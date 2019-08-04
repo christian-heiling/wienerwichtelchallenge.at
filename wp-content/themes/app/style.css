@@ -1,0 +1,14 @@
+/*
+Theme Name:   Wichtel Challenge Theme
+Theme URI:    [http://example.com/parent-theme/]
+Description:  Wichtel Challenge Theme based on twentynineteen
+Author:       Christian Heiling
+Author URI:   [http://deinedomain.at]
+Template:     twentynineteen
+Version:      1.0.0
+Text Domain:  app
+*/
+
+.site-header.featured-image {
+    min-height: 60vh;
+}

@@ -1,0 +1,287 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2019-08-03 22:27+0200\n"
+"PO-Revision-Date: 2019-08-03 22:29+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: plurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.2\n"
+
+#: src/OptionHandler.php:23
+msgid "Wichtel Challenge Options"
+msgstr "WWC Optionen"
+
+#: src/OptionHandler.php:107
+msgid "Event Options"
+msgstr "Event Einstellung"
+
+#: src/OptionHandler.php:112 src/OptionHandler.php:128
+#: src/OptionHandler.php:144 src/OptionHandler.php:160
+msgid "Archive Teaser"
+msgstr "Übersichtstext"
+
+#: src/OptionHandler.php:123
+msgid "Social Organisation Options"
+msgstr "Einrichtungseinstellungen"
+
+#: src/OptionHandler.php:139
+msgid "Sponsor Options"
+msgstr "Sponsoreneinstellungen"
+
+#: src/OptionHandler.php:155
+msgid "Wichtel Type Options"
+msgstr "Wichteltypeneinstellungen"
+
+#: src/posttypes/EventPostType.php:8
+msgid "Events"
+msgstr "Events"
+
+#: src/posttypes/EventPostType.php:20
+msgid "events-slug"
+msgstr "events"
+
+#: src/posttypes/EventPostType.php:29 src/posttypes/EventPostType.php:160
+msgid "Time"
+msgstr "Zeit"
+
+#: src/posttypes/EventPostType.php:34
+msgid "Starts"
+msgstr "Startet"
+
+#: src/posttypes/EventPostType.php:42
+msgid "Ends"
+msgstr "Endet"
+
+#: src/posttypes/EventPostType.php:52 src/posttypes/EventPostType.php:127
+#: src/posttypes/EventPostType.php:167
+#: src/posttypes/SocialOrgansiationPostType.php:200
+msgid "Location"
+msgstr "Ort"
+
+#: src/posttypes/EventPostType.php:57
+msgid "Name"
+msgstr "Name"
+
+#: src/posttypes/EventPostType.php:62
+#: src/posttypes/SocialOrgansiationPostType.php:53
+msgid "Street"
+msgstr "Straße"
+
+#: src/posttypes/EventPostType.php:67
+#: src/posttypes/SocialOrgansiationPostType.php:58
+#: src/posttypes/SocialOrgansiationPostType.php:156
+msgid "ZIP"
+msgstr "PLZ"
+
+#: src/posttypes/EventPostType.php:72
+#: src/posttypes/SocialOrgansiationPostType.php:63
+msgid "City"
+msgstr "Ort"
+
+#: src/posttypes/EventPostType.php:77
+#: src/posttypes/SocialOrgansiationPostType.php:68
+msgid "Map"
+msgstr "Karte"
+
+#: src/posttypes/EventPostType.php:84
+#: src/posttypes/SocialOrgansiationPostType.php:75
+msgid "Public Reachable via"
+msgstr "Öffentliche Erreichbarkeit"
+
+#: src/posttypes/EventPostType.php:91
+msgid "Description"
+msgstr "Beschreibung"
+
+#: src/posttypes/EventPostType.php:96
+msgid "Category"
+msgstr "Kategorie"
+
+#: src/posttypes/EventPostType.php:104
+#: src/posttypes/SocialOrgansiationPostType.php:105
+#: src/posttypes/SponsorPostType.php:40
+msgid "Teaser"
+msgstr "Teaser"
+
+#: src/posttypes/EventPostType.php:112
+msgid "Press Text"
+msgstr "Pressetext"
+
+#: src/posttypes/EventPostType.php:126 src/posttypes/SponsorPostType.php:66
+#: src/posttypes/WichtelTypePostType.php:48
+msgid "Title"
+msgstr "Titel"
+
+#: src/posttypes/EventPostType.php:128
+msgid "Start at"
+msgstr "Startet um"
+
+#: src/posttypes/EventPostType.php:129
+msgid "End at"
+msgstr "Endet um"
+
+#: src/posttypes/EventPostType.php:130
+#: src/posttypes/SocialOrgansiationPostType.php:157
+#: src/posttypes/SponsorPostType.php:67
+#: src/posttypes/WichtelTypePostType.php:49
+msgid "Date"
+msgstr "Datum"
+
+#: src/posttypes/SocialOrgansiationPostType.php:14
+msgid "Social Organisations"
+msgstr "Einrichtungen"
+
+#: src/posttypes/SocialOrgansiationPostType.php:26
+msgid "organisations-slug"
+msgstr "einrichtungen"
+
+#: src/posttypes/SocialOrgansiationPostType.php:36
+#: src/posttypes/SponsorPostType.php:30 src/posttypes/SponsorPostType.php:48
+#: src/posttypes/WichtelTypePostType.php:30
+msgid "Infos"
+msgstr "Infos"
+
+#: src/posttypes/SocialOrgansiationPostType.php:41
+#: src/posttypes/SocialOrgansiationPostType.php:154
+msgid "Carrier"
+msgstr "Träger"
+
+#: src/posttypes/SocialOrgansiationPostType.php:46
+#: src/posttypes/SocialOrgansiationPostType.php:155
+msgid "Field of Action"
+msgstr "Handlungsfeld"
+
+#: src/posttypes/SocialOrgansiationPostType.php:85
+msgid "Delivery hours"
+msgstr "Abgabezeiten"
+
+#: src/posttypes/SocialOrgansiationPostType.php:95
+msgid "Contact"
+msgstr "Kontakt"
+
+#: src/posttypes/SocialOrgansiationPostType.php:115
+msgid "About the Social Organisation"
+msgstr "Über die Einrichtung"
+
+#: src/posttypes/SocialOrgansiationPostType.php:125
+#: src/posttypes/SponsorPostType.php:56
+msgid "Link"
+msgstr "Link"
+
+#: src/posttypes/SocialOrgansiationPostType.php:136
+msgid "Homeless Assistance"
+msgstr "Wohnungslosenhilfe"
+
+#: src/posttypes/SocialOrgansiationPostType.php:137
+msgid "Elderly People"
+msgstr "Ältere Menschen"
+
+#: src/posttypes/SocialOrgansiationPostType.php:138
+msgid "Health Care"
+msgstr "Gesundheit"
+
+#: src/posttypes/SocialOrgansiationPostType.php:139
+msgid "Children Welfare"
+msgstr "Kinder- und Jugendhilfe"
+
+#: src/posttypes/SocialOrgansiationPostType.php:140
+msgid "Migration and Asylum"
+msgstr "Migration & Asly"
+
+#: src/posttypes/SocialOrgansiationPostType.php:141
+msgid "People with Disabilities"
+msgstr "Menschen mit Behinderungen"
+
+#: src/posttypes/SocialOrgansiationPostType.php:142
+msgid "Addiction"
+msgstr "Suchthilfe"
+
+#: src/posttypes/SocialOrgansiationPostType.php:153
+msgid "Social Organisation"
+msgstr "Einrichtung"
+
+#: src/posttypes/SocialOrgansiationPostType.php:193
+msgid "Delivery Infos"
+msgstr "Abgabeinfos"
+
+#: src/posttypes/SponsorPostType.php:8
+msgid "Sponsors"
+msgstr "Sponsoren"
+
+#: src/posttypes/SponsorPostType.php:16
+msgid "sponsors-slug"
+msgstr "sponsoren"
+
+#: src/posttypes/SponsorPostType.php:35
+msgid "Logo"
+msgstr "Logo"
+
+#: src/posttypes/WichtelTypePostType.php:8
+msgid "Wichtel Types"
+msgstr "Wichteltypen"
+
+#: src/posttypes/WichtelTypePostType.php:20
+msgid "wichtel-type-slugs"
+msgstr "wichtel"
+
+#~ msgid "wichtel"
+#~ msgstr "wichtel"
+
+#~ msgid "Manage Events for Wichtel Challenge"
+#~ msgstr "Verwalten von Veranstaltungen für Wichtel Challenge"
+
+#~ msgid "Manage Social Organisations for Wichtel Challenge"
+#~ msgstr "Verwalten von Einrichtungen für Wichtel Challenge"
+
+#~ msgid "Manage Sponsors for Wichtel Challenge"
+#~ msgstr "Verwalten von Sponsoren für Wichtel Challenge"
+
+#~ msgid "Manage Wichtel Types for Wichtel Challenge"
+#~ msgstr "Verwalten von Wichteltypen für Wichtel Challenge"
+
+#~ msgid "Opening Hours"
+#~ msgstr "Öffnungszeiten"
+
+#~ msgid "Event"
+#~ msgstr "Veranstaltung"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Events"
+#~ msgstr "Veranstaltungen"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Event"
+#~ msgstr "Veranstaltung"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Social Organisations"
+#~ msgstr "Einrichtungen"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Social Organisation"
+#~ msgstr "Einrichtung"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Sponsors"
+#~ msgstr "Sponsoren"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Sponsor"
+#~ msgstr "Sponsor"
+
+#~ msgctxt "Post Type General Name"
+#~ msgid "Wichtel Types"
+#~ msgstr "Wichteltypen"
+
+#~ msgctxt "Post Type Singular Name"
+#~ msgid "Wichtel Type"
+#~ msgstr "Wichteltyp"
