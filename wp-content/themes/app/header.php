@@ -29,14 +29,17 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+    
+<div class="event-countdown-container">
+    <?php get_template_part('template-parts/header/event', 'countdown'); ?>
+</div>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentynineteen' ); ?></a>
-
-		<header id="masthead" class="<?php echo ((is_singular() && twentynineteen_can_show_post_thumbnail()) || (!empty($controller))) ? 'site-header featured-image' : 'site-header'; ?>">
-
-			<div class="site-branding-container">
-				<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
-			</div><!-- .site-branding-container -->
+        
+		<header id="masthead" class="<?php echo ((is_singular() && twentynineteen_can_show_post_thumbnail()) || (!empty($controller))) ? 'site-header featured-image' : 'site-header'; ?>">                    
+                    <div class="site-branding-container">
+                            <?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
+                    </div><!-- .site-branding-container -->
 
             <?php if (!empty($controller)) : ?>
                 <div class="site-featured-image">

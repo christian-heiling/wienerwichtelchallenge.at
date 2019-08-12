@@ -3,7 +3,11 @@
 namespace app\posttypes;
 
 class SocialOrganisationPostType extends AbstractPostType {
-    
+
+	function getSupports() {
+		return array( 'title', 'thumbnail', 'revisions' );
+	}
+
     public function echoColumnBody($column_name, $post_ID) {
         if (in_array($column_name, ['carrier', 'field_of_action', 'zip'])) {
             echo rwmb_meta($column_name, [], $post_ID);
@@ -37,6 +41,11 @@ class SocialOrganisationPostType extends AbstractPostType {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
+	                'id'   => 'logo',
+	                'name' => __('Logo', 'app'),
+	                'type' => 'image'
+                ),
+            	array(
                     'id'   => 'carrier',
                     'name' => __('Carrier', 'app'),
                     'type' => 'text'
@@ -203,7 +212,8 @@ class SocialOrganisationPostType extends AbstractPostType {
                 ),
                 array(
                     'field_ids' => array(
-                        'link'
+                        'link',
+	                    'logo'
                     )
                 ),
             ),
@@ -222,5 +232,54 @@ class SocialOrganisationPostType extends AbstractPostType {
     public function echoExcerptContent() {
         echo rwmb_meta('teaser');
     }
+
+	public function generateRandomItem() {
+		$faker = \Faker\Factory::create();
+
+		$id = wp_insert_post(
+			[
+				'post_title' => $faker->text(80),
+				'post_type' => $this->getPostType(),
+				'post_status' => 'publish'
+			]
+		);
+
+		$start = $faker->dateTimeBetween('-10 days', '+20 days')->getTimestamp();
+
+		$metas = [
+			'carrier' => $faker->text(10),
+			'field_of_action' => $faker->randomElement($this->getFieldOfActionOptions()),
+			'street' => $faker->streetAddress,
+			'zip' => '1020',
+			'city' => 'Wien',
+			'map' => '48.1935651,16.3394902,12',
+			'reachable_via' => 'U3, U6 Westbahnhof',
+			'delivery_hours' => 'Mo-Fr von 10 - 17 Uhr',
+			'contact' => $faker->text(120),
+			'teaser' => $faker->text(120),
+			'description' => $faker->text(500),
+			'link' => $faker->url
+		];
+
+		foreach($metas as $key => $value) {
+			add_post_meta($id, $key, $value, true);
+		}
+	}
+
+	public function queryByFieldOfAction($fieldOfAction) {
+		query_posts(array(
+			'post_type' => $this->getPostType(),
+			'meta_key' => 'field_of_action',
+			'order' => 'ASC',
+			'orderby' => 'title',
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key' => 'field_of_action',
+					'value' => $fieldOfAction
+				)
+			)
+		));
+	}
 
 }

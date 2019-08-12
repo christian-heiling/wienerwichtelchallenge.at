@@ -1,6 +1,7 @@
 {
     "require": {
-        "nesbot/carbon": "^2.22"
+        "nesbot/carbon": "^2.22",
+        "fzaninotto/faker": "v1.8.0"
     },
     "autoload": {
         "psr-4": {"app\\": "src/"}

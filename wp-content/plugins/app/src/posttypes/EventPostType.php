@@ -2,6 +2,8 @@
 
 namespace app\posttypes;
 
+use Carbon\Carbon;
+
 class EventPostType extends AbstractPostType {
     
     public function getLabel() {
@@ -33,17 +35,13 @@ class EventPostType extends AbstractPostType {
                     'id'   => 'start',
                     'name' => __('Starts', 'app'),
                     'type' => 'datetime',
-                    'options' => array(
-                        'timestamp' => true
-                    )
+                    'timestamp' => true
                 ),
                 array(
                     'id'   => 'end',
                     'name' => __('Ends', 'app'),
                     'type' => 'datetime',
-                    'options' => array(
-                        'timestamp' => true
-                    )
+                    'timestamp' => true
                 )
             ),
         );
@@ -137,7 +135,7 @@ class EventPostType extends AbstractPostType {
         }
         
         if (in_array($column_name, ['start', 'end'])) {
-            $date = new \Carbon\Carbon(rwmb_meta($column_name, [], $post_ID), get_option('timezone_string'));
+            $date = new \Carbon\Carbon('@' . rwmb_meta($column_name, [], $post_ID), get_option('timezone_string'));
             echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp)
                 . ' (' . $date->diffForHumans() . ')';
         }
@@ -201,5 +199,117 @@ class EventPostType extends AbstractPostType {
     public function echoExcerptContent() {
         echo rwmb_meta('teaser');
     }
+
+    public function getUpcomingEvents() {
+	    // query next event
+	    $posts = get_posts(array(
+		    'post_type' => $this->getPostType(),
+		    'meta_key' => 'start',
+		    'order' => 'DESC',
+		    'orderby' => 'meta_value',
+		    'meta_query' => array(
+			    'key' => 'start',
+			    'value' => time(),
+			    'compare' => '>'
+		    )
+	    ));
+
+	    return $posts;
+    }
+
+    public function getNextUpcomingEvent() {
+        return array_pop($this->getUpcomingEvents());
+    }
+
+    public function queryUpcomingEvents() {
+	    query_posts(array(
+		    'post_type' => $this->getPostType(),
+		    'meta_key' => 'start',
+		    'order' => 'ASC',
+		    'orderby' => 'meta_value',
+		    'meta_query' => array(
+			    'key' => 'start',
+			    'value' => time(),
+			    'compare' => '>'
+		    )
+	    ));
+    }
+
+	public function queryRunningEvents() {
+		query_posts(array(
+			'post_type' => $this->getPostType(),
+			'meta_key' => 'end',
+			'order' => 'ASC',
+			'orderby' => 'meta_value',
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+                    'key' => 'start',
+                    'value' => time(),
+                    'compare' => '<'
+				),
+                array(
+	                'key' => 'end',
+	                'value' => time(),
+	                'compare' => '>'
+                )
+			)
+		));
+	}
+
+	public function queryPastEvents() {
+		query_posts(array(
+			'post_type' => $this->getPostType(),
+			'meta_key' => 'end',
+			'order' => 'ASC',
+			'orderby' => 'meta_value',
+			'meta_query' => array(
+				'relation' => 'AND',
+				array(
+					'key' => 'start',
+					'value' => time(),
+					'compare' => '<'
+				),
+				array(
+					'key' => 'end',
+					'value' => time(),
+					'compare' => '<'
+				)
+			)
+		));
+	}
+
+	public function generateRandomItem() {
+
+        $faker = \Faker\Factory::create();
+
+		$id = wp_insert_post(
+			[
+				'post_title' => $faker->text(80),
+				'post_type' => $this->getPostType(),
+				'post_status' => 'publish'
+			]
+		);
+
+		$start = $faker->dateTimeBetween('-10 days', '+20 days')->getTimestamp();
+
+		$metas = [
+		    'start' => $start,
+            'end' => $start + rand(30, 60*12*3)*60,
+            'location_name' => $faker->text(10),
+            'street' => $faker->streetAddress,
+            'zip' => '1' . sprintf("%02d'.02", rand(1,21)) . '0',
+            'city' => 'Wien',
+            'map' => '48.1935651,16.3394902,12',
+            'reachable_via' => 'U3, U6 Westbahnhof',
+            'category' => $faker->text(10),
+            'teaser' => $faker->text(120),
+            'description' => $faker->text(500)
+        ];
+
+		foreach($metas as $key => $value) {
+		    add_post_meta($id, $key, $value, true);
+        }
+	}
 
 }

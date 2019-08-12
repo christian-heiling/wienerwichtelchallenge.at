@@ -71,4 +71,8 @@ class WichtelTypePostType extends AbstractPostType {
         
     }
 
+	public function generateRandomItem() {
+
+	}
+
 }

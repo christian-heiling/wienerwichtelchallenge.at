@@ -23,6 +23,9 @@ abstract class AbstractPostType {
     
     abstract function echoExcerptContent();
     abstract function echoExcerptMeta();
+
+    // for testing
+    abstract function generateRandomItem();
     
     function getSupports() {
         return array( 'title', 'thumbnail', 'revisions' );
@@ -193,11 +196,24 @@ abstract class AbstractPostType {
     
     private function outputField($id, $type) {
         if ($type == 'datetime') {
-            $date = new \Carbon\Carbon(rwmb_meta($id), get_option('timezone_string'));
+            $date = new \Carbon\Carbon('@' . rwmb_meta($id), get_option('timezone_string'));
             echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp)
                 . ' (' . $date->diffForHumans() . ')';
         } elseif ($type == 'text' && substr(rwmb_meta($id),0,4) == 'http') {
             echo '<a href="' . rwmb_meta($id) . '" target="_blank" rel="nofollow">' . rwmb_meta($id) . '</a>';
+        } elseif ($type == 'image') {
+	        $logo = array_pop(rwmb_meta( 'logo', array( 'limit' => 1 ) ));
+	        ?>
+	        <figure class="wp-block-image is-resized overflow">
+		        <img src="<?php echo $logo['full_url'] ?>"
+		             alt=""
+		             class="wp-image-<?php echo $logo['ID']; ?>"
+		             srcset="<?php echo $logo['srcset']; ?>"
+		             sizes="(max-width: 1920px) 100vw, 1920px"
+		             width="1920"
+		             height="516">
+	        </figure>
+	        <?php
         } elseif ($type == 'map') {
             echo rwmb_meta(
                 $id,
@@ -212,5 +228,10 @@ abstract class AbstractPostType {
         } else {
             echo rwmb_meta($id);
         }
+    }
+
+    function generateMapField() {
+    	$x = rand();
+    	$y = rand();
     }
 }

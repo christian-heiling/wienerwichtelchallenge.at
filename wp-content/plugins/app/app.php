@@ -28,4 +28,4 @@ if (!function_exists('array_key_first')) {
     }
 }
 
-\app\App::getInstance();
+$app = \app\App::getInstance();

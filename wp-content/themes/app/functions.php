@@ -6,10 +6,6 @@
  * and open the template in the editor.
  */
 
-add_action('wp_enqueue_scripts', function() {
-    wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
-});
-
 add_action('widgets_init', function() {
     
     $sidebars = array(

@@ -2,6 +2,8 @@
 
 namespace app;
 
+use app\posttypes\EventPostType;
+
 class App {
     
     protected static $instance;
@@ -16,6 +18,7 @@ class App {
     public static function getInstance() {
         if (empty(self::$instance)) {
             self::$instance = new App();
+            return self::$instance;
         } else {
             return self::$instance;
         }
@@ -52,6 +55,9 @@ class App {
     private function registerHooks() {
         add_action( 'plugins_loaded', array($this, 'loadTextdomain') );
         add_action( 'wp_enqueue_scripts', array($this, 'addDashiconsToFrontend') );
+
+        // generate Items
+	    add_action('plugins_loaded', array($this, 'generateTestItems'));
     }
     
     public function loadTextdomain() {
@@ -70,10 +76,26 @@ class App {
         }
     }
 
+	/**
+	 * @return EventPostType
+	 */
+    public function getEventController() {
+    	return $this->controllers['event'];
+    }
+
     /**
      * @return OptionHandler
      */
     public function getOptions() {
         return $this->options;
+    }
+
+    public function generateTestItems() {
+
+		//for($i = 0; $i < 20, $i++)
+	    //$this->getEventController()->generateRandomItem();
+	    //$this->getController('social_organisation')->generateRandomItem();
+	    //$this->getController('sponsor')->generateRandomItem();
+
     }
 }
