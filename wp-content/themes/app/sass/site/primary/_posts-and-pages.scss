@@ -51,7 +51,7 @@
 			color: $color__link;
 
 			&:hover {
-				color: $color__link;
+				color: $color__text-hover;
 			}
 		}
 	}
@@ -183,7 +183,7 @@
 		@include media(tablet) {
 			max-width: 80%;
 			margin: 0 15%;
-			padding: 0 30px;
+			padding: 0 60px;
 		}
 	}
 

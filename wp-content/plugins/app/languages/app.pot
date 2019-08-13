@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-08-13 22:33+0200\n"
+"POT-Creation-Date: 2019-08-13 23:10+0200\n"
 "PO-Revision-Date: 2019-07-31 21:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Wichtel Challenge\n"
@@ -69,7 +69,6 @@ msgid "events-slug"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:31
-#: plugins/app/src/posttypes/EventPostType.php:157
 msgid "Time"
 msgstr ""
 
@@ -87,7 +86,6 @@ msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:55
 #: plugins/app/src/posttypes/EventPostType.php:125
-#: plugins/app/src/posttypes/EventPostType.php:164
 msgid "Location"
 msgstr ""
 
@@ -113,6 +111,7 @@ msgid "Map"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:82
+#: plugins/app/src/posttypes/EventPostType.php:162
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:84
 msgid "Public Reachable via"
 msgstr ""
@@ -154,6 +153,10 @@ msgstr ""
 #: plugins/app/src/posttypes/SponsorPostType.php:75
 #: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
+msgstr ""
+
+#: plugins/app/src/posttypes/EventPostType.php:154
+msgid "When and Where?"
 msgstr ""
 
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:18

@@ -146,29 +146,30 @@ class EventPostType extends AbstractPostType {
     }
 
     public function echoEntryContent() {
+        echo '<div class="wp-block-columns">';
+            echo '<div class="wp-block-column">';
+                echo '<p>' . rwmb_meta('description') . '</p>';
+            echo '</div>';
+            echo '<div class="wp-block-column">';
+                echo '<h3>' . __("When and Where?", "app") . '</h3>';
+                echo '<p>'
+                    . rwmb_meta('location_name') . '<br>'
+                    . rwmb_meta('street') . '<br>'
+                    . rwmb_meta('zip') . ' ' . rwmb_meta('city')
+                    . '</p>';
+                echo '<p>' . $this->getStartAndEnddate() . '</p>';
+                
+                echo '<h3>' . __('Public Reachable via', 'app') . '</h3>';
+                echo '<p>' . rwmb_meta('reachable_via') . '</p>';
+            echo '</div>';
+        echo '</div>';
+ 
         $this->outputMetaBoxContentWithHeadings(
             array(
                 array(
+                    'section_name' => '',
                     'field_ids' => array(
-                        'description'
-                    )
-                ),
-                array(
-                    'section_name' => __('Time', 'app'),
-                    'field_ids' => array(
-                        'start',
-                        'end'
-                    )
-                ),
-                array(
-                    'section_name' => __('Location', 'app'),
-                    'field_ids' => array(
-                        'map',
-                        'location_name',
-                        'street',
-                        'zip',
-                        'city',
-                        'reachable_via'
+                        'map'
                     )
                 )
             ), 
@@ -278,7 +279,7 @@ class EventPostType extends AbstractPostType {
                         . ' bis ' . date_i18n('H:i', $end->timestamp);                        
             } else {
                 return date_i18n('D., j. M  H:i', $start->timestamp)
-                        . ' bis ' . date_i18n('D., m j. M  H:i', $end->timestamp);
+                        . ' bis ' . date_i18n('D., j. M  H:i', $end->timestamp);
             }
         }
 
