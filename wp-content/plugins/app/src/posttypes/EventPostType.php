@@ -47,12 +47,12 @@ class EventPostType extends AbstractPostType {
         );
         
         $meta_boxes[] = array(
-            'title'  => __('Location'),
+            'title'  => __('Location Infos', 'app'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
                     'id'   => 'location_name',
-                    'name' => __('Name', 'app'),
+                    'name' => __('Location', 'app'),
                     'type' => 'text'
                 ),
                 array(
@@ -142,19 +142,7 @@ class EventPostType extends AbstractPostType {
     }
 
     public function echoEntryMeta() {
-
-
-        ?>
-<div class="calender">
-    <span class="month"></span>
-    <span class="weekday"></span>
-    <span class="day"></span>
-</div>
-        <?php
-
-        $this->outputMetaBoxContentWithSpans(array(
-            'location_name', 'zip'
-        ));
+        $this->echoExcerptMeta();
     }
 
     public function echoEntryContent() {
@@ -191,8 +179,9 @@ class EventPostType extends AbstractPostType {
     }
     
     public function echoExcerptMeta() {
+        echo '<span>' . $this->getStartAndEnddate() . '</span>';
         $this->outputMetaBoxContentWithSpans(array(
-            'start', 'end', 'location_name', 'zip'
+            'location_name', 'zip'
         ));
     }
 
@@ -205,7 +194,7 @@ class EventPostType extends AbstractPostType {
 	    $posts = get_posts(array(
 		    'post_type' => $this->getPostType(),
 		    'meta_key' => 'start',
-		    'order' => 'DESC',
+		    'order' => 'ASC',
 		    'orderby' => 'meta_value',
 		    'meta_query' => array(
 			    'key' => 'start',
@@ -218,7 +207,7 @@ class EventPostType extends AbstractPostType {
     }
 
     public function getNextUpcomingEvent() {
-        return array_pop($this->getUpcomingEvents());
+        return current($this->getUpcomingEvents());
     }
 
     public function queryUpcomingEvents() {
@@ -278,6 +267,20 @@ class EventPostType extends AbstractPostType {
 			)
 		));
 	}
+        
+        public function getStartAndEnddate() {
+
+            $start = new \Carbon\Carbon('@' . rwmb_meta('start'), get_option('timezone_string'));
+            $end = new \Carbon\Carbon('@' . rwmb_meta('end'), get_option('timezone_string'));
+            
+            if ($start->diffInDays($end) !== 0) {
+                return date_i18n('D., j. M  H:i', $start->timestamp)
+                        . ' bis ' . date_i18n('H:i', $end->timestamp);                        
+            } else {
+                return date_i18n('D., j. M  H:i', $start->timestamp)
+                        . ' bis ' . date_i18n('D., m j. M  H:i', $end->timestamp);
+            }
+        }
 
 	public function generateRandomItem() {
 

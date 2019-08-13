@@ -184,36 +184,55 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoEntryMeta() {
-        echo '<span>' . rwmb_meta('description') . '</span>';
         $this->outputMetaBoxContentWithSpans(array(
             'carrier', 'field_of_action', 'zip'
         ));
     }
 
     public function echoEntryContent() {
+        echo '<div class="wp-block-columns">';
+            echo '<div class="wp-block-column">';
+                echo '<p>' . rwmb_meta('description') . '</p>';
+            echo '</div>';
+            echo '<div class="wp-block-column">';
+            
+                echo '<h2>' . __('Delivery Infos', 'app') . '</h2>';
+                echo '<p>';
+                echo rwmb_meta('street') . '<br>';
+                echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
+                echo '</p>';
+                    
+                $this->outputMetaBoxContentWithHeadings(
+                array(
+                    array(
+                        'section_name' => '',
+                        'field_ids' => array(
+                            'delivery_hours',
+                            'contact'
+                        )
+                    )
+                ),
+                array(
+                    'first_heading' => '2' 
+                )        
+                );
+            echo '</div>';
+        echo '</div>';
+        
+        
+            
         $this->outputMetaBoxContentWithHeadings(
             array(
                 array(
-                    'section_name' => __('Delivery Infos', 'app'),
+                    'section_name' => '',
                     'field_ids' => array(
-                        'delivery_hours',
-                        'contact'
-                    )
-                ),
-                array(
-                    'section_name' => __('Location', 'app'),
-                    'field_ids' => array(
+                        'reachable_via',
                         'map',
-                        'street',
-                        'zip',
-                        'city',
-                        'reachable_via'
                     )
                 ),
                 array(
                     'field_ids' => array(
-                        'link',
-	                    'logo'
+                        'link'
                     )
                 ),
             ),

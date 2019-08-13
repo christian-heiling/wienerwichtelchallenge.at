@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-08-12 19:56+0200\n"
+"POT-Creation-Date: 2019-08-13 22:33+0200\n"
 "PO-Revision-Date: 2019-07-31 21:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Wichtel Challenge\n"
@@ -16,245 +16,345 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "X-Generator: Poedit 2.2\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_x\n"
-"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-0: plugins/app\n"
+"X-Poedit-SearchPath-1: themes/app\n"
 
-#: src/OptionHandler.php:23
+#: plugins/app/src/OptionHandler.php:23
 msgid "Wichtel Challenge Options"
 msgstr ""
 
-#: src/OptionHandler.php:107
+#: plugins/app/src/OptionHandler.php:107
+msgid "General"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:112
+msgid "Start Year of Copyright"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:120
 msgid "Event Options"
 msgstr ""
 
-#: src/OptionHandler.php:112 src/OptionHandler.php:135
-#: src/OptionHandler.php:159 src/OptionHandler.php:182
+#: plugins/app/src/OptionHandler.php:125 plugins/app/src/OptionHandler.php:148
+#: plugins/app/src/OptionHandler.php:172 plugins/app/src/OptionHandler.php:195
 msgid "Archive Teaser"
 msgstr ""
 
-#: src/OptionHandler.php:120 src/OptionHandler.php:144
-#: src/OptionHandler.php:167 src/OptionHandler.php:190
+#: plugins/app/src/OptionHandler.php:133 plugins/app/src/OptionHandler.php:157
+#: plugins/app/src/OptionHandler.php:180 plugins/app/src/OptionHandler.php:203
 msgid "Header Image"
 msgstr ""
 
-#: src/OptionHandler.php:130
+#: plugins/app/src/OptionHandler.php:143
 msgid "Social Organisation Options"
 msgstr ""
 
-#: src/OptionHandler.php:154
+#: plugins/app/src/OptionHandler.php:167
 msgid "Sponsor Options"
 msgstr ""
 
-#: src/OptionHandler.php:177
+#: plugins/app/src/OptionHandler.php:190
 msgid "Wichtel Type Options"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:10
+#: plugins/app/src/posttypes/EventPostType.php:10
 msgid "Events"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:22
+#: plugins/app/src/posttypes/EventPostType.php:22
 msgid "events-slug"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:31 src/posttypes/EventPostType.php:169
+#: plugins/app/src/posttypes/EventPostType.php:31
+#: plugins/app/src/posttypes/EventPostType.php:157
 msgid "Time"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:36
+#: plugins/app/src/posttypes/EventPostType.php:36
 msgid "Starts"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:42
+#: plugins/app/src/posttypes/EventPostType.php:42
 msgid "Ends"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:50 src/posttypes/EventPostType.php:125
-#: src/posttypes/EventPostType.php:176
-#: src/posttypes/SocialOrgansiationPostType.php:204
+#: plugins/app/src/posttypes/EventPostType.php:50
+msgid "Location Infos"
+msgstr ""
+
+#: plugins/app/src/posttypes/EventPostType.php:55
+#: plugins/app/src/posttypes/EventPostType.php:125
+#: plugins/app/src/posttypes/EventPostType.php:164
 msgid "Location"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:55
-msgid "Name"
-msgstr ""
-
-#: src/posttypes/EventPostType.php:60
-#: src/posttypes/SocialOrgansiationPostType.php:62
+#: plugins/app/src/posttypes/EventPostType.php:60
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:62
 msgid "Street"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:65
-#: src/posttypes/SocialOrgansiationPostType.php:67
-#: src/posttypes/SocialOrgansiationPostType.php:165
+#: plugins/app/src/posttypes/EventPostType.php:65
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:67
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:165
 msgid "ZIP"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:70
-#: src/posttypes/SocialOrgansiationPostType.php:72
+#: plugins/app/src/posttypes/EventPostType.php:70
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:72
 msgid "City"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:75
-#: src/posttypes/SocialOrgansiationPostType.php:77
+#: plugins/app/src/posttypes/EventPostType.php:75
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:77
 msgid "Map"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:82
-#: src/posttypes/SocialOrgansiationPostType.php:84
+#: plugins/app/src/posttypes/EventPostType.php:82
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:84
 msgid "Public Reachable via"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:89
+#: plugins/app/src/posttypes/EventPostType.php:89
 msgid "Description"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:94
+#: plugins/app/src/posttypes/EventPostType.php:94
 msgid "Category"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:102
-#: src/posttypes/SocialOrgansiationPostType.php:114
-#: src/posttypes/SponsorPostType.php:47
+#: plugins/app/src/posttypes/EventPostType.php:102
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:114
+#: plugins/app/src/posttypes/SponsorPostType.php:47
 msgid "Teaser"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:110
+#: plugins/app/src/posttypes/EventPostType.php:110
 msgid "Press Text"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:124 src/posttypes/SponsorPostType.php:73
-#: src/posttypes/WichtelTypePostType.php:48
+#: plugins/app/src/posttypes/EventPostType.php:124
+#: plugins/app/src/posttypes/SponsorPostType.php:73
+#: plugins/app/src/posttypes/WichtelTypePostType.php:48
 msgid "Title"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:126
+#: plugins/app/src/posttypes/EventPostType.php:126
 msgid "Start at"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:127
+#: plugins/app/src/posttypes/EventPostType.php:127
 msgid "End at"
 msgstr ""
 
-#: src/posttypes/EventPostType.php:128
-#: src/posttypes/SocialOrgansiationPostType.php:166
-#: src/posttypes/SponsorPostType.php:75
-#: src/posttypes/WichtelTypePostType.php:49
+#: plugins/app/src/posttypes/EventPostType.php:128
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:166
+#: plugins/app/src/posttypes/SponsorPostType.php:75
+#: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:18
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:18
 msgid "Social Organisations"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:30
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:30
 msgid "organisations-slug"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:40
-#: src/posttypes/SponsorPostType.php:30 src/posttypes/SponsorPostType.php:55
-#: src/posttypes/WichtelTypePostType.php:30
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:40
+#: plugins/app/src/posttypes/SponsorPostType.php:30
+#: plugins/app/src/posttypes/SponsorPostType.php:55
+#: plugins/app/src/posttypes/WichtelTypePostType.php:30
 msgid "Infos"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:45
-#: src/posttypes/SponsorPostType.php:42
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:45
+#: plugins/app/src/posttypes/SponsorPostType.php:42
 msgid "Logo"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:50
-#: src/posttypes/SocialOrgansiationPostType.php:163
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:50
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:163
 msgid "Carrier"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:55
-#: src/posttypes/SocialOrgansiationPostType.php:164
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:55
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:164
 msgid "Field of Action"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:94
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:94
 msgid "Delivery hours"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:104
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:104
 msgid "Contact"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:124
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:124
 msgid "About the Social Organisation"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:134
-#: src/posttypes/SponsorPostType.php:63
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:134
+#: plugins/app/src/posttypes/SponsorPostType.php:63
 msgid "Link"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:145
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:145
 msgid "Homeless Assistance"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:146
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:146
 msgid "Elderly People"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:147
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:147
 msgid "Health Care"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:148
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:148
 msgid "Children Welfare"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:149
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:149
 msgid "Migration and Asylum"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:150
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:150
 msgid "People with Disabilities"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:151
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:151
 msgid "Addiction"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:162
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:162
 msgid "Social Organisation"
 msgstr ""
 
-#: src/posttypes/SocialOrgansiationPostType.php:197
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:199
 msgid "Delivery Infos"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:8
+#: plugins/app/src/posttypes/SponsorPostType.php:8
 msgid "Sponsors"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:16
+#: plugins/app/src/posttypes/SponsorPostType.php:16
 msgid "sponsors-slug"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:35 src/posttypes/SponsorPostType.php:74
+#: plugins/app/src/posttypes/SponsorPostType.php:35
+#: plugins/app/src/posttypes/SponsorPostType.php:74
 msgid "Type"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:158
+#: plugins/app/src/posttypes/SponsorPostType.php:158
 msgid "Gönnerwichtel"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:159
+#: plugins/app/src/posttypes/SponsorPostType.php:159
 msgid "Dagobertwichtel"
 msgstr ""
 
-#: src/posttypes/SponsorPostType.php:160
+#: plugins/app/src/posttypes/SponsorPostType.php:160
 msgid "Sponsorwichtel"
 msgstr ""
 
-#: src/posttypes/WichtelTypePostType.php:8
+#: plugins/app/src/posttypes/WichtelTypePostType.php:8
 msgid "Wichtel Types"
 msgstr ""
 
-#: src/posttypes/WichtelTypePostType.php:20
+#: plugins/app/src/posttypes/WichtelTypePostType.php:20
 msgid "wichtel-type-slugs"
+msgstr ""
+
+#: themes/app/archive-event.php:28
+msgid "Upcoming Events"
+msgstr ""
+
+#: themes/app/archive-event.php:73
+msgid "Running Events"
+msgstr ""
+
+#: themes/app/archive-event.php:118
+msgid "Past Events"
+msgstr ""
+
+#: themes/app/functions.php:12
+msgid "Page Sidebar"
+msgstr ""
+
+#: themes/app/functions.php:13
+msgid "Post Sidebar"
+msgstr ""
+
+#: themes/app/functions.php:14
+msgid "Event Sidebar"
+msgstr ""
+
+#: themes/app/functions.php:15
+msgid "Social Organisation Sidebar"
+msgstr ""
+
+#: themes/app/functions.php:16
+msgid "Sponsor Sidebar"
+msgstr ""
+
+#: themes/app/template-parts/content/content-excerpt.php:22
+msgid "Featured"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single.php:34
+#, php-format
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single.php:47
+msgid "Pages:"
+msgstr ""
+
+#: themes/app/template-parts/header/archive-header.php:36
+#: themes/app/template-parts/header/entry-header.php:42
+#, php-format
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:14
+msgid "Read more"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:35
+msgid "Day"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:37
+msgid "Days"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:41
+msgid "Hour"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:43
+msgid "Hours"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:47
+msgid "Minute"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:49
+msgid "Minutes"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:53
+msgid "Second"
+msgstr ""
+
+#: themes/app/template-parts/header/event-countdown.php:55
+msgid "Seconds"
 msgstr ""

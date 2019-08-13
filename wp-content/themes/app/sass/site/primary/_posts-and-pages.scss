@@ -48,10 +48,10 @@
 		margin: 0;
 
 		a {
-			color: inherit;
+			color: $color__link;
 
 			&:hover {
-				color: $color__text-hover;
+				color: $color__link;
 			}
 		}
 	}
@@ -183,7 +183,7 @@
 		@include media(tablet) {
 			max-width: 80%;
 			margin: 0 15%;
-			padding: 0 60px;
+			padding: 0 30px;
 		}
 	}
 

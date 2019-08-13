@@ -57,7 +57,11 @@ class App {
         add_action( 'wp_enqueue_scripts', array($this, 'addDashiconsToFrontend') );
 
         // generate Items
-	    add_action('plugins_loaded', array($this, 'generateTestItems'));
+	add_action('plugins_loaded', array($this, 'generateTestItems'));
+        
+        // do not limit query
+        add_action('pre_get_posts', array($this, 'unlimitTheQuery'));
+        
     }
     
     public function loadTextdomain() {
@@ -97,5 +101,9 @@ class App {
 	    //$this->getController('social_organisation')->generateRandomItem();
 	    //$this->getController('sponsor')->generateRandomItem();
 
+    }
+    
+    public function unlimitTheQuery($query) {
+        $query->set('posts_per_page', -1);
     }
 }

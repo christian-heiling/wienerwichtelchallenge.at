@@ -104,6 +104,19 @@ class OptionHandler {
     
     public function addMetaBox($meta_boxes) {       
         $meta_boxes[] = array(
+            'title'  => __('General'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id'   => 'copyright_year',
+                    'name' => __('Start Year of Copyright', 'app'),
+                    'type' => 'text',
+                    
+                )
+            ),
+        );
+        
+        $meta_boxes[] = array(
             'title'  => __('Event Options'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
@@ -199,7 +212,7 @@ class OptionHandler {
         return $meta_boxes;
     }
     
-    public function get($a, $b) {
+    public function get($a, $b = null) {
         
         if (empty($b)) {
             $name = $a;
