@@ -16,6 +16,38 @@ get_header();
  */
 $controller = \app\App::getInstance()->getController(get_post_type());
 
+?>
+
+<div id="mapid" class="full-width-layout" style="width: 100%; height: 400px;"></div>
+
+<script>
+jQuery(document).ready(function() {
+    var mymap = L.map('mapid').setView([48.20849, 16.37208], 13);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+            zoom: 2,
+            scrollWheelZoom: false,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox.streets'
+    }).addTo(mymap);
+
+    <?php 
+    foreach($controller->getAll() as $organisation){
+        $map = rwmb_get_value('map', [], $organisation->ID);
+        
+        $popupText = '<strong>' . $organisation->post_title . '</strong><br>' 
+            . 'Handlungsfeld: ' . rwmb_get_value('field_of_action', [], $organisation->ID) . '<br>'
+            . '<a href=\\"' . get_permalink($organisation) . '\\">Mehr erfahren</a>';
+        
+        echo 'L.marker([' . $map['latitude'] . ', ' . $map['longitude'] . ']).addTo(mymap).bindPopup("' . $popupText . '");';
+    } 
+    ?>
+});
+</script>
+<?php
+
 foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
 ?>
 
@@ -66,4 +98,7 @@ foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
 
 <?php
 endforeach;
+?>
+        
+<?php
 get_footer();

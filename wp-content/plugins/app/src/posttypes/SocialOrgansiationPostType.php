@@ -4,9 +4,23 @@ namespace app\posttypes;
 
 class SocialOrganisationPostType extends AbstractPostType {
 
-	function getSupports() {
-		return array( 'title', 'thumbnail', 'revisions' );
-	}
+    function registerHooks() {
+        parent::registerHooks();
+        
+        add_action('wp_enqueue_scripts', array($this, 'addScripts'));
+    }
+    
+    function addScripts() {
+        if (is_archive() && get_post_type() == $this->getPostType()) {
+            wp_enqueue_style( 'leaflet', 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', array(), '1.5.1' );
+            wp_enqueue_script( 'leaflet', 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.js', array(), '1.5.1', true );
+            wp_enqueue_script( 'rwmb-osm-frontend', RWMB_JS_URL . 'osm-frontend.js', array( 'jquery', 'leaflet' ), RWMB_VER, true );
+        }
+    }
+    
+    function getSupports() {
+            return array( 'title', 'thumbnail', 'revisions' );
+    }
 
     public function echoColumnBody($column_name, $post_ID) {
         if (in_array($column_name, ['carrier', 'field_of_action', 'zip'])) {
@@ -142,13 +156,14 @@ class SocialOrganisationPostType extends AbstractPostType {
     
     public function getFieldOfActionOptions() {
         $field_of_actions = array(
-            __('Homeless Assistance', 'app'),
+            __('Children, Youth, Family', 'app'),
             __('Elderly People', 'app'),
-            __('Health Care', 'app'),
-            __('Children Welfare', 'app'),
-            __('Migration and Asylum', 'app'),
-            __('People with Disabilities', 'app'),
-            __('Addiction', 'app')
+            __('Health', 'app'),
+            __('Children', 'app'),
+            __('Deliquence', 'app'),
+            __('Work and Education', 'app'),
+            __('Migration and Integration', 'app'),
+            __('Material Security', 'app')
         );
         
         $field_of_actions = array_combine($field_of_actions, $field_of_actions);
@@ -285,6 +300,13 @@ class SocialOrganisationPostType extends AbstractPostType {
 		}
 	}
 
+        public function getAll() {
+		return get_posts(array(
+			'post_type' => $this->getPostType(),
+                        'orderby' => 'title'
+		));
+	}
+        
 	public function queryByFieldOfAction($fieldOfAction) {
 		query_posts(array(
 			'post_type' => $this->getPostType(),

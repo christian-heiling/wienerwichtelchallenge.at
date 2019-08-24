@@ -2440,9 +2440,9 @@ a {
       .main-navigation .main-menu > li > a {
         font-weight: 700;
         color: #A3A660;
-        margin-right: 0.5rem; }
+        margin-right: 1rem; }
         .main-navigation .main-menu > li > a + svg {
-          margin-right: 0.5rem; }
+          margin-right: 1rem; }
         .main-navigation .main-menu > li > a:hover, .main-navigation .main-menu > li > a:hover + svg {
           color: #85874c; }
       .main-navigation .main-menu > li.menu-item-has-children {
@@ -3879,42 +3879,24 @@ a {
 ## Footer
 --------------------------------------------------------------*/
 /* Site footer */
-#colophon .widget-area,
-#colophon .site-info {
-  margin: calc(2 * 1rem) 1rem; }
-  @media only screen and (min-width: 768px) {
-    #colophon .widget-area,
-    #colophon .site-info {
-      margin: calc(3 * 1rem) calc(15% + 60px); } }
-#colophon .widget-column {
-  display: flex;
-  flex-wrap: wrap; }
-  #colophon .widget-column .widget {
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    hyphens: auto;
-    width: 100%;
-    word-wrap: break-word; }
-    @media only screen and (min-width: 1168px) {
-      #colophon .widget-column .widget {
-        margin-right: calc(3 * 1rem);
-        width: calc(50% - (3 * 1rem)); } }
-#colophon .site-info {
-  color: #767676;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
-  word-wrap: break-word; }
-  #colophon .site-info a {
-    color: inherit; }
-    #colophon .site-info a:hover {
-      text-decoration: none;
-      color: #A3A660; }
-  #colophon .site-info .imprint,
-  #colophon .site-info .privacy-policy-link {
-    margin-right: 1rem; }
+#colophon {
+  font-size: 0.8em;
+  background: #A3A660;
+  color: #ffffff; }
+  #colophon li {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+  #colophon li a {
+    color: #ffffff; }
+  #colophon h3 {
+    color: #ffffff; }
+  #colophon .wp-block-columns {
+    margin: calc(2 * 1rem) 1rem; }
+  #colophon .site-info {
+    text-align: center;
+    padding-bottom: 1rem;
+    color: #ffffff; }
 
 /* Widgets */
 .widget {
@@ -4000,7 +3982,8 @@ a {
 .entry .entry-content > *,
 .entry .entry-summary > * {
   margin: 32px 0;
-  max-width: 100%; }
+  max-width: 100%;
+  text-align: justify; }
   @media only screen and (min-width: 768px) {
     .entry .entry-content > *,
     .entry .entry-summary > * {

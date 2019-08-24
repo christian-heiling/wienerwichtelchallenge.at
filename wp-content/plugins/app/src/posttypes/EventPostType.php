@@ -90,6 +90,12 @@ class EventPostType extends AbstractPostType {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
+                    'id'   => 'image',
+                    'name' => __('Image', 'app'),
+                    'type' => 'image_advanced',
+                    'max_file_uploads' => 1
+                ),
+                array(
                     'id'   => 'category',
                     'name' => __('Category', 'app'),
                     'type' => 'text',
@@ -114,6 +120,24 @@ class EventPostType extends AbstractPostType {
                     )
                 )
             ),
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('Link'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'link_label',
+                    'name' => __('Label', 'app'),
+                    'desc' => __('e.g. Get Tickets here!'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id'   => 'link',
+                    'name' => __('URL', 'app'),
+                    'type' => 'url'
+                )
+            )
         );
         
         return $meta_boxes;
@@ -142,12 +166,31 @@ class EventPostType extends AbstractPostType {
     }
 
     public function echoEntryMeta() {
-        $this->echoExcerptMeta();
+        echo '<span>' . $this->getStartAndEnddate() . '</span>';
+        $this->outputMetaBoxContentWithSpans(array(
+            'location_name', 'zip'
+        ));
     }
 
     public function echoEntryContent() {
+        $image = rwmb_meta( 'image', array( 'limit' => 1 ) );
+        
         echo '<div class="wp-block-columns">';
             echo '<div class="wp-block-column">';
+                if (!empty($image)) {
+                    $image = array_pop($image);
+                    ?>
+                        <figure class="wp-block-image is-resized overflow">
+                                <img src="<?php echo $image['full_url'] ?>"
+                                     alt="<?php the_title(); ?>"
+                                     class="wp-image-<?php echo $image['ID']; ?>"
+                                     srcset="<?php echo $logo['srcset']; ?>"
+                                     sizes="(max-width: 1920px) 100vw, 1920px"
+                                     width="1920"
+                                     height="516">
+                        </figure>
+                    <?php
+                }
                 echo '<p>' . rwmb_meta('description') . '</p>';
             echo '</div>';
             echo '<div class="wp-block-column">';
@@ -161,6 +204,10 @@ class EventPostType extends AbstractPostType {
                 
                 echo '<h3>' . __('Public Reachable via', 'app') . '</h3>';
                 echo '<p>' . rwmb_meta('reachable_via') . '</p>';
+                
+                echo '<div class="wp-block-button">';
+                echo '<a class="wp-block-button__link" href="' . rwmb_meta('link') . '">' . rwmb_meta('link_label') . '</a>';
+                echo '</div>';
             echo '</div>';
         echo '</div>';
  
@@ -180,10 +227,23 @@ class EventPostType extends AbstractPostType {
     }
     
     public function echoExcerptMeta() {
-        echo '<span>' . $this->getStartAndEnddate() . '</span>';
-        $this->outputMetaBoxContentWithSpans(array(
-            'location_name', 'zip'
-        ));
+        $image = rwmb_meta( 'image', array( 'limit' => 1 ) );
+        if (!empty($image)) {
+            $image = array_pop($image);
+            ?>
+                <figure class="wp-block-image is-resized overflow">
+                        <img src="<?php echo $image['full_url'] ?>"
+                             alt="<?php the_title(); ?>"
+                             class="wp-image-<?php echo $image['ID']; ?>"
+                             srcset="<?php echo $logo['srcset']; ?>"
+                             sizes="(max-width: 1920px) 100vw, 1920px"
+                             width="1920"
+                             height="516">
+                </figure>
+            <?php
+        }
+        
+        $this->echoEntryMeta();
     }
 
     public function echoExcerptContent() {

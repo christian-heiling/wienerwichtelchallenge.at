@@ -86,6 +86,20 @@ class App {
     public function getEventController() {
     	return $this->controllers['event'];
     }
+    
+    /**
+     * @return SponsorPostType
+    */
+    public function getSponsorController() {
+    	return $this->controllers['sponsor'];
+    }
+    
+    /**
+	 * @return SocialOrganisationPostType
+	 */
+    public function getSocialOrganisationController() {
+    	return $this->controllers['social_organisation'];
+    }
 
     /**
      * @return OptionHandler

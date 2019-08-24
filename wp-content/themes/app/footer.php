@@ -17,32 +17,74 @@
 
 	<footer id="colophon" class="site-footer">
 		<?php get_template_part( 'template-parts/footer/footer', 'widgets' ); ?>
-		<div class="site-info">
-			<?php $blog_info = get_bloginfo( 'name' ); ?>
-			<?php if ( ! empty( $blog_info ) ) : ?>
-				<?php bloginfo( 'name' ); ?> © <?php echo app\App::getInstance()->getOptions()->get('copyright_year'); ?> - <?php echo date("Y"); ?>
-			<?php endif; ?>
+            
+            <div class="wp-block-columns">
+                <div class="wp-block-column">
+                    <h3>Eine Initivate von SELBSTundLOS – Wirkstatt zur Förderung vom sozialen Engagement</h3>
+                    <p>ZVR-Zahl: 1363320378</p>
+                    <p><a href="mailto:wichtel@wienerwichtelchallenge.at">wichtel@wienerwichtelchallenge.at</a></p>
+                    
+                    <?php if ( has_nav_menu( 'social' ) ) : ?>
+                    <nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'twentynineteen' ); ?>">
+                            <?php
+                            wp_nav_menu(
+                                    array(
+                                            'theme_location' => 'social',
+                                            'menu_class'     => 'social-links-menu',
+                                            'link_before'    => '<span class="screen-reader-text">',
+                                            'link_after'     => '</span>' . twentynineteen_get_icon_svg( 'link' ),
+                                            'depth'          => 1,
+                                    )
+                            );
+                            ?>
+                    </nav><!-- .social-navigation -->
+                    <?php endif; ?>
+                </div>
+            
+                <div class="wp-block-column">
+                    <h3>Wir werden unterstützt von</h3>
 
-			<?php
-			if ( function_exists( 'the_privacy_policy_link' ) ) {
-				the_privacy_policy_link( '', '<span role="separator" aria-hidden="true"></span>' );
-			}
-			?>
-			<?php if ( has_nav_menu( 'footer' ) ) : ?>
-				<nav class="footer-navigation" aria-label="<?php esc_attr_e( 'Footer Menu', 'twentynineteen' ); ?>">
-					<?php
-					wp_nav_menu(
-						array(
-							'theme_location' => 'footer',
-							'menu_class'     => 'footer-menu',
-							'depth'          => 1,
-						)
-					);
-					?>
-				</nav><!-- .footer-navigation -->
-			<?php endif; ?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
+                    <ul>
+                    <?php 
+                    $controller = app\App::getInstance()->getSponsorController();
+                    foreach($controller->getTypes() as $type) {
+                        $controller->queryByType($type);
+                        while ( have_posts() ) {
+                            the_post();
+                            echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                        }
+                    }
+                    ?>
+                    </ul>
+                </div>
+
+                <div class="wp-block-column">
+                    <h3>Wir unterstützen</h3>
+
+                    <ul>
+                    <?php 
+                    $controller = app\App::getInstance()->getSocialOrganisationController();
+                    query_posts(array(
+                            'post_type' => $controller->getPostType(),
+                            'orderby' => 'title'
+                    ));
+
+                    while ( have_posts() ) {
+                        the_post();
+                        echo '<li><a href="' . get_permalink() . '">' . get_the_title() . '</a></li>';
+                    }
+                    ?>
+                    </ul>
+                </div>
+        </div>
+            
+	<div class="site-info">
+            <?php $blog_info = get_bloginfo( 'name' ); ?>
+            <?php if ( ! empty( $blog_info ) ) : ?>
+                    <?php bloginfo( 'name' ); ?> © <?php echo app\App::getInstance()->getOptions()->get('copyright_year'); ?> - <?php echo date("Y"); ?>
+            <?php endif; ?>
+        </div>
+        </footer>
 
 </div><!-- #page -->
 

@@ -63,10 +63,10 @@
 
 				font-weight: 700;
 				color: $color__link;
-				margin-right: #{0.5 * $size__spacing-unit};
+				margin-right: #{$size__spacing-unit};
 
 				+ svg {
-					margin-right: #{0.5 * $size__spacing-unit};
+					margin-right: #{$size__spacing-unit};
 				}
 
 				&:hover,
