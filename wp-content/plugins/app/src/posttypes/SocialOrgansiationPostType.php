@@ -163,6 +163,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             __('Deliquence', 'app'),
             __('Work and Education', 'app'),
             __('Migration and Integration', 'app'),
+            __('Homeless People', 'app'),
             __('Material Security', 'app')
         );
         
