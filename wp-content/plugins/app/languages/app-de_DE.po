@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-08-13 23:10+0200\n"
-"PO-Revision-Date: 2019-08-13 23:10+0200\n"
+"POT-Creation-Date: 2019-08-25 00:11+0200\n"
+"PO-Revision-Date: 2019-08-25 00:13+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -80,34 +80,34 @@ msgid "Location Infos"
 msgstr "Örtlichkeit"
 
 #: plugins/app/src/posttypes/EventPostType.php:55
-#: plugins/app/src/posttypes/EventPostType.php:125
+#: plugins/app/src/posttypes/EventPostType.php:149
 msgid "Location"
 msgstr "Location"
 
 #: plugins/app/src/posttypes/EventPostType.php:60
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:62
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:76
 msgid "Street"
 msgstr "Straße"
 
 #: plugins/app/src/posttypes/EventPostType.php:65
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:67
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:165
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:81
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:181
 msgid "ZIP"
 msgstr "PLZ"
 
 #: plugins/app/src/posttypes/EventPostType.php:70
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:72
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:86
 msgid "City"
 msgstr "Ort"
 
 #: plugins/app/src/posttypes/EventPostType.php:75
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:77
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:91
 msgid "Map"
 msgstr "Karte"
 
 #: plugins/app/src/posttypes/EventPostType.php:82
-#: plugins/app/src/posttypes/EventPostType.php:162
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:84
+#: plugins/app/src/posttypes/EventPostType.php:205
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:98
 msgid "Public Reachable via"
 msgstr "Öffentliche Erreichbarkeit"
 
@@ -116,124 +116,149 @@ msgid "Description"
 msgstr "Beschreibung"
 
 #: plugins/app/src/posttypes/EventPostType.php:94
+msgid "Image"
+msgstr "Bild"
+
+#: plugins/app/src/posttypes/EventPostType.php:100
 msgid "Category"
 msgstr "Kategorie"
 
-#: plugins/app/src/posttypes/EventPostType.php:102
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:114
+#: plugins/app/src/posttypes/EventPostType.php:108
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:128
 #: plugins/app/src/posttypes/SponsorPostType.php:47
 msgid "Teaser"
 msgstr "Teaser"
 
-#: plugins/app/src/posttypes/EventPostType.php:110
+#: plugins/app/src/posttypes/EventPostType.php:116
 msgid "Press Text"
 msgstr "Pressetext"
 
-#: plugins/app/src/posttypes/EventPostType.php:124
+#: plugins/app/src/posttypes/EventPostType.php:126
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:148
+#: plugins/app/src/posttypes/SponsorPostType.php:63
+msgid "Link"
+msgstr "Link"
+
+#: plugins/app/src/posttypes/EventPostType.php:131
+msgid "Label"
+msgstr "Beschriftung"
+
+#: plugins/app/src/posttypes/EventPostType.php:132
+msgid "e.g. Get Tickets here!"
+msgstr "z.B. Holle dir hier dein Ticket"
+
+#: plugins/app/src/posttypes/EventPostType.php:137
+msgid "URL"
+msgstr "URL"
+
+#: plugins/app/src/posttypes/EventPostType.php:148
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
 msgid "Title"
 msgstr "Titel"
 
-#: plugins/app/src/posttypes/EventPostType.php:126
+#: plugins/app/src/posttypes/EventPostType.php:150
 msgid "Start at"
 msgstr "Startet um"
 
-#: plugins/app/src/posttypes/EventPostType.php:127
+#: plugins/app/src/posttypes/EventPostType.php:151
 msgid "End at"
 msgstr "Endet um"
 
-#: plugins/app/src/posttypes/EventPostType.php:128
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:166
+#: plugins/app/src/posttypes/EventPostType.php:152
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:182
 #: plugins/app/src/posttypes/SponsorPostType.php:75
 #: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
 msgstr "Datum"
 
-#: plugins/app/src/posttypes/EventPostType.php:154
+#: plugins/app/src/posttypes/EventPostType.php:197
 msgid "When and Where?"
 msgstr "Wo und Wann?"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:18
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:32
 msgid "Social Organisations"
 msgstr "Einrichtungen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:30
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:44
 msgid "organisations-slug"
 msgstr "einrichtungen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:40
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:54
 #: plugins/app/src/posttypes/SponsorPostType.php:30
 #: plugins/app/src/posttypes/SponsorPostType.php:55
 #: plugins/app/src/posttypes/WichtelTypePostType.php:30
 msgid "Infos"
 msgstr "Infos"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:45
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:59
 #: plugins/app/src/posttypes/SponsorPostType.php:42
 msgid "Logo"
 msgstr "Logo"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:50
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:163
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:64
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:179
 msgid "Carrier"
 msgstr "Träger"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:55
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:164
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:69
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:180
 msgid "Field of Action"
 msgstr "Handlungsfeld"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:94
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:108
 msgid "Delivery hours"
 msgstr "Abgabezeiten"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:104
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:118
 msgid "Contact"
 msgstr "Kontakt"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:124
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:138
 msgid "About the Social Organisation"
 msgstr "Über die Einrichtung"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:134
-#: plugins/app/src/posttypes/SponsorPostType.php:63
-msgid "Link"
-msgstr "Link"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:159
+msgid "Children, Youth, Family"
+msgstr "Kind, Jugend & Familie"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:145
-msgid "Homeless Assistance"
-msgstr "Wohnungslosenhilfe"
-
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:146
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:160
 msgid "Elderly People"
 msgstr "Ältere Menschen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:147
-msgid "Health Care"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:161
+msgid "Health"
 msgstr "Gesundheit"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:148
-msgid "Children Welfare"
-msgstr "Kinder- und Jugendhilfe"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:162
+msgid "Children"
+msgstr "Kinder"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:149
-msgid "Migration and Asylum"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:163
+msgid "Deliquence"
+msgstr "Straffälligkeit"
+
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:164
+msgid "Work and Education"
+msgstr "Arbeit & Bildung"
+
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:165
+msgid "Migration and Integration"
 msgstr "Migration & Asly"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:150
-msgid "People with Disabilities"
-msgstr "Menschen mit Behinderungen"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:166
+msgid "Homeless People"
+msgstr "Wohnungslosigkeit"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:151
-msgid "Addiction"
-msgstr "Suchthilfe"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:167
+msgid "Material Security"
+msgstr "Materielle Sicherung"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:162
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:178
 msgid "Social Organisation"
 msgstr "Einrichtung"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:199
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:215
 msgid "Delivery Infos"
 msgstr "Abgabeinfos"
 
@@ -356,6 +381,15 @@ msgstr "Sekunde"
 #: themes/app/template-parts/header/event-countdown.php:55
 msgid "Seconds"
 msgstr "Sekunden"
+
+#~ msgid "Homeless Assistance"
+#~ msgstr "Wohnungslosenhilfe"
+
+#~ msgid "People with Disabilities"
+#~ msgstr "Menschen mit Behinderungen"
+
+#~ msgid "Addiction"
+#~ msgstr "Suchthilfe"
 
 #~ msgid "Name"
 #~ msgstr "Name"
