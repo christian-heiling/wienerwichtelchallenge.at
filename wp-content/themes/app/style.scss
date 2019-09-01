@@ -169,7 +169,15 @@ Text Domain:  app
 
 .home-video {
     margin: 0 auto;
-    display: block;
+    display: none;
+    
+    @include media(tablet) {
+            display: block;
+    }
+
+    @include media(desktop) {
+            display: block;
+    }
 }
 
 .home-cta {

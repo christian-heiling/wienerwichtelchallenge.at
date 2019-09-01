@@ -276,7 +276,7 @@
 		 * but smooth effect when resizing the screen.
 		 */
 		transition: opacity 1200ms ease-in-out;
-		opacity: 0.4;
+		opacity: 0;
 		z-index: 5;
 
 		/* When image filters are active, a blue overlay is added. */
