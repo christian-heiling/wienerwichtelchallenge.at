@@ -30,4 +30,10 @@
         padding-bottom: $size__spacing-unit;
         color: #ffffff;
     }
+    
+    .wp-block-columns {
+        max-width: 80%;
+        margin: 0 15%;
+        padding: 2rem 60px;
+    }
 }

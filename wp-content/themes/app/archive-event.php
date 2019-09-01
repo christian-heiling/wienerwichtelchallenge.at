@@ -27,7 +27,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                     <header class="entry-header">
                         <h2 class="entry-title"><?php echo __("Upcoming Events", "app"); ?></h2>
                     </header>
-                </article>
+                
 
 				<?php
 				// Start the Loop.
@@ -36,7 +36,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 				while ( have_posts() ) :
 				    $rows = 2;
                     if ($i % $rows == 0) {
-                        echo '<div class="wp-block-columns">';
+                        echo '<div class="entry-content"><div class="wp-block-columns">';
                     }
                     echo '<div class="wp-block-column">';
 					$i++;
@@ -54,11 +54,12 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
                     echo '</div>';
                     if ($i % $rows == 0) {
-                        echo '</div>';
+                        echo '</div></div>';
                     }
 				endwhile;
 			endif;
 			?>
+                    </article>
 		</main><!-- #main -->
 	</section><!-- #primary -->
 
@@ -72,7 +73,6 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                     <header class="entry-header">
                         <h2 class="entry-title"><?php echo __("Running Events", "app"); ?></h2>
                     </header>
-                </article>
 
 				<?php
 				// Start the Loop.
@@ -81,7 +81,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 				while ( have_posts() ) :
 					$rows = 2;
 					if ($i % $rows == 0) {
-						echo '<div class="wp-block-columns">';
+						echo '<div class="entry-content"><div class="wp-block-columns">';
 					}
 					echo '<div class="wp-block-column">';
 					$i++;
@@ -99,11 +99,12 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 					echo '</div>';
 					if ($i % $rows == 0) {
-						echo '</div>';
+						echo '</div></div>';
 					}
 				endwhile;
 			endif;
 			?>
+                    </article>
         </main><!-- #main -->
     </section><!-- #primary -->
 
@@ -117,7 +118,6 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                     <header class="entry-header">
                         <h2 class="entry-title"><?php echo __("Past Events", "app"); ?></h2>
                     </header>
-                </article>
 
 				<?php
 				// Start the Loop.
@@ -126,7 +126,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 				while ( have_posts() ) :
 					$rows = 2;
 					if ($i % $rows == 0) {
-						echo '<div class="wp-block-columns">';
+						echo '<div class="entry-content"><div class="wp-block-columns">';
 					}
 					echo '<div class="wp-block-column">';
 					$i++;
@@ -144,11 +144,12 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 					echo '</div>';
 					if ($i % $rows == 0) {
-						echo '</div>';
+						echo '</div></div>';
 					}
 				endwhile;
 			endif;
 			?>
+                    </article>
         </main><!-- #main -->
     </section><!-- #primary -->
 

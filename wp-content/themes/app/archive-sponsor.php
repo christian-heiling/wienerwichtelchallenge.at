@@ -29,7 +29,7 @@ foreach($controller->getTypes() as $type):
 					<header class="entry-header">
 						<h2 class="entry-title"><?php echo $type; ?></h2>
 					</header>
-				</article>
+				
 
 				<?php
 				// Start the Loop.
@@ -38,7 +38,7 @@ foreach($controller->getTypes() as $type):
 				while ( have_posts() ) :
 					$rows = 2;
 					if ($i % $rows == 0) {
-						echo '<div class="wp-block-columns">';
+						echo '<div class="entry-content"><div class="wp-block-columns">';
 					}
 					echo '<div class="wp-block-column">';
 					$i++;
@@ -56,11 +56,12 @@ foreach($controller->getTypes() as $type):
 
 					echo '</div>';
 					if ($i % $rows == 0) {
-						echo '</div>';
+						echo '</div></div>';
 					}
 				endwhile;
 			endif;
 			?>
+                    </article>                    
 		</main><!-- #main -->
 	</section><!-- #primary -->
 

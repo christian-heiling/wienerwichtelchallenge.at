@@ -18,8 +18,6 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 ?>
 
-<div id="mapid" class="full-width-layout" style="width: 100%; height: 400px;"></div>
-
 <script>
 jQuery(document).ready(function() {
     var mymap = L.map('mapid').setView([48.20849, 16.37208], 13);
@@ -46,8 +44,23 @@ jQuery(document).ready(function() {
     ?>
 });
 </script>
-<?php
 
+<section id="primary" class="content-area event-archive">
+    <main id="main" class="site-main">
+        <article class="hentry entry">
+            <header class="entry-header">
+                <h2 class="entry-title">Karte</h2>
+            </header>
+
+            <div class="entry-content">
+                <div id="mapid"></div>
+            </div>
+        </article>
+    </main>
+</section>
+        
+<?php
+        
 foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
 ?>
 
@@ -61,7 +74,7 @@ foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
                     <header class="entry-header">
                         <h2 class="entry-title"><?php echo $fieldOfAction; ?></h2>
                     </header>
-                </article>
+                
 
 				<?php
 				// Start the Loop.
@@ -70,7 +83,7 @@ foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
 				while ( have_posts() ) :
 				    $rows = 2;
                     if ($i % $rows == 0) {
-                        echo '<div class="wp-block-columns">';
+                        echo '<div class="entry-content"><div class="wp-block-columns">';
                     }
                     echo '<div class="wp-block-column">';
 					$i++;
@@ -88,11 +101,12 @@ foreach($controller->getFieldOfActionOptions() as $fieldOfAction):
 
                     echo '</div>';
                     if ($i % $rows == 0) {
-                        echo '</div>';
+                        echo '</div></div>';
                     }
 				endwhile;
 			endif;
 			?>
+                </article>
 		</main><!-- #main -->
 	</section><!-- #primary -->
 

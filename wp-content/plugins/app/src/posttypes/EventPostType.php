@@ -174,7 +174,6 @@ class EventPostType extends AbstractPostType {
 
     public function echoEntryContent() {
         $image = rwmb_meta( 'image', array( 'limit' => 1 ) );
-        
         echo '<div class="wp-block-columns">';
             echo '<div class="wp-block-column">';
                 if (!empty($image)) {
