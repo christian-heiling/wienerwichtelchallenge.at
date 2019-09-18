@@ -17,31 +17,38 @@
 	.main-navigation a:after,
 	.main-navigation .main-menu > li.menu-item-has-children:after,
 	.main-navigation li,
-	.social-navigation li,
-	.entry-meta,
-	.entry-title {
+	.social-navigation li
+        {
 		color: $color__background-body;
 	}
+        
+        .entry-title {
+            color: #e97356;
+        }
+        
+        .entry-meta {
+            color: #3e3d3d;
+        }
 
 	.main-navigation a,
 	.main-navigation a + svg,
 	.social-navigation a,
 	.site-title a,
 	.site-featured-image a {
-		color: $color__background-body;
+		color: #e97356;;
 		transition: opacity $link_transition ease-in-out;
 
 		&:hover,
 		&:active,
 		&:hover + svg,
 		&:active + svg {
-			color: $color__background-body;
+			color: #e97356;
 			opacity: 0.6;
 		}
 
 		&:focus,
 		&:focus + svg {
-			color: $color__background-body;
+			color: #e97356;
 		}
 	}
 

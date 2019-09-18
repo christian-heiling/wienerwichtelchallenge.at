@@ -141,7 +141,7 @@
 
 	.sub-menu {
 
-		background-color: $color__link;
+		background-color: white;
 		color: $color__background-body;
 		list-style: none;
 		padding-left: 0;
@@ -209,10 +209,10 @@
 
 				&:hover,
 				&:focus {
-					background: $color__link-hover;
+					background: white;
 
 					&:after {
-						background: $color__link-hover;
+						background: white;
 					}
 				}
 			}
