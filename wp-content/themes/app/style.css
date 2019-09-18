@@ -2417,7 +2417,7 @@ a {
     line-height: 1.2;
     text-decoration: none;
     background: transparent;
-    color: inherit;
+    color: #e97356;
     cursor: pointer;
     transition: background 250ms ease-in-out, transform 150ms ease;
     -webkit-appearance: none;
@@ -4847,8 +4847,9 @@ svg {
 
 .home-cta {
   text-align: center;
-  margin-top: 1em;
-  color: white;
-  background-color: #3e3d3d; }
+  margin-top: 1em; }
+
+.site-header.featured-image .site-featured-image .wp-block-button a {
+  color: white; }
 
 /*# sourceMappingURL=style.css.map */
