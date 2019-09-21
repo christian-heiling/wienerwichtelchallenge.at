@@ -206,8 +206,22 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoEntryContent() {
+        
+        $logo = array_pop(rwmb_meta( 'logo', array( 'limit' => 1 ) ));
+        
         echo '<div class="wp-block-columns">';
             echo '<div class="wp-block-column">';
+            ?>
+            <figure class="social-organisation-logo wp-block-image is-resized overflow">
+                    <img src="<?php echo $logo['full_url'] ?>"
+                         alt=""
+                         class="wp-image-<?php echo $logo['ID']; ?>"
+                         srcset="<?php echo $logo['srcset']; ?>"
+                         sizes="(max-width: 1920px) 100vw, 1920px"
+                         width="1920"
+                         height="516">
+            </figure>
+            <?php
                 echo '<p>' . rwmb_meta('description') . '</p>';
             echo '</div>';
             echo '<div class="wp-block-column">';
@@ -259,6 +273,19 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
     
     public function echoExcerptMeta() {
+        $logo = array_pop(rwmb_meta( 'logo', array( 'limit' => 1 ) ));
+
+        ?>
+        <figure class="social-organisation-logo wp-block-image is-resized overflow">
+                <img src="<?php echo $logo['full_url'] ?>"
+                     alt=""
+                     class="wp-image-<?php echo $logo['ID']; ?>"
+                     srcset="<?php echo $logo['srcset']; ?>"
+                     sizes="(max-width: 1920px) 100vw, 1920px"
+                     width="1920"
+                     height="516">
+        </figure>
+        <?php
         $this->outputMetaBoxContentWithSpans(array(
             'carrier', 'field_of_action', 'zip'
         ));
