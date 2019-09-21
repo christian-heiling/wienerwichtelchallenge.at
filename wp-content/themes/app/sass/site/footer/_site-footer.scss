@@ -31,7 +31,7 @@
         color: #ffffff;
     }
     
-    @media only screen and ( min-width: 782px ) {
+    @include media(tablet) {
         .wp-block-columns {
             max-width: 80%;
             margin: 0 15%;

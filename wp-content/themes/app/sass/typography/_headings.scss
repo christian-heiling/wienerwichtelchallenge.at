@@ -126,6 +126,10 @@ h6 {
 	font-size: $font__size-xs;
 }
 
+.site-featured-image .entry-meta {
+	font-size: $font__size-sm;
+}
+
 .site-title,
 .page-title {
 	font-weight: normal;
@@ -146,10 +150,6 @@ h6 {
 .error-404 .page-title,
 .comments-title,
 blockquote {
-	-webkit-hyphens: auto;
-	-moz-hyphens: auto;
-	-ms-hyphens: auto;
-	hyphens: auto;
 	word-break: break-word;
 	word-wrap: break-word;
 }

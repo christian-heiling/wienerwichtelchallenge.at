@@ -27,7 +27,12 @@ object {
 
 svg {
 	transition: fill $icon_transition ease-in-out;
-	fill: currentColor;
+	fill: rgb(233, 115, 86);
+}
+
+.site-footer svg {
+	transition: fill $icon_transition ease-in-out;
+	fill: #fff;
 }
 
 /*--------------------------------------------------------------

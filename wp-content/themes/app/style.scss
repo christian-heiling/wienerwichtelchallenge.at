@@ -100,7 +100,7 @@ Text Domain:  app
 /* reduce feature image */
 
 .home .site-header.featured-image { 
-    min-height: 100vh;
+    min-height: 50vh;
     opacity: 1;
 }
 
@@ -115,6 +115,12 @@ Text Domain:  app
     background-size: 100% 100%;
     background-image: url(images/rainbow-background.jpg);
     background-repeat: repeat-y;
+    padding: 0.5em;
+    font-size: $font__size-xs;
+    
+    @media(tablet) {
+        font-size: $font__size-sm;
+    }
 }
 
 .event-countdown {
@@ -130,7 +136,11 @@ Text Domain:  app
 
 .event-countdown-content {
     padding-right: 1.2em;
-    display: inline-block;
+    display: block;
+    
+    @include media(tablet) {
+        display: inline-block;
+    }
 }
 
 .event-countdown > a {

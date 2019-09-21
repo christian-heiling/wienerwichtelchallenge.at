@@ -1,5 +1,9 @@
 /* !Block styles */
 
+.entry-title {
+    text-align: left;
+}
+
 .entry .entry-content > *,
 .entry .entry-summary > * {
 	margin: 32px 0;
@@ -103,15 +107,9 @@
 	.entry-content,
 	.entry-summary,
 	.entry {
-		margin: inherit;
+		margin: 0;
 		max-width: inherit;
 		padding: inherit;
-
-		@include media(tablet) {
-			margin: inherit;
-			max-width: inherit;
-			padding: inherit;
-		}
 	}
 }
 

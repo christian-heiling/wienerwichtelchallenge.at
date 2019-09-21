@@ -65,8 +65,8 @@ $font__fallbacks: (
 $font__code: Menlo, monaco, Consolas, Lucida Console, monospace;
 $font__pre: "Courier 10 Pitch", Courier, monospace;
 
-$font__size_base: 20px;
-$font__size-ratio: 1.05;
+$font__size_base: 16px;
+$font__size-ratio: 1.1;
 
 $font__size-xxs:   1em / (1.5 * $font__size-ratio);
 $font__size-xs:    1em / (1.25 * $font__size-ratio);
