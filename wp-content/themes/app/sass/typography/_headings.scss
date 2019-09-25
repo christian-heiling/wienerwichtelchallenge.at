@@ -25,7 +25,7 @@ h4,
 h5,
 h6 {
 	@include font-family( $font__heading );
-        color: #F28F79;
+        color: #841828;
 }
 
 .main-navigation,
@@ -45,7 +45,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: 700;
+	font-weight: normal;
 	letter-spacing: -0.02em;
 	line-height: $font__line-height-heading;
 	-webkit-font-smoothing: antialiased;
@@ -78,10 +78,6 @@ h1 {
 .has-larger-font-size,
 h2 {
 	font-size: $font__size-lg;
-
-	@include media(tablet) {
-		font-size: $font__size-xl;
-	}
 }
 
 .has-regular-font-size,

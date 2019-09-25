@@ -20,11 +20,11 @@
 	}
         
         .entry-title {
-            color: #e97356;
+            color: #fff;
         }
         
         .entry-meta {
-            color: #3e3d3d;
+            color: #fff;
         }
 
 	.main-navigation a,
@@ -32,24 +32,12 @@
 	.social-navigation a,
 	.site-title a,
 	.site-featured-image a {
-		color: #e97356;;
+		color: #fff;
 		transition: opacity $link_transition ease-in-out;
-
-		&:hover,
-		&:active,
-		&:hover + svg,
-		&:active + svg {
-			color: #e97356;
-			opacity: 0.6;
-		}
-
-		&:focus,
-		&:focus + svg {
-			color: #e97356;
-		}
 	}
 
 	.main-navigation .sub-menu a {
+                color: #346732;
 		opacity: inherit;
 	}
 
@@ -124,7 +112,8 @@
 
 			.entry-meta {
 
-				font-weight: 500;
+				font-weight: 400;
+                                font-size: 1em;
 
 				> span {
 
@@ -190,7 +179,6 @@
 
 	.custom-logo-link {
 
-		background: $color__background-body;
 		box-shadow: 0 0 0 0 rgba($color__background-body, 0);
 
 		&:hover,

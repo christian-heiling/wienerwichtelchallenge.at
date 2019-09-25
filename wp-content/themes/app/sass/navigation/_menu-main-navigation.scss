@@ -20,11 +20,11 @@
 		padding: 0;
 		margin: 0;
 		font-family: $font__heading;
-		font-weight: 700;
+		font-weight: normal;
 		line-height: $font__line-height-heading;
 		text-decoration: none;
 		background: transparent;
-		color: #e97356;
+		color: #fff;
 		cursor: pointer;
 		transition:
 			background 250ms ease-in-out,
@@ -61,8 +61,8 @@
 
 			> a {
 
-				font-weight: 700;
-				color: $color__link;
+				font-weight: normal;
+				color: #fff;
 				margin-right: #{$size__spacing-unit};
 
 				+ svg {
@@ -200,7 +200,7 @@
 			> a,
 			> .menu-item-link-return {
 
-				color: $color__background-body;
+				color: #346732;
 				display: block;
 				line-height: $font__line-height-heading;
 				text-shadow: none;
@@ -215,6 +215,10 @@
 						background: white;
 					}
 				}
+                                
+                                > svg {
+                                    fill: #346732;
+                                }
 			}
 
 			> .menu-item-link-return {
