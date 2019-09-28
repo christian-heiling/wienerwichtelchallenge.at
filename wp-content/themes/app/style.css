@@ -3324,7 +3324,7 @@ a {
     margin-bottom: calc(3 * 1rem) 1rem 1rem;
     position: relative; }
     @media only screen and (min-width: 1167px) {
-      .entry .entry-header {
+      .entry .entry-header .entry .entry-header {
         margin: calc(3 * 1rem) calc(15% + 60px) 1rem; } }
   .entry .entry-title {
     margin: 0; }
@@ -3854,6 +3854,8 @@ a {
     margin: 0;
     padding: 0;
     list-style: none; }
+  #colophon a {
+    color: #ffffff; }
   #colophon li a {
     color: #ffffff; }
   #colophon h3 {
