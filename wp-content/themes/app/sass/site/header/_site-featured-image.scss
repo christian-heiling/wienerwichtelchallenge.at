@@ -1,7 +1,9 @@
 // Featured image styles
 
 .site-header.featured-image {
-
+  
+        text-shadow: #fff 0.25px 0.25px;
+    
 	/* Hide overflow for overflowing featured image */
 	overflow: hidden;
 
@@ -214,7 +216,7 @@
 
 	/* Background & Effects */
 	/* Shared background settings between pseudo elements. */
-	background-position: center;
+	background-position: center bottom;
 	background-repeat: no-repeat;
 	background-size: cover;
 

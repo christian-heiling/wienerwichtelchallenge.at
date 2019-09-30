@@ -16,6 +16,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> 
 	<?php wp_head(); ?>
 </head>
 
@@ -47,7 +48,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                     <figure class="post-thumbnail">
                         <?php
                         $imageId = array_key_first(\app\App::getInstance()->getOptions()->get($controller->getPostType(), 'header_image'));
-                        echo wp_get_attachment_image( $imageId, 'post-thumbnail', false, [] );
+                        echo wp_get_attachment_image( $imageId, 'full', false, [] );
                         ?>
                     </figure>
 

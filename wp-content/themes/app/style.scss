@@ -193,6 +193,10 @@ Text Domain:  app
 .home-cta {
     text-align: center;
     margin-top: 1em;
+    
+    a {
+        background-color: rgb(132, 24, 40);
+    }
 }
 
 .site-header.featured-image .site-featured-image .wp-block-button a {

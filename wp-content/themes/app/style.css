@@ -1948,7 +1948,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #111;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 1em;
   line-height: 1.8;
@@ -1961,7 +1961,7 @@ select,
 optgroup,
 textarea {
   color: #111;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
   line-height: 1.8;
   text-rendering: optimizeLegibility; }
@@ -1992,7 +1992,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   color: #841828; }
 
 .main-navigation,
@@ -2019,7 +2019,7 @@ h6 {
   -moz-osx-font-smoothing: grayscale; }
 
 .page-title {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
 
 .site-branding,
 .main-navigation ul.main-menu > li,
@@ -2123,7 +2123,7 @@ i {
 blockquote cite {
   font-size: 0.7272727273em;
   font-style: normal;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
 
 pre {
   font-size: 0.9090909091em;
@@ -2250,7 +2250,7 @@ table {
   margin: 0 0 1rem;
   border-collapse: collapse;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
   table td,
   table th {
     padding: 0.5em;
@@ -2269,7 +2269,7 @@ input[type="submit"] {
   border-radius: 5px;
   box-sizing: border-box;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 0.9090909091em;
   font-weight: 700;
   line-height: 1.2;
@@ -2404,7 +2404,7 @@ a {
     border: none;
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: normal;
     line-height: 1.2;
     text-decoration: none;
@@ -2594,7 +2594,7 @@ a {
     .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu {
       counter-reset: submenu; }
     .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus-within > .sub-menu .sub-menu > li > a::before {
-      font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
       font-weight: normal;
       content: "– " counters(submenu,"– ",none);
       counter-increment: submenu; }
@@ -2669,7 +2669,7 @@ a {
     .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):hover > .sub-menu .sub-menu > li > a::before,
     .main-navigation .main-menu .menu-item-has-children:not(.off-canvas):focus > .sub-menu .sub-menu > li > a::before,
     .main-navigation .main-menu .menu-item-has-children.is-focused:not(.off-canvas) > .sub-menu .sub-menu > li > a::before {
-      font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
       font-weight: normal;
       content: "– " counters(submenu,"– ",none);
       counter-increment: submenu; }
@@ -2893,7 +2893,7 @@ a {
 .comment-navigation .nav-next {
   min-width: 50%;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: bold; }
   .comment-navigation .nav-previous .secondary-text,
   .comment-navigation .nav-next .secondary-text {
@@ -3015,7 +3015,8 @@ a {
 ## Header
 --------------------------------------------------------------*/
 .site-header {
-  padding: 1em; }
+  padding: 1em;
+  padding-bottom: 3em; }
   .site-header.featured-image {
     display: flex;
     flex-direction: column;
@@ -3025,8 +3026,9 @@ a {
       margin-bottom: auto; }
   @media only screen and (min-width: 1167px) {
     .site-header {
-      margin: 0;
-      padding: 3rem 0; }
+      padding: 1em;
+      padding-top: 1em;
+      padding-bottom: 3em; }
       .site-header.featured-image {
         min-height: 100vh; } }
 
@@ -3103,6 +3105,7 @@ a {
   margin: 0; }
 
 .site-header.featured-image {
+  text-shadow: #fff 0.25px 0.25px;
   /* Hide overflow for overflowing featured image */
   overflow: hidden;
   /* Need relative positioning to properly align layers. */
@@ -3115,7 +3118,7 @@ a {
   /* Set up image filter layer positioning */
   /* Background & Effects */
   /* Shared background settings between pseudo elements. */
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   background-size: cover;
   /* The intensity of each blend mode is controlled via layer opacity. */
@@ -3601,7 +3604,7 @@ a {
   .comment-list .pingback .comment-body,
   .comment-list .trackback .comment-body {
     color: #767676;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 0.7272727273em;
     font-weight: 500;
     margin-top: 1rem;
@@ -3616,7 +3619,7 @@ a {
     .comment-list .pingback .comment-body .comment-edit-link,
     .comment-list .trackback .comment-body .comment-edit-link {
       color: #767676;
-      font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
       font-weight: 500; }
 
 #respond + .comment-reply {
@@ -3756,7 +3759,7 @@ a {
 
 .comment-form .comment-notes,
 .comment-form label {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 0.7272727273em;
   color: #767676; }
 @media only screen and (min-width: 1167px) {
@@ -3902,7 +3905,7 @@ a {
   .widget_recent_entries ul li,
   .widget_rss ul li {
     color: #767676;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: calc(16px * 1.1);
     font-weight: 700;
     line-height: 1.2;
@@ -3925,13 +3928,13 @@ a {
   .widget_recent_comments ul ul > li > a::before,
   .widget_recent_entries ul ul > li > a::before,
   .widget_rss ul ul > li > a::before {
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-weight: normal;
     content: "– " counters(submenu,"– ",none);
     counter-increment: submenu; }
 
 .widget_tag_cloud .tagcloud {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 700; }
 
 .widget_search .search-field {
@@ -4088,7 +4091,7 @@ a {
   transition: background 150ms ease-in-out;
   border: none;
   font-size: 0.9090909091em;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.2;
   box-sizing: border-box;
   font-weight: bold;
@@ -4134,7 +4137,7 @@ a {
   .entry .entry-content .wp-block-categories li,
   .entry .entry-content .wp-block-latest-posts li {
     color: #767676;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: calc(16px * 1.1);
     font-weight: bold;
     line-height: 1.2;
@@ -4160,7 +4163,7 @@ a {
 .entry .entry-content .wp-block-categories ul {
   counter-reset: submenu; }
 .entry .entry-content .wp-block-categories ul > li > a::before {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: normal;
   content: "– " counters(submenu,"– ",none);
   counter-increment: submenu; }
@@ -4179,11 +4182,11 @@ a {
   line-height: 1.8;
   padding: 1rem; }
 .entry .entry-content .wp-block-verse {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   line-height: 1.8; }
 .entry .entry-content .has-drop-cap:not(:focus):first-letter {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 3.3em;
   line-height: 1;
   font-weight: bold;
@@ -4212,7 +4215,7 @@ a {
         font-size: 2.2em; } }
   .entry .entry-content .wp-block-pullquote cite {
     display: inline-block;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.6;
     text-transform: none;
     color: #767676;
@@ -4351,7 +4354,7 @@ a {
   .entry .entry-content .wp-block-cover .wp-block-cover-image-text,
   .entry .entry-content .wp-block-cover .wp-block-cover-text,
   .entry .entry-content .wp-block-cover h2 {
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 1.65em;
     font-weight: bold;
     line-height: 1.25;
@@ -4417,7 +4420,7 @@ a {
 .entry .entry-content .wp-block-gallery .blocks-gallery-image figcaption,
 .entry .entry-content .wp-block-gallery .blocks-gallery-item figcaption {
   font-size: 0.7272727273em;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0.5rem;
@@ -4475,7 +4478,7 @@ a {
 .entry .entry-content .wp-block-table td {
   border-color: #767676; }
 .entry .entry-content .wp-block-file {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; }
   .entry .entry-content .wp-block-file .wp-block-file__button {
     display: table;
     transition: background 150ms ease-in-out;
@@ -4483,7 +4486,7 @@ a {
     border-radius: 5px;
     background: #841828;
     font-size: 16px;
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     line-height: 1.2;
     text-decoration: none;
     font-weight: bold;
@@ -4518,7 +4521,7 @@ a {
     .entry .entry-content .wp-block-columns .wp-block-column:not(:first-child) {
       margin-left: 64px; } }
 .entry .entry-content .wp-block-latest-comments .wp-block-latest-comments__comment-meta {
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: bold; }
   .entry .entry-content .wp-block-latest-comments .wp-block-latest-comments__comment-meta .wp-block-latest-comments__comment-date {
     font-weight: normal; }
@@ -4674,7 +4677,7 @@ svg {
 .wp-caption-text {
   color: #767676;
   font-size: 0.7272727273em;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0.5rem;
@@ -4734,7 +4737,7 @@ svg {
 .gallery-caption {
   display: block;
   font-size: 0.7272727273em;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 0.5rem; }
@@ -4823,6 +4826,8 @@ svg {
 .home-cta {
   text-align: center;
   margin-top: 1em; }
+  .home-cta a {
+    background-color: #841828; }
 
 .site-header.featured-image .site-featured-image .wp-block-button a {
   color: white; }

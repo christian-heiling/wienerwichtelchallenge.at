@@ -2,6 +2,7 @@
 
 .site-header {
 	padding: 1em;
+        padding-bottom: 3em;
 
 	&.featured-image {
 		display: flex;
@@ -15,8 +16,9 @@
 	}
 
 	@include media(tablet) {
-		margin: 0;
-		padding: 3rem 0;
+		padding: 1em;
+                padding-top: 1em;
+                padding-bottom: 3em;
 
 		&.featured-image {
 			min-height: 100vh;
