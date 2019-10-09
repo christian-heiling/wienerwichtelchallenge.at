@@ -18,9 +18,12 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 ?>
 
+<?php
+$map = app\App::getInstance()->getOptions()->get('map');
+?>
 <script>
 jQuery(document).ready(function() {
-    var mymap = L.map('mapid').setView([48.20849, 16.37208], 13);
+    var mymap = L.map('mapid').setView<?php echo '([' . $map['latitude'] . ', ' . $map['longitude'] . '], ' . $map['zoom'] . ');'; ?>
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
             zoom: 2,
