@@ -3,6 +3,7 @@
 namespace app;
 
 use app\posttypes\EventPostType;
+use app\posttypes\CityPostType;
 
 class App {
     
@@ -40,12 +41,10 @@ class App {
         $event = new posttypes\EventPostType();
         $socialOrganisation = new posttypes\SocialOrganisationPostType();
         $sponsor = new posttypes\SponsorPostType();
-        $wichtelType = new posttypes\WichtelTypePostType();
         
         $this->controllers[$event->getPostType()] = $event;
         $this->controllers[$socialOrganisation->getPostType()] = $socialOrganisation;
         $this->controllers[$sponsor->getPostType()] = $sponsor;
-        $this->controllers[$wichtelType->getPostType()] = $wichtelType;
     }
     
     private function initOptionHandler() {

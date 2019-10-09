@@ -111,9 +111,45 @@ class OptionHandler {
                     'id'   => 'copyright_year',
                     'name' => __('Start Year of Copyright', 'app'),
                     'type' => 'text',
-                    
+                ),
+                array(
+                    'id'   => 'start_header',
+                    'name' => __('Header of the Start Page', 'app'),
+                    'type' => 'text',
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    )
                 )
             ),
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('Map'),
+            'post_types' => array($this->getSlug()),
+            'fields' => array(
+                array(
+                    'id'   => 'street',
+                    'name' => __('Street', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id'   => 'zip',
+                    'name' => __('ZIP', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id'   => 'city',
+                    'name' => __('City', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'map',
+                    'name' => __('Map', 'app'),
+                    'type' => 'osm',
+                    'address_field' => 'street,zip,city'
+                ),
+            )
         );
         
         $meta_boxes[] = array(
@@ -159,7 +195,7 @@ class OptionHandler {
                     'force_delete' => false,
                     'max_file_uploads' => 1,
                     'image_size' => 'medium'
-                )
+                ),
             ),
         );
 
@@ -220,7 +256,7 @@ class OptionHandler {
             $name = $a . '_' . $b;
         }
         
-        return rwmb_meta($name, [], $this->getPostId());
+        return rwmb_get_value($name, [], $this->getPostId());
     }
 
     public function getPostId() {

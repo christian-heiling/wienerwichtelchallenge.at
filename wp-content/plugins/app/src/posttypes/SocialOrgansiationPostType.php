@@ -23,7 +23,7 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoColumnBody($column_name, $post_ID) {
-        if (in_array($column_name, ['carrier', 'field_of_action', 'zip'])) {
+        if (in_array($column_name, ['carrier', 'field_of_action', 'city', 'zip'])) {
             echo rwmb_meta($column_name, [], $post_ID);
         }
     }
@@ -84,7 +84,8 @@ class SocialOrganisationPostType extends AbstractPostType {
                 array(
                     'id'   => 'city',
                     'name' => __('City', 'app'),
-                    'type' => 'text'
+                    'type' => 'post_type',
+                    ''
                 ),
                 array(
                     'id' => 'map',
@@ -178,6 +179,7 @@ class SocialOrganisationPostType extends AbstractPostType {
         $head['title'] = __('Social Organisation', 'app');
         $head['carrier'] = __('Carrier', 'app');
         $head['field_of_action'] = __('Field of Action', 'app');
+        $head['city'] = __('City', 'app');
         $head['zip'] = __('ZIP', 'app');
         $head['date'] = __('Date');
         
@@ -287,7 +289,7 @@ class SocialOrganisationPostType extends AbstractPostType {
         </figure>
         <?php
         $this->outputMetaBoxContentWithSpans(array(
-            'carrier', 'field_of_action', 'zip'
+            'carrier', 'field_of_action', 'city', 'zip'
         ));
     }
 
