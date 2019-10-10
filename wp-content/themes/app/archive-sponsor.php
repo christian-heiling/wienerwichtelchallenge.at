@@ -26,11 +26,7 @@ foreach($controller->getTypes() as $type):
 			<?php if ( have_posts() ) : ?>
 
 				<article class="hentry entry">
-					<header class="entry-header">
-						<h2 class="entry-title"><?php echo $type; ?></h2>
-					</header>
-				
-
+							
 				<?php
 				// Start the Loop.
 				$i = 0;
