@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2019-08-25 00:11+0200\n"
-"PO-Revision-Date: 2019-08-25 00:13+0200\n"
+"PO-Revision-Date: 2019-10-10 22:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -264,11 +264,11 @@ msgstr "Abgabeinfos"
 
 #: plugins/app/src/posttypes/SponsorPostType.php:8
 msgid "Sponsors"
-msgstr "Sponsoren"
+msgstr "Unterstützer"
 
 #: plugins/app/src/posttypes/SponsorPostType.php:16
 msgid "sponsors-slug"
-msgstr "sponsoren"
+msgstr "unterstuetzer"
 
 #: plugins/app/src/posttypes/SponsorPostType.php:35
 #: plugins/app/src/posttypes/SponsorPostType.php:74
@@ -325,7 +325,7 @@ msgstr "Einrichtungs Sidebar"
 
 #: themes/app/functions.php:16
 msgid "Sponsor Sidebar"
-msgstr "Sponsoren Sidebar"
+msgstr "Unterstützer Sidebar"
 
 #: themes/app/template-parts/content/content-excerpt.php:22
 msgid "Featured"
