@@ -16,13 +16,14 @@
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer">
-		<?php get_template_part( 'template-parts/footer/footer', 'widgets' ); ?>
-            
+
             <div class="wp-block-columns">
                 <div class="wp-block-column">
+                    
                     <h3>Eine Initivate von SELBSTundLOS – Wirkstatt zur Förderung vom sozialen Engagement</h3>
                     <p>ZVR-Zahl: 1363320378</p>
                     <p><a href="mailto:wichtel@wienerwichtelchallenge.at">wichtel@wienerwichtelchallenge.at</a></p>
+                    <p><a href="<?php echo app\App::getInstance()->getOptions()->get('link_tac'); ?>"><?php echo __('Impressum & Datenschutzerklärung', 'app'); ?></a></p>
                     
                     <?php if ( has_nav_menu( 'social' ) ) : ?>
                     <nav class="social-navigation" aria-label="<?php esc_attr_e( 'Social Links Menu', 'twentynineteen' ); ?>">
