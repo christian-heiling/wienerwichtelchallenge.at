@@ -72,6 +72,10 @@ class App {
     }
     
     public function getController($postType) {
+        if ($postType == false) {
+            return null;
+        }
+        
         if (array_key_exists($postType, $this->controllers)) {
             return $this->controllers[$postType];
         } else {
@@ -117,6 +121,6 @@ class App {
     }
     
     public function unlimitTheQuery($query) {
-        $query->set('posts_per_page', -1);
+        $query->set('posts_per_page', 1000);
     }
 }

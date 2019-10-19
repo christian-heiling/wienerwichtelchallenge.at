@@ -108,6 +108,11 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
+                    'id'   => 'link_tac',
+                    'name' => __('Link to Terms & Conditions', 'app'),
+                    'type' => 'text',
+                ),
+                array(
                     'id'   => 'copyright_year',
                     'name' => __('Start Year of Copyright', 'app'),
                     'type' => 'text',
