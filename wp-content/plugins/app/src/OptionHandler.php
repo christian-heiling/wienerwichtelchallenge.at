@@ -108,16 +108,6 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id'   => 'link_tac',
-                    'name' => __('Link to Terms & Conditions', 'app'),
-                    'type' => 'text',
-                ),
-                array(
-                    'id'   => 'copyright_year',
-                    'name' => __('Start Year of Copyright', 'app'),
-                    'type' => 'text',
-                ),
-                array(
                     'id'   => 'start_header',
                     'name' => __('Header of the Start Page', 'app'),
                     'type' => 'text',
@@ -125,6 +115,19 @@ class OptionHandler {
                     'options' => array(
                         'textarea_rows' => 8
                     )
+                ),
+                array(
+                    'id'   => 'footer',
+                    'name' => __('Footer', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    )
+                ),
+                array(
+                    'id'   => 'copyright_year',
+                    'name' => __('Start Year of Copyright', 'app'),
+                    'type' => 'text',
                 )
             ),
         );
