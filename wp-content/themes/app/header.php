@@ -37,17 +37,16 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentynineteen' ); ?></a>
         
-		<header id="masthead" class="<?php echo ((is_singular() && twentynineteen_can_show_post_thumbnail()) || (!empty($controller))) ? 'site-header featured-image' : 'site-header'; ?>">                    
+		<header id="masthead" class="site-header featured-image">                    
                     <div class="site-branding-container">
                             <?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
                     </div><!-- .site-branding-container -->
 
-            <?php if (!empty($controller)) : ?>
                 <div class="site-featured-image">
 
                     <figure class="post-thumbnail">
                         <?php
-                        $imageId = array_key_first(\app\App::getInstance()->getOptions()->get($controller->getPostType(), 'header_image'));
+                        $imageId = \app\App::getInstance()->getOptions()->get('header_image');
                         echo wp_get_attachment_image( $imageId, 'full' , false, [] );
                         ?>
                     </figure>
@@ -65,24 +64,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                     </div><!-- .entry-header -->
                     <?php rewind_posts(); ?>
                 </div>
-            <?php elseif ( is_singular() && twentynineteen_can_show_post_thumbnail() ) : ?>
-				<div class="site-featured-image">
-					<?php
-						twentynineteen_post_thumbnail();
-						the_post();
-						$discussion = ! is_page() && twentynineteen_can_show_post_thumbnail() ? twentynineteen_get_discussion_data() : null;
 
-						$classes = 'entry-header';
-					if ( ! empty( $discussion ) && absint( $discussion->responses ) > 0 ) {
-						$classes = 'entry-header has-discussion';
-					}
-					?>
-					<div class="<?php echo $classes; ?>">
-						<?php get_template_part( 'template-parts/header/entry', 'header' ); ?>
-					</div><!-- .entry-header -->
-					<?php rewind_posts(); ?>
-				</div>
-			<?php endif; ?>
 		</header><!-- #masthead -->
 
 	<div id="content" class="site-content">

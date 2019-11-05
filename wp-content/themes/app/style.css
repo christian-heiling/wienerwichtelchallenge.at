@@ -3963,7 +3963,7 @@ a {
 .entry .entry-summary > * {
   margin: 32px 0;
   max-width: 100%;
-  text-align: justify; }
+  text-align: left; }
   @media only screen and (min-width: 1167px) {
     .entry .entry-content > *,
     .entry .entry-summary > * {
@@ -4831,5 +4831,46 @@ svg {
 
 .site-header.featured-image .site-featured-image .wp-block-button a {
   color: white; }
+
+#main .entry-header h1.entry-title {
+  display: none; }
+
+.entry .entry-content > .wish-letter {
+  background-color: #FFEFD5;
+  padding: 2rem;
+  text-align: center; }
+
+.featherlight .featherlight-content {
+  border: 3px solid #841828 !important;
+  max-width: 800px; }
+  .featherlight .featherlight-content p {
+    text-align: center;
+    font-size: 1.1em; }
+  .featherlight .featherlight-content .wp-block-button {
+    text-align: center; }
+  .featherlight .featherlight-content .wish-buttons {
+    margin: 0 auto;
+    text-align: center; }
+  .featherlight .featherlight-content .wish-button-primary,
+  .featherlight .featherlight-content .wish-button-secondary {
+    display: inline-block;
+    padding-left: 1rem; }
+  .featherlight .featherlight-content .wish-button-primary .wp-block-button__link {
+    background-color: #841828;
+    border-radius: 5px !important;
+    font-size: 0.9090909091em; }
+  .featherlight .featherlight-content .wish-button-primary .wp-block-button__link:hover {
+    background-color: #d04653; }
+  .featherlight .featherlight-content .wish-button-secondary .wp-block-button__link {
+    border-radius: 5px !important;
+    font-size: 0.9090909091em; }
+  .featherlight .featherlight-content .wish-button-secondary .wp-block-button__link:hover {
+    background-color: #676f78; }
+
+.wish-buttons .wp-block-button {
+  text-align: center; }
+
+.field-visibility-settings-header {
+  display: none; }
 
 /*# sourceMappingURL=style.css.map */

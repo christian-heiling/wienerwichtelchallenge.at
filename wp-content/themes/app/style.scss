@@ -202,3 +202,67 @@ Text Domain:  app
 .site-header.featured-image .site-featured-image .wp-block-button a {
     color: white;
 }
+
+#main .entry-header h1.entry-title {
+    display: none;
+}
+
+.entry .entry-content > .wish-letter {
+    background-color: #FFEFD5;
+    padding: 2rem;
+    text-align: center;
+}
+
+.featherlight .featherlight-content {
+    border: 3px solid $color__background-button !important;
+    max-width: 800px;
+    
+    p {
+        text-align: center;
+        font-size: $font__size-md;
+    }
+    
+    .wp-block-button {
+        text-align: center;
+    }
+    
+    .wish-buttons {
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .wish-button-primary,
+    .wish-button-secondary {
+        display: inline-block;
+        padding-left: 1rem;
+    }
+    
+    .wish-button-primary .wp-block-button__link {
+        background-color: $color__background-button;
+        border-radius: 5px !important;
+        font-size: $font__size-sm;
+    }
+    
+    .wish-button-primary .wp-block-button__link:hover {
+        background-color: $color__background-button-hover;
+    }
+    
+    .wish-button-secondary .wp-block-button__link {
+        border-radius: 5px !important;
+        font-size: $font__size-sm;
+    }
+    
+    .wish-button-secondary .wp-block-button__link:hover {
+        background-color: #676f78;
+    }
+}
+
+.wish-buttons {
+    .wp-block-button {
+        text-align: center;
+    }
+}
+
+.field-visibility-settings-header {
+    display: none;
+}
