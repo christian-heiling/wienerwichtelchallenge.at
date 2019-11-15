@@ -20,7 +20,7 @@ class OptionHandler {
     }
     
     function getLabel() {
-        return __('Wichtel Challenge Options', 'app');
+        return __('Wichtelchallenge Options', 'app');
     }
     
     function getSupports() {
@@ -36,6 +36,7 @@ class OptionHandler {
     }
     
     public function registerPostType() {
+        
         $args = array(
                 'label'                 => $this->getLabel(),
                 'supports'              => $this->getSupports(),
@@ -82,6 +83,7 @@ class OptionHandler {
             return null;
         } else {
             $this->optionItem = array_pop($items);
+            $this->options = get_post_custom($this->optionItem->ID);
             return $this->optionItem;
         }
     }
@@ -102,11 +104,37 @@ class OptionHandler {
         );
     }
     
-    public function addMetaBox($meta_boxes) {       
+    public function addMetaBox($meta_boxes) {   
+        
+        $shortcodes = array(
+            '<code>[wichtel_end_date]</code>',
+            '<code>[wichtel_end_date_delta_in_days]</code>',
+        );
+        
+        $boxes = App::getInstance()->getWishController()->addMetaBox([]);
+        $fields = array_pop($boxes)['fields'];
+        foreach($fields as $field) {
+            $shortcodes[] = '<code>[' . $field['id'] . ']</code>';
+        }
+        $shortcodes_description = sprintf(__('You can use following snippets to add content from the wish: %s', 'app'), implode(', ', $shortcodes));
+        
         $meta_boxes[] = array(
             'title'  => __('General'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
+                array(
+                    'id'   => 'country',
+                    'name' => __('Country', 'app'),
+                    'type' => 'text',
+                ),
+                array(
+                    'id' => 'header_image',
+                    'name' => __('Header Image', 'app'),
+                    'type' => 'image_advanced',
+                    'force_delete' => false,
+                    'max_file_uploads' => 1,
+                    'image_size' => 'medium'
+                ),
                 array(
                     'id'   => 'start_header',
                     'name' => __('Header of the Start Page', 'app'),
@@ -130,6 +158,189 @@ class OptionHandler {
                     'type' => 'text',
                 )
             ),
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('JIRA Connection Settings', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_domain',
+                    'name' => __('Domain', 'app'),
+                    'type' => 'url'
+                ),
+                array(
+                    'id' => 'jira_username',
+                    'name' => __('User Name', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_password',
+                    'name' => __('Password', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_project',
+                    'name' => __('Project', 'app'),
+                    'type' => 'text'
+                )
+        ));
+        
+        $meta_boxes[] = array(
+            'title'  => __('JIRA State Ids', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_state_offen',
+                    'name' => __('Offen', 'app'),
+                    'type' => 'text' 
+                ),
+                array(
+                    'id' => 'jira_state_in_arbeit',
+                    'name' => __('In Arbeit', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_state_erfuellt',
+                    'name' => __('Erfüllt', 'app'),
+                    'type' => 'text' 
+                ),
+                array(
+                    'id' => 'jira_state_abgeschlossen',
+                    'name' => __('Abgeschlossen', 'app'),
+                    'type' => 'text' 
+                )
+            )
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('Before Wish Letter', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_state_pre_offen',
+                    'name' => __('Offen', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_state_pre_in_arbeit',
+                    'name' => __('In Arbeit', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_state_pre_erfuellt',
+                    'name' => __('Erfüllt', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_state_pre_abgeschlossen',
+                    'name' => __('Abgeschlossen', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                )
+            )
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('JIRA Transition Ids', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_transition_vergeben',
+                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'type' => 'text' 
+                ),
+                array(
+                    'id' => 'jira_transition_erfuellen',
+                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_transition_zuruecklegen',
+                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'type' => 'text' 
+                )
+            )
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('Transition: Confirm Question', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_transition_question_vergeben',
+                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_transition_question_erfuellen',
+                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_transition_question_zuruecklegen',
+                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_transition_question_not_logged_in',
+                    'name' => __('Fallback: If user is not logged in', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+            )
+        );
+        
+        $meta_boxes[] = array(
+            'title'  => __('Transition: Button Caption', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'jira_transition_button_vergeben',
+                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_transition_button_erfuellen',
+                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'jira_transition_button_zuruecklegen',
+                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'type' => 'text'
+                )
+            )
         );
         
         $meta_boxes[] = array(
@@ -171,15 +382,7 @@ class OptionHandler {
                     'options' => array(
                         'textarea_rows' => 8
                     )
-                ),
-                array(
-                    'id' => 'event_header_image',
-                    'name' => __('Header Image', 'app'),
-                    'type' => 'image_advanced',
-                    'force_delete' => false,
-                    'max_file_uploads' => 1,
-                    'image_size' => 'medium'
-                )
+                ) 
             ),
         );
 
@@ -195,15 +398,7 @@ class OptionHandler {
                     'options' => array(
                         'textarea_rows' => 8
                     )
-                ),
-                array(
-                    'id' => 'social_organisation_header_image',
-                    'name' => __('Header Image', 'app'),
-                    'type' => 'image_advanced',
-                    'force_delete' => false,
-                    'max_file_uploads' => 1,
-                    'image_size' => 'medium'
-                ),
+                )
             ),
         );
 
@@ -218,37 +413,6 @@ class OptionHandler {
                     'options' => array(
                         'textarea_rows' => 8
                     )
-                ),
-                array(
-                    'id' => 'sponsor_header_image',
-                    'name' => __('Header Image', 'app'),
-                    'type' => 'image_advanced',
-                    'force_delete' => false,
-                    'max_file_uploads' => 1,
-                    'image_size' => 'medium'
-                )
-            ),
-        );
-
-        $meta_boxes[] = array(
-            'title'  => __('Wichtel Type Options'),
-            'post_types' => array($this->getPostType()),
-            'fields' => array(
-                array(
-                    'id'   => 'wichtel_type_archive_teaser',
-                    'name' => __('Archive Teaser', 'app'),
-                    'type' => 'wysiwyg',
-                    'options' => array(
-                        'textarea_rows' => 8
-                    )
-                ),
-                array(
-                    'id' => 'wichtel_type_header_image',
-                    'name' => __('Header Image', 'app'),
-                    'type' => 'image_advanced',
-                    'force_delete' => false,
-                    'max_file_uploads' => 1,
-                    'image_size' => 'medium'
                 )
             ),
         );
@@ -258,13 +422,18 @@ class OptionHandler {
     
     public function get($a, $b = null) {
         
+        if (empty($this->options)) {
+            $this->getOptionItem();
+        }
+        
         if (empty($b)) {
             $name = $a;
         } else {
             $name = $a . '_' . $b;
         }
-        
-        return rwmb_get_value($name, [], $this->getPostId());
+              
+        $value = $this->options[$name][0];
+        return $value;
     }
 
     public function getPostId() {

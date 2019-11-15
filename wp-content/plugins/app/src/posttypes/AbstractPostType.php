@@ -81,7 +81,7 @@ abstract class AbstractPostType {
         register_post_type($this->getPostType(), $args);
     }
 
-    private function slugify($text) {
+    protected function slugify($text) {
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
