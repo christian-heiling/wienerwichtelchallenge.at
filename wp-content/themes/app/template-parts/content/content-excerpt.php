@@ -49,8 +49,4 @@ $controller = \app\App::getInstance()->getController(get_post_type());
                 }
                 ?>
 	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php twentynineteen_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

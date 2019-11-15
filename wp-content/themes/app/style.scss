@@ -15,31 +15,31 @@ Text Domain:  app
 # Variables
 # Normalize
 # Typography
-	## Headings
-	## Copy
+        ## Headings
+        ## Copy
 # Elements
-	## Lists
-	## Tables
+        ## Lists
+        ## Tables
 # Forms
-	## Buttons
-	## Fields
+        ## Buttons
+        ## Fields
 # Navigation
-	## Links
-	## Menus
-	## Next & Previous
+        ## Links
+        ## Menus
+        ## Next & Previous
 # Accessibility
 # Alignments
 # Clearings
 # Layout
 # Widgets
 # Content
-	## Archives
-	## Posts and pages
-	## Comments
+        ## Archives
+        ## Posts and pages
+        ## Comments
 # Blocks
 # Media
-	## Captions
-	## Galleries
+        ## Captions
+        ## Galleries
 --------------------------------------------------------------*/
 @import "sass/variables-site/variables-site";
 @import "sass/mixins/mixins-master";
@@ -104,10 +104,19 @@ Text Domain:  app
     opacity: 1;
 }
 
+.post-type-archive-wish .site-header.featured-image,
+.single-wish .site-header.featured-image,
+.tax-wish-region .site-header.featured-image{
+    min-height: 0;
+    opacity: 1;
+}
+
 .site-header.featured-image { 
     min-height: 50vh;
     opacity: 1;
 }
+
+
 
 
 /* event countdown */
@@ -117,7 +126,7 @@ Text Domain:  app
     background-repeat: repeat-y;
     padding: 0.5em;
     font-size: $font__size-xs;
-    
+
     @media(tablet) {
         font-size: $font__size-sm;
     }
@@ -137,7 +146,7 @@ Text Domain:  app
 .event-countdown-content {
     padding-right: 1.2em;
     display: block;
-    
+
     @include media(tablet) {
         display: inline-block;
     }
@@ -157,7 +166,7 @@ Text Domain:  app
 }
 
 .post-type-archive h2 {
-  text-align: center;
+    text-align: center;
 }
 
 /* display map */
@@ -180,20 +189,20 @@ Text Domain:  app
 .home-video {
     margin: 0 auto;
     display: none;
-    
+
     @include media(tablet) {
-            display: block;
+        display: block;
     }
 
     @include media(desktop) {
-            display: block;
+        display: block;
     }
 }
 
 .home-cta {
     text-align: center;
     margin-top: 1em;
-    
+
     a {
         background-color: rgb(132, 24, 40);
     }
@@ -207,6 +216,49 @@ Text Domain:  app
     display: none;
 }
 
+.wish-letter-mini {
+    padding: 2rem;
+    padding-bottom: 1.5rem;
+    background-color: #FFEFD5;
+
+    .key {
+        font-size: $font__size-xs;
+        float: right;
+    }
+
+    .status {
+        font-size: $font__size-xs;
+        float: left;
+    }
+
+    .status-icon {
+        padding-top: 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    h1 {
+        padding-top: 0.5rem;
+        padding-bottom: 0;
+        margin: 0;
+        font-size: $font__size-lg;
+        text-align: center;
+    }
+
+    .institution-info {
+        font-size: $font__size-xs;
+        text-align: center;
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .description {
+        text-align: center;
+    }
+}
+
 .entry .entry-content > .wish-letter {
     background-color: #FFEFD5;
     padding: 2rem;
@@ -216,53 +268,123 @@ Text Domain:  app
 .featherlight .featherlight-content {
     border: 3px solid $color__background-button !important;
     max-width: 800px;
-    
+
     p {
         text-align: center;
         font-size: $font__size-md;
     }
-    
+
     .wp-block-button {
         text-align: center;
     }
-    
+
     .wish-buttons {
         margin: 0 auto;
         text-align: center;
     }
-    
+
     .wish-button-primary,
     .wish-button-secondary {
         display: inline-block;
         padding-left: 1rem;
     }
-    
+
     .wish-button-primary .wp-block-button__link {
         background-color: $color__background-button;
         border-radius: 5px !important;
         font-size: $font__size-sm;
     }
-    
+
     .wish-button-primary .wp-block-button__link:hover {
         background-color: $color__background-button-hover;
     }
-    
+
     .wish-button-secondary .wp-block-button__link {
         border-radius: 5px !important;
         font-size: $font__size-sm;
+        background-color: #676f78;
     }
-    
+
     .wish-button-secondary .wp-block-button__link:hover {
         background-color: #676f78;
+    }
+
+    .wp-block-button {
+        text-align: center;
+    }
+
+    .wp-block-button__link {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
 .wish-buttons {
     .wp-block-button {
         text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .wish-detail-link {
+        font-size: $font__size-sm;
+        text-align: center;
+        display: block;
     }
 }
 
 .field-visibility-settings-header {
     display: none;
+}
+
+ul.wish-region-menu {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+
+    li {
+        display: inline-block;
+        margin-right: 16px;
+        margin-bottom: 16px;
+        background-color: $color__background-button;
+        font-weight: bold;
+        border-radius: 5px;
+        padding: 0;
+
+        a {
+            font-size: $font__size-sm;
+            color: #fff;
+            padding: 16px;
+        }
+        
+        a:hover {
+            color: #fff;
+        }
+        
+        a:visited {
+            color: #fff;
+        }
+    }
+    
+    li.is-active {
+        background-color: $color__background-button-hover;
+    }
+
+    li:hover {
+        background-color: $color__background-button-hover;
+    }
+
+    li:last-child {
+        margin-right: 0;
+    }
+}
+
+.wp-block-columns {
+    margin-top: 32px;
+}
+
+.blur {
+   color: transparent !important;
+   text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+   font-weight: normal !important;
 }
