@@ -20,8 +20,9 @@ class WishPostType extends AbstractPostType {
     /*
      * tokens related to wishes:
      */
-    public function getMailTemplates() {       
-        
+
+    public function getMailTemplates() {
+
         $content = <<<MAILCONTENT
 Folgende Kürzel können verwendet werden für diese E-Mail:
 {{wish.url}}
@@ -66,7 +67,7 @@ Folgende Kürzel können verwendet werden für diese E-Mail:
 {{organisation.jira_user}}
 {{organisation.logo}}
 MAILCONTENT;
-        
+
         return array(
             array(
                 'post_title' => __('[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen willst!', 'app'),
@@ -105,9 +106,9 @@ MAILCONTENT;
             )
         );
     }
-    
+
     public function addMailTemplates() {
-        
+
         $mailTemplates = $this->getMailTemplates();
 
         foreach ($mailTemplates as $event => $mt) {
@@ -138,38 +139,38 @@ MAILCONTENT;
             }
         }
     }
-    
+
     public function getCurrentWichtelLastDeliveryDate($wish_id = null) {
         if (empty($wish_id)) {
             $wish_id = get_the_ID();
         }
-        
+
         $found_wichtel = rwmb_get_value('found_wichtel_date', [], $wish_id);
-        
+        $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date', [], $wish_id));
+
         if (empty($found_wichtel)) {
             return '';
         }
-        
-        $found_wichtel = new \DateTime($found_wichtel);
-        $currentLastWichtelDeliveryDate = $found_wichtel->add(new \DateInterval('P5D'));
-        
-        $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date'));
-        if ($currentLastWichtelDeliveryDate > $lastWichtelDeliveryDate) {
+
+        $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
+        $currentLastWichtelDeliveryDate->add(new \DateInterval('P5D'));
+
+        if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
             $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
         }
         return $currentLastWichtelDeliveryDate;
     }
-    
+
     public function getCurrentWichtelLastDeliveryDateDeltaInDays($wish_id = null) {
         $d = $this->getCurrentWichtelLastDeliveryDate($wish_id);
         $now = new \DateTime(date('Y-m-d'));
-        
+
         $delta = $now->diff($d, false);
-        
+
         if ($delta->invert) {
-            return $delta->d * -1 - 1;
+            return $delta->d * -1;
         } else {
-            return $delta->d - 1;
+            return $delta->d;
         }
         
     }
@@ -237,25 +238,33 @@ MAILCONTENT;
 
         // if wish is displayed ...
         if (get_post_type() == $this->getPostType() && is_single()) {
-
+            
             // ... is not open
             // and not related to the user and not admin or editor
-            if (rwmb_meta('status_id') !== $options->get('jira_state', 'offen') && get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
+            if (rwmb_meta('status_id') !== $options->get('jira_state', 'offen')) {
                 // 302 redirect it to the wish overview page
-                header('Location: ' . home_url('/' . $this->getSlug() . '/'));
-                exit;
+                
+                if (get_current_user_id() == 0) {
+                    header('Location: ' . wp_login_url(get_permalink()));
+                    exit;
+                }
+                
+                if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
+                    header('Location: ' . home_url('/' . $this->getSlug() . '/'));
+                    exit;
+                }
             }
         }
     }
-    
+
     public function getState() {
         $o = \app\App::getInstance()->getOptions();
-        foreach($this->getStates() as $s) {
+        foreach ($this->getStates() as $s) {
             if ($o->get('jira_state', $s) == rwmb_get_value('status_id')) {
                 return $s;
             }
         }
-        
+
         return null;
     }
 
@@ -328,7 +337,7 @@ MAILCONTENT;
         \app\App::getInstance()->getJiraHandler()->doTransition(
                 rwmb_get_value('key'), $transition_id
         );
-        
+
         // afterwards redirect to the single wish page
         header('Location: ' . $single_wish_link);
         exit;
@@ -345,11 +354,11 @@ MAILCONTENT;
                 add_shortcode($field_id, function() use ($field_id) {
                     return rwmb_get_value($field_id);
                 });
-                
+
                 add_shortcode('wichtel_end_date_delta_in_days', function() {
                     return $this->getCurrentWichtelLastDeliveryDateDeltaInDays();
                 });
-                
+
                 add_shortcode('wichtel_end_date', function() {
                     return date_i18n(get_option('date_format'), $this->getCurrentWichtelLastDeliveryDate()->getTimestamp());
                 });
@@ -512,62 +521,61 @@ MAILCONTENT;
         ));
         return $meta_boxes;
     }
-    
+
     public function getMailTokens($id = null) {
         if ($id == null) {
             $id = get_the_ID();
         }
-        
+
         // get wish data
         $w = get_post($id);
         $wMeta = get_post_meta($id);
-        
+
         // get organisation data
         $oId = rwmb_get_value('social_organisation_id', [], $id);
         $oMeta = get_post_meta($oId);
         $o = get_post($oId);
-        
+
         $tokens = array();
         $tokens['wish.url'] = get_permalink($w);
         $tokens['wish.title'] = $w->post_title;
         $tokens['wish.wichtel_end_date'] = date_i18n(get_option('date_format'), $this->getCurrentWichtelLastDeliveryDate($id)->getTimestamp());
         $tokens['wish.wichtel_end_date_delta_in_days'] = $this->getCurrentWichtelLastDeliveryDateDeltaInDays($id);
-        foreach($wMeta as $key => $value) {
+        foreach ($wMeta as $key => $value) {
             if (substr($key, 0, 1) == '_') {
                 continue;
             }
-            
+
             $value = $value[0];
-            
+
             if (substr($key, -5) == '_date') {
                 if (empty($value)) {
                     $tokens['wish.' . $key] = '';
                     continue;
                 }
-                
+
                 $cDate = new \DateTime($value);
                 $tokens['wish.' . $key] = date_i18n(get_option('date_format'), $cDate->getTimestamp());
             } else {
                 $tokens['wish.' . $key] = trim(strip_tags($value));
             }
-            
         }
-        foreach($this->getTransitions() as $s) {
-            foreach($s as $trans_name) {
+        foreach ($this->getTransitions() as $s) {
+            foreach ($s as $trans_name) {
                 $tokens['wish.' . $trans_name . '.url'] = get_permalink($w) . '?transition=' . $trans_name;
             }
         }
-        
+
         $tokens['organisation.url'] = get_permalink($o);
         $tokens['organisation.title'] = $o->post_title;
-        foreach($oMeta as $key => $value) {
+        foreach ($oMeta as $key => $value) {
             if (substr($key, 0, 1) == '_') {
                 continue;
             }
             $tokens['organisation.' . $key] = trim(strip_tags($value[0]));
         }
-        
-        
+
+
         return $tokens;
     }
 
@@ -670,15 +678,9 @@ MAILCONTENT;
                 $popup_html = do_shortcode($question);
                 $popup_html .= '<div class="wish-buttons">';
 
-                $popup_html .= '<div class="wp-block-button wish-button-primary">';
-                $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink(get_option('bp-pages')['register']) . '">';
-                $popup_html .= __('Sign Up', 'buddypress');
-                $popup_html .= '</a>';
-                $popup_html .= '</div>';
-
                 $popup_html .= '<div class="wp-block-button wish-button-secondary">';
                 $popup_html .= '<a class="wp-block-button__link" href="' . wp_login_url(get_permalink()) . '">';
-                $popup_html .= __('Log In', 'buddypress');
+                $popup_html .= __('Anmelden', 'app');
                 $popup_html .= '</a>';
                 $popup_html .= '</div>';
 

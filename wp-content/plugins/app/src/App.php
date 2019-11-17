@@ -69,6 +69,8 @@ class App {
 
         add_action('init', array($this, 'doFullImport'));
         add_action('init', array($this, 'afterInit'));
+        
+        add_action('bp_email_use_wp_mail', function() { return true; });
     }
 
     public function handleJiraRequests() {
@@ -81,10 +83,16 @@ class App {
         if (isset($_GET['key'])) {
             $key = $_GET['key'];
 
-            $wish = get_page_by_title($key, OBJECT, $this->getWishController()->getPostType());
-            if (empty($wish)) {
+            $wishes = get_posts(array(
+                'post_type' => $this->getWishController()->getPostType(),
+                'title' => $key
+            ));
+
+            if (empty($wishes)) {
                 return;
             }
+
+            $wish = array_pop($wishes);
 
             if ($action == 'issueUpdate') {
                 $this->getJiraHandler()->doImportSingleIssue($key);
