@@ -15,6 +15,8 @@ class SocialOrganisationPostType extends AbstractPostType {
     function limitQuery($query) {
         if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {
             $query->set('posts_per_page', -1);
+            $query->set('orderby', 'title');
+            $query->set('order', 'ASC');
         }
     }
     
