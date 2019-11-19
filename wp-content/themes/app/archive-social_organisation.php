@@ -21,6 +21,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 
 <?php if (have_posts()) : ?>
 
+
     <?php
     // Start the Loop.
     $i = 0;
