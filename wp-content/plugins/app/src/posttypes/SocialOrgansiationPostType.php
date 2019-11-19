@@ -8,8 +8,16 @@ class SocialOrganisationPostType extends AbstractPostType {
         parent::registerHooks();
 
         add_action('wp_enqueue_scripts', array($this, 'addScripts'));
+        
+        add_action('pre_get_posts', array($this, 'limitQuery'));
     }
 
+    function limitQuery($query) {
+        if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {
+            $query->set('posts_per_page', -1);
+        }
+    }
+    
     function addScripts() {
         if (is_archive() && get_post_type() == $this->getPostType()) {
             wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', array(), '1.5.1');

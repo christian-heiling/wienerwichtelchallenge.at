@@ -15,6 +15,14 @@ class WishPostType extends AbstractPostType {
         add_filter('pre_get_posts', array($this, 'addWishToTaxonomyInQuery'), 0);
         add_filter('pre_get_posts', array($this, 'showOnlyOpenWishesInArchive'), 1);
         add_action('bp_core_install_emails', array($this, 'addMailTemplates'));
+        
+        add_action('pre_get_posts', array($this, 'limitQuery'));
+    }
+    
+    function limitQuery($query) {
+        if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {
+            $query->set('posts_per_page', 30);
+        }
     }
 
     /*

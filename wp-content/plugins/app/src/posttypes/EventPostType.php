@@ -30,6 +30,13 @@ class EventPostType extends AbstractPostType {
         parent::registerHooks();
 
         add_shortcode('events', array($this, 'getEventsHtml'));
+        add_action('pre_get_posts', array($this, 'limitQuery'));
+    }
+    
+    function limitQuery($query) {
+        if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {
+            $query->set('posts_per_page', -1);
+        }
     }
 
     public function getEventsHtml($atts) {

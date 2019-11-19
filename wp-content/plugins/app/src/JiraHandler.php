@@ -48,17 +48,17 @@ class JiraHandler {
         if (!empty($updateFields)) {
             $postData['fields'] = $updateFields;
         }
-        
+
         if ($transition_id == App::getInstance()->getOptions()->get('jira_transition', 'vergeben')) {
             global $current_user;
-            
+
             $postData['fields'] = array(
                 'customfield_10116' => $current_user->data->ID,
                 'customfield_10142' => $current_user->data->display_name,
                 'customfield_10143' => $current_user->data->user_email
-            );   
+            );
         }
-        
+
         $postData = json_encode($postData);
 
         $this->doPost('/rest/api/2/issue/' . $issue_id . '/transitions', $postData);
@@ -67,14 +67,14 @@ class JiraHandler {
 
     public function doImportSingleIssue($issue_id) {
 
-        
+
         // request wish
         $i = $this->doGet('/rest/api/2/issue/' . $issue_id . '/');
-        
+
         if (empty($i)) {
             return;
         }
-        
+
         // delete old wish
         global $wpdb;
         $query = new \WP_Query(array(
@@ -88,13 +88,13 @@ class JiraHandler {
                 )
             )
         ));
-        
+
         $posts = $query->get_posts();
-        
-        foreach($posts as $post) {
+
+        foreach ($posts as $post) {
             wp_delete_post($post->ID);
         }
-        
+
         // create wish
         $this->createWish($i);
     }
@@ -102,7 +102,7 @@ class JiraHandler {
     public function doFullImport($debug = false) {
         wp_suspend_cache_addition();
         $start = microtime(true);
-        
+
         $options = App::getInstance()->getOptions();
 
         $wish_post_type = App::getInstance()->getWishController()->getPostType();
@@ -121,41 +121,52 @@ class JiraHandler {
             }
         } while (!empty($res) && $res->startAt + $res->maxResults < $res->total);
 
-        if ($debug) echo 'Request JIRA done: ' . (microtime(true) - $start) . "\n";
-        
+        if ($debug)
+            echo 'Request JIRA done: ' . (microtime(true) - $start) . "\n";
+
         // if no issues returned, abort
         if (empty($res)) {
             return;
         }
+
+        // calculate flat array of issues
+        $issues = array();
+        foreach ($responses as $res) {
+            foreach ($res->issues as $i) {
+                $issues[] = $i;
+            }
+        }
+        
+        // randomize them
+        shuffle($issues);
 
         // delete old wishes
         global $wpdb;
         $wpdb->query('DELETE FROM wp_posts WHERE post_type="' . $wish_post_type . '";');
         $wpdb->query('DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts);');
 
-        if ($debug) echo 'Delete Posts done: ' . (microtime(true) - $start) . "\n";
-        
+        if ($debug)
+            echo 'Delete Posts done: ' . (microtime(true) - $start) . "\n";
+
         // insert new wishes
-        foreach ($responses as $res) {
-            foreach ($res->issues as $i) {
-                $this->createWish($i);
-            }
+        foreach ($issues as $i) {
+            $this->createWish($i);
         }
-        
-        if ($debug) echo 'Create new Wishes done: ' . (microtime(true) - $start) . "\n";
-        
+
+        if ($debug)
+            echo 'Create new Wishes done: ' . (microtime(true) - $start) . "\n";
+
         if ($debug) {
             global $wpdb;
             echo "<pre>";
-            foreach($wpdb->queries as $q) {
-                echo implode(", ",array_map(function($e) {
-                    return '"' . $e . '"';
-                }, $q)) . "\n";
+            foreach ($wpdb->queries as $q) {
+                echo implode(", ", array_map(function($e) {
+                            return '"' . $e . '"';
+                        }, $q)) . "\n";
             }
             echo "</pre>";
             die();
         }
-        
     }
 
     private function createWish($i, $debug = true) {
@@ -164,7 +175,7 @@ class JiraHandler {
 
         $wish_post_type = App::getInstance()->getWishController()->getPostType();
         $region_taxonomy = App::getInstance()->getWishController()->getRegionTaxonomyName();
-        
+
         $f = $i->fields;
 
         if ($f->project->key !== $this->project) {
@@ -182,7 +193,7 @@ class JiraHandler {
         } else {
             return;
         }
-        
+
         $id = wp_insert_post(
                 [
                     'post_title' => $i->key,
@@ -213,8 +224,9 @@ class JiraHandler {
             'found_wichtel_date' => substr($f->customfield_10119, 0, 10)
         ];
 
-        if (!empty($metas['reporter_mail'])) {
 
+
+        if (!empty($metas['reporter_mail'])) {
             $query = "SELECT post_id FROM wp_postmeta WHERE meta_key = 'jira_user' AND meta_value LIKE '%" . $wpdb->esc_like($metas['reporter_mail']) . "%';";
             $results = $wpdb->get_results($query);
 
@@ -222,13 +234,13 @@ class JiraHandler {
                 $metas['social_organisation_id'] = array_pop($results)->post_id;
             }
         }
-     
+
         $values = '';
-        foreach($metas as $key => $value) {
-            $key   = wp_unslash( $key );
-            $value = wp_unslash( $value );
+        foreach ($metas as $key => $value) {
+            $key = wp_unslash($key);
+            $value = wp_unslash($value);
         }
-                
+
         $this->add_post_metas($id, $metas);
 
         // add region     
@@ -307,21 +319,22 @@ class JiraHandler {
         curl_close($ch);
         return $body;
     }
-    
+
     // increase performance
     private function add_post_metas($id, $metas) {
-        
+
         $values = array();
-        foreach($metas as $key => $value) {
-            $key   = esc_sql( $key );
+        foreach ($metas as $key => $value) {
+            $key = esc_sql($key);
             $value = esc_sql($value);
-            
+
             $values[] = '(' . $id . ', "' . $key . '", "' . $value . '")';
         }
 
         $query = 'INSERT INTO `wp_postmeta` (`post_id`, `meta_key`, `meta_value`) VALUES ' . implode(', ', $values) . ';';
-        
+
         global $wpdb;
         $wpdb->get_results($query);
     }
+
 }
