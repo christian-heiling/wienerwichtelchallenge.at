@@ -64,7 +64,10 @@
                     $controller = app\App::getInstance()->getSocialOrganisationController();
                     query_posts(array(
                             'post_type' => $controller->getPostType(),
-                            'orderby' => 'title'
+                            'orderby' => 'title',
+                            'posts_per_page' => -1,
+                            'orderby' => 'title',
+                            'order' => 'ASC'
                     ));
 
                     while ( have_posts() ) {
