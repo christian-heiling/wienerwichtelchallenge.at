@@ -10,9 +10,9 @@
 	Contributors: specialk, aldolat, WpBlogHost, jameswilkes, juliobox, lernerconsult
 	Donate link: https://monzillamedia.com/donate.html
 	Requires at least: 4.1
-	Tested up to: 5.2
-	Stable tag: 20190501
-	Version: 20190501
+	Tested up to: 5.3
+	Stable tag: 20191109
+	Version: 20191109
 	Requires PHP: 5.6.20
 	Text Domain: block-bad-queries
 	Domain Path: /languages
@@ -38,10 +38,10 @@
 
 if (!defined('ABSPATH')) die();
 
-if (!defined('BBQ_VERSION')) define('BBQ_VERSION', '20190501');
+if (!defined('BBQ_VERSION')) define('BBQ_VERSION', '20191109');
 if (!defined('BBQ_FILE'))    define('BBQ_FILE', plugin_basename(__FILE__));
 if (!defined('BBQ_DIR'))     define('BBQ_DIR',  plugin_dir_path(__FILE__));
-if (!defined('BBQ_URL'))     define('BBQ_URL',  plugin_dir_url(__FILE__));
+if (!defined('BBQ_URL'))     define('BBQ_URL',  plugins_url('/block-bad-queries/'));
 
 function bbq_core() {
 	

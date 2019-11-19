@@ -198,7 +198,8 @@ class Cookie_Law_Info_Admin {
 	* @since 1.7.7
 	*/
 	public function privacy_overview_page()
-	{
+	{	
+		wp_enqueue_style($this->plugin_name);
 		require_once plugin_dir_path( __FILE__ ).'partials/cookie-law-info-privacy_overview.php';
 	}
 	public function plugin_action_links( $links ) 
@@ -215,6 +216,7 @@ class Cookie_Law_Info_Admin {
 	    wp_enqueue_style($this->plugin_name);
 	    wp_enqueue_script($this->plugin_name);
 		$options = array('thirdparty_on_field',
+			'third_party_default_state',
 			'thirdparty_description',
 	        'thirdparty_head_section',
 	        'thirdparty_body_section',
@@ -223,6 +225,7 @@ class Cookie_Law_Info_Admin {
 	    // Get options:
 	    $stored_options = get_option('cookielawinfo_thirdparty_settings', array(
 			'thirdparty_on_field' => false,
+			'third_party_default_state' => true,
 			'thirdparty_description'=> '',
 	        'thirdparty_head_section' => '',
 	        'thirdparty_body_section' => '',
@@ -258,6 +261,7 @@ class Cookie_Law_Info_Admin {
 
 	    $stored_options = get_option('cookielawinfo_thirdparty_settings', array(
 			'thirdparty_on_field' => false,
+			'third_party_default_state' => true,
 			'thirdparty_description'=> '',
 	        'thirdparty_head_section' => '',
 	        'thirdparty_body_section' => '',

@@ -4,7 +4,7 @@ Donate link: https://www.webtoffee.com/plugins/
 Tags: eu cookie law, GDPR, cookie law, cookie consent, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 5.2
-Stable tag: 1.7.8
+Stable tag: 1.8.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -33,6 +33,13 @@ You can choose to make the cookie bar disappear after a few seconds (completely 
 It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
 
 
+The plugin uses the following cookies.
+
+- viewed_cookie_policy - Is the primary cookie that records the user consent for the usage of the cookies upon accept and reject. It doesn’t track any personal data and is set only upon user action(accept/reject).
+
+- cookielawinfo-checkbox-necessary/cookielawinfo-checkbox-non-necessary - Records the default button state of the corresponding category. It works only in coordination with the primary cookie.
+
+
 This plugin supports WPML and qTranslate so your translation needs are covered.
 
 
@@ -48,14 +55,14 @@ Features:
 * WPML compatible
 * qTranslate support
 
-[Read more about the EU Cookie Law](http://cookielawinfo.com/ "More information about the EU Cookie Law")
+[Read more about the EU Cookie Law](https://cookielawinfo.com/ "More information about the EU Cookie Law")
 
 <blockquote>
 
 = GDPR Cookie Consent Premium Version Features =
 &#9989; Manage list of cookies ( Name, CookieID, Description, Duration, Type, Category, Header Script, Footer Script).  
 &#9989; Manage Cookie Categories.  
-&#9989; Scan and auto block scripts - Google Analytics, FB Pixel, Google tag manager.  
+&#9989; Scan and auto block scripts - Google Analytics, FB Pixel, Google tag manager, Hotjar, Instagram, etc.  
 &#9989; Location based exclusion of cookie notice for EU countries.  
 &#9989; Provide the users with the granular control over the cookies/scipts used by the website.  
 &#9989; Optionally log users' consent and export into a CSV file.  
@@ -86,42 +93,13 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to "Cookie Law Info / Cookie Law Settings" to configure the banner with your own text, colours and styles
 
-To set up your Privacy & Cookie Policy Page:
-
-1. Add descriptions of the cookies your site uses. Go to "Cookie Law Info / Add New".
-2. Add a new page called e.g. Privacy and Cookie Policy
-3. Add the [cookie_audit] shortcode to your Privacy & Cookie Policy Page
-
-Cookie table shortcode usage:
-
-	[cookie_audit]
-	[cookie_audit style="winter"]
-	[cookie_audit not_shown_message="No records found"]
-	[cookie_audit style="winter" not_shown_message="Not found"]
-	
-	Parameters:
-	
-	style (optional) - choose one of several table styles included with the plugin. Styles included: simple, classic, modern, rounded, elegant, winter (styles are cAsE sensitive). Default style applied: classic.
-	not_shown_message (optional) - if no cookie records are found, display this text. Default is blank (i.e. no message shown).
-	
-
-Delete header cookie usage:
-
-	[delete_cookies]
-	[delete_cookies linktext="delete cookies"]
-	
-	Parameters:
-	
-	linktext (optional) - the text shown in the link. Default is "Delete Cookies".
-
-
 == Frequently Asked Questions ==
 
 There's a lot of help available on the main plugin website. See:
 
-http://cookielawinfo.com/faq
-http://cookielawinfo.com/user-guide
-http://cookielawinfo.com/support
+https://cookielawinfo.com/faq
+https://cookielawinfo.com/user-guide
+https://cookielawinfo.com/support
 
 = The cookie header isn't displaying =
 First check you have installed the plugin and have activated it in the plugins panel.
@@ -171,6 +149,23 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.8.1 =
+
+* Added option in admin to modify the default button state of the non-necessary cookie category
+* [Bug fix] Show more / show less issue when custom text editor is used in the privacy overview content.
+* Updated translations
+* Read me updates
+
+= 1.8.0 =
+
+* [Bug fix] Warning fixes
+
+= 1.7.9 =
+
+* Fixed W3C Validation issues
+* [Bug fix] Hide non-necessary category on cookie settings popup if it is not enabled
+* [Bug fix] Translation issue with category cookies
 
 = 1.7.8 =
 
@@ -389,8 +384,9 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Upgrade Notice ==
 
-= 1.7.8 =
+= 1.8.1 =
 
-* Fixed issues with translations
-* [user_consent_state] added missing space in user consent states
-* Fixed issues with web accessibility
+* Added option in admin to modify the default button state of the non-necessary cookie category
+* [Bug fix] Show more / show less issue when custom text editor is used in the privacy overview content.
+* Updated translations
+* Read me updates

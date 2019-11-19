@@ -10,9 +10,9 @@ Author URI: https://plugin-planet.com/
 Contributors: specialk, aldolat, WpBlogHost, jameswilkes, juliobox, lernerconsult
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
-Tested up to: 5.2
-Stable tag: 20190501
-Version: 20190501
+Tested up to: 5.3
+Stable tag: 20191109
+Version: 20191109
 Requires PHP: 5.6.20
 Text Domain: block-bad-queries
 Domain Path: /languages
@@ -69,7 +69,7 @@ For advanced protection and awesome features, check out [BBQ Pro](https://plugin
 
 Once active, BBQ automically blocks bad queries to protect your site against malicious URL requests. For more control and stronger protection, [check out BBQ Pro &raquo;](https://plugin-planet.com/bbq-pro/)
 
-[More info on installing WP plugins](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+[More info on installing WP plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
 
 
 **Customizing**
@@ -159,7 +159,7 @@ So you can check out the Standalone PHP Script for sites that are not running Wo
 
 __Full question:__ "Except most of the rules overlapping, is it counter productive (site slowing down for example, potential conflicts, bugs) or is there any risks using 6G/7G Firewall + BBQ at the same time?" 
 
-__Answer:__ It's fine to run both BBQ and 6G/7G Firewall at the same time. Both firewalls are super fast, so they won’t slow things down. In other words the two firewalls play well together. The only downside is that some of the rules will be redundant, but there should be no negative impact on performance. The upside is that you get extra protection when using both, as there are variations in the firewall rules and patterns, etc.
+__Answer:__ It's fine to run both BBQ and 6G/7G Firewall at the same time. Both firewalls are super fast, so they won't slow things down. In other words the two firewalls play well together. The only downside is that some of the rules will be redundant, but there should be no negative impact on performance. The upside is that you get extra protection when using both, as there are variations in the firewall rules and patterns, etc.
 
 
 **Do you offer any other security plugins?**
@@ -198,6 +198,16 @@ Links, tweets and likes also appreciated. Thank you! :)
 
 If you like BBQ, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/block-bad-queries/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2019/11/09**
+
+* Changes to `plugins_url()` for `BBQ_URL` constant
+* Tests on WordPress 5.3
+
+**2019/09/02**
+
+* Updates some links to https
+* Tests on WordPress 5.3 (alpha)
 
 **2019/05/01**
 
@@ -290,8 +300,8 @@ If you like BBQ, please take a moment to [give a 5-star rating](https://wordpres
 
 **2015/11/07**
 
-* Added `\.php\([0-9]+\)`, `__hdhdhd.php` to URI patterns (Thanks to [George Lerner](http://www.glerner.com/))
-* Added `acapbot`, `semalt` to User Agent patterns (Thanks to [George Lerner](http://www.glerner.com/))
+* Added `\.php\([0-9]+\)`, `__hdhdhd.php` to URI patterns (Thanks to [George Lerner](https://www.glerner.com/))
+* Added `acapbot`, `semalt` to User Agent patterns (Thanks to [George Lerner](https://www.glerner.com/))
 * Replaced `UNION.*SELECT` with `UNION(.*)SELECT` in Request URI patterns
 * Added `morfeus`, `snoopy` to User Agent patterns
 * Refactored redirect/exit functionality

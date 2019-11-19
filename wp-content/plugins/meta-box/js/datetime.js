@@ -13,9 +13,20 @@
 			$picker = $inline.length ? $inline : $this;
 
 		$this.siblings( '.ui-datepicker-append' ).remove(); // Remove appended text
+
+		options.onSelect = function() {
+			$this.trigger( 'change' );
+		}
+		options.beforeShow = function( i ) {
+			if ( $( i ).prop( 'readonly' ) ) {
+				return false;
+			}
+		}
+
 		if ( $timestamp.length ) {
 			options.onClose = options.onSelect = function () {
 				$timestamp.val( getTimestamp( $picker.datetimepicker( 'getDate' ) ) );
+				$this.trigger( 'change' );
 			};
 		}
 
