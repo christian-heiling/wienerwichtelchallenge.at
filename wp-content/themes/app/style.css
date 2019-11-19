@@ -2077,7 +2077,7 @@ h5 {
 #cancel-comment-reply-link,
 img:after,
 h6 {
-  font-size: 0.7272727273em; }
+  font-size: 0.9090909091em; }
 
 .site-featured-image .entry-meta {
   font-size: 0.9090909091em; }
@@ -2436,7 +2436,7 @@ a {
         .main-navigation .main-menu > li > a + svg {
           margin-right: 1rem; }
         .main-navigation .main-menu > li > a:hover, .main-navigation .main-menu > li > a:hover + svg {
-          color: #d04653; }
+          color: #fff; }
       .main-navigation .main-menu > li.menu-item-has-children {
         display: inline-block;
         position: inherit; }
@@ -4843,6 +4843,7 @@ svg {
 .wish-letter-mini {
   padding: 2rem;
   padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
   background-color: #FFEFD5; }
   .wish-letter-mini .key {
     font-size: 0.7272727273em;
