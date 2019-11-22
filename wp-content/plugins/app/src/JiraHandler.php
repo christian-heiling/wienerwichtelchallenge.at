@@ -26,7 +26,32 @@ class JiraHandler {
     }
 
     public function search($jql, $startAt = 0) {
-        return $this->doGet('/rest/api/2/search?jql=' . urlencode($jql) . '&startAt=' . $startAt);
+        $post_params = array(
+            'jql' => $jql,
+            'startAt' => $startAt,
+            'maxResults' => 1000,
+            'fields' => array(
+                'project',
+                'status',
+                'customfield_10109',
+                'customfield_10116',
+                'customfield_10142',
+                'customfield_10143',
+                'customfield_10117',
+                'summary',
+                'description',
+                'customfield_10120',
+                'customfield_10121',
+                'customfield_10122',
+                'customfield_10118',
+                'customfield_10119',
+                'duedate',
+                'components',
+                'reporter'
+            )
+        );
+
+        return $this->doPost('/rest/api/2/search', json_encode($post_params));
     }
 
     public function doTransition($issue_id, $transition_id, $comment = '') {
@@ -136,7 +161,7 @@ class JiraHandler {
                 $issues[] = $i;
             }
         }
-        
+
         // randomize them
         shuffle($issues);
 
@@ -155,7 +180,7 @@ class JiraHandler {
 
         if ($debug)
             echo 'Create new Wishes done: ' . (microtime(true) - $start) . "\n";
-
+//
         if ($debug) {
             global $wpdb;
             echo "<pre>";
@@ -169,7 +194,7 @@ class JiraHandler {
         }
     }
 
-    private function createWish($i, $debug = true) {
+    private function createWish($i, $debug = false) {
         global $wpdb;
         $options = App::getInstance()->getOptions();
 
@@ -283,6 +308,7 @@ class JiraHandler {
             echo '<h2>Body</h2>';
             echo '<p>' . print_r($body, true) . '</p>';
             echo '<hr>';
+            exit;
         }
 
         curl_close($ch);
