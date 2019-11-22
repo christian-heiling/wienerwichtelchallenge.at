@@ -389,3 +389,9 @@ ul.wish-region-menu {
    text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
    font-weight: normal !important;
 }
+
+.nav-links {
+    .current {
+        font-weight: bold;
+    }
+}
