@@ -104,6 +104,16 @@ class SocialOrganisationPostType extends AbstractPostType {
                     'address_field' => 'street,zip,city'
                 ),
                 array(
+                    'id' => 'postal_delivery_allowed',
+                    'name' => __('Public Reachable via', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 4,
+                        'media_buttons' => false,
+                        'teeny' => true
+                    )
+                ),
+                array(
                     'id' => 'reachable_via',
                     'name' => __('Public Reachable via', 'app'),
                     'type' => 'wysiwyg',
@@ -121,6 +131,16 @@ class SocialOrganisationPostType extends AbstractPostType {
                         'textarea_rows' => 4,
                         'media_buttons' => false,
                         'teeny' => true
+                    )
+                ),
+                array(
+                    'id' => 'postal_delivery_allowed',
+                    'name' => __('Postal delivery allowed', 'app'),
+                    'type' => 'select',
+                    'options' => array(
+                        'unknown' => __('Unknown', 'app'),
+                        'yes' => __('Yes', 'app'),
+                        'no' => __('No', 'app')
                     )
                 ),
                 array(
@@ -336,7 +356,8 @@ class SocialOrganisationPostType extends AbstractPostType {
     public function getAll() {
         return get_posts(array(
             'post_type' => $this->getPostType(),
-            'orderby' => 'title'
+            'orderby' => 'title',
+            'posts_per_page' => -1
         ));
     }
 

@@ -403,7 +403,7 @@ class OptionHandler {
         );
 
         $meta_boxes[] = array(
-            'title'  => __('Sponsor Options'),
+            'title'  => __('Sponsor Options', 'app'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
@@ -415,6 +415,18 @@ class OptionHandler {
                     )
                 )
             ),
+        );
+        
+        $meta_boxes[] = array(
+            'title' => __('Affilate Ids', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'amazon_de',
+                    'name' => 'amazon.de',
+                    'type' => 'text'
+                )
+            )
         );
 
         return $meta_boxes;
