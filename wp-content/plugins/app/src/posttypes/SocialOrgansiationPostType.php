@@ -104,16 +104,6 @@ class SocialOrganisationPostType extends AbstractPostType {
                     'address_field' => 'street,zip,city'
                 ),
                 array(
-                    'id' => 'postal_delivery_allowed',
-                    'name' => __('Public Reachable via', 'app'),
-                    'type' => 'wysiwyg',
-                    'options' => array(
-                        'textarea_rows' => 4,
-                        'media_buttons' => false,
-                        'teeny' => true
-                    )
-                ),
-                array(
                     'id' => 'reachable_via',
                     'name' => __('Public Reachable via', 'app'),
                     'type' => 'wysiwyg',
@@ -134,14 +124,15 @@ class SocialOrganisationPostType extends AbstractPostType {
                     )
                 ),
                 array(
-                    'id' => 'postal_delivery_allowed',
-                    'name' => __('Postal delivery allowed', 'app'),
-                    'type' => 'select',
+                    'id' => 'delivery_options',
+                    'name' => __('Delivery Options', 'app'),
+                    'type' => 'checkbox_list',
                     'options' => array(
-                        'unknown' => __('Unknown', 'app'),
-                        'yes' => __('Yes', 'app'),
-                        'no' => __('No', 'app')
-                    )
+                        'personal' => __('Personal', 'app'),
+                        'postal' => __('Postal', 'app'),
+                        'amazon' => __('via Amazon as Present', 'app')
+                    ),
+                    'select_all_none' => true
                 ),
                 array(
                     'id' => 'contact',
@@ -251,21 +242,26 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function echoEntryContent() {
 
-        $logo = array_pop(rwmb_meta('logo', array('limit' => 1)));
+        $logos = rwmb_meta('logo', array('limit' => 1));
 
         echo '<div class="wp-block-columns">';
         echo '<div class="wp-block-column">';
-        ?>
-        <figure class="social-organisation-logo wp-block-image is-resized overflow">
-            <img src="<?php echo $logo['full_url'] ?>"
-                 alt=""
-                 class="wp-image-<?php echo $logo['ID']; ?>"
-                 srcset="<?php echo $logo['srcset']; ?>"
-                 sizes="(max-width: 1920px) 100vw, 1920px"
-                 width="1920"
-                 height="516">
-        </figure>
-        <?php
+        
+        if (!empty($logos)) {
+            $logo = array_pop($logos);
+            ?>
+            <figure class="social-organisation-logo wp-block-image is-resized overflow">
+                <img src="<?php echo $logo['full_url'] ?>"
+                     alt=""
+                     class="wp-image-<?php echo $logo['ID']; ?>"
+                     srcset="<?php echo $logo['srcset']; ?>"
+                     sizes="(max-width: 1920px) 100vw, 1920px"
+                     width="1920"
+                     height="516">
+            </figure>
+            <?php
+        }
+        
         echo '<p>' . rwmb_meta('description') . '</p>';
 
         echo '</div>';

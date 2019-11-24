@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2019-11-22 23:32+0100\n"
+"POT-Creation-Date: 2019-11-24 17:29+0100\n"
 "PO-Revision-Date: 2019-07-31 21:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Wichtel Challenge\n"
@@ -150,14 +150,14 @@ msgstr ""
 #: plugins/app/src/posttypes/EventPostType.php:91
 #: plugins/app/src/posttypes/EventPostType.php:142
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:91
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:226
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:217
 msgid "ZIP"
 msgstr ""
 
 #: plugins/app/src/OptionHandler.php:362
 #: plugins/app/src/posttypes/EventPostType.php:147
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:96
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:225
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:216
 msgid "City"
 msgstr ""
 
@@ -179,7 +179,11 @@ msgid "Sponsor Options"
 msgstr ""
 
 #: plugins/app/src/OptionHandler.php:421
-msgid "Affilate Ids"
+msgid "Amazon.de Affiliate"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:441
+msgid "Amazon.de Link Text"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:10
@@ -215,8 +219,7 @@ msgstr ""
 #: plugins/app/src/posttypes/EventPostType.php:159
 #: plugins/app/src/posttypes/EventPostType.php:291
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:108
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:118
-#: themes/app/template-parts/content/content-single-wish.php:55
+#: themes/app/template-parts/content/content-single-wish.php:88
 msgid "Public Reachable via"
 msgstr ""
 
@@ -233,7 +236,7 @@ msgid "Category"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:185
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:158
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:149
 #: plugins/app/src/posttypes/SponsorPostType.php:47
 msgid "Teaser"
 msgstr ""
@@ -243,7 +246,7 @@ msgid "Press Text"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:203
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:178
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:169
 #: plugins/app/src/posttypes/SponsorPostType.php:63
 msgid "Link"
 msgstr ""
@@ -263,7 +266,7 @@ msgstr ""
 #: plugins/app/src/posttypes/EventPostType.php:225
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
-#: plugins/app/src/posttypes/WishPostType.php:593
+#: plugins/app/src/posttypes/WishPostType.php:682
 msgid "Title"
 msgstr ""
 
@@ -276,7 +279,7 @@ msgid "End at"
 msgstr ""
 
 #: plugins/app/src/posttypes/EventPostType.php:229
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:227
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:218
 #: plugins/app/src/posttypes/SponsorPostType.php:75
 #: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
@@ -307,102 +310,102 @@ msgid "Logo"
 msgstr ""
 
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:74
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:223
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:214
 msgid "Carrier"
 msgstr ""
 
 #: plugins/app/src/posttypes/SocialOrgansiationPostType.php:79
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:224
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:215
 msgid "Field of Action"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:128
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:118
 msgid "Delivery hours"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:138
-msgid "Postal delivery allowed"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:128
+msgid "Delivery Options"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:141
-msgid "Unknown"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:131
+msgid "Personal"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:142
-msgid "Yes"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:132
+msgid "Postal"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:143
-msgid "No"
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:133
+msgid "via Amazon as Present"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:148
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:139
 msgid "Contact for Questions"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:168
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:159
 msgid "About the Social Organisation"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:185
-#: plugins/app/src/posttypes/WishPostType.php:431
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:176
+#: plugins/app/src/posttypes/WishPostType.php:520
 msgid "JIRA"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:190
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:181
 msgid "Associated Jira Users"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:203
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:194
 msgid "Children, Youth, Family"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:204
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:195
 msgid "Elderly People"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:205
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:196
 msgid "Health"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:206
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:197
 msgid "Children"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:207
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:198
 msgid "Deliquence"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:208
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:199
 msgid "Work and Education"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:209
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:200
 msgid "Migration and Integration"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:210
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:201
 msgid "Homeless People"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:211
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:202
 msgid "Material Security"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:222
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:213
 msgid "Social Organisation"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:274
-#: themes/app/template-parts/content/content-single-wish.php:44
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:270
+#: themes/app/template-parts/content/content-single-wish.php:66
 msgid "Delivery Infos"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:318
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:314
 msgid "Open Wishes"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:326
+#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:322
 msgid "keine offenen Wünsche"
 msgstr ""
 
@@ -479,49 +482,49 @@ msgstr ""
 msgid "Nachdem die Einrichtung die Geschenkannahme bestätigt hat"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:228
+#: plugins/app/src/posttypes/WishPostType.php:317
 msgid "Wish Regions"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:234
+#: plugins/app/src/posttypes/WishPostType.php:323
 msgid "wish-region-slug"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:409
+#: plugins/app/src/posttypes/WishPostType.php:498
 msgid "Wishes"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:421
+#: plugins/app/src/posttypes/WishPostType.php:510
 msgid "wish-slugs"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:592
+#: plugins/app/src/posttypes/WishPostType.php:681
 msgid "JIRA ID"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:594
-#: plugins/app/src/posttypes/WishPostType.php:595
-#: plugins/app/src/posttypes/WishPostType.php:596
+#: plugins/app/src/posttypes/WishPostType.php:683
+#: plugins/app/src/posttypes/WishPostType.php:684
+#: plugins/app/src/posttypes/WishPostType.php:685
 msgid "Beschreibung"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:597
+#: plugins/app/src/posttypes/WishPostType.php:686
 msgid "Status"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:672
+#: plugins/app/src/posttypes/WishPostType.php:761
 msgid "Willst du diesen Wunsch erfüllen?"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:691
+#: plugins/app/src/posttypes/WishPostType.php:780
 msgid "Anmelden"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:705
+#: plugins/app/src/posttypes/WishPostType.php:794
 msgid "Bestätigen"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:727
+#: plugins/app/src/posttypes/WishPostType.php:816
 msgid "alle Details sehen"
 msgstr ""
 
@@ -561,11 +564,55 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:58
+#: themes/app/template-parts/content/content-single-wish.php:67
+msgid "Du hast folgende Möglichkeiten, dein Geschenk abzugeben:"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:74
+msgid "Persönliche Abgabe"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:76
+msgid "Wenn du in der Nähe wohnst und die Einrichtung persönlich kennenlernen willst."
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:85
+msgid "Abgabezeiten"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:97
+msgid "Als Amazon.de-Geschenk"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:98
+msgid "Wenn du nicht in der Nähe wohnst und kein Geschenk verpacken willst"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:123
+msgid "Mit der Post"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:124
+msgid "Wenn du nicht in der Nähe wohnst und dein Geschenk selbst liebevoll verpacken willst"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:127
+msgid "Schreibe die Empfängerkennung auf das Geschenk und sende das Paket an:"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:150
+msgid "Empfängerkennung"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:155
+msgid "Ort der Abgabe"
+msgstr ""
+
+#: themes/app/template-parts/content/content-single-wish.php:163
 msgid "Contact for Quenstions"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:66
+#: themes/app/template-parts/content/content-single-wish.php:170
 #, php-format
 msgid "About %s"
 msgstr ""

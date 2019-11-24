@@ -15,10 +15,10 @@ class WishPostType extends AbstractPostType {
         add_filter('pre_get_posts', array($this, 'addWishToTaxonomyInQuery'), 0);
         add_filter('pre_get_posts', array($this, 'showOnlyOpenWishesInArchive'), 1);
         add_action('bp_core_install_emails', array($this, 'addMailTemplates'));
-        
+
         add_action('pre_get_posts', array($this, 'limitQuery'));
     }
-    
+
     function limitQuery($query) {
         if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {
             $query->set('posts_per_page', 30);
@@ -148,6 +148,92 @@ MAILCONTENT;
         }
     }
 
+    public function generateAmazonAffiliateLink($wish_id = null) {
+        if (empty($wish_id)) {
+            $wish_id = get_the_ID();
+        }
+
+        $o = \app\App::getInstance()->getOptions();
+        $tag = $o->get('amazonde', 'tag');
+        $camp = $o->get('amazonde', 'camp');
+        $creative = $o->get('amazonde', 'creative');
+        $link_text = $o->get('amazonde', 'link_text');
+
+        if (empty($tag) || empty($camp) || empty($creative) || empty($link_text)) {
+            return '';
+        }
+
+        $attributes = array(
+            'ie' => 'UTF8',
+            'tag' => $tag,
+            'linkCode' => 'ur2',
+            'linkId' => md5(rwmb_get_value('key', [], $wish_id)),
+            'camp' => $camp,
+            'creative' => $creative,
+            'index' => 'aps',
+            'keywords' => $this->improveAffiliateSearchTerms(rwmb_get_value('summary', [], $wish_id))
+        );
+
+        $linkParams = array();
+
+        foreach ($attributes as $a => $v) {
+            $linkParams[] = $a . '=' . $v;
+        }
+
+        $linkParams = implode('&', $linkParams);
+        $link = 'https://www.amazon.de/gp/search?' . $linkParams;
+
+
+        $html = '<div class="wp-block-button">';
+        $html .= '<a class="wp-block-button__link" target="_blank" href="' . $link . '">' .
+                $link_text .
+                '</a>';
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    private function improveAffiliateSearchTerms($keywords) {
+        
+        $keywords = strtolower($keywords);
+        
+        // remove non alphabetical signs
+        $nonAlphabeticalSigns = array(
+            "[", "]", "(", ")", "-", ",", ":", "&", "!", "\"", "'", "/"
+        );
+
+        $keywords = str_replace($nonAlphabeticalSigns, ' ', $keywords);
+
+        // remove top 100 frequent words
+        $frequentGermanTerms = array(
+            "die", "der", "und", "in", "zu", "den", "das", "nicht", "von", "sie",
+            "ist", "des", "sich", "mit", "dem", "dass", "er", "es", "ein", "ich", "auf",
+            "so", "eine", "auch", "als", "an", "nach", "wie", "im", "für", "man", "aber",
+            "aus", "durch", "wenn", "nur", "war", "noch", "werden", "bei", "hat", "wir",
+            "was", "wird", "sein", "einen", "welche", "sind", "oder", "zur", "um", "haben",
+            "einer", "mir", "über", "ihm", "diese", "einem", "ihr", "uns", "da",
+            "zum", "kann", "doch", "vor", "dieser", "mich", "ihn", "du", "hatte", "seine",
+            "mehr", "am", "denn", "nun", "unter", "sehr", "selbst", "schon", "hier", "bis",
+            "habe", "ihre", "dann", "ihnen", "seiner", "alle", "wieder", "meine", "Zeit",
+            "gegen", "vom", "ganz", "einzelnen", "wo", "muss", "ohne", "eines", "können", "sei",
+            "gebraucht", "gebrauchtes", "über"
+        );
+
+        foreach ($frequentGermanTerms as &$word) {
+            $word = '/\b' . preg_quote($word, '/') . '\b/';
+        }
+
+        $keywords = preg_replace($frequentGermanTerms, '', $keywords);
+        
+        // remove mulitple whitespace signs with one space
+        $keywords = preg_replace('!\s+!', ' ', $keywords);
+        
+        // remove leading and ending white spaces
+        $keywords = trim($keywords);
+        
+        return $keywords;
+    }
+
     public function getCurrentWichtelLastDeliveryDate($wish_id = null) {
         if (empty($wish_id)) {
             $wish_id = get_the_ID();
@@ -171,6 +257,10 @@ MAILCONTENT;
 
     public function getCurrentWichtelLastDeliveryDateDeltaInDays($wish_id = null) {
         $d = $this->getCurrentWichtelLastDeliveryDate($wish_id);
+        
+        if (empty($d)) {
+            return '';
+        }
         $now = new \DateTime(date('Y-m-d'));
 
         $delta = $now->diff($d, false);
@@ -180,7 +270,6 @@ MAILCONTENT;
         } else {
             return $delta->d;
         }
-        
     }
 
     /**
@@ -246,17 +335,17 @@ MAILCONTENT;
 
         // if wish is displayed ...
         if (get_post_type() == $this->getPostType() && is_single()) {
-            
+
             // ... is not open
             // and not related to the user and not admin or editor
             if (rwmb_meta('status_id') !== $options->get('jira_state', 'offen')) {
                 // 302 redirect it to the wish overview page
-                
+
                 if (get_current_user_id() == 0) {
                     header('Location: ' . wp_login_url(get_permalink()));
                     exit;
                 }
-                
+
                 if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
                     header('Location: ' . home_url('/' . $this->getSlug() . '/'));
                     exit;

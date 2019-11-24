@@ -418,12 +418,27 @@ class OptionHandler {
         );
         
         $meta_boxes[] = array(
-            'title' => __('Affilate Ids', 'app'),
+            'title' => __('Amazon.de Affiliate', 'app'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'amazon_de',
-                    'name' => 'amazon.de',
+                    'id' => 'amazonde_tag',
+                    'name' => 'tag',
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'amazonde_camp',
+                    'name' => 'camp',
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'amazonde_creative',
+                    'name' => 'creative',
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'amazonde_link_text',
+                    'name' => __('Amazon.de Link Text'),
                     'type' => 'text'
                 )
             )
