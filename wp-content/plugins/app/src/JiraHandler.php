@@ -58,13 +58,13 @@ class JiraHandler {
         return $this->doPost('/rest/api/2/search', json_encode($post_params));
     }
 
-    public function doTransition($issue_id, $transition_id, $comment = '') {
+    public function doTransition($issue_id, $transition_id, $comment = 'Transition') {
         $postData = array(
             'update' => array(
                 'comment' => array(
                     array(
                         'add' => array(
-                            'body' => 'Transition'
+                            'body' => $comment
                         )
                     )
                 )
@@ -105,7 +105,6 @@ class JiraHandler {
         }
 
         // delete old wish
-        global $wpdb;
         $query = new \WP_Query(array(
             'posts_per_page' => -1,
             'post_type' => App::getInstance()->getWishController()->getPostType(),

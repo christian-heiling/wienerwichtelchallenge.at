@@ -475,9 +475,50 @@ MAILCONTENT;
         $transition_id = $o->get('jira_transition', $_GET['transition']);
         $single_wish_link = get_permalink();
 
-        // do transition
+        // 11111111111
+        
+        // calculated related Comment
+        $query = new \WP_Query(array(
+            'posts_per_page' => -1,
+            'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
+            'post_status' => 'any',
+            'meta_query' => array(
+                array(
+                    'key' => 'key',
+                    'value' => rwmb_get_value('key')
+                )
+            )
+        ));
+
+        $posts = $query->get_posts();
+        $wish = array_pop($posts);
+
+        global $current_user;
+        
+        $comment = 'Transition';
+        if ($_GET['transition'] == 'vergeben') {
+            $comment = 'Wichtel gefunden!' . "\n"
+                . 'Wichtel ' . $current_user->data->display_name . ' will '
+                . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                . '" besorgen.';
+        } elseif ($_GET['transition'] == 'erfuellen') {
+            $comment = 'Geschenk abgegeben!' . "\n"
+                . 'Wichtel ' . $current_user->data->display_name . ' hat angegeben'
+                . ', dass er/sie das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                . '" abgegeben hat.';
+        } elseif ($_GET['transition'] == 'zuruecklegen') {
+            $comment = 'Wunsch zurückgelegt!' . "\n"
+                . 'Wichtel ' . $current_user->data->display_name . ' kann '
+                . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                . '" doch nicht besorgen. Es wird ein neuer Wichtel gesucht.';;
+        }
+        
+        // do transition        
         \app\App::getInstance()->getJiraHandler()->doTransition(
-                rwmb_get_value('key'), $transition_id
+                rwmb_get_value('key'), $transition_id, $comment
         );
 
         sleep(2);
