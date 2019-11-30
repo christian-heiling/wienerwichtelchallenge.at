@@ -29,18 +29,18 @@
  * Ersetze datenbankname_hier_einfuegen
  * mit dem Namen der Datenbank, die du verwenden möchtest.
  */
-define( 'DB_NAME', 'wichtelbeta' );
+define( 'DB_NAME', 'datenbankname_hier_einfuegen' );
 
 /**
  * Ersetze benutzername_hier_einfuegen
  * mit deinem MySQL-Datenbank-Benutzernamen.
  */
-define( 'DB_USER', 'root' );
+define( 'DB_USER', 'benutzername_hier_einfuegen' );
 
 /**
  * Ersetze passwort_hier_einfuegen mit deinem MySQL-Passwort.
  */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', 'passwort_hier_einfuegen' );
 
 /**
  * Ersetze localhost mit der MySQL-Serveradresse.
@@ -70,14 +70,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         ' 0F$;ov.f0HU|Gr/TB_eG1(ll>opZZ5;WL[fOH[qfa(]rm|v)$:7NB2:GzsI&Fu8');
-define('SECURE_AUTH_KEY',  'OhCI76<Rak{]=fyS4d~|,:d>&9:-V2<+hNt|s#o#[hf*YdA5$QODf-.k}T`_8m7H');
-define('LOGGED_IN_KEY',    'D J/Tb/h<_0nCd|TCvr_z(G2UT>5zg:preHTudNY$y!qX^%.Oq:9+6& Cr*%>@a?');
-define('NONCE_KEY',        'L?.;1uQIV8Oy7]$Gz`/=,CfsD_TZsvT|$Qzv>LT-)KUGFU)EE|I7AM!,zT%f`yHS');
-define('AUTH_SALT',        '/9vNQI34@urh4o.oG@ [++xSec&AViJN-=C h<+!IzW2AeRQ}w$rx.Ze|Ab%:J7h');
-define('SECURE_AUTH_SALT', '%!rG+)sf he4Wz1;/jm0Bs(Y(9l(xhW!?r<iB+I,J!s}yGDD%%k9Cx?YT@$M5C7z');
-define('LOGGED_IN_SALT',   'zmhXu{B7N4gn5|AO)NS=xPE5`Bt.^`|8b`j7vd1M,>MXVo0Zy&L8Eb-aH|K8cLA<');
-define('NONCE_SALT',       '+;p BN^vFT7SZ&G,<@p8azfS1tw|>msdDE7[mRn6^9E+ 8!&|@Dw#Z5/d;d^;}7!');
+define( 'AUTH_KEY',         'Füge hier deine Zeichenkette ein' );
+define( 'SECURE_AUTH_KEY',  'Füge hier deine Zeichenkette ein' );
+define( 'LOGGED_IN_KEY',    'Füge hier deine Zeichenkette ein' );
+define( 'NONCE_KEY',        'Füge hier deine Zeichenkette ein' );
+define( 'AUTH_SALT',        'Füge hier deine Zeichenkette ein' );
+define( 'SECURE_AUTH_SALT', 'Füge hier deine Zeichenkette ein' );
+define( 'LOGGED_IN_SALT',   'Füge hier deine Zeichenkette ein' );
+define( 'NONCE_SALT',       'Füge hier deine Zeichenkette ein' );
 
 /**#@-*/
 

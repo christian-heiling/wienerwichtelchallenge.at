@@ -1,0 +1,1 @@
+[Fri Nov 29 15:59:22.791202 2019] [php7:notice] [pid 9800:tid 2080] [client 127.0.0.1:50875] PHP Notice:  Undefined index:  in C:\\xampp\\htdocs\\beta.wienerwichtelchallenge.at\\wp-content\\plugins\\app\\src\\OptionHandler.php on line 449

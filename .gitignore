@@ -1,2 +1,5 @@
 wp-config.php
 sync-db.sh
+/logs/
+/wp-content/uploads/
+/layouts/
