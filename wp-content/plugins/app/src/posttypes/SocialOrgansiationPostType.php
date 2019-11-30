@@ -303,6 +303,12 @@ class SocialOrganisationPostType extends AbstractPostType {
                 array(
                     'key' => 'status_id',
                     'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
+                ),
+                array(
+                    'key' => 'last_wichtel_delivery_date',
+                    'value' => date('Y-m-d'),
+                    'compare' => '>=',
+                    'type' => 'DATE'
                 )
             ),
             'posts_per_page' => -1,

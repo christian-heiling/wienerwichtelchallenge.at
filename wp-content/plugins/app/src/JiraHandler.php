@@ -9,6 +9,10 @@ class JiraHandler {
     private $password;
     private $project;
 
+    public function getWishesPerPartialImport() {
+        return 250;
+    }
+
     public function __construct() {
         $options = App::getInstance()->getOptions();
 
@@ -25,11 +29,11 @@ class JiraHandler {
         return $this->doGet('/rest/api/2/project')->values;
     }
 
-    public function search($jql, $startAt = 0) {
+    public function search($jql, $startAt = 0, $maxResults = 1000) {
         $post_params = array(
             'jql' => $jql,
             'startAt' => $startAt,
-            'maxResults' => 1000,
+            'maxResults' => $maxResults,
             'fields' => array(
                 'project',
                 'status',
@@ -124,27 +128,38 @@ class JiraHandler {
         $this->createWish($i);
     }
 
-    public function doFullImport($debug = false) {
+    private function getSearchWishQuery() {
+        return 'issuetype = Wunsch AND status in (Offen, "In Arbeit", Erfüllt, Abgeschlossen) AND project="' . $this->project . '"';
+    }
+
+    public function getCountOfWishesForImport() {
+        $res = $this->search($this->getSearchWishQuery(), 0, 1);
+        if (empty($res)) {
+            return null;
+        }
+
+        return $res->total;
+    }
+
+    public function doPartialImport($part, $debug = false) {
         wp_suspend_cache_addition();
         $start = microtime(true);
 
         $options = App::getInstance()->getOptions();
 
-        $wish_post_type = App::getInstance()->getWishController()->getPostType();
-        $region_taxonomy = App::getInstance()->getWishController()->getRegionTaxonomyName();
         $responses = array();
 
         // query all issues
-        $startAt = 0;
+        $count = 0;
 
         do {
-            $res = $this->search('issuetype = Wunsch AND status in (Offen, "In Arbeit", Erfüllt, Abgeschlossen) AND project="' . $this->project . '"', $startAt);
+            $res = $this->search($this->getSearchWishQuery(), $part * $this->getWishesPerPartialImport(), $this->getWishesPerPartialImport());
 
             if (!empty($res)) {
                 $responses[] = $res;
-                $startAt += $res->maxResults;
+                $count += $res->maxResults;
             }
-        } while (!empty($res) && $res->startAt + $res->maxResults < $res->total);
+        } while (!empty($res) && $count < $this->getWishesPerPartialImport());
 
         if ($debug)
             echo 'Request JIRA done: ' . (microtime(true) - $start) . "\n";
@@ -161,14 +176,6 @@ class JiraHandler {
                 $issues[] = $i;
             }
         }
-
-        // randomize them
-        shuffle($issues);
-
-        // delete old wishes
-        global $wpdb;
-        $wpdb->query('DELETE FROM wp_posts WHERE post_type="' . $wish_post_type . '";');
-        $wpdb->query('DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts);');
 
         if ($debug)
             echo 'Delete Posts done: ' . (microtime(true) - $start) . "\n";
@@ -192,6 +199,77 @@ class JiraHandler {
             echo "</pre>";
             die();
         }
+    }
+
+    public function doFullImport($debug = false) {
+        wp_suspend_cache_addition();
+        $start = microtime(true);
+
+        $options = App::getInstance()->getOptions();
+
+        $responses = array();
+
+        // query all issues
+        $startAt = 0;
+
+        do {
+            $res = $this->search($this->getSearchWishQuery(), $startAt);
+
+            if (!empty($res)) {
+                $responses[] = $res;
+                $startAt += $res->maxResults;
+            }
+        } while (!empty($res) && $res->startAt + $res->maxResults < $res->total);
+
+        if ($debug)
+            echo 'Request JIRA done: ' . (microtime(true) - $start) . "\n";
+
+        // if no issues returned, abort
+        if (empty($res)) {
+            return;
+        }
+
+        // calculate flat array of issues
+        $issues = array();
+        foreach ($responses as $res) {
+            foreach ($res->issues as $i) {
+                $issues[] = $i;
+            }
+        }
+
+        // delete old wishes
+        $this->clearAllWishes();
+
+        if ($debug)
+            echo 'Delete Posts done: ' . (microtime(true) - $start) . "\n";
+
+        // insert new wishes
+        foreach ($issues as $i) {
+            $this->createWish($i);
+        }
+
+        if ($debug)
+            echo 'Create new Wishes done: ' . (microtime(true) - $start) . "\n";
+//
+        if ($debug) {
+            global $wpdb;
+            echo "<pre>";
+            foreach ($wpdb->queries as $q) {
+                echo implode(", ", array_map(function($e) {
+                            return '"' . $e . '"';
+                        }, $q)) . "\n";
+            }
+            echo "</pre>";
+            die();
+        }
+    }
+
+    public function clearAllWishes() {
+        $wish_post_type = App::getInstance()->getWishController()->getPostType();
+
+        global $wpdb;
+        $wpdb->query('DELETE FROM wp_posts WHERE post_type="' . $wish_post_type . '";');
+        $wpdb->query('DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts);');
     }
 
     private function createWish($i, $debug = false) {
@@ -246,7 +324,8 @@ class JiraHandler {
             'zip' => $f->customfield_10122,
             'end_date' => substr($f->duedate, 0, 10),
             'last_wichtel_delivery_date' => substr($f->customfield_10118, 0, 10),
-            'found_wichtel_date' => substr($f->customfield_10119, 0, 10)
+            'found_wichtel_date' => substr($f->customfield_10119, 0, 10),
+            'priority' => ceil(rand(0, 1000))
         ];
 
 
@@ -361,6 +440,20 @@ class JiraHandler {
 
         global $wpdb;
         $wpdb->get_results($query);
+    }
+    
+    public function shuffleWishes() {
+        $wish_type = App::getInstance()->getWishController()->getPostType();
+        
+        $wishes = get_posts(array(
+            'post_type' => $wish_type,
+            'limit' => -1,
+            'posts_per_page' => -1
+        ));
+        
+        foreach($wishes as $wish) {
+            update_post_meta($wish->ID, 'priority', ceil(rand(0, 1000)));
+        }
     }
 
 }

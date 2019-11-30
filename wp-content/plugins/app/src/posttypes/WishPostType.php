@@ -9,11 +9,15 @@ class WishPostType extends AbstractPostType {
 
         add_action('wp_enqueue_scripts', array($this, 'addAdditionalScripts'));
         add_action('the_post', array($this, 'addShortcodes'));
+
         add_action('wp', array($this, 'handleTransition'));
-        add_action('wp', array($this, 'restrictAccess'), 1);
+        add_action('wp', array($this, 'restrictAccess'), 5);
+        add_filter('wp', array($this, 'redirectDuplicatedWishes'), 1);
+
         add_action('init', array($this, 'createRegionTaxonomy'), 0);
         add_filter('pre_get_posts', array($this, 'addWishToTaxonomyInQuery'), 0);
         add_filter('pre_get_posts', array($this, 'showOnlyOpenWishesInArchive'), 1);
+
         add_action('bp_core_install_emails', array($this, 'addMailTemplates'));
 
         add_action('pre_get_posts', array($this, 'limitQuery'));
@@ -194,9 +198,9 @@ MAILCONTENT;
     }
 
     private function improveAffiliateSearchTerms($keywords) {
-        
+
         $keywords = strtolower($keywords);
-        
+
         // remove non alphabetical signs
         $nonAlphabeticalSigns = array(
             "[", "]", "(", ")", "-", ",", ":", "&", "!", "\"", "'", "/"
@@ -224,13 +228,13 @@ MAILCONTENT;
         }
 
         $keywords = preg_replace($frequentGermanTerms, '', $keywords);
-        
+
         // remove mulitple whitespace signs with one space
         $keywords = preg_replace('!\s+!', ' ', $keywords);
-        
+
         // remove leading and ending white spaces
         $keywords = trim($keywords);
-        
+
         return $keywords;
     }
 
@@ -247,7 +251,7 @@ MAILCONTENT;
         }
 
         $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
-        $currentLastWichtelDeliveryDate->add(new \DateInterval('P5D'));
+        $currentLastWichtelDeliveryDate->add(new \DateInterval('P7D'));
 
         if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
             $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
@@ -257,7 +261,7 @@ MAILCONTENT;
 
     public function getCurrentWichtelLastDeliveryDateDeltaInDays($wish_id = null) {
         $d = $this->getCurrentWichtelLastDeliveryDate($wish_id);
-        
+
         if (empty($d)) {
             return '';
         }
@@ -294,7 +298,7 @@ MAILCONTENT;
     public function showOnlyOpenWishesInArchive($query) {
 
         // is it the right query?
-        if (!$query->is_main_query() || !is_archive()) {
+        if (is_admin() || !$query->is_main_query() || !is_archive()) {
             return;
         }
 
@@ -302,12 +306,26 @@ MAILCONTENT;
             return;
         }
 
-        // ... Yes, then change it to only show open wishes
-        $query->set('meta_key', 'status_id');
-        $query->set('meta_query', array(
-            'key' => 'status_id',
-            'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
-        ));
+        // ... Yes, then change it to only show open wishes 
+        // and respect the last_wichtel_delivery_date
+        $metaQuery = array(
+            'relation' => 'AND',
+            array(
+                'key' => 'status_id',
+                'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
+            ),
+            array(
+                'key' => 'last_wichtel_delivery_date',
+                'value' => date('Y-m-d'),
+                'compare' => '>=',
+                'type' => 'DATE'
+            )
+        );
+
+        $query->set('meta_key', 'priority');
+        $query->set('orderby', 'meta_value');
+        $query->set('meta_query', $metaQuery);
+
 
         return $query;
     }
@@ -342,7 +360,7 @@ MAILCONTENT;
                 // 302 redirect it to the wish overview page
 
                 if (get_current_user_id() == 0) {
-                    header('Location: ' . wp_login_url(get_permalink()));
+                    header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
                     exit;
                 }
 
@@ -352,6 +370,33 @@ MAILCONTENT;
                 }
             }
         }
+    }
+
+    // curresponding to a bug this function is necessary
+    // we have had duplicated wishes
+    // we want only show the orign wish
+    public function redirectDuplicatedWishes() {
+        $request = $_SERVER['REQUEST_URI'];
+
+        $request_parts = array_values(array_filter(explode('/', $request)));
+
+        if (empty($request_parts) || $request_parts[0] != $this->getSlug() || count($request_parts) !== 2) {
+            return;
+        }
+
+        $splittedWishId = explode('-', $request_parts[1]);
+        if (count($splittedWishId) <= 2) {
+            return;
+        }
+
+        // its a duplicated wish
+        // now redirect to the origin wish
+        $redirectUrl = home_url('/' . $this->getSlug() . '/' . $splittedWishId[0] . '-' . $splittedWishId[1]);
+        if (!empty($_SERVER['QUERY_STRING'])) {
+            $redirectUrl .= '?' . $_SERVER['QUERY_STRING'];
+        }
+        header('Location: ' . $redirectUrl);
+        exit;
     }
 
     public function getState() {
@@ -435,6 +480,7 @@ MAILCONTENT;
                 rwmb_get_value('key'), $transition_id
         );
 
+        sleep(2);
         // afterwards redirect to the single wish page
         header('Location: ' . $single_wish_link);
         exit;
@@ -614,6 +660,11 @@ MAILCONTENT;
                         'post_status' => 'publish',
                         'posts_per_page' => - 1,
                     ),
+                ],
+                    [
+                    'id' => 'priority',
+                    'name' => 'priority',
+                    'type' => 'text'
                 ]
         ));
         return $meta_boxes;
@@ -758,7 +809,7 @@ MAILCONTENT;
             echo '<div class="wish-buttons">';
             echo '<div class="wp-block-button wish-button-primary">';
             echo '<a class="wp-block-button__link" href="' . get_permalink() . '">'
-            . __('Willst du diesen Wunsch erfüllen?', 'app')
+            . __('Mehr erfahren', 'app')
             . '</a>';
             echo '</div>';
             echo '</div>';

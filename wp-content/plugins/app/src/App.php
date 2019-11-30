@@ -68,6 +68,7 @@ class App {
         add_action('wp', array($this, 'handleJiraRequests'), 1);
 
         add_action('init', array($this, 'doFullImport'));
+        add_action('init', array($this, 'handleAjaxRequest'));
         add_action('init', array($this, 'afterInit'));
         
         add_action('bp_email_use_wp_mail', function() { return true; });
@@ -217,6 +218,33 @@ class App {
             header('Location: ' . get_home_url() . '/wp-admin/edit.php?post_type=' . $this->getWishController()->getPostType());
             exit;
         }
+    }
+    
+    public function handleAjaxRequest() {
+        global $current_user;
+        
+        if (user_can($current_user, 'administrator') && array_key_exists('ajax-action', $_GET)) {
+            $action = $_GET['ajax-action'];
+            
+            if ($action == 'clearAllWishes') {
+                $this->getJiraHandler()->clearAllWishes();
+            } elseif ($action == 'doPartialImport') {
+                if (!array_key_exists('part', $_GET)) {
+                    http_response_code(404);
+                    exit;
+                }                
+                $this->getJiraHandler()->doPartialImport($_GET['part']);
+            } elseif ($action == 'doFullImport') {
+                $this->getJiraHandler()->doFullImport();
+            } elseif ($action == 'shuffleWishes') {
+                $this->getJiraHandler()->shuffleWishes();
+            } else {
+                http_response_code(404);
+            }
+            
+            exit;
+        }
+
     }
 
 }
