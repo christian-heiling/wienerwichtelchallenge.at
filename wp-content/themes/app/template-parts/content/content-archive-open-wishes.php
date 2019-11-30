@@ -8,6 +8,10 @@ global $wp_query;
 $c = \app\App::getInstance()->getController($wp_query->get('post_type'));
 $rows = 2;
 
+$ads = \app\App::getInstance()->getOptions()->get('ad_banner');
+$ads = unserialize($ads);
+
+
 if (have_posts()) {
 
     // Start the Loop.
@@ -37,6 +41,19 @@ if (have_posts()) {
         echo '</div>';
         if ($i % $rows == 0) {
             echo '</div>';
+        }
+        
+        // every 12th wish an add
+        if ($i % 12 == 0) {
+            if (empty($ads)) {
+                continue;
+            }
+            
+            //select add
+            $ad = $ads[array_rand($ads)];
+            
+            // echo ad
+            echo '<div style="display: flex">' . do_shortcode($ad) . '<br></div>';
         }
     }
 

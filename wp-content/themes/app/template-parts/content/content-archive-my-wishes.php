@@ -18,7 +18,8 @@ $query_options = array(
             'value' => get_current_user_id()
         )
     ),
-    'limit' => -1
+    'limit' => -1,
+    'posts_per_page' => -1
 );
 
 $wishTaxonomy = $wp_query->get($c->getRegionTaxonomyName());

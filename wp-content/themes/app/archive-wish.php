@@ -43,7 +43,7 @@ get_header();
 
                 $links = array(
                     '<li class="' . $class . '"><p><a href="' . get_post_type_archive_link($c->getPostType()) . '">'
-                     . $o->get('country') . '</a></p></li>'
+                    . $o->get('country') . '</a></p></li>'
                 );
 
                 foreach ($terms as $term) {
@@ -62,14 +62,17 @@ get_header();
                 <?php get_template_part('template-parts/content/content-archive', 'my-wishes'); ?>
             </div>
 
-            <?php if (have_posts()): ?>
-                <div class="entry-content">
-                    <h2>Offene Wünsche</h2>
+
+            <div class="entry-content">
+                <h2>Offene Wünsche</h2>
+                <?php if (have_posts()): ?>
                     <?php twentynineteen_the_posts_navigation(); ?>
                     <?php get_template_part('template-parts/content/content-archive', 'open-wishes'); ?> 
                     <?php twentynineteen_the_posts_navigation(); ?>
-                </div>
-            <?php endif; ?>
+                <?php else: ?>
+                    <p><?php echo __('keine offenen Wünsche', 'app'); ?></p>
+                <?php endif; ?>
+            </div>
         </article>
     </main><!-- #main -->
 </section><!-- #primary -->
