@@ -154,8 +154,10 @@ if (empty($deliveryOptions)) {
 
                 <h2><?php echo __('Ort der Abgabe', 'app'); ?></h2>
                 <p>
+                    <?php if(!$is_open): ?>
                     <span><?php echo $institution->post_title; ?></span><br>
                     <span><?php echo rwmb_meta('street', [], $institution_id); ?></span><br>
+                    <?php endif; ?>
                     <span><?php echo rwmb_meta('zip', [], $institution_id) . ' ' . rwmb_meta('city', [], $institution_id); ?></span>
                 </p>
                 <p><?php echo rwmb_meta('delivery_hours', [], $institution_id); ?></p>
@@ -166,7 +168,7 @@ if (empty($deliveryOptions)) {
             </div>
         </div>
 
-        <?php if (!empty($institution_id)): ?>
+        <?php if (!empty($institution_id) && is_user_logged_in()): ?>
             <h2><?php echo sprintf(__('About %s', 'app'), get_the_title($institution_id)); ?></h2>
             <p><?php echo rwmb_meta('teaser', [], $institution_id); ?></p>
             <p><a href="<?php echo get_permalink($institution_id); ?>">
