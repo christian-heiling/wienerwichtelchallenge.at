@@ -91,7 +91,7 @@ if (empty($deliveryOptions)) {
                     </div>
                 <?php endif; ?>
 
-                <?php if (in_array('amazon', $deliveryOptions)): ?>
+                <?php if (in_array('amazon', $deliveryOptions) && !empty($o->get('amazonde_tag'))): ?>
                     <div class="wp-block-column">
                         <br>
                         <p><strong><?php echo __('Als Amazon.de-Geschenk', 'app'); ?></strong></p>
@@ -157,6 +157,9 @@ if (empty($deliveryOptions)) {
                     <?php if(!$is_open): ?>
                     <span><?php echo $institution->post_title; ?></span><br>
                     <span><?php echo rwmb_meta('street', [], $institution_id); ?></span><br>
+                    <?php else: ?>
+                    <span class="blur">Topsecret Organisation</span><br>
+                    <span class="blur">Geheime Adresse 147</span><br>
                     <?php endif; ?>
                     <span><?php echo rwmb_meta('zip', [], $institution_id) . ' ' . rwmb_meta('city', [], $institution_id); ?></span>
                 </p>
