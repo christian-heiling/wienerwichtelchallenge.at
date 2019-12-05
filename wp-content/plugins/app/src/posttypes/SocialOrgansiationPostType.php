@@ -369,6 +369,8 @@ class SocialOrganisationPostType extends AbstractPostType {
             'meta_key' => 'field_of_action',
             'order' => 'ASC',
             'orderby' => 'title',
+            'limit' => -1,
+            'posts_per_page' => -1,
             'meta_query' => array(
                 'relation' => 'AND',
                 array(
