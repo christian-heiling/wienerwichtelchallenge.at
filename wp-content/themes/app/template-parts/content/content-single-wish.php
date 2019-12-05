@@ -166,12 +166,18 @@ if (empty($deliveryOptions)) {
                 <p><?php echo rwmb_meta('delivery_hours', [], $institution_id); ?></p>
 
                 <h2><?php echo __('Contact for Quenstions', 'app') ?></h2>
-                <span><?php echo rwmb_meta('contact', [], $institution_id) ?></span>
+                <?php 
+                $contact = rwmb_meta('contact', [], $institution_id);
+                if ($is_open) {
+                    $contact = '3sadf09834890<br>sdaflkjasd@sdaklfa.com';
+                }
+                ?>
+                <span class="<?php echo $blur_class; ?>"><?php echo $contact; ?></span>
                 <br>
             </div>
         </div>
 
-        <?php if (!empty($institution_id) && is_user_logged_in()): ?>
+        <?php if (!empty($institution_id)): ?>
             <h2><?php echo sprintf(__('About %s', 'app'), get_the_title($institution_id)); ?></h2>
             <p><?php echo rwmb_meta('teaser', [], $institution_id); ?></p>
             <p><a href="<?php echo get_permalink($institution_id); ?>">

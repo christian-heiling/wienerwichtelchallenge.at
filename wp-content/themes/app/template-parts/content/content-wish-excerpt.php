@@ -38,6 +38,7 @@ $controller = \app\App::getInstance()->getController(get_post_type());
     <footer class="wish-footer">
         <p class="institution-info">
             <?php $so_id = rwmb_get_value('social_organisation_id'); ?>
+            <?php echo get_the_title($so_id); ?>,
             <?php echo rwmb_meta('zip', [], $so_id); ?> <?php echo rwmb_meta('city', [], $so_id); ?>
         </p>
     </footer><!-- .entry-footer -->
