@@ -246,22 +246,22 @@ MAILCONTENT;
         $found_wichtel = rwmb_get_value('found_wichtel_date', [], $wish_id);
         $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date', [], $wish_id));
 
-        if (empty($found_wichtel)) {
-            return '';
-        }
+        if (!empty($found_wichtel)) {
+            return $lastWichtelDeliveryDate;
+        } else {
+            $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
+            $currentLastWichtelDeliveryDate->add(new \DateInterval('P7D'));
 
-        $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
-        $currentLastWichtelDeliveryDate->add(new \DateInterval('P7D'));
-
-        if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
-            $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
+            if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
+                $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
+            }
+            return $currentLastWichtelDeliveryDate;
         }
-        return $currentLastWichtelDeliveryDate;
     }
 
     public function getCurrentWichtelLastDeliveryDateDeltaInDays($wish_id = null) {
         $d = $this->getCurrentWichtelLastDeliveryDate($wish_id);
-
+        
         if (empty($d)) {
             return '';
         }
