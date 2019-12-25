@@ -31,9 +31,9 @@ $controller = \app\App::getInstance()->getController(get_post_type());
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
     
-<div class="event-countdown-container">
-    <?php get_template_part('template-parts/header/event', 'countdown'); ?>
-</div>
+
+<?php get_template_part('template-parts/header/event', 'countdown'); ?>
+
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentynineteen' ); ?></a>
         

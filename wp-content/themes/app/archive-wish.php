@@ -17,6 +17,11 @@ get_header();
 <section id="primary" class="content-area event-archive">
     <main id="main" class="site-main">
         <article class="hentry entry">
+            
+            <div class="entry-content">
+                <?php echo do_shortcode(app\App::getInstance()->getOptions()->get('wish_archive', 'teaser')); ?>
+            </div>
+            
             <div class="entry-content">
                 <?php
                 // create region menu
@@ -62,9 +67,17 @@ get_header();
                 <?php get_template_part('template-parts/content/content-archive', 'my-wishes'); ?>
             </div>
 
-
             <div class="entry-content">
-                <h2>Offene Wünsche</h2>
+                <?php 
+                $wishListState = $o->get('wish_list_status');
+                
+                if ($wishListState == 'done') {
+                    echo '<h2>Erfüllte Wünsche</h2>';
+                } else {
+                    echo '<h2>Offene Wünsche</h2>';
+                }
+                ?>
+                
                 <?php if (have_posts()): ?>
                     <?php twentynineteen_the_posts_navigation(); ?>
                     <?php get_template_part('template-parts/content/content-archive', 'open-wishes'); ?> 

@@ -12,7 +12,7 @@
  * @var app\posttypes\AbstractPostType $controller
  */
 $controller = \app\App::getInstance()->getController(get_post_type());
-
+$o = \app\App::getInstance()->getOptions();
 ?>
 
 <div class="wish-letter-mini">
@@ -21,7 +21,15 @@ $controller = \app\App::getInstance()->getController(get_post_type());
         <span class="status"><?php echo rwmb_meta('status_name'); ?></span>
         <div style="clear: both;"></div>
         <img class="status-icon" src="<?php echo get_stylesheet_directory_uri() . '/images/' . $controller->getState() . '.png'; ?>" width="72" height="72" />
-        <a href="<?php echo get_permalink(); ?>"><h1><?php echo rwmb_meta('summary'); ?></h1></a>
+        
+        <?php
+            if ($o->get('wish_list_status') == 'done') {
+                echo '<h1>' . rwmb_meta('summary') . '</h1>';
+            } else {
+                echo '<a href="' . get_permalink() . '><h1><' . rwmb_meta('summary') . '</h1></a>';
+            }
+        ?>
+        
         
     </header><!-- .entry-header -->
 
