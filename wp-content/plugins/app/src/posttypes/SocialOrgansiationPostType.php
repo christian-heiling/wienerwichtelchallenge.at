@@ -8,7 +8,7 @@ class SocialOrganisationPostType extends AbstractPostType {
         parent::registerHooks();
 
         add_action('wp_enqueue_scripts', array($this, 'addScripts'));
-        
+
         add_action('pre_get_posts', array($this, 'limitQuery'));
     }
 
@@ -19,7 +19,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             $query->set('order', 'ASC');
         }
     }
-    
+
     function addScripts() {
         if (is_archive() && get_post_type() == $this->getPostType()) {
             wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.5.1/dist/leaflet.css', array(), '1.5.1');
@@ -246,7 +246,7 @@ class SocialOrganisationPostType extends AbstractPostType {
 
         echo '<div class="wp-block-columns">';
         echo '<div class="wp-block-column">';
-        
+
         if (!empty($logos)) {
             $logo = array_pop($logos);
             ?>
@@ -261,7 +261,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             </figure>
             <?php
         }
-        
+
         echo '<p>' . rwmb_meta('description') . '</p>';
 
         echo '</div>';
@@ -291,41 +291,72 @@ class SocialOrganisationPostType extends AbstractPostType {
         echo '</div>';
         echo '</div>';
 
-        $query = new \WP_Query(array(
-            'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
-            'meta_key' => 'social_organisation_id',
-            'meta_query' => array(
-                'relation' => 'AND',
-                array(
-                    'key' => 'social_organisation_id',
-                    'value' => get_the_ID()
-                ),
-                array(
-                    'key' => 'status_id',
-                    'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
-                ),
-                array(
-                    'key' => 'last_wichtel_delivery_date',
-                    'value' => date('Y-m-d'),
-                    'compare' => '>=',
-                    'type' => 'DATE'
-                )
-            ),
-            'posts_per_page' => -1,
-            'post_status' => 'publish',
-            'orderby' => 'rand',
-            'order' => 'ASC'
-        ));
 
-        echo '<h2>' . sprintf(__('Open Wishes', 'app')) . '</h2>';
-        
-        if ($query->post_count !== 0) {    
+        $o = \app\App::getInstance()->getOptions();
+        $wishListState = $o->get('wish_list_status');
+
+        if ($wishListState == 'done') {
+            echo '<h2>' . sprintf(__('Erfüllte Wünsche', 'app')) . '</h2>';
+            $query = new \WP_Query(array(
+                'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
+                'meta_key' => 'social_organisation_id',
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'social_organisation_id',
+                        'value' => get_the_ID()
+                    ),
+                    array(
+                        'key' => 'status_id',
+                        'value' => array(
+                            $o->get('jira_state', 'erfuellt'),
+                            $o->get('jira_state', 'abgeschlossen')
+                        ),
+                        'compare' => 'IN'
+                    )
+                ),
+                'posts_per_page' => -1,
+                'post_status' => 'publish',
+                'orderby' => 'rand',
+                'order' => 'ASC'
+            ));
+        } else {
+            echo '<h2>' . sprintf(__('Open Wishes', 'app')) . '</h2>';
+
+            $query = new \WP_Query(array(
+                'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
+                'meta_key' => 'social_organisation_id',
+                'meta_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'key' => 'social_organisation_id',
+                        'value' => get_the_ID()
+                    ),
+                    array(
+                        'key' => 'status_id',
+                        'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
+                    ),
+                    array(
+                        'key' => 'last_wichtel_delivery_date',
+                        'value' => date('Y-m-d'),
+                        'compare' => '>=',
+                        'type' => 'DATE'
+                    )
+                ),
+                'posts_per_page' => -1,
+                'post_status' => 'publish',
+                'orderby' => 'rand',
+                'order' => 'ASC'
+            ));
+        }
+
+        if ($query->post_count !== 0) {
             global $wp_query;
             $wp_query = $query;
 
             get_template_part('template-parts/content/content-archive', 'open-wishes');
         } else {
-            echo '<p>' . __('keine offenen Wünsche', 'app') . '</p>';
+            echo '<p>' . __('keine Wünsche gefunden', 'app') . '</p>';
         }
     }
 

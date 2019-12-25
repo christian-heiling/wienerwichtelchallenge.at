@@ -76,7 +76,7 @@ class EventPostType extends AbstractPostType {
                     . '<img src="' . $image['full_url'] . '" '
                     . 'alt="' . get_the_title($event->ID) . '" '
                     . 'class="wp-image-' . $image['ID'] . '" '
-                    . 'srcset="' . $logo['srcset'] . '" '
+                    . 'srcset="' . $image['srcset'] . '" '
                     . 'sizes="(max-width: 1920px) 100vw, 1920px" '
                     . 'width="1920" '
                     . 'height="516"></figure>';

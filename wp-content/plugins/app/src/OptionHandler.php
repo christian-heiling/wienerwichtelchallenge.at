@@ -123,6 +123,20 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
+                    'id' => 'wish_list_status',
+                    'name' => __('Wish List Status', 'app'),
+                    'type' => 'select',
+                    'options' => array(
+                        'open' => __('show all open wishes', 'app'),
+                        'done' => __('show all done wishes', 'app')
+                    )
+                ),
+                array(
+                    'id' => 'country',
+                    'name' => __('Country', 'app'),
+                    'type' => 'text',
+                ),
+                array(
                     'id' => 'country',
                     'name' => __('Country', 'app'),
                     'type' => 'text',
@@ -369,6 +383,21 @@ class OptionHandler {
                     'address_field' => 'street,zip,city'
                 ),
             )
+        );
+        
+        $meta_boxes[] = array(
+            'title' => __('Wish Archive Options'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'wish_archive_teaser',
+                    'name' => __('Teaser', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    )
+                )
+            ),
         );
 
         $meta_boxes[] = array(

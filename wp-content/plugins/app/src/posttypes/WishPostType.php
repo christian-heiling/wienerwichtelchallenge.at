@@ -16,7 +16,7 @@ class WishPostType extends AbstractPostType {
 
         add_action('init', array($this, 'createRegionTaxonomy'), 0);
         add_filter('pre_get_posts', array($this, 'addWishToTaxonomyInQuery'), 0);
-        add_filter('pre_get_posts', array($this, 'showOnlyOpenWishesInArchive'), 1);
+        add_filter('pre_get_posts', array($this, 'showCertainWishesInArchive'), 1);
 
         add_action('bp_core_install_emails', array($this, 'addMailTemplates'));
 
@@ -261,7 +261,7 @@ MAILCONTENT;
 
     public function getCurrentWichtelLastDeliveryDateDeltaInDays($wish_id = null) {
         $d = $this->getCurrentWichtelLastDeliveryDate($wish_id);
-        
+
         if (empty($d)) {
             return '';
         }
@@ -295,7 +295,9 @@ MAILCONTENT;
      * 
      * @param \WP_Query $query
      */
-    public function showOnlyOpenWishesInArchive($query) {
+    public function showCertainWishesInArchive($query) {
+
+        $o = \app\App::getInstance()->getOptions();
 
         // is it the right query?
         if (is_admin() || !$query->is_main_query() || !is_archive()) {
@@ -308,19 +310,43 @@ MAILCONTENT;
 
         // ... Yes, then change it to only show open wishes 
         // and respect the last_wichtel_delivery_date
-        $metaQuery = array(
-            'relation' => 'AND',
-            array(
-                'key' => 'status_id',
-                'value' => \app\App::getInstance()->getOptions()->get('jira_state', 'offen')
-            ),
-            array(
-                'key' => 'last_wichtel_delivery_date',
-                'value' => date('Y-m-d'),
-                'compare' => '>=',
-                'type' => 'DATE'
-            )
-        );
+
+        $wishListState = $o->get('wish_list_status');
+
+        if ($wishListState == 'done') {
+            $validStates = array(
+                $o->get('jira_state', 'erfuellt'),
+                $o->get('jira_state', 'abgeschlossen')
+            );
+
+            $metaQuery = array(
+                'relation' => 'AND',
+                array(
+                    'key' => 'status_id',
+                    'value' => $validStates,
+                    'compare' => 'IN'
+                )
+            );
+        } else {
+            $validStates = array(
+                $o->get('jira_state', 'offen')
+            );
+
+            $metaQuery = array(
+                'relation' => 'AND',
+                array(
+                    'key' => 'status_id',
+                    'value' => $validStates,
+                    'compare' => 'IN'
+                ),
+                array(
+                    'key' => 'last_wichtel_delivery_date',
+                    'value' => date('Y-m-d'),
+                    'compare' => '>=',
+                    'type' => 'DATE'
+                )
+            );
+        }
 
         $query->set('meta_key', 'priority');
         $query->set('orderby', 'meta_value');
@@ -411,6 +437,7 @@ MAILCONTENT;
     }
 
     public function registerPostType() {
+
         $args = array(
             'label' => $this->getLabel(),
             'description' => 'Hallo',
@@ -476,7 +503,6 @@ MAILCONTENT;
         $single_wish_link = get_permalink();
 
         // 11111111111
-        
         // calculated related Comment
         $query = new \WP_Query(array(
             'posts_per_page' => -1,
@@ -494,28 +520,29 @@ MAILCONTENT;
         $wish = array_pop($posts);
 
         global $current_user;
-        
+
         $comment = 'Transition';
         if ($_GET['transition'] == 'vergeben') {
             $comment = 'Wichtel gefunden!' . "\n"
-                . 'Wichtel ' . $current_user->data->display_name . ' will '
-                . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                . '" besorgen.';
+                    . 'Wichtel ' . $current_user->data->display_name . ' will '
+                    . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                    . '" besorgen.';
         } elseif ($_GET['transition'] == 'erfuellen') {
             $comment = 'Geschenk abgegeben!' . "\n"
-                . 'Wichtel ' . $current_user->data->display_name . ' hat angegeben'
-                . ', dass er/sie das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                . '" abgegeben hat.';
+                    . 'Wichtel ' . $current_user->data->display_name . ' hat angegeben'
+                    . ', dass er/sie das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                    . '" abgegeben hat.';
         } elseif ($_GET['transition'] == 'zuruecklegen') {
             $comment = 'Wunsch zurückgelegt!' . "\n"
-                . 'Wichtel ' . $current_user->data->display_name . ' kann '
-                . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                . '" doch nicht besorgen. Es wird ein neuer Wichtel gesucht.';;
+                    . 'Wichtel ' . $current_user->data->display_name . ' kann '
+                    . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
+                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
+                    . '" doch nicht besorgen. Es wird ein neuer Wichtel gesucht.';
+            ;
         }
-        
+
         // do transition        
         \app\App::getInstance()->getJiraHandler()->doTransition(
                 rwmb_get_value('key'), $transition_id, $comment
