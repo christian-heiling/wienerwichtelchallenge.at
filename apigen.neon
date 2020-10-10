@@ -1,0 +1,6 @@
+parameters:
+    source: [wp-content/plugins/app, wp-content/themes/app]
+    destination: docs
+    title: "wichtelchallenge website"
+    accessLevel: [public, protected, private]
+    undocumented: docs/undocumented.html

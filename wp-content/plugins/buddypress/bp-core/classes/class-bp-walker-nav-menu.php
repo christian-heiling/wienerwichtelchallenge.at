@@ -16,7 +16,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.7.0
  */
 class BP_Walker_Nav_Menu extends Walker_Nav_Menu {
-
 	/**
 	 * Description of fields indexes for building markup.
 	 *
@@ -47,15 +46,16 @@ class BP_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * those have ID/post_parent.
 	 *
 	 * @since 1.7.0
+	 * @since 5.1.0 Method was renamed from `walk` to `do_walk` to ensure PHP 5.3 compatibility
 	 *
 	 * @see Walker::walk()
 	 *
 	 * @param array $elements  See {@link Walker::walk()}.
 	 * @param int   $max_depth See {@link Walker::walk()}.
+	 * @param array $args      Optional additional arguments.
 	 * @return string See {@link Walker::walk()}.
 	 */
-	public function walk( $elements, $max_depth ) {
-		$args   = array_slice( func_get_args(), 2 );
+	public function do_walk( $elements, $max_depth, $args = array() ) {
 		$output = '';
 
 		if ( $max_depth < -1 ) // Invalid parameter.
@@ -128,6 +128,20 @@ class BP_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 }
 
 		 return $output;
+	}
+
+	/**
+	 * Overrides Walker::walk() method.
+	 *
+	 * @since 6.0.0 Formalized the existing `...$args` parameter by adding it
+	 *              to the function signature to match WordPress 5.3.
+	 *
+	 * @param array $elements  See {@link Walker::walk()}.
+	 * @param int   $max_depth See {@link Walker::walk()}.
+	 * @param mixed ...$args   See {@link Walker::walk()}.
+	 */
+	public function walk( $elements, $max_depth, ...$args ) {
+		return $this->do_walk( $elements, $max_depth, $args );
 	}
 
 	/**

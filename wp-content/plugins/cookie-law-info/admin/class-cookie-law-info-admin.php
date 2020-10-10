@@ -48,6 +48,8 @@ class Cookie_Law_Info_Admin {
 	 */
 	private $modules=array(
 		'cli-policy-generator',
+		'ccpa',
+		'uninstall-feedback',
 	);
 
 	public static $existing_modules=array();
@@ -107,7 +109,6 @@ class Cookie_Law_Info_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
 		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cookie-law-info-admin.js', array( 'jquery' ,'wp-color-picker'), $this->version, false );
 
 	}
@@ -210,11 +211,14 @@ class Cookie_Law_Info_Admin {
 	   return $links;
 	}
 
-
 	public function admin_non_necessary_cookie_page()
 	{
 	    wp_enqueue_style($this->plugin_name);
-	    wp_enqueue_script($this->plugin_name);
+		wp_enqueue_script($this->plugin_name);
+		if (!current_user_can('manage_options')) 
+		{
+		    wp_die(__('You do not have sufficient permission to perform this operation', 'cookie-law-info'));
+		}
 		$options = array('thirdparty_on_field',
 			'third_party_default_state',
 			'thirdparty_description',
@@ -239,16 +243,13 @@ class Cookie_Law_Info_Admin {
 		) 
 	    {
 	        // Check nonce:
-	        check_admin_referer('cookielawinfo-update-thirdparty');
-	        foreach ($options as $key) 
-	        {
-	            if (isset($_POST[$key])) 
-	            {
-	                // Store sanitised values only:
-	                $stored_options[$key]=wp_unslash($_POST[$key]);
-	            }
-	        }
-	        update_option('cookielawinfo_thirdparty_settings', $stored_options);
+			check_admin_referer('cookielawinfo-update-thirdparty');
+			$stored_options['thirdparty_on_field'] = (bool)( isset( $_POST['thirdparty_on_field'] )  ? Cookie_Law_Info::sanitise_settings('thirdparty_on_field',$_POST['thirdparty_on_field']) : false );
+			$stored_options['third_party_default_state'] = (bool)( isset( $_POST['third_party_default_state'] )  ? Cookie_Law_Info::sanitise_settings('third_party_default_state',$_POST['third_party_default_state']) : true );
+			$stored_options['thirdparty_description'] = wp_kses_post( isset( $_POST['thirdparty_description'] ) && $_POST['thirdparty_description'] !== '' ? $_POST['thirdparty_description'] : '' );
+			$stored_options['thirdparty_head_section'] = wp_unslash( isset( $_POST['thirdparty_head_section'] ) && $_POST['thirdparty_head_section'] !== '' ? $_POST['thirdparty_head_section'] : '' );
+			$stored_options['thirdparty_body_section'] = wp_unslash( isset( $_POST['thirdparty_body_section'] ) && $_POST['thirdparty_body_section'] !== '' ? $_POST['thirdparty_body_section'] : '' );
+			update_option('cookielawinfo_thirdparty_settings', $stored_options);
 	        echo '<div class="updated"><p><strong>';
 	        echo __('Settings Updated.','cookie-law-info');
 	        echo '</strong></p></div>';
@@ -272,7 +273,11 @@ class Cookie_Law_Info_Admin {
 	public function admin_necessary_cookie_page()
 	{
 	    wp_enqueue_style($this->plugin_name);
-	    wp_enqueue_script($this->plugin_name);
+		wp_enqueue_script($this->plugin_name);
+		if (!current_user_can('manage_options')) 
+		{
+		    wp_die(__('You do not have sufficient permission to perform this operation', 'cookie-law-info'));
+		}
 		$options = array('necessary_description'
 	    );
 	    // Get options:
@@ -286,15 +291,9 @@ class Cookie_Law_Info_Admin {
 		) 
 	    {	
 	        // Check nonce:
-	        check_admin_referer('cookielawinfo-update-necessary');
-	        foreach ($options as $key) 
-	        {
-	            if (isset($_POST[$key])) 
-	            {
-	                // Store sanitised values only:
-	                $stored_options[$key]=wp_unslash($_POST[$key]);
-	            }
-	        }
+			check_admin_referer('cookielawinfo-update-necessary');
+			
+	        $stored_options['necessary_description'] = wp_kses_post( isset( $_POST['necessary_description'] ) && $_POST['necessary_description'] !== '' ? $_POST['necessary_description'] : $stored_options['necessary_description'] );
 	        update_option('cookielawinfo_necessary_settings', $stored_options);
 	        echo '<div class="updated"><p><strong>';
 	        echo __('Settings Updated.','cookie-law-info');
@@ -340,7 +339,8 @@ class Cookie_Law_Info_Admin {
 	                // Store sanitised values only:
 	                $the_options[$key] = Cookie_Law_Info::sanitise_settings($key, $_POST[$key . '_field']);
 	            }
-	        }
+			}
+			$the_options = apply_filters('wt_cli_before_save_settings',$the_options, $_POST);
 	        update_option(CLI_SETTINGS_FIELD, $the_options);
 	        echo '<div class="updated"><p><strong>' . __('Settings Updated.', 'cookie-law-info') . '</strong></p></div>';
 	    } 

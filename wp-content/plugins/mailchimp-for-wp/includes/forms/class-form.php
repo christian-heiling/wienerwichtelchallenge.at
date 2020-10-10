@@ -19,6 +19,15 @@ class MC4WP_Form {
 	public static $instances = array();
 
 	/**
+	 * @param int $post_id
+	 * @throws Exception
+	 */
+	public static function throw_not_found_exception( $post_id ) {
+		$message = sprintf( __( 'There is no form with ID %d, perhaps it was deleted?', 'mailchimp-for-wp' ), $post_id );
+		throw new Exception( $message );
+	}
+
+	/**
 	 * Get a shared form instance.
 	 *
 	 * @param WP_Post|int $post Post instance or post ID.
@@ -29,11 +38,15 @@ class MC4WP_Form {
 		if ( $post instanceof WP_Post ) {
 			$post_id = $post->ID;
 		} else {
-			$post_id = absint( $post );
+			$post_id = (int) $post;
 
 			if ( $post_id === 0 ) {
 				$post_id = (int) get_option( 'mc4wp_default_form_id', 0 );
 			}
+		}
+
+		if ( $post_id === 0 ) {
+			self::throw_not_found_exception( $post_id );
 		}
 
 		if ( isset( self::$instances[ $post_id ] ) ) {
@@ -47,8 +60,7 @@ class MC4WP_Form {
 
 		// check post object
 		if ( ! $post instanceof WP_Post || $post->post_type !== 'mc4wp-form' ) {
-			$message = sprintf( __( 'There is no form with ID %d, perhaps it was deleted?', 'mailchimp-for-wp' ), $post_id );
-			throw new Exception( $message );
+			self::throw_not_found_exception( $post_id );
 		}
 
 		// get all post meta in single call for performance

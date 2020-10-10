@@ -1,9 +1,13 @@
 <?xml version="1.0"?>
 <ruleset name="rules">
     <description>rules</description>
+	<file>mailchimp-for-wp.php</file>
     <file>includes/</file>
     <file>integrations/</file>
     <file>config/</file>
+
+	<exclude-pattern>**/*.js</exclude-pattern>
+
     <rule ref="WordPress-Core">
         <exclude name="WordPress.PHP.YodaConditions" />
         <exclude name="WordPress.WP.DeprecatedFunctions.get_settingsFound" />

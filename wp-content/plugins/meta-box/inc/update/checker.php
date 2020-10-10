@@ -74,6 +74,7 @@ class RWMB_Update_Checker {
 		$extensions = array(
 			'mb-admin-columns',
 			'mb-blocks',
+			'mb-core',
 			'mb-custom-table',
 			'mb-frontend-submission',
 			'mb-revision',
@@ -81,6 +82,7 @@ class RWMB_Update_Checker {
 			'mb-term-meta',
 			'mb-user-meta',
 			'mb-user-profile',
+			'mb-views',
 			'meta-box-aio',
 			'meta-box-builder',
 			'meta-box-columns',
@@ -124,6 +126,9 @@ class RWMB_Update_Checker {
 			return $data;
 		}
 
+		if ( empty( $data ) ) {
+			$data = new stdClass;
+		}
 		if ( ! isset( $data->response ) ) {
 			$data->response = array();
 		}

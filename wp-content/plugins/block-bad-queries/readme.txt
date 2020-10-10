@@ -10,9 +10,9 @@ Author URI: https://plugin-planet.com/
 Contributors: specialk, aldolat, WpBlogHost, jameswilkes, juliobox, lernerconsult
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
-Tested up to: 5.3
-Stable tag: 20191109
-Version: 20191109
+Tested up to: 5.5
+Stable tag: 20200811
+Version: 20200811
 Requires PHP: 5.6.20
 Text Domain: block-bad-queries
 Domain Path: /languages
@@ -28,6 +28,7 @@ The fastest firewall plugin for WordPress.
 > Powerful protection from WP's __fastest__ firewall plugin.
 
 [Block Bad Queries](https://perishablepress.com/block-bad-queries/) (BBQ) is a simple, super-fast plugin that protects your site against malicious URL requests. BBQ checks all incoming traffic and quietly blocks bad requests containing nasty stuff like `eval(`, `base64_`, and excessively long request-strings. This is a simple yet solid solution for sites that are unable to use a [strong .htaccess firewall](https://perishablepress.com/6g/).
+
 
 **Awesome Features**
 
@@ -49,11 +50,11 @@ The fastest firewall plugin for WordPress.
 * Regularly updated and "future proof"
 * Customize blocked strings via [Whitelist/Blacklist plugins](https://perishablepress.com/bbq-whitelist-blacklist/)
 
+
 **Privacy**
 
 This plugin does not collect or store any user data. It does not set any cookies, and it does not connect to any third-party locations. Thus, this plugin does not affect user privacy in any way.
 
-> Works perfectly with or without Gutenberg Block Editor
 
 **Pro Version**
 
@@ -69,7 +70,7 @@ For advanced protection and awesome features, check out [BBQ Pro](https://plugin
 
 Once active, BBQ automically blocks bad queries to protect your site against malicious URL requests. For more control and stronger protection, [check out BBQ Pro &raquo;](https://plugin-planet.com/bbq-pro/)
 
-[More info on installing WP plugins](https://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
+[More info on installing WP plugins](https://wordpress.org/support/article/managing-plugins/#installing-plugins)
 
 
 **Customizing**
@@ -119,9 +120,9 @@ Nope, just install and relax knowing that BBQ is protecting your site from bad U
 No settings needed for BBQ! Everything is done automatically behind the scenes. Zero configuration required. The free version of BBQ is strictly plug-n-play, set-it-and-forget-it, with no settings to configure whatsoever. Just install, activate, and enjoy better security and robust protection against malicious requests. The Pro version of BBQ is just as fast and simple to use, but is much more powerful and includes robust settings to customize and fine-tune your firewall.
 
 
-**Is BBQ free version compatible with Wordfence? Does it makes sense to use both?**
+**Is BBQ free version compatible with Wordfence?**
 
-Yes BBQ free and BBQ Pro are both compatible with any plugin written according to the WP API. And yes, there is benefit to using BBQ with any other security plugin, including Wordfence. They protect against different threats, so using both means you are extra secure.
+Does it makes sense to use both? Yes BBQ free and BBQ Pro are both compatible with any plugin written according to the WP API. And yes, there is benefit to using BBQ with any other security plugin, including Wordfence. They protect against different threats, so using both means you are extra secure.
 
 
 **Does BBQ make changes to my .htaccess file?**
@@ -167,6 +168,11 @@ __Answer:__ It's fine to run both BBQ and 6G/7G Firewall at the same time. Both 
 Yes, check out [Blackhole for Bad Bots](https://wordpress.org/plugins/blackhole-bad-bots/) to protect your site against bad bots. I also have a [video course on WordPress security](https://m0n.co/securewp), for more plugin recommendations and lots of tips and tricks.
 
 
+**My PHP checker found something?**
+
+If you are using some PHP checker that's reporting an error or bad string in BBQ, it's a false positive and safe to ignore. Why? Because the PHP checker is finding the static strings/patterns that BBQ uses to identify and block bad requests. In other words, your PHP checker is finding a static string thinking it is live code. It's not. If possible, please take a moment to report this to the developers of your PHP checker. They should be happy to improve the accuracy and quality of their plugin.
+
+
 **Got a question?**
 
 Send any questions or feedback via my [contact form](https://perishablepress.com/contact/).
@@ -198,6 +204,21 @@ Links, tweets and likes also appreciated. Thank you! :)
 
 If you like BBQ, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/block-bad-queries/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2020/08/11**
+
+* Replaces `guangxiymcd` with wildcard match `www.(.*).cn`
+* Refines readme/documentation
+* Tests on WordPress 5.5
+
+**2020/07/06**
+
+* Adds `guangxiymcd` to Request URI and Query String patterns
+* Tests on WordPress 5.4 + 5.5 (alpha)
+
+**2020/03/19**
+
+* Tests on WordPress 5.4
 
 **2019/11/09**
 

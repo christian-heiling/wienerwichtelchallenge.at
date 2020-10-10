@@ -1367,10 +1367,10 @@ body.colors-light #buddypress div#invite-list {
     #buddypress div.dir-search form input[type="submit"],
     #buddypress div.message-search form input[type="submit"],
     #buddypress li.groups-members-search form input[type="submit"] {
-      -webkit-border-radius: none;
-      -moz-border-radius: none;
-      -ms-border-radius: none;
-      border-radius: none;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -ms-border-radius: 0;
+      border-radius: 0;
       float: right;
       font-weight: 400;
       padding: 0.2em 1em;

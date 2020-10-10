@@ -113,12 +113,16 @@ class MC4WP_Admin {
 		*/
 		do_action( 'mc4wp_admin_' . $action );
 
-		// redirect back to where we came from
-		$redirect_url = isset( $_REQUEST['_redirect_to'] ) ? $_REQUEST['_redirect_to'] : remove_query_arg( '_mc4wp_action' );
-		if ( $redirect_url ) {
-			wp_redirect( $redirect_url );
-			exit;
+		// redirect back to where we came from (to prevent double submit)
+		if ( isset( $_POST['_redirect_to'] ) ) {
+			$redirect_url = $_POST['_redirect_to'];
+		} else if ( isset( $_GET['_redirect_to'] ) ) {
+			$redirect_url = $_GET['_redirect_to'];
+		} else {
+			$redirect_url = remove_query_arg( '_mc4wp_action' );
 		}
+		wp_redirect( $redirect_url );
+		exit;
 	}
 
 	/**
@@ -166,11 +170,10 @@ class MC4WP_Admin {
 			update_option( 'mc4wp_version', MC4WP_VERSION );
 
 			// if we have at least one form, we're going to run upgrade routine for v3 => v4 anyway.
-			// TODO: Remove this once we hit 4.2.x
 			$posts = get_posts(
 				array(
 					'post_type'   => 'mc4wp-form',
-					'numberposts' => 1,
+					'posts_per_page' => 1,
 				)
 			);
 			if ( empty( $posts ) ) {
@@ -192,7 +195,7 @@ class MC4WP_Admin {
 		}
 
 		define( 'MC4WP_DOING_UPGRADE', true );
-		$upgrade_routines = new MC4WP_Upgrade_Routines( $previous_version, MC4WP_VERSION, dirname( __FILE__ ) . '/migrations' );
+		$upgrade_routines = new MC4WP_Upgrade_Routines( $previous_version, MC4WP_VERSION, __DIR__ . '/migrations' );
 		$upgrade_routines->run();
 		update_option( 'mc4wp_version', MC4WP_VERSION );
 	}
@@ -206,7 +209,7 @@ class MC4WP_Admin {
 		$lists     = $mailchimp->refresh_lists();
 
 		if ( ! empty( $lists ) ) {
-			$this->messages->flash( __( 'Success! The cached configuration for your Mailchimp lists has been renewed.', 'mailchimp-for-wp' ) );
+			$this->messages->flash( esc_html__( 'Success! The cached configuration for your Mailchimp lists has been renewed.', 'mailchimp-for-wp' ) );
 		}
 	}
 
@@ -330,15 +333,15 @@ class MC4WP_Admin {
 
 		$menu_items = array(
 			array(
-				'title'    => __( 'Mailchimp API Settings', 'mailchimp-for-wp' ),
-				'text'     => __( 'Mailchimp', 'mailchimp-for-wp' ),
+				'title'    => esc_html__( 'Mailchimp API Settings', 'mailchimp-for-wp' ),
+				'text'     => 'Mailchimp',
 				'slug'     => '',
 				'callback' => array( $this, 'show_generals_setting_page' ),
 				'position' => 0,
 			),
 			array(
-				'title'    => __( 'Other Settings', 'mailchimp-for-wp' ),
-				'text'     => __( 'Other', 'mailchimp-for-wp' ),
+				'title'    => esc_html__( 'Other Settings', 'mailchimp-for-wp' ),
+				'text'     => esc_html__( 'Other', 'mailchimp-for-wp' ),
 				'slug'     => 'other',
 				'callback' => array( $this, 'show_other_setting_page' ),
 				'position' => 90,
@@ -416,18 +419,19 @@ class MC4WP_Admin {
 				$mailchimp = new MC4WP_MailChimp();
 				$lists     = $mailchimp->get_lists();
 			} catch ( MC4WP_API_Connection_Exception $e ) {
-				$message = sprintf( '<strong>%s</strong> %s %s ', __( 'Error connecting to Mailchimp:', 'mailchimp-for-wp' ), $e->getCode(), $e->getMessage() );
+				$message = sprintf( '<strong>%s</strong> %s %s ', esc_html__( 'Error connecting to Mailchimp:', 'mailchimp-for-wp' ), $e->getCode(), $e->getMessage() );
 
 				if ( is_object( $e->data ) && ! empty( $e->data->ref_no ) ) {
-					$message .= '<br />' . sprintf( __( 'Looks like your server is blocked by Mailchimp\'s firewall. Please contact Mailchimp support and include the following reference number: %s', 'mailchimp-for-wp' ), $e->data->ref_no );
+					$message .= '<br />' . sprintf( esc_html__( 'Looks like your server is blocked by Mailchimp\'s firewall. Please contact Mailchimp support and include the following reference number: %s', 'mailchimp-for-wp' ), $e->data->ref_no );
 				}
 
-				$message .= '<br /><br />' . sprintf( '<a href="%s">' . __( 'Here\'s some info on solving common connectivity issues.', 'mailchimp-for-wp' ) . '</a>', 'https://kb.mc4wp.com/solving-connectivity-issues/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=settings-notice' );
+				$message .= '<br /><br />' . sprintf( '<a href="%s">' . esc_html__( 'Here\'s some info on solving common connectivity issues.', 'mailchimp-for-wp' ) . '</a>', 'https://www.mc4wp.com/kb/solving-connectivity-issues/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=settings-notice' );
 
 				$this->messages->flash( $message, 'error' );
 				$connected = false;
 			} catch ( MC4WP_API_Exception $e ) {
-				$this->messages->flash( sprintf( '<strong>%s</strong><br /> %s', __( 'Mailchimp returned the following error:', 'mailchimp-for-wp' ), $e ), 'error' );
+				$message = sprintf( '<strong>%s</strong><br /> %s', esc_html__( 'Mailchimp returned the following error:', 'mailchimp-for-wp' ), nl2br( (string) $e ) );
+				$this->messages->flash( $message, 'error' );
 				$connected = false;
 			}
 		}
@@ -465,7 +469,7 @@ class MC4WP_Admin {
 		$log = $this->get_log();
 		file_put_contents( $log->file, '' );
 
-		$this->messages->flash( __( 'Log successfully emptied.', 'mailchimp-for-wp' ) );
+		$this->messages->flash( esc_html__( 'Log successfully emptied.', 'mailchimp-for-wp' ) );
 	}
 
 	/**
@@ -495,7 +499,7 @@ class MC4WP_Admin {
 		}
 
 		echo '<div class="notice notice-warning mc4wp-is-dismissible">';
-		echo '<p>' . sprintf( __( 'To get started with Mailchimp for WordPress, please <a href="%s">enter your Mailchimp API key on the settings page of the plugin</a>.', 'mailchimp-for-wp' ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ) . '</p>';
+		echo '<p>', sprintf( wp_kses( __( 'To get started with Mailchimp for WordPress, please <a href="%s">enter your Mailchimp API key on the settings page of the plugin</a>.', 'mailchimp-for-wp' ), array( 'a' => array( 'href' => array() ) ) ), admin_url( 'admin.php?page=mailchimp-for-wp' ) ), '</p>';
 		echo '<form method="post"><input type="hidden" name="_mc4wp_action" value="dismiss_api_key_notice" /><button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></form>';
 		echo '</div>';
 	}

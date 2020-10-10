@@ -2,7 +2,6 @@
 
 class MC4WP_API_V3_Client {
 
-
 	/**
 	* @var string
 	*/
@@ -111,7 +110,7 @@ class MC4WP_API_V3_Client {
 		$args   = array(
 			'method'    => $method,
 			'headers'   => $this->get_headers(),
-			'timeout'   => 15,
+			'timeout'   => 20,
 			'sslverify' => apply_filters( 'mc4wp_use_sslverify', true ),
 		);
 
@@ -151,9 +150,10 @@ class MC4WP_API_V3_Client {
 	private function get_headers() {
 		global $wp_version;
 
-		$headers                  = array();
-		$headers['Authorization'] = 'Basic ' . base64_encode( 'mc4wp:' . $this->api_key );
-		$headers['User-Agent']    = 'mc4wp/' . MC4WP_VERSION . '; WordPress/' . $wp_version . '; ' . home_url();
+		$headers = array(
+			'Authorization' => sprintf( 'Basic %s', base64_encode( 'mc4wp:' . $this->api_key ) ),
+			'User-Agent'    => sprintf( 'mc4wp/%s; WordPress/%s; %s', MC4WP_VERSION, $wp_version, home_url() ),
+		);
 
 		// Copy Accept-Language from browser headers
 		if ( ! empty( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {

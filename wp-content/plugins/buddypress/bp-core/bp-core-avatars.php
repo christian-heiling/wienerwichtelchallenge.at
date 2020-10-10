@@ -193,11 +193,9 @@ function bp_core_fetch_avatar( $args = '' ) {
 	$bp = buddypress();
 
 	// If avatars are disabled for the root site, obey that request and bail.
-	if ( ! $bp->avatar->show_avatars ) {
+	if ( ! $bp->avatar || ! $bp->avatar->show_avatars ) {
 		return;
 	}
-
-	global $current_blog;
 
 	// Set the default variables array and parse it against incoming $args array.
 	$params = wp_parse_args( $args, array(
@@ -227,7 +225,7 @@ function bp_core_fetch_avatar( $args = '' ) {
 		switch ( $params['object'] ) {
 
 			case 'blog'  :
-				$params['item_id'] = $current_blog->id;
+				$params['item_id'] = get_current_blog_id();
 				break;
 
 			case 'group' :
@@ -718,7 +716,6 @@ function bp_core_delete_existing_avatar( $args = '' ) {
 	);
 
 	$args = wp_parse_args( $args, $defaults );
-	extract( $args, EXTR_SKIP );
 
 	/**
 	 * Filters whether or not to handle deleting an existing avatar.
@@ -745,47 +742,61 @@ function bp_core_delete_existing_avatar( $args = '' ) {
 		return true;
 	}
 
-	if ( empty( $item_id ) ) {
-		if ( 'user' == $object )
-			$item_id = bp_displayed_user_id();
-		elseif ( 'group' == $object )
-			$item_id = buddypress()->groups->current_group->id;
-		elseif ( 'blog' == $object )
-			$item_id = $current_blog->id;
+	if ( empty( $args['item_id'] ) ) {
+		if ( 'user' === $args['object'] ) {
+			$args['item_id'] = bp_displayed_user_id();
+		} elseif ( 'group' === $args['object'] ) {
+			$args['item_id'] = buddypress()->groups->current_group->id;
+		} elseif ( 'blog' === $args['object'] ) {
+			$args['item_id'] = get_current_blog_id();
+		}
 
 		/** This filter is documented in bp-core/bp-core-avatars.php */
-		$item_id = apply_filters( 'bp_core_avatar_item_id', $item_id, $object );
-
-		if ( !$item_id ) return false;
+		$item_id = apply_filters( 'bp_core_avatar_item_id', $args['item_id'], $args['object'] );
+	} else {
+		$item_id = $args['item_id'];
 	}
 
-	if ( empty( $avatar_dir ) ) {
-		if ( 'user' == $object )
-			$avatar_dir = 'avatars';
-		elseif ( 'group' == $object )
-			$avatar_dir = 'group-avatars';
-		elseif ( 'blog' == $object )
-			$avatar_dir = 'blog-avatars';
+	if ( $item_id && ( ctype_digit( $item_id ) || is_int( $item_id ) ) ) {
+		$item_id = (int) $item_id;
+	} else {
+		return false;
+	}
+
+	if ( empty( $args['avatar_dir'] ) ) {
+		if ( 'user' === $args['object'] ) {
+			$args['avatar_dir'] = 'avatars';
+		} elseif ( 'group' === $args['object'] ) {
+			$args['avatar_dir'] = 'group-avatars';
+		} elseif ( 'blog' === $args['object'] ) {
+			$args['avatar_dir'] = 'blog-avatars';
+		}
 
 		/** This filter is documented in bp-core/bp-core-avatars.php */
-		$avatar_dir = apply_filters( 'bp_core_avatar_dir', $avatar_dir, $object );
+		$avatar_dir = apply_filters( 'bp_core_avatar_dir', $args['avatar_dir'], $args['object'] );
+	} else {
+		$avatar_dir = $args['avatar_dir'];
+	}
 
-		if ( !$avatar_dir ) return false;
+	if ( ! $avatar_dir ) {
+		return false;
 	}
 
 	/** This filter is documented in bp-core/bp-core-avatars.php */
-	$avatar_folder_dir = apply_filters( 'bp_core_avatar_folder_dir', bp_core_avatar_upload_path() . '/' . $avatar_dir . '/' . $item_id, $item_id, $object, $avatar_dir );
+	$avatar_folder_dir = apply_filters( 'bp_core_avatar_folder_dir', bp_core_avatar_upload_path() . '/' . $avatar_dir . '/' . $item_id, $item_id, $args['object'], $avatar_dir );
 
-	if ( !file_exists( $avatar_folder_dir ) )
+	if ( ! is_dir( $avatar_folder_dir ) ) {
 		return false;
+	}
 
 	if ( $av_dir = opendir( $avatar_folder_dir ) ) {
-		while ( false !== ( $avatar_file = readdir($av_dir) ) ) {
-			if ( ( preg_match( "/-bpfull/", $avatar_file ) || preg_match( "/-bpthumb/", $avatar_file ) ) && '.' != $avatar_file && '..' != $avatar_file )
+		while ( false !== ( $avatar_file = readdir( $av_dir ) ) ) {
+			if ( ( preg_match( "/-bpfull/", $avatar_file ) || preg_match( "/-bpthumb/", $avatar_file ) ) && '.' != $avatar_file && '..' != $avatar_file ) {
 				@unlink( $avatar_folder_dir . '/' . $avatar_file );
+			}
 		}
 	}
-	closedir($av_dir);
+	closedir( $av_dir );
 
 	@rmdir( $avatar_folder_dir );
 
@@ -900,6 +911,7 @@ function bp_core_avatar_handle_upload( $file, $upload_dir_filter ) {
 
 	// In case of an error, stop the process and display a feedback to the user.
 	if ( ! empty( $bp->avatar_admin->original['error'] ) ) {
+		/* translators: %s: the upload error message */
 		bp_core_add_message( sprintf( __( 'Upload Failed! Error was: %s', 'buddypress' ), $bp->avatar_admin->original['error'] ), 'error' );
 		return false;
 	}
@@ -928,13 +940,15 @@ function bp_core_avatar_handle_upload( $file, $upload_dir_filter ) {
 
 	// Check for WP_Error on what should be an image.
 	if ( is_wp_error( $bp->avatar_admin->image->dir ) ) {
+		/* translators: %s: the upload error message */
 		bp_core_add_message( sprintf( __( 'Upload failed! Error was: %s', 'buddypress' ), $bp->avatar_admin->image->dir->get_error_message() ), 'error' );
 		return false;
 	}
 
 	// If the uploaded image is smaller than the "full" dimensions, throw a warning.
 	if ( $avatar_attachment->is_too_small( $bp->avatar_admin->image->file ) ) {
-		bp_core_add_message( sprintf( __( 'You have selected an image that is smaller than recommended. For best results, upload a picture larger than %d x %d pixels.', 'buddypress' ), bp_core_avatar_full_width(), bp_core_avatar_full_height() ), 'error' );
+		/* translators: 1: the advised width size in pixels. 2: the advised height size in pixels. */
+		bp_core_add_message( sprintf( __( 'You have selected an image that is smaller than recommended. For best results, upload a picture larger than %1$d x %2$d pixels.', 'buddypress' ), bp_core_avatar_full_width(), bp_core_avatar_full_height() ), 'error' );
 	}
 
 	// Set the url value for the image.
@@ -992,8 +1006,8 @@ function bp_avatar_ajax_upload() {
 	$bp_params['upload_dir_filter'] = '';
 	$needs_reset = array();
 
-	if ( 'user' === $bp_params['object'] && bp_is_active( 'xprofile' ) ) {
-		$bp_params['upload_dir_filter'] = 'xprofile_avatar_upload_dir';
+	if ( 'user' === $bp_params['object'] && bp_is_active( 'members' ) ) {
+		$bp_params['upload_dir_filter'] = 'bp_members_avatar_upload_dir';
 
 		if ( ! bp_displayed_user_id() && ! empty( $bp_params['item_id'] ) ) {
 			$needs_reset = array( 'key' => 'displayed_user', 'value' => $bp->displayed_user );
@@ -1284,20 +1298,19 @@ function bp_avatar_ajax_set() {
 				'item_id'       => $avatar_data['item_id'],
 			);
 
+			/** This action is documented in wp-includes/deprecated.php */
+			do_action_deprecated( 'xprofile_avatar_uploaded', array( (int) $avatar_data['item_id'], $avatar_data['type'], $avatar_data ), '6.0.0', 'bp_members_avatar_uploaded' );
+
 			/**
 			 * Fires if the new avatar was successfully captured.
 			 *
-			 * @since 1.1.0 Used to inform the avatar was successfully cropped
-			 * @since 2.3.4 Add two new parameters to inform about the user id and
-			 *              about the way the avatar was set (eg: 'crop' or 'camera')
-			 *              Move the action at the right place, once the avatar is set
-			 * @since 2.8.0 Added the `$avatar_data` parameter.
+			 * @since 6.0.0
 			 *
 			 * @param string $item_id     Inform about the user id the avatar was set for.
 			 * @param string $type        Inform about the way the avatar was set ('camera').
 			 * @param array  $avatar_data Array of parameters passed to the avatar handler.
 			 */
-			do_action( 'xprofile_avatar_uploaded', (int) $avatar_data['item_id'], $avatar_data['type'], $avatar_data );
+			do_action( 'bp_members_avatar_uploaded', (int) $avatar_data['item_id'], $avatar_data['type'], $avatar_data );
 
 			wp_send_json_success( $return );
 		}
@@ -1342,8 +1355,11 @@ function bp_avatar_ajax_set() {
 		);
 
 		if ( 'user' === $avatar_data['object'] ) {
+			/** This action is documented in wp-includes/deprecated.php */
+			do_action_deprecated( 'xprofile_avatar_uploaded', array( (int) $avatar_data['item_id'], $avatar_data['type'], $r ), '6.0.0', 'bp_members_avatar_uploaded' );
+
 			/** This action is documented in bp-core/bp-core-avatars.php */
-			do_action( 'xprofile_avatar_uploaded', (int) $avatar_data['item_id'], $avatar_data['type'], $r );
+			do_action( 'bp_members_avatar_uploaded', (int) $avatar_data['item_id'], $avatar_data['type'], $r );
 		} elseif ( 'group' === $avatar_data['object'] ) {
 			/** This action is documented in bp-groups/bp-groups-screens.php */
 			do_action( 'groups_avatar_uploaded', (int) $avatar_data['item_id'], $avatar_data['type'], $r );
@@ -1922,11 +1938,6 @@ add_action( 'bp_parse_query', 'bp_core_avatar_reset_query', 10, 1 );
  */
 function bp_avatar_is_front_edit() {
 	$retval = false;
-
-	// No need to carry on if the current WordPress version is not supported.
-	if ( ! bp_attachments_is_wp_version_supported() ) {
-		return $retval;
-	}
 
 	if ( bp_is_user_change_avatar() && 'crop-image' !== bp_get_avatar_admin_step() ) {
 		$retval = ! bp_core_get_root_option( 'bp-disable-avatar-uploads' );

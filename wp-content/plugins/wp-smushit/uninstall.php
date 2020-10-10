@@ -49,12 +49,15 @@ $smushit_keys = array(
 	'lazy_load',
 	'last_run_sync',
 	'networkwide',
+	'cron_update_running',
+	'hide-conflict-notice',
+	'show_upgrade_modal',
+	'hide_tutorials_from_bulk_smush',
 );
 
 $db_keys = array(
 	'skip-smush-setup',
 	'smush_global_stats',
-	'smush-directory-path-hash-updated',
 );
 
 // Cache Keys.

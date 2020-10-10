@@ -1,24 +1,39 @@
 /*
-Error: File to import not found or unreadable: /modules/media.
-        on line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss
+Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.
+        on line 4 of C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss
+        from line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss
 
 1: /**
 2:  * Common styles that are used on all the WP pages in the backend
 3:  *\/
-4: @import "/modules/media";
+4: @import "modules/media";
 5: 
 6: /**
-7:  * Smush buttons & stats in the media library, media upload and featured image modals.
-8:  *
-9:  * @since 2.8.0
+7:  * Media details (grid layout)
+8:  * @since 3.4.0
+9:  *\/
 
 Backtrace:
+C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss:4
 C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss:4
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:44:in `import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:28:in `imported_file'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:37:in `css_import?'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:79:in `with_base'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `visit'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:325:in `block (2 levels) in visit_import'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:325:in `map'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:325:in `block in visit_import'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:88:in `block in with_import'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:135:in `with_frame'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:88:in `with_import'
+C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:322:in `visit_import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/base.rb:36:in `visit'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/stack.rb:79:in `block in with_base'
@@ -51,4 +66,4 @@ C:/Ruby26-x64/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: /modules/media.\A         on line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss\A \A 1: /**\A 2:  * Common styles that are used on all the WP pages in the backend\A 3:  */\A 4: @import \"/modules/media\";\A 5: \A 6: /**\A 7:  * Smush buttons & stats in the media library, media upload and featured image modals.\A 8:  *\A 9:  * @since 2.8.0"; }
+  content: "Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.\A         on line 4 of C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss\A         from line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss\A \A 1: /**\A 2:  * Common styles that are used on all the WP pages in the backend\A 3:  */\A 4: @import \"modules/media\";\A 5: \A 6: /**\A 7:  * Media details (grid layout)\A 8:  * @since 3.4.0\A 9:  */"; }

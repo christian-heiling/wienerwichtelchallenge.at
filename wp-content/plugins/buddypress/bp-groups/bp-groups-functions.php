@@ -694,6 +694,7 @@ function groups_get_group_members( $args = array() ) {
 
 	// Backward compatibility with old method of passing arguments.
 	if ( ! is_array( $args ) || count( $function_args ) > 1 ) {
+		/* translators: 1: the name of the method. 2: the name of the file. */
 		_deprecated_argument( __METHOD__, '2.0.0', sprintf( __( 'Arguments passed to %1$s should be in an associative array. See the inline documentation at %2$s for more details.', 'buddypress' ), __METHOD__, __FILE__ ) );
 
 		$old_args_keys = array(
@@ -980,32 +981,31 @@ function bp_get_user_groups( $user_id, $args = array() ) {
 
 		// Prime the invitations cache.
 		$uncached_invitation_ids = bp_get_non_cached_ids( $invitation_ids, 'bp_groups_invitations_as_memberships' );
-
-		$uncached_invitations = groups_get_invites( array(
-			'ids'         => $uncached_invitation_ids,
-			'invite_sent' => 'all',
-			'type'        => 'all'
-		) );
-		foreach ( $uncached_invitations as $uncached_invitation ) {
-			// Reshape the result as a membership db entry.
-			$invitation = new StdClass;
-			$invitation->id            = $uncached_invitation->id;
-			$invitation->group_id      = $uncached_invitation->item_id;
-			$invitation->user_id       = $uncached_invitation->user_id;
-			$invitation->inviter_id    = $uncached_invitation->inviter_id;
-			$invitation->is_admin      = false;
-			$invitation->is_mod	       = false;
-			$invitation->user_title    = '';
-			$invitation->date_modified = $uncached_invitation->date_modified;
-			$invitation->comments      = $uncached_invitation->content;
-			$invitation->is_confirmed  = false;
-			$invitation->is_banned     = false;
-			$invitation->invite_sent   = $uncached_invitation->invite_sent;
-			wp_cache_set( $uncached_invitation->id, $invitation, 'bp_groups_invitations_as_memberships' );
+		if ( $uncached_invitation_ids ) {
+			$uncached_invitations = groups_get_invites( array(
+				'id'          => $uncached_invitation_ids,
+				'invite_sent' => 'all',
+				'type'        => 'all'
+			) );
+			foreach ( $uncached_invitations as $uncached_invitation ) {
+				// Reshape the result as a membership db entry.
+				$invitation = new StdClass;
+				$invitation->id            = $uncached_invitation->id;
+				$invitation->group_id      = $uncached_invitation->item_id;
+				$invitation->user_id       = $uncached_invitation->user_id;
+				$invitation->inviter_id    = $uncached_invitation->inviter_id;
+				$invitation->is_admin      = false;
+				$invitation->is_mod        = false;
+				$invitation->user_title    = '';
+				$invitation->date_modified = $uncached_invitation->date_modified;
+				$invitation->comments      = $uncached_invitation->content;
+				$invitation->is_confirmed  = false;
+				$invitation->is_banned     = false;
+				$invitation->invite_sent   = $uncached_invitation->invite_sent;
+				wp_cache_set( $uncached_invitation->id, $invitation, 'bp_groups_invitations_as_memberships' );
+			}
 		}
-
 	}
-
 
 	// Assemble filter array for use in `wp_list_filter()`.
 	$filters = wp_array_slice_assoc( $r, array( 'is_confirmed', 'is_banned', 'is_admin', 'is_mod', 'invite_sent' ) );
@@ -1690,6 +1690,14 @@ function groups_send_invites( $args = array() ) {
 		'force_resend'  => false,
 	), 'groups_send_invitation' );
 
+
+	$args = array(
+		'user_id'       => $r['user_id'],
+		'invitee_email' => $r['invitee_email'],
+		'item_id'       => $r['group_id'],
+		'inviter_id'    => $r['inviter_id'],
+	);
+
 	/*
 	 * We will generally only want to fetch unsent invitations.
 	 * If force_resend is true, then we need to fetch both sent and draft invites.
@@ -1700,12 +1708,6 @@ function groups_send_invites( $args = array() ) {
 		$args['invite_sent'] = 'draft';
 	}
 
-	$args = array(
-		'user_id'       => $r['user_id'],
-		'invitee_email' => $r['invitee_email'],
-		'item_id'       => $r['group_id'],
-		'inviter_id'    => $r['inviter_id'],
-	);
 	$invites = groups_get_invites( $args );
 
 	$invited_users = array();
@@ -2077,7 +2079,8 @@ function groups_send_membership_request( $args = array() ) {
 function groups_accept_membership_request( $membership_id, $user_id = 0, $group_id = 0 ) {
 
 	if ( ! empty( $membership_id ) ) {
-		_deprecated_argument( __METHOD__, '5.0.0', sprintf( __( 'Argument `membership_id` passed to %1$s  is deprecated. See the inline documentation at %2$s for more details.', 'buddypress' ), __METHOD__, __FILE__ ) );
+		/* translators: 1: the name of the method. 2: the name of the file. */
+		_deprecated_argument( __METHOD__, '5.0.0', sprintf( __( 'Argument `membership_id` passed to %1$s is deprecated. See the inline documentation at %2$s for more details.', 'buddypress' ), __METHOD__, __FILE__ ) );
 	}
 
 	if ( ! $user_id || ! $group_id ) {
@@ -2147,6 +2150,7 @@ function groups_reject_membership_request( $membership_id, $user_id = 0, $group_
  */
 function groups_delete_membership_request( $membership_id, $user_id = 0, $group_id = 0 ) {
 	if ( ! empty( $membership_id ) ){
+		/* translators: 1: method name. 2: file name. */
 		_deprecated_argument( __METHOD__, '5.0.0', sprintf( __( 'Argument `membership_id` passed to %1$s  is deprecated. See the inline documentation at %2$s for more details.', 'buddypress' ), __METHOD__, __FILE__ ) );
 	}
 
@@ -2413,8 +2417,23 @@ function groups_remove_data_for_user( $user_id ) {
 	do_action( 'groups_remove_data_for_user', $user_id );
 }
 add_action( 'wpmu_delete_user',  'groups_remove_data_for_user' );
-add_action( 'delete_user',       'groups_remove_data_for_user' );
 add_action( 'bp_make_spam_user', 'groups_remove_data_for_user' );
+
+/**
+ * Deletes user group data on the 'delete_user' hook.
+ *
+ * @since 6.0.0
+ *
+ * @param int $user_id The ID of the deleted user.
+ */
+function bp_groups_remove_data_for_user_on_delete_user( $user_id ) {
+	if ( ! bp_remove_user_data_on_delete_user_hook( 'groups', $user_id ) ) {
+		return;
+	}
+
+	groups_remove_data_for_user( $user_id );
+}
+add_action( 'delete_user', 'bp_groups_remove_data_for_user_on_delete_user' );
 
 /**
  * Update orphaned child groups when the parent is deleted.
@@ -2750,6 +2769,12 @@ function bp_groups_get_group_type( $group_id, $single = true ) {
  */
 function bp_groups_remove_group_type( $group_id, $group_type ) {
 	if ( empty( $group_type ) || ! bp_groups_get_group_type_object( $group_type ) ) {
+		return false;
+	}
+
+	// No need to continue if the group doesn't have the type.
+	$existing_types = bp_groups_get_group_type( $group_id, false );
+	if ( ! in_array( $group_type, $existing_types, true ) ) {
 		return false;
 	}
 

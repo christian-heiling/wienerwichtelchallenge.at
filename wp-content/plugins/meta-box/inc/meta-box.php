@@ -312,7 +312,7 @@ class RW_Meta_Box {
 		// Call defined method to save meta value, if there's no methods, call common one.
 		RWMB_Field::call( $field, 'save', $new, $old, $this->object_id );
 
-		RWMB_Field::filter( 'after_save_field', null, $field, $new, $old, $this->object_id, $field );
+		RWMB_Field::filter( 'after_save_field', null, $field, $new, $old, $this->object_id );
 	}
 
 	/**
@@ -339,11 +339,13 @@ class RW_Meta_Box {
 	 * @return array $meta_box Normalized meta box.
 	 */
 	public static function normalize( $meta_box ) {
+		$default_title = __( 'Meta Box Title', 'meta-box' );
 		// Set default values for meta box.
 		$meta_box = wp_parse_args(
 			$meta_box,
 			array(
-				'id'             => sanitize_title( $meta_box['title'] ),
+				'title'          => $default_title,
+				'id'             => ! empty( $meta_box['title'] ) ? sanitize_title( $meta_box['title'] ) : sanitize_title( $default_title ),
 				'context'        => 'normal',
 				'priority'       => 'high',
 				'post_types'     => 'post',
