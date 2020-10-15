@@ -464,38 +464,4 @@ class EventPostType extends AbstractPostType {
                     . ' bis ' . date_i18n('H:i', $end->timestamp);
         }
     }
-
-    public function generateRandomItem() {
-
-        $faker = \Faker\Factory::create();
-
-        $id = wp_insert_post(
-                [
-                    'post_title' => $faker->text(80),
-                    'post_type' => $this->getPostType(),
-                    'post_status' => 'publish'
-                ]
-        );
-
-        $start = $faker->dateTimeBetween('-10 days', '+20 days')->getTimestamp();
-
-        $metas = [
-            'start' => $start,
-            'end' => $start + rand(30, 60 * 12 * 3) * 60,
-            'location_name' => $faker->text(10),
-            'street' => $faker->streetAddress,
-            'zip' => '1' . sprintf("%02d'.02", rand(1, 21)) . '0',
-            'city' => 'Wien',
-            'map' => '48.1935651,16.3394902,12',
-            'reachable_via' => 'U3, U6 Westbahnhof',
-            'category' => $faker->text(10),
-            'teaser' => $faker->text(120),
-            'description' => $faker->text(500)
-        ];
-
-        foreach ($metas as $key => $value) {
-            add_post_meta($id, $key, $value, true);
-        }
-    }
-
 }

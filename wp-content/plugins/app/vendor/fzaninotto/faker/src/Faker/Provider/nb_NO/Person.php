@@ -295,7 +295,6 @@ class Person extends \Faker\Provider\Person
         $datePart = $birthdate->format('dmy');
 
         /**
-        * @todo These number should be random based on birth year
         * @link http://no.wikipedia.org/wiki/F%C3%B8dselsnummer
         */
         $randomDigits = (string)static::numerify('##');
@@ -315,7 +314,6 @@ class Person extends \Faker\Provider\Person
         $digits = $datePart.$randomDigits.$genderDigit;
 
         /**
-        * @todo Calculate modulo 11 of $digits
         * @link http://no.wikipedia.org/wiki/F%C3%B8dselsnummer
         */
         $checksum = (string)static::numerify('##');

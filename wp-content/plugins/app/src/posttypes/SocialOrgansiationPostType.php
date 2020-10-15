@@ -70,6 +70,11 @@ class SocialOrganisationPostType extends AbstractPostType {
                     'type' => 'image'
                 ),
                 array(
+                    'id' => 'link',
+                    'name' => __('Link', 'app'),
+                    'type' => 'text'
+                ),
+                array(
                     'id' => 'carrier',
                     'name' => __('Carrier', 'app'),
                     'type' => 'text'
@@ -80,48 +85,6 @@ class SocialOrganisationPostType extends AbstractPostType {
                     'type' => 'select',
                     'flatten' => true,
                     'options' => $this->getFieldOfActionOptions()
-                ),
-                array(
-                    'id' => 'street',
-                    'name' => __('Street', 'app'),
-                    'type' => 'text'
-                ),
-                array(
-                    'id' => 'zip',
-                    'name' => __('ZIP', 'app'),
-                    'type' => 'text'
-                ),
-                array(
-                    'id' => 'city',
-                    'name' => __('City', 'app'),
-                    'type' => 'post_type',
-                ),
-                array(
-                    'id' => 'map',
-                    'name' => __('Map', 'app'),
-                    'type' => 'osm',
-                    'std' => '48.20849,16.37208,13',
-                    'address_field' => 'street,zip,city'
-                ),
-                array(
-                    'id' => 'reachable_via',
-                    'name' => __('Public Reachable via', 'app'),
-                    'type' => 'wysiwyg',
-                    'options' => array(
-                        'textarea_rows' => 4,
-                        'media_buttons' => false,
-                        'teeny' => true
-                    )
-                ),
-                array(
-                    'id' => 'delivery_hours',
-                    'name' => __('Delivery hours', 'app'),
-                    'type' => 'wysiwyg',
-                    'options' => array(
-                        'textarea_rows' => 4,
-                        'media_buttons' => false,
-                        'teeny' => true
-                    )
                 ),
                 array(
                     'id' => 'delivery_options',
@@ -163,17 +126,94 @@ class SocialOrganisationPostType extends AbstractPostType {
                         'media_buttons' => false,
                         'teeny' => true
                     )
-                ),
-                array(
-                    'id' => 'link',
-                    'name' => __('Link', 'app'),
-                    'type' => 'text'
                 )
             )
         );
 
         $meta_boxes[] = array(
-            'title' => __('JIRA'),
+            'title' => __('Personal Delivery', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'addressee',
+                    'name' => __('Addressee', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'street',
+                    'name' => __('Street', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'zip',
+                    'name' => __('ZIP', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'city',
+                    'name' => __('City', 'app'),
+                    'type' => 'post_type',
+                ),
+                array(
+                    'id' => 'map',
+                    'name' => __('Map', 'app'),
+                    'type' => 'osm',
+                    'std' => '48.20849,16.37208,13',
+                    'address_field' => 'street,zip,city'
+                ),
+                array(
+                    'id' => 'covid19_regulations',
+                    'name' => __('COVID-19 Regulations', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 4,
+                        'media_buttons' => false,
+                        'teeny' => true
+                    )
+                ),
+                array(
+                    'id' => 'delivery_hours',
+                    'name' => __('Delivery hours', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 4,
+                        'media_buttons' => false,
+                        'teeny' => true
+                    )
+                )
+                
+            )
+        );
+
+        $meta_boxes[] = array(
+            'title' => __('Postal Delivery', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'postal_addressee',
+                    'name' => __('Addressee', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'postal_street',
+                    'name' => __('Street', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'postal_zip',
+                    'name' => __('ZIP', 'app'),
+                    'type' => 'text'
+                ),
+                array(
+                    'id' => 'postal_city',
+                    'name' => __('City', 'app'),
+                    'type' => 'post_type',
+                )
+            )
+        );
+
+        $meta_boxes[] = array(
+            'title' => __('JIRA', 'app'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
@@ -191,15 +231,12 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionOptions() {
         $field_of_actions = array(
-            __('Children, Youth, Family', 'app'),
-            __('Elderly People', 'app'),
             __('Health', 'app'),
-            __('Children', 'app'),
-            __('Deliquence', 'app'),
-            __('Work and Education', 'app'),
-            __('Migration and Integration', 'app'),
-            __('Homeless People', 'app'),
-            __('Material Security', 'app')
+            __('Childrens', 'app'),
+            __('People with Disablities', 'app'),
+            __('Neighborhood Aid', 'app'),
+            __('Addicted People', 'app'),
+            __('Homeless People', 'app')
         );
 
         $field_of_actions = array_combine($field_of_actions, $field_of_actions);
@@ -266,37 +303,79 @@ class SocialOrganisationPostType extends AbstractPostType {
 
         echo '</div>';
         echo '<div class="wp-block-column">';
-
-        echo '<h2>' . __('Delivery Infos', 'app') . '</h2>';
-        echo '<p>';
-        echo rwmb_meta('street') . '<br>';
-        echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
-        echo '</p>';
-
+        
         $this->outputMetaBoxContentWithHeadings(
                 array(
             array(
                 'section_name' => '',
                 'field_ids' => array(
-                    'delivery_hours',
-                    'contact',
-                    'reachable_via',
-                    'link'
+                    'contact'
                 )
             )
                 ), array(
             'first_heading' => '2'
                 )
         );
+        
+        echo '<a href="' . rwmb_meta('link') . '">' . rwmb_meta('link') . '</a>';
+        
+        if (in_array('postal', rwmb_meta('delivery_options'))) {
+        echo '<h2>' . __('Postal Delivery', 'app') . '</h2>';
+            echo '<p>';
+            echo rwmb_meta('postal_addressee') . '<br>';
+            echo rwmb_meta('postal_street') . '<br>';
+            echo rwmb_meta('postal_zip') . ' ' . rwmb_meta('postal_city');
+            echo '</p>';
+        }
+
+        if (in_array('personal', rwmb_meta('delivery_options'))) {
+            echo '<h2>' . __('Personal Delivery', 'app') . '</h2>';
+
+            echo '<h4>' . __('COVID19 Regulations', 'app') . '</h4>';
+            echo '<p>' . rwmb_meta('covid19_regulations') . '</p>';
+
+            $this->outputMetaBoxContentWithHeadings(
+                    array(
+                array(
+                    'section_name' => '',
+                    'field_ids' => array(
+                        'delivery_hours'
+                    )
+                )
+                    ), array(
+                'first_heading' => '3'
+                    )
+            );
+            
+            echo '<h4>' . __('Drop-off Point', 'app') . '</h4>';
+            echo '<p>';
+            echo rwmb_meta('addressee') . '<br>';
+            echo rwmb_meta('street') . '<br>';
+            echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
+            echo '</p>';
+            
+            $this->outputMetaBoxContentWithHeadings(
+                    array(
+                array(
+                    'section_name' => '',
+                    'field_ids' => array(
+                        'map',
+                    )
+                )
+                    ), array(
+                'first_heading' => '3'
+                    )
+            );
+        }
+        
         echo '</div>';
         echo '</div>';
-
-
+        
         $o = \app\App::getInstance()->getOptions();
         $wishListState = $o->get('wish_list_status');
 
         if ($wishListState == 'done') {
-            echo '<h2>' . sprintf(__('Erfüllte Wünsche', 'app')) . '</h2>';
+            echo '<h2>' . sprintf(__('Fulfilled Wishes', 'app')) . '</h2>';
             $query = new \WP_Query(array(
                 'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
                 'meta_key' => 'social_organisation_id',
@@ -356,7 +435,7 @@ class SocialOrganisationPostType extends AbstractPostType {
 
             get_template_part('template-parts/content/content-archive', 'open-wishes');
         } else {
-            echo '<p>' . __('keine Wünsche gefunden', 'app') . '</p>';
+            echo '<p>' . __('no wishes found', 'app') . '</p>';
         }
     }
 
@@ -380,10 +459,6 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function echoExcerptContent() {
         echo rwmb_meta('teaser');
-    }
-
-    public function generateRandomItem() {
-        // do noting
     }
 
     public function getAll() {

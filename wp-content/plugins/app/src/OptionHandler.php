@@ -206,22 +206,22 @@ class OptionHandler {
             'fields' => array(
                 array(
                     'id' => 'jira_state_offen',
-                    'name' => __('Offen', 'app'),
+                    'name' => __('Open', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_state_in_arbeit',
-                    'name' => __('In Arbeit', 'app'),
+                    'name' => __('In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_state_erfuellt',
-                    'name' => __('Erfüllt', 'app'),
+                    'name' => __('Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_state_abgeschlossen',
-                    'name' => __('Abgeschlossen', 'app'),
+                    'name' => __('Present confirmed', 'app'),
                     'type' => 'text'
                 )
             )
@@ -233,7 +233,7 @@ class OptionHandler {
             'fields' => array(
                 array(
                     'id' => 'jira_state_pre_offen',
-                    'name' => __('Offen', 'app'),
+                    'name' => __('Open', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -242,7 +242,7 @@ class OptionHandler {
                 ),
                 array(
                     'id' => 'jira_state_pre_in_arbeit',
-                    'name' => __('In Arbeit', 'app'),
+                    'name' => __('In progress', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -251,7 +251,7 @@ class OptionHandler {
                 ),
                 array(
                     'id' => 'jira_state_pre_erfuellt',
-                    'name' => __('Erfüllt', 'app'),
+                    'name' => __('Wish fulfilled', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -260,7 +260,7 @@ class OptionHandler {
                 ),
                 array(
                     'id' => 'jira_state_pre_abgeschlossen',
-                    'name' => __('Abgeschlossen', 'app'),
+                    'name' => __('Present confirmed', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -276,17 +276,17 @@ class OptionHandler {
             'fields' => array(
                 array(
                     'id' => 'jira_transition_vergeben',
-                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'name' => __('Assign: open => In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_transition_erfuellen',
-                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_transition_zuruecklegen',
-                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'text'
                 )
             )
@@ -298,7 +298,7 @@ class OptionHandler {
             'fields' => array(
                 array(
                     'id' => 'jira_transition_question_vergeben',
-                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'name' => __('Assign: open => In progress', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -307,7 +307,7 @@ class OptionHandler {
                 ),
                 array(
                     'id' => 'jira_transition_question_erfuellen',
-                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -316,7 +316,7 @@ class OptionHandler {
                 ),
                 array(
                     'id' => 'jira_transition_question_zuruecklegen',
-                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
@@ -341,17 +341,17 @@ class OptionHandler {
             'fields' => array(
                 array(
                     'id' => 'jira_transition_button_vergeben',
-                    'name' => __('Vergeben: Offen => In Arbeit', 'app'),
+                    'name' => __('Assign: Open => In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_transition_button_erfuellen',
-                    'name' => __('Erfüllen: In Arbeit => Erfüllt', 'app'),
+                    'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
                     'id' => 'jira_transition_button_zuruecklegen',
-                    'name' => __('Zurücklegen: In Arbeit => Offen', 'app'),
+                    'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'text'
                 )
             )
@@ -384,7 +384,7 @@ class OptionHandler {
                 ),
             )
         );
-        
+
         $meta_boxes[] = array(
             'title' => __('Wish Archive Options'),
             'post_types' => array($this->getPostType()),
@@ -445,7 +445,7 @@ class OptionHandler {
                 )
             ),
         );
-        
+
         $meta_boxes[] = array(
             'title' => __('Ads', 'app'),
             'post_types' => array($this->getPostType()),
@@ -566,7 +566,7 @@ class OptionHandler {
         if (!array_key_exists($name, $this->options)) {
             return null;
         }
-        
+
         $value = $this->options[$name][0];
         return $value;
     }
@@ -574,4 +574,5 @@ class OptionHandler {
     public function getPostId() {
         return $this->getOptionItem()->ID;
     }
+
 }

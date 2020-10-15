@@ -30,3 +30,17 @@ add_action('widgets_init', function() {
     }
     
 });
+
+add_filter('twentynineteen_custom_colors_css', function($value) {
+    
+    $return = array();
+    $rows = explode("\n", $value);
+    
+    foreach($rows as $row) {
+        if (strpos($row, '.sub-menu') === false && strpos($row, '.main-navigation') === false) {
+            $return[] = $row;
+        }
+    }
+    
+    return implode("\n", $return);
+});

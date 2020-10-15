@@ -523,18 +523,24 @@ MAILCONTENT;
 
         $comment = 'Transition';
         if ($_GET['transition'] == 'vergeben') {
-            $comment = 'Wichtel gefunden!' . "\n"
+            $comment = sprintf(__("Found a Wichtel!\n Wichtel %1 want to fulfill the wish %2 (%3) with the recipient identification %4"));
+                    
+                    "Wichtel gefunden!" . "\n"
                     . 'Wichtel ' . $current_user->data->display_name . ' will '
                     . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
                     . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
                     . '" besorgen.';
         } elseif ($_GET['transition'] == 'erfuellen') {
+            $comment = sprintf(__("Present delivered!\n Wichtel %1 has delivered the present %2 (%3) with the recipient identification %4"));
+            
             $comment = 'Geschenk abgegeben!' . "\n"
                     . 'Wichtel ' . $current_user->data->display_name . ' hat angegeben'
                     . ', dass er/sie das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
                     . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
                     . '" abgegeben hat.';
         } elseif ($_GET['transition'] == 'zuruecklegen') {
+            $comment = sprintf(__("Wichtel %1 do not like to fulfill wish %2 (%3) with the recipient identification %4. Therefore we are looking for a new Wichtel for this wish."));
+            
             $comment = 'Wunsch zurückgelegt!' . "\n"
                     . 'Wichtel ' . $current_user->data->display_name . ' kann '
                     . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
@@ -634,92 +640,92 @@ MAILCONTENT;
             'title' => __('JIRA'),
             'post_types' => array($this->getPostType()),
             'fields' => array(
-                    [
+                [
                     'id' => 'key',
                     'name' => 'key',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'status_id',
                     'name' => 'status_id',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'status_name',
                     'name' => 'status_name',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'link_to_jira',
                     'name' => 'link_to_jira',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'wichtel_id',
                     'name' => 'wichtel_id',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'wichtel_name',
                     'name' => 'wichtel_name',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'wichtel_mail',
                     'name' => 'wichtel_mail',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'price',
                     'name' => 'price',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'summary',
                     'name' => 'summary',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'description',
                     'name' => 'description',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'reporter_mail',
                     'name' => 'reporter_mail',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'recipient',
                     'name' => 'recipient',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'address',
                     'name' => 'address',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'zip',
                     'name' => 'zip',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'end_date',
                     'name' => 'end_date',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'last_wichtel_delivery_date',
                     'name' => 'last_wichtel_delivery_date',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'found_wichtel_date',
                     'name' => 'found_wichtel_date',
                     'type' => 'text'
                 ],
-                    [
+                [
                     'id' => 'social_organisation_id',
                     'name' => 'social_organisation_id',
                     'type' => 'post',
@@ -729,7 +735,7 @@ MAILCONTENT;
                         'posts_per_page' => - 1,
                     ),
                 ],
-                    [
+                [
                     'id' => 'priority',
                     'name' => 'priority',
                     'type' => 'text'
@@ -877,7 +883,8 @@ MAILCONTENT;
             echo '<div class="wish-buttons">';
             echo '<div class="wp-block-button wish-button-primary">';
             echo '<a class="wp-block-button__link" href="' . get_permalink() . '">'
-            . __('Mehr erfahren', 'app')
+
+            . __('Read more', 'app')
             . '</a>';
             echo '</div>';
             echo '</div>';
@@ -896,7 +903,8 @@ MAILCONTENT;
 
                 $popup_html .= '<div class="wp-block-button wish-button-secondary">';
                 $popup_html .= '<a class="wp-block-button__link" href="' . wp_login_url(get_permalink()) . '">';
-                $popup_html .= __('Anmelden', 'app');
+
+                $popup_html .= __('Log in', 'app');
                 $popup_html .= '</a>';
                 $popup_html .= '</div>';
 
@@ -910,7 +918,8 @@ MAILCONTENT;
 
                 $popup_html .= '<div class="wp-block-button wish-button-primary">';
                 $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink() . '?transition=' . $trans_name . '">';
-                $popup_html .= __('Bestätigen', 'app');
+
+                $popup_html .= __('Confirm', 'app');
                 $popup_html .= '</a>';
                 $popup_html .= '</div>';
             }
@@ -953,10 +962,6 @@ MAILCONTENT;
 
     public function getSortableColumns() {
         return [];
-    }
-
-    public function generateRandomItem() {
-        
     }
 
 }

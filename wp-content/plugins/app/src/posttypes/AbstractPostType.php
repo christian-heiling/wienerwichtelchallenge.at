@@ -33,9 +33,6 @@ abstract class AbstractPostType {
 
     abstract function echoExcerptMeta();
 
-    // for testing
-    abstract function generateRandomItem();
-
     function getSupports() {
         return array('title', 'thumbnail', 'revisions');
     }
