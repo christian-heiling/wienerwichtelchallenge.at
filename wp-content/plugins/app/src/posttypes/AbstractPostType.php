@@ -230,9 +230,8 @@ abstract class AbstractPostType {
 
     private function outputField($id, $type) {
         if ($type == 'datetime') {
-            $date = new \Carbon\Carbon('@' . rwmb_meta($id), get_option('timezone_string'));
-            echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp)
-            . ' (' . $date->diffForHumans() . ')';
+            $date = new \DateTime('@' . rwmb_meta($id), get_option('timezone_string'));
+            echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp);
         } elseif ($type == 'text' && substr(rwmb_meta($id), 0, 4) == 'http') {
             echo '<a href="' . rwmb_meta($id) . '" target="_blank" rel="nofollow">' . rwmb_meta($id) . '</a>';
         } elseif ($type == 'image') {

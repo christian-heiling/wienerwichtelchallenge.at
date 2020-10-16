@@ -25,9 +25,6 @@ class App {
     }
 
     private function __construct() {
-        //setup carbon
-        \Carbon\Carbon::setLocale(substr(get_locale(), 0, 2));
-
         $this->initPostTypes();
         $this->initOptionHandler();
 

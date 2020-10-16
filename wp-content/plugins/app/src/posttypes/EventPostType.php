@@ -2,8 +2,6 @@
 
 namespace app\posttypes;
 
-use Carbon\Carbon;
-
 class EventPostType extends AbstractPostType {
 
     public function getLabel() {
@@ -236,9 +234,8 @@ class EventPostType extends AbstractPostType {
         }
 
         if (in_array($column_name, ['start', 'end'])) {
-            $date = new \Carbon\Carbon('@' . rwmb_meta($column_name, [], $post_ID), get_option('timezone_string'));
-            echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp)
-            . ' (' . $date->diffForHumans() . ')';
+            $date = new \DateTime('@' . rwmb_meta($column_name, [], $post_ID), new \DateTimeZone(get_option('timezone_string')));
+            echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->getTimestamp());
         }
     }
 
@@ -425,43 +422,45 @@ class EventPostType extends AbstractPostType {
     }
 
     public function getStartAndEnddate($id = null) {
-        $start = new \Carbon\Carbon('@' . rwmb_meta('start', [], $id), get_option('timezone_string'));
-        $end = new \Carbon\Carbon('@' . rwmb_meta('end', [], $id), get_option('timezone_string'));
+        $start = new \DateTime('@' . rwmb_meta('start', [], $id));
+        $end = new \DateTime('@' . rwmb_meta('end', [], $id));
         
-        $now = new \Carbon\Carbon('@' . \time(), get_option('timezone_string'));
+        $now = new \DateTime('@' . \time(), new \DateTimeZone(get_option('timezone_string')));
         $return = '';
 
+        $diff = $start->diff($end);
+        
         // running events
-        if ($start->lessThan($now) && $end->greaterThan($now)) {
+        if ($start < $now && $end > $now) {
             if ($end->hour == 0 && $end->minute == 0) {
-                $return .= 'bis ' . date_i18n('D., j. M Y', $end->timestamp);
+                $return .= 'bis ' . date_i18n('D., j. M Y', $end->getTimestamp());
             } else {
-                $return .= 'bis ' . date_i18n('D., j. M Y, H:i', $end->timestamp);
+                $return .= 'bis ' . date_i18n('D., j. M Y, H:i', $end->getTimestamp());
             }
 
             return $return;
         }
         // more than one day events
-        elseif ($start->diffInDays($end) !== 0) {
+        elseif ($diff->d !== 0) {
 
 
             if ($start->hour == 0 && $start->minute == 0) {
-                $return .= date_i18n('D., j. M Y', $start->timestamp);
+                $return .= date_i18n('D., j. M Y', $start->getTimestamp());
             } else {
-                $return .= date_i18n('D., j. M Y, H:i', $start->timestamp);
+                $return .= date_i18n('D., j. M Y, H:i', $start->getTimestamp());
             }
 
 
             if ($end->hour == 0 && $end->minute == 0) {
-                $return .= ' bis ' . date_i18n('D., j. M Y', $end->timestamp);
+                $return .= ' bis ' . date_i18n('D., j. M Y', $end->getTimestamp());
             } else {
-                $return .= ' bis ' . date_i18n('D., j. M Y, H:i', $end->timestamp);
+                $return .= ' bis ' . date_i18n('D., j. M Y, H:i', $end->getTimestamp());
             }
 
             return $return;
         } else {
-            return date_i18n('D., j. M Y, H:i', $start->timestamp)
-                    . ' bis ' . date_i18n('H:i', $end->timestamp);
+            return date_i18n('D., j. M Y, H:i', $start->getTimestamp())
+                    . ' bis ' . date_i18n('H:i', $end->getTimestamp());
         }
     }
 }
