@@ -16,7 +16,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require 'vendor/autoload.php';
 require 'src/App.php';
 
 if (!function_exists('array_key_first')) {

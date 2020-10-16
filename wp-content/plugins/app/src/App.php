@@ -2,6 +2,15 @@
 
 namespace app;
 
+require 'JiraHandler.php';
+require 'OptionHandler.php';
+require 'posttypes/AbstractPostType.php';
+require 'posttypes/EventPostType.php';
+require 'posttypes/SocialOrgansationPostType.php';
+require 'posttypes/SponsorPostType.php';
+require 'posttypes/WichtelTypePostType.php';
+require 'posttypes/WishPostType.php';
+
 use app\posttypes\EventPostType;
 use app\posttypes\CityPostType;
 
