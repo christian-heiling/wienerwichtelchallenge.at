@@ -231,6 +231,7 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionOptions() {
         $field_of_actions = array(
+            __('Asylum and Migration', 'app'),
             __('Health', 'app'),
             __('Childrens', 'app'),
             __('People with Disablities', 'app'),

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-10-15 21:21+0200\n"
-"PO-Revision-Date: 2020-10-15 21:35+0200\n"
+"POT-Creation-Date: 2020-11-04 18:37+0100\n"
+"PO-Revision-Date: 2020-11-04 18:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: plurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.2\n"
 
-#: plugins/app/src/App.php:203
+#: plugins/app/src/App.php:209
 msgid "Full Import"
 msgstr "Vollständiger Import"
 
@@ -145,32 +145,32 @@ msgid "Assign: Open => In progress"
 msgstr "Zuweisen: Offen => In Arbeit"
 
 #: plugins/app/src/OptionHandler.php:361 plugins/app/src/OptionHandler.php:381
-#: plugins/app/src/posttypes/EventPostType.php:152
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:159
+#: plugins/app/src/posttypes/EventPostType.php:150
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:159
 msgid "Map"
 msgstr "Karte"
 
 #: plugins/app/src/OptionHandler.php:366
-#: plugins/app/src/posttypes/EventPostType.php:137
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:144
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:199
+#: plugins/app/src/posttypes/EventPostType.php:135
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:144
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:199
 msgid "Street"
 msgstr "Straße"
 
 #: plugins/app/src/OptionHandler.php:371
-#: plugins/app/src/posttypes/EventPostType.php:91
-#: plugins/app/src/posttypes/EventPostType.php:142
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:149
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:204
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:254
+#: plugins/app/src/posttypes/EventPostType.php:89
+#: plugins/app/src/posttypes/EventPostType.php:140
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:149
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:204
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:255
 msgid "ZIP"
 msgstr "PLZ"
 
 #: plugins/app/src/OptionHandler.php:376
-#: plugins/app/src/posttypes/EventPostType.php:147
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:154
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:209
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:253
+#: plugins/app/src/posttypes/EventPostType.php:145
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:154
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:209
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:254
 msgid "City"
 msgstr "Ort"
 
@@ -179,8 +179,8 @@ msgid "Wish Archive Options"
 msgstr "Wunschübersichtsoptionen"
 
 #: plugins/app/src/OptionHandler.php:394
-#: plugins/app/src/posttypes/EventPostType.php:185
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:112
+#: plugins/app/src/posttypes/EventPostType.php:183
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:112
 #: plugins/app/src/posttypes/SponsorPostType.php:47
 msgid "Teaser"
 msgstr "Teaser"
@@ -230,235 +230,239 @@ msgstr "Lösche alle Wünsche"
 msgid "Jira Import"
 msgstr "JIRA Import"
 
-#: plugins/app/src/posttypes/EventPostType.php:10
+#: plugins/app/src/posttypes/EventPostType.php:8
 msgid "Events"
 msgstr "Events"
 
-#: plugins/app/src/posttypes/EventPostType.php:22
+#: plugins/app/src/posttypes/EventPostType.php:20
 msgid "events-slug"
 msgstr "events"
 
-#: plugins/app/src/posttypes/EventPostType.php:87
-#: plugins/app/src/posttypes/EventPostType.php:132
-#: plugins/app/src/posttypes/EventPostType.php:226
+#: plugins/app/src/posttypes/EventPostType.php:85
+#: plugins/app/src/posttypes/EventPostType.php:130
+#: plugins/app/src/posttypes/EventPostType.php:224
 msgid "Location"
 msgstr "Location"
 
-#: plugins/app/src/posttypes/EventPostType.php:108
+#: plugins/app/src/posttypes/EventPostType.php:106
 msgid "Time"
 msgstr "Zeit"
 
-#: plugins/app/src/posttypes/EventPostType.php:113
+#: plugins/app/src/posttypes/EventPostType.php:111
 msgid "Starts"
 msgstr "Startet"
 
-#: plugins/app/src/posttypes/EventPostType.php:119
+#: plugins/app/src/posttypes/EventPostType.php:117
 msgid "Ends"
 msgstr "Endet"
 
-#: plugins/app/src/posttypes/EventPostType.php:127
+#: plugins/app/src/posttypes/EventPostType.php:125
 msgid "Location Infos"
 msgstr "Örtlichkeit"
 
-#: plugins/app/src/posttypes/EventPostType.php:159
-#: plugins/app/src/posttypes/EventPostType.php:291
+#: plugins/app/src/posttypes/EventPostType.php:157
+#: plugins/app/src/posttypes/EventPostType.php:288
 #: themes/app/template-parts/content/content-single-wish.php:102
 msgid "Public Reachable via"
 msgstr "Öffentliche Erreichbarkeit"
 
-#: plugins/app/src/posttypes/EventPostType.php:166
+#: plugins/app/src/posttypes/EventPostType.php:164
 msgid "Description"
 msgstr "Beschreibung"
 
-#: plugins/app/src/posttypes/EventPostType.php:171
+#: plugins/app/src/posttypes/EventPostType.php:169
 msgid "Image"
 msgstr "Bild"
 
-#: plugins/app/src/posttypes/EventPostType.php:177
+#: plugins/app/src/posttypes/EventPostType.php:175
 msgid "Category"
 msgstr "Kategorie"
 
-#: plugins/app/src/posttypes/EventPostType.php:193
+#: plugins/app/src/posttypes/EventPostType.php:191
 msgid "Press Text"
 msgstr "Pressetext"
 
-#: plugins/app/src/posttypes/EventPostType.php:203
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:74
+#: plugins/app/src/posttypes/EventPostType.php:201
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:74
 #: plugins/app/src/posttypes/SponsorPostType.php:63
 msgid "Link"
 msgstr "Link"
 
-#: plugins/app/src/posttypes/EventPostType.php:208
+#: plugins/app/src/posttypes/EventPostType.php:206
 msgid "Label"
 msgstr "Beschriftung"
 
-#: plugins/app/src/posttypes/EventPostType.php:209
+#: plugins/app/src/posttypes/EventPostType.php:207
 msgid "e.g. Get Tickets here!"
 msgstr "z.B. Hole dein Ticket hier"
 
-#: plugins/app/src/posttypes/EventPostType.php:214
+#: plugins/app/src/posttypes/EventPostType.php:212
 msgid "URL"
 msgstr "URL"
 
-#: plugins/app/src/posttypes/EventPostType.php:225
+#: plugins/app/src/posttypes/EventPostType.php:223
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
 #: plugins/app/src/posttypes/WishPostType.php:807
 msgid "Title"
 msgstr "Titel"
 
-#: plugins/app/src/posttypes/EventPostType.php:227
+#: plugins/app/src/posttypes/EventPostType.php:225
 msgid "Start at"
 msgstr "Startet um"
 
-#: plugins/app/src/posttypes/EventPostType.php:228
+#: plugins/app/src/posttypes/EventPostType.php:226
 msgid "End at"
 msgstr "Endet um"
 
-#: plugins/app/src/posttypes/EventPostType.php:229
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:255
+#: plugins/app/src/posttypes/EventPostType.php:227
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:256
 #: plugins/app/src/posttypes/SponsorPostType.php:75
 #: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
 msgstr "Datum"
 
-#: plugins/app/src/posttypes/EventPostType.php:278
+#: plugins/app/src/posttypes/EventPostType.php:275
 msgid "When and Where?"
 msgstr "Wo und Wann?"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:42
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:42
 msgid "Social Organisations"
 msgstr "Einrichtungen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:54
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:54
 msgid "organisations-slug"
 msgstr "einrichtungen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:64
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:64
 #: plugins/app/src/posttypes/SponsorPostType.php:30
 #: plugins/app/src/posttypes/SponsorPostType.php:55
 #: plugins/app/src/posttypes/WichtelTypePostType.php:30
 msgid "Infos"
 msgstr "Infos"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:69
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:69
 #: plugins/app/src/posttypes/SponsorPostType.php:42
 msgid "Logo"
 msgstr "Logo"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:79
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:251
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:79
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:252
 msgid "Carrier"
 msgstr "Träger"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:84
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:252
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:84
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:253
 msgid "Field of Action"
 msgstr "Handlungsfeld"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:91
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:91
 msgid "Delivery Options"
 msgstr "Abgabearten"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:94
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:94
 msgid "Personal"
 msgstr "persönliche Abgabe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:95
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:95
 msgid "Postal"
 msgstr "mit Post"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:96
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:96
 msgid "via Amazon as Present"
 msgstr "als Amazon.de-Geschenk"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:102
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:102
 msgid "Contact for Questions"
 msgstr "Kontakt für Rückfragen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:122
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:122
 msgid "About the Social Organisation"
 msgstr "Über die Einrichtung"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:134
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:330
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:134
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:333
 msgid "Personal Delivery"
 msgstr "persönliche Abgabe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:139
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:194
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:139
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:194
 msgid "Addressee"
 msgstr "Adressat"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:166
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:166
 msgid "COVID-19 Regulations"
 msgstr "COVID-19 Maßnahmen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:176
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:176
 msgid "Delivery hours"
 msgstr "Abgabezeiten"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:189
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:321
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:189
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:324
 msgid "Postal Delivery"
 msgstr "Paketversand"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:216
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:216
 #: plugins/app/src/posttypes/WishPostType.php:640
 msgid "JIRA"
 msgstr "JIRA"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:221
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:221
 msgid "Associated Jira Users"
 msgstr "zugeordnete JIRA-Customer Account"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:234
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:234
+msgid "Asylum and Migration"
+msgstr "Asly und Migration"
+
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:235
 msgid "Health"
 msgstr "Gesundheit"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:235
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:236
 msgid "Childrens"
 msgstr "Kinder- und Jugendhilfe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:236
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:237
 msgid "People with Disablities"
 msgstr "Menschen mit Behinderungen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:237
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:238
 msgid "Neighborhood Aid"
 msgstr "Nachbarschaftshilfe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:238
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:239
 msgid "Addicted People"
 msgstr "Suchthilfe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:239
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:240
 msgid "Homeless People"
 msgstr "Wohnungslosenhilfe"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:250
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:251
 msgid "Social Organisation"
 msgstr "Einrichtung"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:332
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:335
 msgid "COVID19 Regulations"
 msgstr "COVID-19 Maßnahmen"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:335
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:351
 msgid "Drop-off Point"
 msgstr "Abgabeort"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:363
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:379
 #: themes/app/archive-wish.php:78
 msgid "Fulfilled Wishes"
 msgstr "Erfüllte Wünsche"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:388
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:404
 #: themes/app/archive-wish.php:83
 msgid "Open Wishes"
 msgstr "Offene Wünsche"
 
-#: plugins/app/src/posttypes/SocialOrgansiationPostType.php:423
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:439
 msgid "no wishes found"
 msgstr "keine Wünsche gefunden"
 
