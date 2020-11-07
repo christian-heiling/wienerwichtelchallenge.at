@@ -2,7 +2,7 @@
 Contributors: wponlinesupport, anoopranawat, pratik-jain
 Tags: countdown timer, timer, timer countdown, countdown, event countdown timer, animated countdown timer, birthday countdown, clock, count down, countdown, countdown clock, countdown form, countdown generator, countdown system, countdown timer, countdown timer, date countdown, event countdown, flash countdown, html5 countdown, jQuery countdown, time counter, website countdown, wp countdown, wp countdown timer
 Requires at least: 4.0
-Tested up to: 5.5
+Tested up to: 5.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -50,6 +50,10 @@ You can create multiplate countdown timer and display them with shortcode. The e
 > * Option to show/hide Days, hours, minutes and seconds.
 > * Option to set difftent background colors for Days, hours, minutes and seconds.
 > * Easy to integrate with e-commerce coupons like WooCommerce and Easy Digital Downloads.
+> * Gutenberg Block Supports.
+> * WPBakery Page Builder Support
+> * Elementor, Beaver and SiteOrigin Page Builder Support (New).
+> * Divi Page Builder Native Support (New).
 > * Various parameters for clock like background color, text color and etc.
 > * Clock expiration event. Display your desired text on complition of timer.
 > * Light weight and fast.
@@ -77,6 +81,11 @@ You can create multiplate countdown timer and display them with shortcode. The e
 
 
 == Changelog ==
+
+= 1.3 (29, Oct 2020) =
+* [+] New - Click to copy the shortcode.
+* [*] Update - Regular plugin maintenance. Updated readme file.
+* [*] Added - Added our other Popular Plugins under Countdown Timer --> Install Popular Plugins From WPOS. This will help you to save your time during creating a website.
 
 = 1.2.5 (14-07-2020) =
 * [*] Follow WordPress Detailed Plugin Guidelines for Offload Media and Analytics Code.

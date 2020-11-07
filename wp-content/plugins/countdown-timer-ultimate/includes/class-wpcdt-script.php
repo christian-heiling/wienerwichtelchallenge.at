@@ -8,7 +8,7 @@
  * @since 1.0.0
  */
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
@@ -90,6 +90,10 @@ class Wpcdt_Script {
 
 		global $post_type;
 
+		wp_register_script( 'wpcdt-ui-timepicker-addon-js', WPCDT_URL.'assets/js/wpcdt-ui-timepicker-addon.js', array('jquery'), WPCDT_VERSION, true );
+
+		wp_register_script( 'wpcdt-admin-js', WPCDT_URL.'assets/js/wpcdt-admin-js.js', array('jquery'), WPCDT_VERSION, true );
+
 		// If page is plugin setting page then enqueue script
 		if( $post_type == WPCDT_POST_TYPE ) {
 
@@ -98,10 +102,12 @@ class Wpcdt_Script {
 			wp_enqueue_script( 'jquery-ui-slider' );
 
 			// Registring admin script
-			wp_register_script( 'wpcdt-ui-timepicker-addon-js', WPCDT_URL.'assets/js/wpcdt-ui-timepicker-addon.js', array('jquery'), WPCDT_VERSION, true );
 			wp_enqueue_script( 'wpcdt-ui-timepicker-addon-js' );
+			wp_enqueue_script( 'wpcdt-admin-js' );
+		}
 
-			wp_register_script( 'wpcdt-admin-js', WPCDT_URL.'assets/js/wpcdt-admin-js.js', array('jquery'), WPCDT_VERSION, true );
+		// How it work page
+		if( $hook == WPCDT_POST_TYPE.'_page_wpcdt-designs' ) {
 			wp_enqueue_script( 'wpcdt-admin-js' );
 		}
 	}

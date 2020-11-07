@@ -253,7 +253,7 @@ var cli_notify_msg=
 	},
 	success:function(message)
 	{
-		var suss_elm=jQuery('<div class="notify_msg" style="background:#1de026; border:solid 1px #2bcc1c;">'+message+'</div>');				
+		var suss_elm=jQuery('<div class="notify_msg" style="background:#00B200; border:solid 1px #00B200;">'+message+'</div>');				
 		this.setNotify(suss_elm);
 	},
 	setNotify:function(elm)

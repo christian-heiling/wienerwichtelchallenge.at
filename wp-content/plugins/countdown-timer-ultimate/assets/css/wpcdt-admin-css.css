@@ -9,7 +9,7 @@
 .wpcdt-post-sett-table .wp-picker-container{margin-top: 10px;}
 .wpcdt-post-sett-table td{vertical-align: top;}
 .wpcdt-notice{background-color: #f2dede; border: 1px solid #ebccd1; border-radius: 4px; color: #a94442; font-weight: 600; padding: 10px;}
-
+.wpos-copy-clipboard{-webkit-touch-callout: all; -webkit-user-select: all; -khtml-user-select: all; -moz-user-select: all; -ms-user-select: all; user-select: all;}
 .ui-helper-hidden {
 	display: none;
 }

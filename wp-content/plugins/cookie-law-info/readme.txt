@@ -4,7 +4,7 @@ Donate link: https://www.webtoffee.com/plugins/
 Tags: eu cookie law, GDPR, CCPA, cookie law, cookie consent, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 5.5
-Stable tag: 1.9.1
+Stable tag: 1.9.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,7 +28,9 @@ The GDPR Cookie Consent plugin will assist you in making your website GDPR compl
 
 - It also has a Cookie Audit module so you can easily show what cookies your site uses and display them neatly in a table on your Privacy & Cookies Policy page.
 
-- The plugin can be configured to have a CCPA 'Do Not Sell My Personal Information' control to the cookie notice. 
+- The plugin can be configured to have a CCPA 'Do Not Sell My Personal Information' control to the cookie notice.
+
+- Integrates seamlessly with Official Facebook Pixel, Smash Balloon Instagram Feed & Twitter Feed.
 
 
 = The plugin uses the following cookies = 
@@ -154,6 +156,15 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.9.3 =
+
+* Fix: Editors unable to access the dashboard due to recent security update
+
+= 1.9.2 =
+
+* Improvement: Option to change the title for necessary and non-necessary categories
+* Improvement: Added support for Official Facebook Pixel, Smash Balloon Instagram Feed & Twitter Feed plugins.
 
 = 1.9.1 =
 
@@ -439,6 +450,6 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Upgrade Notice ==
 
-= 1.9.1 =
+= 1.9.3 =
 
-* Fix - Conflict with the Divi page builder
+* Fix: Editors unable to access the dashboard due to recent security update

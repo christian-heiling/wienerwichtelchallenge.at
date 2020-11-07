@@ -40,7 +40,7 @@
                 </div>
             
                 <div class="wp-block-column">
-                    <h3>Wir werden unterstützt von</h3>
+                    <h3><?php echo __('Our supporters', 'app'); ?></h3>
 
                     <ul>
                     <?php 
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="wp-block-column">
-                    <h3>Wir unterstützen</h3>
+                    <h3><?php echo __('We support', 'app'); ?></h3>
 
                     <ul>
                     <?php 

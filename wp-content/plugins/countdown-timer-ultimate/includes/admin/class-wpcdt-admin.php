@@ -42,11 +42,21 @@ class Wpcdt_Admin {
 	 */
 	function wpcdt_register_menu() {
 
+		// How It Work Page
+		add_submenu_page( 'edit.php?post_type='.WPCDT_POST_TYPE, __('How it works - Countdown Timer Ultimate', 'countdown-timer-ultimate'), __('How It Works', 'countdown-timer-ultimate'), 'manage_options', 'wpcdt-designs', array($this, 'wpcdt_designs_page') );
+
 		// Premium Feature Page
 		add_submenu_page( 'edit.php?post_type='.WPCDT_POST_TYPE, __('Upgrade to PRO - Countdown Timer Ultimate', 'countdown-timer-ultimate'), '<span style="color:#2ECC71">'.__('Upgrade to PRO', 'countdown-timer-ultimate').'</span>', 'manage_options', 'wpcdt-premium', array($this, 'wpcdt_premium_page') );
+	}
 
-		// Hire Us Page
-		add_submenu_page( 'edit.php?post_type='.WPCDT_POST_TYPE, __('Hire Us', 'countdown-timer-ultimate'), '<span style="color:#2ECC71">'.__('Hire Us', 'countdown-timer-ultimate').'</span>', 'manage_options', 'wpcdt-hireus', array($this, 'wpcdt_hireus_page') );		
+	/**
+	 * How it work Page HTML
+	 * 
+	 * @package Countdown Timer Ultimate
+	 * @since 1.0.0
+	 */
+	function wpcdt_designs_page() {
+		include_once( WPCDT_DIR . '/includes/admin/wpcdt-how-it-work.php' );
 	}
 
 	/**
@@ -57,16 +67,6 @@ class Wpcdt_Admin {
 	 */
 	function wpcdt_premium_page() {
 		include_once( WPCDT_DIR . '/includes/admin/settings/premium.php' );
-	}
-
-	/**
-	 * Hire Us Page Html
-	 * 
-	 * @package Countdown Timer Ultimate
-	 * @since 1.1.4
-	 */
-	function wpcdt_hireus_page() {
-		include_once( WPCDT_DIR . '/includes/admin/settings/hire-us.php' );
 	}
 
 	/**
@@ -195,7 +195,7 @@ class Wpcdt_Admin {
 		switch ($column) {
 			case 'wpcdt_shortcode':
 
-				echo '<div class="wpcdt-shortcode-preview">[wpcdt-countdown id="'.$post_id.'"]</div> <br/>';
+				echo '<div class="wpos-copy-clipboard wpcdt-shortcode-preview">[wpcdt-countdown id="'.$post_id.'"]</div> <br/>';
 				break;
 		}
 	}

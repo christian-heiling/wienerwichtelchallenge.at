@@ -6,132 +6,13 @@
  * @since 1.1.2
  */
 
-// Exit if accessed directly
-if ( !defined( 'ABSPATH' ) ) exit;
-
-// Action to add menu
-add_action('admin_menu', 'wpcdt_register_design_page');
-
-/**
- * Register plugin design page in admin menu
- * 
- * @package Countdown Timer Ultimate
- * @since 1.1.2
- */
-function wpcdt_register_design_page() {
-	add_submenu_page( 'edit.php?post_type='.WPCDT_POST_TYPE, __('How it works - Countdown Timer Ultimate', 'countdown-timer-ultimate'), __('How It Works', 'countdown-timer-ultimate'), 'manage_options', 'wpcdt-designs', 'wpcdt_designs_page' );
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly
 }
-
-/**
- * Function to display plugin design HTML
- * 
- * @package Countdown Timer Ultimate
- * @since 1.1.2
- */
-function wpcdt_designs_page() {
-
-	$wpos_feed_tabs = wpcdt_help_tabs();
-	$active_tab 	= isset($_GET['tab']) ? $_GET['tab'] : 'how-it-work';
 ?>
-	<div class="wrap wpcdt-wrap">
 
-		<h2 class="nav-tab-wrapper">
-			<?php
-			foreach ($wpos_feed_tabs as $tab_key => $tab_val) {
-				$tab_name	= $tab_val['name'];
-				$active_cls = ($tab_key == $active_tab) ? 'nav-tab-active' : '';
-				$tab_link 	= add_query_arg( array( 'post_type' => WPCDT_POST_TYPE, 'page' => 'wpcdt-designs', 'tab' => $tab_key), admin_url('edit.php') );
-			?>
-
-			<a class="nav-tab <?php echo $active_cls; ?>" href="<?php echo $tab_link; ?>"><?php echo $tab_name; ?></a>
-
-			<?php } ?>
-		</h2>
-
-		<div class="wpcdt-tab-cnt-wrp">
-		<?php
-			if( isset($active_tab) && $active_tab == 'how-it-work' ) {
-				wpcdt_howitwork_page();
-			}
-			else if( isset($active_tab) && $active_tab == 'plugins-feed' ) {
-				echo wpcdt_get_plugin_design( 'plugins-feed' );
-			}
-		?>
-		</div><!-- end .wpcdt-tab-cnt-wrp -->
-
-	</div><!-- end .wpcdt-wrap -->
-
-<?php
-}
-
-/**
- * Gets the plugin design part feed
- *
- * @package Countdown Timer Ultimate
- * @since 1.1.2
- */
-function wpcdt_get_plugin_design( $feed_type = '' ) {
-
-	$active_tab = isset($_GET['tab']) ? $_GET['tab'] : '';
-
-	// If tab is not set then return
-	if( empty($active_tab) ) {
-		return false;
-	}
-
-	// Taking some variables
-	$wpos_feed_tabs = wpcdt_help_tabs();
-	$transient_key 	= isset($wpos_feed_tabs[$active_tab]['transient_key']) 	? $wpos_feed_tabs[$active_tab]['transient_key'] 	: 'wpcdt_' . $active_tab;
-	$url 			= isset($wpos_feed_tabs[$active_tab]['url']) 			? $wpos_feed_tabs[$active_tab]['url'] 				: '';
-	$transient_time = isset($wpos_feed_tabs[$active_tab]['transient_time']) ? $wpos_feed_tabs[$active_tab]['transient_time'] 	: 172800;
-	$cache 			= get_transient( $transient_key );
-
-	if ( false === $cache ) {
-
-		$feed 			= wp_remote_get( esc_url_raw( $url ), array( 'timeout' => 120, 'sslverify' => false ) );
-		$response_code 	= wp_remote_retrieve_response_code( $feed );
-
-		if ( ! is_wp_error( $feed ) && $response_code == 200 ) {
-			if ( isset( $feed['body'] ) && strlen( $feed['body'] ) > 0 ) {
-				$cache = wp_remote_retrieve_body( $feed );
-				set_transient( $transient_key, $cache, $transient_time );
-			}
-		} else {
-			$cache = '<div class="error"><p>' . __( 'There was an error retrieving the data from the server. Please try again later.', 'countdown-timer-ultimate' ) . '</div>';
-		}
-	}
-	return $cache;	
-}
-
-/**
- * Function to get plugin feed tabs
- *
- * @package Countdown Timer Ultimate
- * @since 1.1.2
- */
-function wpcdt_help_tabs() {
-	$wpos_feed_tabs = array(
-						'how-it-work' 	=> array(
-													'name' => __('How It Works', 'countdown-timer-ultimate'),
-												),
-						'plugins-feed' 	=> array(
-													'name' 				=> __('Our Plugins', 'countdown-timer-ultimate'),
-													'url'				=> 'http://wponlinesupport.com/plugin-data-api/plugins-data.php',
-													'transient_key'		=> 'wpos_plugins_feed',
-													'transient_time'	=> 172800
-												),
-					);
-	return $wpos_feed_tabs;
-}
-
-/**
- * Function to get 'How It Works' HTML
- *
- * @package Countdown Timer Ultimate
- * @since 1.1.2
- */
-function wpcdt_howitwork_page() { ?>
-
+<div class="wrap wpcdt-wrap">
+<h2><?php _e( 'How It Works', 'countdown-timer-ultimate' ); ?></h2>
 	<style type="text/css">
 		.wpos-pro-box .hndle{background-color:#0073AA; color:#fff;}
 		.wpos-pro-box .postbox{background:#dbf0fa none repeat scroll 0 0; border:1px solid #0073aa; color:#191e23;}
@@ -139,6 +20,7 @@ function wpcdt_howitwork_page() { ?>
 		.wpcdt-wrap .wpos-button-full{display:block; text-align:center; box-shadow:none; border-radius:0;}
 		.wpcdt-shortcode-preview{background-color: #e7e7e7; font-weight: bold; padding: 2px 5px; display: inline-block; margin:0 0 2px 0;}
 		.upgrade-to-pro{font-size:18px; text-align:center; margin-bottom:15px;}
+		.wpos-copy-clipboard{-webkit-touch-callout: all; -webkit-user-select: all; -khtml-user-select: all; -moz-user-select: all; -ms-user-select: all; user-select: all;}
 	</style>
 
 	<div class="post-box-container">
@@ -150,10 +32,11 @@ function wpcdt_howitwork_page() { ?>
 					<div class="metabox-holder">
 						<div class="meta-box-sortables ui-sortable">
 							<div class="postbox">
-								<h3 class="hndle">
-									<span><?php _e( 'How It Works - Display and shortcode', 'countdown-timer-ultimate' ); ?></span>
-								</h3>
-
+								<div class="postbox-header">
+									<h2 class="hndle">
+										<span><?php _e( 'How It Works - Display and shortcode', 'countdown-timer-ultimate' ); ?></span>
+									</h2>
+								</div>
 								<div class="inside">
 									<table class="form-table">
 										<tbody>
@@ -175,14 +58,24 @@ function wpcdt_howitwork_page() { ?>
 													<label><?php _e('Plugin Shortcodes', 'countdown-timer-ultimate'); ?></label>
 												</th>
 												<td>
-													<span class="wpcdt-shortcode-preview">[wpcdt-countdown id="1"]</span> – <?php _e('Countdown Timer', 'countdown-timer-ultimate'); ?> <br/>
+													<span class="wpos-copy-clipboard wpcdt-shortcode-preview">[wpcdt-countdown id="1"]</span> – <?php _e('Countdown Timer', 'countdown-timer-ultimate'); ?> <br/>
 												</td>
 											</tr>
+										</tbody>
+									</table>
+								</div><!-- .inside -->
+							</div><!-- #general -->
 
+							<div class="postbox">
+								<div class="postbox-header">
+									<h2 class="hndle">
+										<span><?php _e( 'Need Support?', 'countdown-timer-ultimate' ); ?></span>
+									</h2>
+								</div>
+								<div class="inside">
+									<table class="form-table">
+										<tbody>											
 											<tr>
-												<th>
-													<label><?php _e('Need Support?', 'countdown-timer-ultimate'); ?></label>
-												</th>
 												<td>
 													<p><?php _e('Check plugin document for shortcode parameters and demo for designs.', 'countdown-timer-ultimate'); ?></p><br/>
 													<a class="button button-primary" href="https://docs.wponlinesupport.com/countdown-timer-ultimate/" target="_blank"><?php _e('Documentation', 'countdown-timer-ultimate'); ?></a>
@@ -191,6 +84,18 @@ function wpcdt_howitwork_page() { ?>
 											</tr>
 										</tbody>
 									</table>
+								</div><!-- .inside -->
+							</div><!-- #general -->
+
+							<!-- Help to improve this plugin! -->
+							<div class="postbox">
+								<div class="postbox-header">
+									<h2 class="hndle">
+										<span><?php _e( 'Help to improve this plugin!', 'countdown-timer-ultimate' ); ?></span>
+									</h2>
+								</div>
+								<div class="inside">
+									<p><?php _e('Enjoyed this plugin? You can help by rate this plugin', 'countdown-timer-ultimate'); ?> <a href="https://wordpress.org/support/plugin/countdown-timer-ultimate/reviews/" target="_blank">5 stars!</a></p>
 								</div><!-- .inside -->
 							</div><!-- #general -->
 						</div><!-- .meta-box-sortables ui-sortable -->
@@ -221,24 +126,10 @@ function wpcdt_howitwork_page() { ?>
 										<li>Fully responsive</li>
 										<li>100% Multi language</li>
 									</ul>
-									<div class="upgrade-to-pro">Gain access to <strong>Album and Image Gallery Plus Lightbox</strong> included in <br /><strong>Essential Plugin Bundle</div>
+									<div class="upgrade-to-pro">Gain access to <strong>Countdown Timer Ultimate</strong> included in <br /><strong>Essential Plugin Bundle</div>
 									<a class="button button-primary wpos-button-full" href="https://www.wponlinesupport.com/wp-plugin/countdown-timer-ultimate/?ref=WposPratik&utm_source=WP&utm_medium=Countdown-Timer&utm_campaign=Upgrade-PRO" target="_blank"><?php _e('Go Premium ', 'countdown-timer-ultimate'); ?></a>
 									<p><a class="button button-primary wpos-button-full" href="https://demo.wponlinesupport.com/prodemo/countdown-timer-ultimate-pro/circle-countdown-timer/" target="_blank"><?php _e('View PRO Demo ', 'countdown-timer-ultimate'); ?></a>	</p>
 								</div><!-- .inside -->
-							</div><!-- #general -->
-						</div><!-- .meta-box-sortables ui-sortable -->
-					</div><!-- .metabox-holder -->
-
-					<!-- Help to improve this plugin! -->
-					<div class="metabox-holder">
-						<div class="meta-box-sortables ui-sortable">
-							<div class="postbox">
-									<h3 class="hndle">
-										<span><?php _e( 'Help to improve this plugin!', 'countdown-timer-ultimate' ); ?></span>
-									</h3>
-									<div class="inside">
-										<p><?php _e('Enjoyed this plugin? You can help by rate this plugin', 'countdown-timer-ultimate'); ?> <a href="https://wordpress.org/support/plugin/countdown-timer-ultimate/reviews/" target="_blank">5 stars!</a></p>
-									</div><!-- .inside -->
 							</div><!-- #general -->
 						</div><!-- .meta-box-sortables ui-sortable -->
 					</div><!-- .metabox-holder -->
@@ -246,4 +137,4 @@ function wpcdt_howitwork_page() { ?>
 			</div><!-- #post-body -->
 		</div><!-- #poststuff -->
 	</div><!-- #post-box-container -->
-<?php }
+</div>

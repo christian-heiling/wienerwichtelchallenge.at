@@ -6,7 +6,7 @@
  * @since 1.1.4
  */
 
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 ?>
@@ -123,11 +123,6 @@ if ( !defined( 'ABSPATH' ) ) {
 				<td><i class="dashicons dashicons-no-alt"> </i></td>
 				<td><i class="dashicons dashicons-yes"> </i></td>
 			</tr>
-			<tr>
-	    		<th>Visual Composer / WPBakery Page Builder Supports <span>Use this plugin with Visual Composer easily</span></th>
-	    		<td><i class="dashicons dashicons-no-alt"></i></td>
-	    		<td><i class="dashicons dashicons-yes"></i></td>
-	    	</tr>
 	    	<tr>
 	    		<th>Custom CSS for plugin <span>Plugin related CSS add in settings menu</span></th>
 	    		<td><i class="dashicons dashicons-no-alt"></i></td>

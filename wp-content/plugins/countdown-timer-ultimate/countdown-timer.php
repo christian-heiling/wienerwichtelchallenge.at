@@ -6,7 +6,7 @@
  * Author: WP OnlineSupport
  * Text Domain: countdown-timer-ultimate
  * Domain Path: /languages/
- * Version: 1.2.5
+ * Version: 1.3
  * Author URI: https://www.wponlinesupport.com/
  *
  * @package WordPress
@@ -24,22 +24,22 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if( !defined( 'WPCDT_VERSION' ) ) {
-	define( 'WPCDT_VERSION', '1.2.5' ); // Version of plugin
+if( ! defined( 'WPCDT_VERSION' ) ) {
+	define( 'WPCDT_VERSION', '1.3' ); // Version of plugin
 }
-if( !defined( 'WPCDT_DIR' ) ) {
+if( ! defined( 'WPCDT_DIR' ) ) {
 	define( 'WPCDT_DIR', dirname( __FILE__ ) ); // Plugin dir
 }
-if( !defined( 'WPCDT_URL' ) ) {
+if( ! defined( 'WPCDT_URL' ) ) {
 	define( 'WPCDT_URL', plugin_dir_url( __FILE__ ) ); // Plugin url
 }
-if( !defined( 'WPCDT_PLUGIN_BASENAME' ) ) {
+if( ! defined( 'WPCDT_PLUGIN_BASENAME' ) ) {
 	define( 'WPCDT_PLUGIN_BASENAME', plugin_basename( __FILE__ ) ); // plugin base name
 }
-if( !defined( 'WPCDT_POST_TYPE' ) ) {
+if( ! defined( 'WPCDT_POST_TYPE' ) ) {
 	define( 'WPCDT_POST_TYPE', 'wpcdt_countdown' ); // Plugin post type
 }
-if( !defined( 'WPCDT_META_PREFIX' ) ) {
+if( ! defined( 'WPCDT_META_PREFIX' ) ) {
 	define( 'WPCDT_META_PREFIX', '_wpcdt_' ); // Plugin metabox prefix
 }
 
@@ -189,10 +189,17 @@ require_once( WPCDT_DIR . '/includes/class-wpcdt-script.php' );
 // Shortcode File
 require_once( WPCDT_DIR . '/includes/shortcode/wpcdt-shortcode.php' );
 
-// How it work file, Load admin files
-if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
-	require_once( WPCDT_DIR . '/includes/admin/wpcdt-how-it-work.php' );
+/* Recommended Plugins Starts */
+if ( is_admin() ) {
+	require_once( WPCDT_DIR . '/wpos-plugins/wpos-recommendation.php' );
+
+	wpos_espbw_init_module( array(
+							'prefix'	=> 'wpcdt',
+							'menu'		=> 'edit.php?post_type='.WPCDT_POST_TYPE,
+							'position'	=> 2,
+						));
 }
+/* Recommended Plugins Ends */
 
 /* Plugin Wpos Analytics Data Starts */
 function wpos_analytics_anl31_load() {

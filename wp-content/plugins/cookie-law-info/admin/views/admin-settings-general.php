@@ -14,7 +14,7 @@ if (!defined('WPINC')) {
 			<div class="wt-cli-section wt-cli-section-general-settings">
 				<table class="form-table">
 					<tr valign="top">
-						<th scope="row"><label for="is_on_field"><?php _e('Enable cookie law', 'cookie-law-info'); ?></label></th>
+						<th scope="row"><label for="is_on_field"><?php _e('Enable cookie bar', 'cookie-law-info'); ?></label></th>
 						<td>
 							<input type="radio" id="is_on_field_yes" name="is_on_field" class="styled cli_bar_on" value="true" <?php echo ($the_options['is_on'] == true) ? ' checked="checked"' : ''; ?> /><?php _e('On', 'cookie-law-info'); ?>
 							<input type="radio" id="is_on_field_no" name="is_on_field" class="styled" value="false" <?php echo ($the_options['is_on'] == false) ? ' checked="checked" ' : ''; ?> /><?php _e('Off', 'cookie-law-info'); ?>

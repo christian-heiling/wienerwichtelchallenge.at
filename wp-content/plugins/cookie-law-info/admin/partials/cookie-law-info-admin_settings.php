@@ -36,7 +36,7 @@ $all_pages=get_pages($args_for_get_pages);
                 <label><img id="cli-plugin-status-icon" src="<?php echo $cli_img_path;?>tick.png" /></label>
             </th>
             <td style="padding-left: 10px;">
-                <?php _e('Your Cookie Law Info bar is switched on', 'cookie-law-info'); ?>
+                <?php _e('Cookie bar is currently active', 'cookie-law-info'); ?>
             </td>
         </tr>
         <tr valign="middle" class="cli_bar_off" style="<?php echo $the_options['is_on'] == true ? 'display:none;' : '';?>">
@@ -44,7 +44,7 @@ $all_pages=get_pages($args_for_get_pages);
                 <label><img id="cli-plugin-status-icon" src="<?php echo $cli_img_path;?>cross.png" /></label>
             </th>
             <td style="padding-left: 10px;">
-                <?php _e('Your Cookie Law Info bar is switched off', 'cookie-law-info'); ?>
+                <?php _e('Cookie bar is currently inactive', 'cookie-law-info'); ?>
             </td>
         </tr>
     </table>
