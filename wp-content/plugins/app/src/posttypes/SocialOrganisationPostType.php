@@ -441,6 +441,7 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoExcerptMeta() {
+
         $logo = array_pop(rwmb_meta('logo', array('limit' => 1)));
         ?>
         <figure class="social-organisation-logo wp-block-image is-resized overflow">
@@ -452,10 +453,19 @@ class SocialOrganisationPostType extends AbstractPostType {
                  width="1920"
                  height="516">
         </figure>
+        
         <?php
-        $this->outputMetaBoxContentWithSpans(array(
-            'carrier', 'field_of_action', 'city', 'zip'
-        ));
+        echo '<span>';
+        if (!empty(trim(rwmb_meta('zip')))) {
+            echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
+        } else {
+            echo rwmb_meta('postal_zip') . ' ' . rwmb_meta('postal_city');
+        }
+        echo '</span>';
+        
+        echo '<span>' . __('Carrier', 'app') . ': ';
+        $this->outputField('carrier', 'text');
+        echo '</span>';
     }
 
     public function echoExcerptContent() {

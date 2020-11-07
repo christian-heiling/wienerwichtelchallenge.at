@@ -228,7 +228,7 @@ abstract class AbstractPostType {
         }
     }
 
-    private function outputField($id, $type) {
+    public function outputField($id, $type) {
         if ($type == 'datetime') {
             $date = new \DateTime('@' . rwmb_meta($id), get_option('timezone_string'));
             echo date_i18n(get_option('date_format') . ' ' . get_option('time_format'), $date->timestamp);

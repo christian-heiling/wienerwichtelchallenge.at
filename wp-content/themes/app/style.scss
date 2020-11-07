@@ -238,7 +238,7 @@ Text Domain:  app
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     h1 {
         padding-top: 0.5rem;
         padding-bottom: 0;
@@ -357,16 +357,16 @@ ul.wish-region-menu {
             color: #fff;
             padding: 16px;
         }
-        
+
         a:hover {
             color: #fff;
         }
-        
+
         a:visited {
             color: #fff;
         }
     }
-    
+
     li.is-active {
         background-color: $color__background-button-hover;
     }
@@ -385,13 +385,29 @@ ul.wish-region-menu {
 }
 
 .blur {
-   color: transparent !important;
-   text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
-   font-weight: normal !important;
+    color: transparent !important;
+    text-shadow: 0 0 5px rgba(0,0,0,0.5) !important;
+    font-weight: normal !important;
 }
 
 .nav-links {
     .current {
         font-weight: bold;
+    }
+}
+
+/* format social organization logo */
+
+.social-organisation-logo {
+
+    width: 100%;
+    height: 250px;
+        
+    img {
+        object-fit: contain;
+        width: 100%;
+        height: inherit;
+        object-position: 50% 50%;
+        
     }
 }
