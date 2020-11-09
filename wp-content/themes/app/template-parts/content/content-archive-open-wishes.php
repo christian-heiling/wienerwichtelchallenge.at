@@ -42,18 +42,27 @@ if (have_posts()) {
         if ($i % $rows == 0) {
             echo '</div>';
         }
-        
+
         // every 12th wish an add
         if ($i % 12 == 0) {
             if (empty($ads)) {
                 continue;
             }
-            
+
             //select add
             $ad = $ads[array_rand($ads)];
-            
+
             // echo ad
             echo '<div style="display: flex">' . do_shortcode($ad) . '<br></div>';
+        }
+    }
+
+
+    while ($i % $rows !== 0) {
+        $i++;
+        echo '<div class="wp-block-column">&nbsp;</div>';
+        if ($i % $rows == 0) {
+            echo '</div>';
         }
     }
 

@@ -26,7 +26,7 @@ $o = \app\App::getInstance()->getOptions();
             if ($o->get('wish_list_status') == 'done') {
                 echo '<h1>' . rwmb_meta('summary') . '</h1>';
             } else {
-                echo '<a href="' . get_permalink() . '><h1><' . rwmb_meta('summary') . '</h1></a>';
+                echo '<a href="' . get_permalink() . '"><h1><' . rwmb_meta('summary') . '</h1></a>';
             }
         ?>
         

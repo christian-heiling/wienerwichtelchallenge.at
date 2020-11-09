@@ -4,6 +4,35 @@ namespace app\posttypes;
 
 class WishPostType extends AbstractPostType {
 
+    const STATE_OPEN = 'offen';
+    const STATE_IN_PROGRESS = 'in_arbeit';
+    const STATE_FULFILLED = 'erfuellt';
+    const STATE_DONE = 'abgeschlossen';
+    const TRANSITION_ASSIGN = 'vergeben';
+    const TRANSITION_FULFILL = 'erfuellen';
+    const TRANSITION_PUT_BACK = 'zuruecklegen';
+
+    public static function getStates() {
+        return array(
+            self::STATE_OPEN,
+            self::STATE_IN_PROGRESS,
+            self::STATE_FULFILLED,
+            self::STATE_DONE
+        );
+    }
+
+    public static function getTransitionsByState() {
+        return array(
+            self::STATE_OPEN => array(
+                self::TRANSITION_ASSIGN
+            ),
+            self::STATE_IN_PROGRESS => array(
+                self::TRANSITION_FULFILL,
+                self::TRANSITION_PUT_BACK
+            )
+        );
+    }
+
     public function registerHooks() {
         parent::registerHooks();
 
@@ -59,7 +88,8 @@ Folgende Kürzel können verwendet werden für diese E-Mail:
 {{wish.last_wichtel_delivery_date}}
 {{wish.found_wichtel_date}}
 {{wish.social_organisation_id}}
-{{wish.vergeben.url}}
+{{wish.vergeben.postal.url}}
+{{wish.vergeben.personal.url}}
 {{wish.erfuellen.url}}
 {{wish.zuruecklegen.url}}
 {{organisation.url}}
@@ -315,8 +345,8 @@ MAILCONTENT;
 
         if ($wishListState == 'done') {
             $validStates = array(
-                $o->get('jira_state', 'erfuellt'),
-                $o->get('jira_state', 'abgeschlossen')
+                $o->get('jira_state', self::STATE_FULFILLED),
+                $o->get('jira_state', self::STATE_DONE)
             );
 
             $metaQuery = array(
@@ -329,7 +359,7 @@ MAILCONTENT;
             );
         } else {
             $validStates = array(
-                $o->get('jira_state', 'offen')
+                $o->get('jira_state', self::STATE_OPEN)
             );
 
             $metaQuery = array(
@@ -377,18 +407,38 @@ MAILCONTENT;
 
         $options = \app\App::getInstance()->getOptions();
 
+        if (get_current_user_id() == 0 && !isset($_GET['fl'])) {
+            header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
+            exit;
+        }
+
+        // is user logged in and fast login flag is set
+        // then login
+        if (get_current_user_id() == 0 && isset($_GET['fl'])) {
+            $mail = \app\App::getInstance()->decrypt($_GET['fl']);
+            $user = get_user_by('email', $mail);
+
+            // no user found -> send it to login
+            if (empty($user)) {
+                header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
+                exit;
+            }
+
+            // do fast login
+            wp_set_current_user($user->ID, $user->data->user_login);
+            wp_set_auth_cookie($user->ID);
+            do_action('wp_login', $user->data->user_login);
+            wp_safe_redirect($_SERVER["REQUEST_URI"]);
+            exit;
+        }
+
         // if wish is displayed ...
         if (get_post_type() == $this->getPostType() && is_single()) {
 
             // ... is not open
             // and not related to the user and not admin or editor
-            if (rwmb_meta('status_id') !== $options->get('jira_state', 'offen')) {
+            if (rwmb_meta('status_id') !== $options->get('jira_state', self::STATE_OPEN)) {
                 // 302 redirect it to the wish overview page
-
-                if (get_current_user_id() == 0) {
-                    header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
-                    exit;
-                }
 
                 if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
                     header('Location: ' . home_url('/' . $this->getSlug() . '/'));
@@ -473,14 +523,20 @@ MAILCONTENT;
     public function handleTransition() {
         $o = \app\App::getInstance()->getOptions();
 
-        // is a transition and user is logged in?
-        if (!isset($_GET['transition']) || get_current_user_id() == 0) {
+        // is a transition?
+        if (!isset($_GET['transition'])) {
+            return;
+        }
+
+        // is user logged in 
+        // then abort
+        if (get_current_user_id() == 0) {
             return;
         }
 
         // check if a transition is valid ...
         // if not vergeben then wichtel_id must be equal current user id
-        if ($_GET['transition'] !== 'vergeben' && rwmb_get_value('wichtel_id') != get_current_user_id()) {
+        if ($_GET['transition'] !== self::TRANSITION_ASSIGN && rwmb_get_value('wichtel_id') != get_current_user_id()) {
             return;
         }
 
@@ -493,7 +549,7 @@ MAILCONTENT;
             }
         }
 
-        if (!in_array($_GET['transition'], $this->getTransitions()[$status])) {
+        if (!in_array($_GET['transition'], $this->getTransitionsByState()[$status])) {
             return;
         }
 
@@ -502,7 +558,6 @@ MAILCONTENT;
         $transition_id = $o->get('jira_transition', $_GET['transition']);
         $single_wish_link = get_permalink();
 
-        // 11111111111
         // calculated related Comment
         $query = new \WP_Query(array(
             'posts_per_page' => -1,
@@ -520,41 +575,64 @@ MAILCONTENT;
         $wish = array_pop($posts);
 
         global $current_user;
+        $fields = array();
+        
+        /**
+         * @todo Remove me, only for testing
+         */
+        $_GET['delivery_type'] = 'personal';
 
         $comment = 'Transition';
-        if ($_GET['transition'] == 'vergeben') {
-            $comment = sprintf(__("Found a Wichtel!\n Wichtel %1 want to fulfill the wish %2 (%3) with the recipient identification %4"));
-                    
-                    "Wichtel gefunden!" . "\n"
-                    . 'Wichtel ' . $current_user->data->display_name . ' will '
-                    . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                    . '" besorgen.';
-        } elseif ($_GET['transition'] == 'erfuellen') {
-            $comment = sprintf(__("Present delivered!\n Wichtel %1 has delivered the present %2 (%3) with the recipient identification %4"));
-            
-            $comment = 'Geschenk abgegeben!' . "\n"
-                    . 'Wichtel ' . $current_user->data->display_name . ' hat angegeben'
-                    . ', dass er/sie das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                    . '" abgegeben hat.';
-        } elseif ($_GET['transition'] == 'zuruecklegen') {
-            $comment = sprintf(__("Wichtel %1 do not like to fulfill wish %2 (%3) with the recipient identification %4. Therefore we are looking for a new Wichtel for this wish."));
-            
-            $comment = 'Wunsch zurückgelegt!' . "\n"
-                    . 'Wichtel ' . $current_user->data->display_name . ' kann '
-                    . 'das Geschenk "' . rwmb_get_value('summary', [], $wish->ID)
-                    . '" (' . rwmb_get_value('key', [], $wish->ID) . ') mit der Empfängerkennung "' . rwmb_get_value('recipient')
-                    . '" doch nicht besorgen. Es wird ein neuer Wichtel gesucht.';
-            ;
+        
+        //prepare replace pattern
+        $replace_pattern = array(
+            'wichtel_name' => $current_user->data->display_name,
+            'wish_title' => rwmb_get_value('summary', [], $wish->ID),
+            'wish_key' => rwmb_get_value('key', [], $wish->ID),
+            'wish_recipient' => rwmb_get_value('recipient', [], $wish->ID)
+        );
+        
+        $search = array();
+        $replace = array();
+        
+        foreach($replace_pattern as $key => $value) {
+            $search[] = '%' . $key . '%';
+            $replace[] = $value;
         }
+        
+        if ($_GET['transition'] == self::TRANSITION_ASSIGN) {
+            $fields = array(
+                \app\JiraHandler::JIRA_FIELD_WICHTEL_ID => $current_user->data->ID,
+                \app\JiraHandler::JIRA_FIELD_WICHTEL_NAME => $current_user->data->display_name,
+                \app\JiraHandler::JIRA_FIELD_WICHTEL_MAIL => $current_user->data->user_email,
+                \app\JiraHandler::JIRA_FIELD_DELIVERY_TYPE => $_GET['delivery_type']
+            );
+
+            $comment = __("*Found a Wichtel!*\n\nWichtel %wichtel_name% want to fulfill the wish %wish_title% (%wish_key%).\nThe present is for %wish_recipient%.", 'app');
+            
+        } elseif ($_GET['transition'] == self::TRANSITION_FULFILL) {
+            $delivery_type = rwmb_get_value('delivery_type', [], $wish->ID);
+            
+            if ($delivery_type == 'personal') {
+                $comment = __("*Present delivered directly to the institution!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) directly to the institution.\nThe present is for %wish_recipient%\n\n(!) Please confirm.", 'app');
+            } elseif ($delivery_type == 'postal') {
+                $comment = __("*Present brought to the post office!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) to the post office. It should arrive in the next few days.\nThe present is for %wish_recipient%\n\n(!) Please confirm when the present arrive.", 'app');
+            } else {
+                $comment = __("*Present delivered!*\n\nWichtel %wichtel_name% has indicated that he/she the present %wish_title% (%wish_key%).\nThe present is for %wish_recipient%\n\n(!) Please confirm.", 'app');
+            }
+        } elseif ($_GET['transition'] == self::TRANSITION_PUT_BACK) {
+            $comment = __(":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n\n It was for %wish_recipient%.\nTherefore we are looking for a new Wichtel.", 'app');
+        }
+        
+        $comment = str_replace($search, $replace, $comment);
 
         // do transition        
         \app\App::getInstance()->getJiraHandler()->doTransition(
-                rwmb_get_value('key'), $transition_id, $comment
+                rwmb_get_value('key', [], $wish->ID), $transition_id, $fields, $comment
         );
 
-        sleep(2);
+        sleep(0.5);
+        
         // afterwards redirect to the single wish page
         header('Location: ' . $single_wish_link);
         exit;
@@ -591,27 +669,6 @@ MAILCONTENT;
                 'featherlight', plugin_dir_url(dirname(dirname(__FILE__))) . 'featherlight/featherlight.js', 'jquery', '1.17.1', true
         );
         wp_enqueue_script('featherlight');
-    }
-
-    public function getStates() {
-        return array(
-            'offen',
-            'in_arbeit',
-            'erfuellt',
-            'abgeschlossen'
-        );
-    }
-
-    public function getTransitions() {
-        return array(
-            'offen' => array(
-                'vergeben'
-            ),
-            'in_arbeit' => array(
-                'erfuellen',
-                'zuruecklegen'
-            )
-        );
     }
 
     public function getLabel() {
@@ -739,6 +796,11 @@ MAILCONTENT;
                     'id' => 'priority',
                     'name' => 'priority',
                     'type' => 'text'
+                ],
+                [
+                    'id' => 'delivery_type',
+                    'name' => 'delivery_type',
+                    'type' => 'text'
                 ]
         ));
         return $meta_boxes;
@@ -782,9 +844,15 @@ MAILCONTENT;
                 $tokens['wish.' . $key] = trim(strip_tags($value));
             }
         }
-        foreach ($this->getTransitions() as $s) {
+        foreach ($this->getTransitionsByState() as $s) {
             foreach ($s as $trans_name) {
-                $tokens['wish.' . $trans_name . '.url'] = get_permalink($w) . '?transition=' . $trans_name;
+                $url = get_permalink($w) . '?transition=' . $trans_name . '&fl=' . \app\App::getInstance()->encrypt($wMeta['wichtel_mail']);
+                if ($trans_name == self::TRANSITION_ASSIGN) {
+                    $tokens['wish.' . $trans_name . 'postal.url'] = $url . '&deliveryType=postal';
+                    $tokens['wish.' . $trans_name . 'personal.url'] = $url . '&deliverType=personal';
+                } else {
+                    $tokens['wish.' . $trans_name . '.url'] = $url;
+                }
             }
         }
 
@@ -873,17 +941,16 @@ MAILCONTENT;
         }
 
         // figure out which transitions for this status
-        if (!array_key_exists($status, $this->getTransitions())) {
+        if (!array_key_exists($status, $this->getTransitionsByState())) {
             return;
         }
 
-        $transitions = $this->getTransitions()[$status];
+        $transitions = $this->getTransitionsByState()[$status];
 
-        if (is_archive() && $status == 'offen') {
+        if (is_archive() && $status == self::STATE_OPEN) {
             echo '<div class="wish-buttons">';
             echo '<div class="wp-block-button wish-button-primary">';
             echo '<a class="wp-block-button__link" href="' . get_permalink() . '">'
-
             . __('Read more', 'app')
             . '</a>';
             echo '</div>';
@@ -927,7 +994,6 @@ MAILCONTENT;
             $popup_html = str_replace('"', "'", $popup_html);
 
             if ($key == 0) {
-
                 $class = 'wish-button-primary';
             } else {
                 $class = 'wish-button-secondary';
@@ -939,7 +1005,7 @@ MAILCONTENT;
         }
 
 
-        if (is_archive() && $status !== 'offen') {
+        if (is_archive() && $status !== self::STATE_OPEN) {
             echo '<a class="wish-detail-link" href="' . get_permalink() . '">'
             . __('alle Details sehen', 'app')
             . '</a>';

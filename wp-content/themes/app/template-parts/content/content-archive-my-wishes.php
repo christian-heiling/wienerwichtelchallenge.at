@@ -67,6 +67,14 @@ while ($query->have_posts()) :
     }
 endwhile;
 
+while ($i % $rows !== 0) {
+    $i++;
+    echo '<div class="wp-block-column">&nbsp;</div>';
+    if ($i % $rows == 0) {
+        echo '</div>';
+    }
+}
+
 if ($i % $rows !== 0) {
     echo '</div>';
 }

@@ -2,7 +2,29 @@
 
 namespace app;
 
+use app\posttypes\WishPostType;
+
 class JiraHandler {
+
+    const JIRA_FIELD_KEY = 'key';
+    const JIRA_FIELD_PROJECT = 'project';
+    const JIRA_FIELD_STATUS = 'status';
+    const JIRA_FIELD_LINK_TO_JIRA = 'customfield_10109';
+    const JIRA_FIELD_WICHTEL_ID = 'customfield_10116';
+    const JIRA_FIELD_WICHTEL_NAME = 'customfield_10142';
+    const JIRA_FIELD_WICHTEL_MAIL = 'customfield_10143';
+    const JIRA_FIELD_PRICE = 'customfield_10117';
+    const JIRA_FIELD_SUMMARY = 'summary';
+    const JIRA_FIELD_DESCRIPTION = 'description';
+    const JIRA_FIELD_REPORTER = 'reporter';
+    const JIRA_FIELD_RECIPIENT = 'customfield_10120';
+    const JIRA_FIELD_ADDRESS = 'customfield_10121';
+    const JIRA_FIELD_ZIP = 'customfield_10122';
+    const JIRA_FIELD_END_DATE = 'duedate';
+    const JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE = 'customfield_10118';
+    const JIRA_FIELD_FOUND_WICHTEL_DATE = 'customfield_10119';
+    const JIRA_FIELD_COMPONENTS = 'components';
+    const JIRA_FIELD_DELIVERY_TYPE = 'customfield_10603';
 
     private $domain;
     private $username;
@@ -35,30 +57,31 @@ class JiraHandler {
             'startAt' => $startAt,
             'maxResults' => $maxResults,
             'fields' => array(
-                'project',
-                'status',
-                'customfield_10109',
-                'customfield_10116',
-                'customfield_10142',
-                'customfield_10143',
-                'customfield_10117',
-                'summary',
-                'description',
-                'customfield_10120',
-                'customfield_10121',
-                'customfield_10122',
-                'customfield_10118',
-                'customfield_10119',
-                'duedate',
-                'components',
-                'reporter'
+                self::JIRA_FIELD_PROJECT,
+                self::JIRA_FIELD_STATUS,
+                self::JIRA_FIELD_LINK_TO_JIRA,
+                self::JIRA_FIELD_WICHTEL_ID,
+                self::JIRA_FIELD_WICHTEL_NAME,
+                self::JIRA_FIELD_WICHTEL_MAIL,
+                self::JIRA_FIELD_PRICE,
+                self::JIRA_FIELD_SUMMARY,
+                self::JIRA_FIELD_DESCRIPTION,
+                self::JIRA_FIELD_REPORTER,
+                self::JIRA_FIELD_RECIPIENT,
+                self::JIRA_FIELD_ADDRESS,
+                self::JIRA_FIELD_ZIP,
+                self::JIRA_FIELD_END_DATE,
+                self::JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE,
+                self::JIRA_FIELD_FOUND_WICHTEL_DATE,
+                self::JIRA_FIELD_COMPONENTS,
+                self::JIRA_FIELD_DELIVERY_TYPE
             )
         );
 
         return $this->doPost('/rest/api/2/search', json_encode($post_params));
     }
 
-    public function doTransition($issue_id, $transition_id, $comment = 'Transition') {
+    public function doTransition($issue_id, $transition_id, $updateFields = [], $comment = 'Transition') {        
         $postData = array(
             'update' => array(
                 'comment' => array(
@@ -76,16 +99,6 @@ class JiraHandler {
 
         if (!empty($updateFields)) {
             $postData['fields'] = $updateFields;
-        }
-
-        if ($transition_id == App::getInstance()->getOptions()->get('jira_transition', 'vergeben')) {
-            global $current_user;
-
-            $postData['fields'] = array(
-                'customfield_10116' => $current_user->data->ID,
-                'customfield_10142' => $current_user->data->display_name,
-                'customfield_10143' => $current_user->data->user_email
-            );
         }
 
         $postData = json_encode($postData);
@@ -285,12 +298,16 @@ class JiraHandler {
         }
 
         // create post
-        if (in_array($f->status->id, array(
-                    $options->get('jira_state', 'offen'),
-                    $options->get('jira_state', 'in_arbeit'),
-                    $options->get('jira_state', 'erfuellt'),
-                    $options->get('jira_state', 'abgeschlossen'),
-                ))) {
+        $states = WishPostType::getStates();
+        $state_ids = array();
+
+        foreach ($states as $state) {
+            $state_ids[] = $options->get('jira_state', $state);
+        }
+
+        // publish all known states
+        // unknown states ignore e.g. requested wishes, faulty wishes
+        if (in_array($f->{self::JIRA_FIELD_STATUS}->id, $state_ids)) {
             $post_state = 'publish';
         } else {
             return;
@@ -304,30 +321,28 @@ class JiraHandler {
                 ]
         );
 
-        // add metas
-
+        // add metas 
         $metas = [
-            'key' => $i->key,
-            'status_id' => $f->status->id,
-            'status_name' => $f->status->name,
-            'link_to_jira' => $f->customfield_10109->_links->web,
-            'wichtel_id' => $f->customfield_10116,
-            'wichtel_name' => $f->customfield_10142,
-            'wichtel_mail' => $f->customfield_10143,
-            'price' => $f->customfield_10117->value,
-            'summary' => $f->summary,
-            'description' => $f->description,
-            'reporter_mail' => $f->reporter->name,
-            'recipient' => $f->customfield_10120,
-            'address' => $f->customfield_10121,
-            'zip' => $f->customfield_10122,
-            'end_date' => substr($f->duedate, 0, 10),
-            'last_wichtel_delivery_date' => substr($f->customfield_10118, 0, 10),
-            'found_wichtel_date' => substr($f->customfield_10119, 0, 10),
-            'priority' => ceil(rand(0, 1000))
+            'key' => $i->{self::JIRA_FIELD_KEY},
+            'status_id' => $f->{self::JIRA_FIELD_STATUS}->id,
+            'status_name' => $f->{self::JIRA_FIELD_STATUS}->name,
+            'link_to_jira' => $f->{self::JIRA_FIELD_LINK_TO_JIRA}->_links->web,
+            'wichtel_id' => $f->{self::JIRA_FIELD_WICHTEL_ID},
+            'wichtel_name' => $f->{self::JIRA_FIELD_WICHTEL_NAME},
+            'wichtel_mail' => $f->{self::JIRA_FIELD_WICHTEL_MAIL},
+            'price' => $f->{self::JIRA_FIELD_PRICE}->value,
+            'summary' => $f->{self::JIRA_FIELD_SUMMARY},
+            'description' => $f->{self::JIRA_FIELD_DESCRIPTION},
+            'reporter_mail' => $f->{self::JIRA_FIELD_REPORTER}->name,
+            'recipient' => $f->{self::JIRA_FIELD_RECIPIENT},
+            'address' => $f->{self::JIRA_FIELD_ADDRESS},
+            'zip' => $f->{self::JIRA_FIELD_ZIP},
+            'end_date' => substr($f->{self::JIRA_FIELD_END_DATE}, 0, 10),
+            'last_wichtel_delivery_date' => substr($f->{self::JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE}, 0, 10),
+            'found_wichtel_date' => substr($f->{self::JIRA_FIELD_FOUND_WICHTEL_DATE}, 0, 10),
+            'priority' => ceil(rand(0, 1000)),
+            'delivery_type' => $f->{self::JIRA_FIELD_DELIVERY_TYPE}
         ];
-
-
 
         if (!empty($metas['reporter_mail'])) {
             $query = "SELECT post_id FROM wp_postmeta WHERE meta_key = 'jira_user' AND meta_value LIKE '%" . $wpdb->esc_like($metas['reporter_mail']) . "%';";
@@ -440,17 +455,17 @@ class JiraHandler {
         global $wpdb;
         $wpdb->get_results($query);
     }
-    
+
     public function shuffleWishes() {
         $wish_type = App::getInstance()->getWishController()->getPostType();
-        
+
         $wishes = get_posts(array(
             'post_type' => $wish_type,
             'limit' => -1,
             'posts_per_page' => -1
         ));
-        
-        foreach($wishes as $wish) {
+
+        foreach ($wishes as $wish) {
             update_post_meta($wish->ID, 'priority', ceil(rand(0, 1000)));
         }
     }

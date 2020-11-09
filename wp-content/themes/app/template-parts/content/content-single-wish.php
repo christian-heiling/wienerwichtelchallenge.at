@@ -11,6 +11,9 @@
 /**
  * @var app\posttypes\WishPostType Wish Type Controller
  */
+
+use app\posttypes\WishPostType;
+
 $c = \app\App::getInstance()->getController(get_post_type());
 $o = \app\App::getInstance()->getOptions();
 
@@ -18,8 +21,8 @@ $institution = rwmb_get_value('social_organisation_id');
 $institution = get_post($institution);
 $institution_id = $institution->ID;
 
-$is_open = rwmb_get_value('status_id') == $o->get('jira_state', 'offen');
-$is_in_arbeit = rwmb_get_value('status_id') == $o->get('jira_state', 'in_arbeit');
+$is_open = rwmb_get_value('status_id') == $o->get('jira_state', WishPostType::STATE_OPEN);
+$is_in_progress = rwmb_get_value('status_id') == $o->get('jira_state', WishPostType::STATE_IN_PROGRESS);
 
 $blur_class = '';
 $recipient = rwmb_get_value('recipient');
@@ -61,7 +64,7 @@ if (empty($deliveryOptions)) {
         $c->echoCtaButtons();
         ?>
         <br>
-        <?php if ($is_in_arbeit || $is_open): ?>
+        <?php if ($is_in_progress || $is_open): ?>
 
             <h2><?php echo __('Delivery Infos', 'app'); ?></h2>
             <?php
@@ -89,7 +92,7 @@ if (empty($deliveryOptions)) {
                         ?>
                         <p><?php echo __('Wenn du in der Nähe wohnst und die Einrichtung persönlich kennenlernen willst.', 'app') ?></p>
 
-                        <?php if ($is_in_arbeit): ?>
+                        <?php if ($is_in_progress): ?>
                             <p>
                                 <span><?php echo $institution->post_title; ?></span><br>
                                 <span><?php echo rwmb_meta('street', [], $institution_id); ?></span><br>
@@ -121,7 +124,7 @@ if (empty($deliveryOptions)) {
                         ?>
                         <p><?php echo __('Wenn du nicht in der Nähe wohnst und kein Geschenk verpacken willst', 'app') ?></p>
 
-                        <?php if ($is_in_arbeit): ?>
+                        <?php if ($is_in_progress): ?>
                             <p>Wähle das Produkt über unseren Link aus und sende es als Geschenk verpackt an die Einrichtung</p>
 
                             <?php echo $c->generateAmazonAffiliateLink(); ?>
@@ -152,7 +155,7 @@ if (empty($deliveryOptions)) {
                         <p><strong><?php echo __('Mit der Post', 'app'); ?></strong></p>
                         <p><?php echo __('Wenn du nicht in der Nähe wohnst und dein Geschenk selbst liebevoll verpacken willst', 'app') ?></p>
 
-                        <?php if ($is_in_arbeit): ?>
+                        <?php if ($is_in_progress): ?>
                             <p><?php echo __('Schreibe die Empfängerkennung auf das Geschenk und sende das Paket an:', 'app') ?></p>
                             <p>
                                 <span><?php echo $institution->post_title; ?></span><br>

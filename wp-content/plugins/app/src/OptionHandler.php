@@ -2,6 +2,8 @@
 
 namespace app;
 
+use app\posttypes\WishPostType;
+
 class OptionHandler {
 
     private $options;
@@ -205,22 +207,22 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'jira_state_offen',
+                    'id' => 'jira_state_' . WishPostType::STATE_OPEN,
                     'name' => __('Open', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_state_in_arbeit',
+                    'id' => 'jira_state_' . WishPostType::STATE_IN_PROGRESS,
                     'name' => __('In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_state_erfuellt',
+                    'id' => 'jira_state_' . WishPostType::STATE_FULFILLED,
                     'name' => __('Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_state_abgeschlossen',
+                    'id' => 'jira_state_' . WishPostType::STATE_DONE,
                     'name' => __('Present confirmed', 'app'),
                     'type' => 'text'
                 )
@@ -232,7 +234,7 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'jira_state_pre_offen',
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_OPEN,
                     'name' => __('Open', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -241,7 +243,7 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_state_pre_in_arbeit',
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_IN_PROGRESS,
                     'name' => __('In progress', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -250,7 +252,7 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_state_pre_erfuellt',
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_FULFILLED,
                     'name' => __('Wish fulfilled', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -259,7 +261,7 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_state_pre_abgeschlossen',
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_DONE,
                     'name' => __('Present confirmed', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -275,17 +277,17 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'jira_transition_vergeben',
+                    'id' => 'jira_transition_' . WishPostType::TRANSITION_ASSIGN,
                     'name' => __('Assign: open => In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_transition_erfuellen',
+                    'id' => 'jira_transition_' . WishPostType::TRANSITION_FULFILL,
                     'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_transition_zuruecklegen',
+                    'id' => 'jira_transition_' . WishPostType::TRANSITION_PUT_BACK,
                     'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'text'
                 )
@@ -297,7 +299,7 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'jira_transition_question_vergeben',
+                    'id' => 'jira_transition_question_' . WishPostType::TRANSITION_ASSIGN,
                     'name' => __('Assign: open => In progress', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -306,7 +308,7 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_transition_question_erfuellen',
+                    'id' => 'jira_transition_question_' . WishPostType::TRANSITION_FULFILL,
                     'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -315,7 +317,7 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_transition_question_zuruecklegen',
+                    'id' => 'jira_transition_question_' . WishPostType::TRANSITION_PUT_BACK,
                     'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
@@ -340,17 +342,17 @@ class OptionHandler {
             'post_types' => array($this->getPostType()),
             'fields' => array(
                 array(
-                    'id' => 'jira_transition_button_vergeben',
+                    'id' => 'jira_transition_button_' . WishPostType::TRANSITION_ASSIGN,
                     'name' => __('Assign: Open => In progress', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_transition_button_erfuellen',
+                    'id' => 'jira_transition_button_' . WishPostType::TRANSITION_FULFILL,
                     'name' => __('Fulfilling: In progress => Wish fulfilled', 'app'),
                     'type' => 'text'
                 ),
                 array(
-                    'id' => 'jira_transition_button_zuruecklegen',
+                    'id' => 'jira_transition_button_' . WishPostType::TRANSITION_PUT_BACK,
                     'name' => __('Return: In progress => Open', 'app'),
                     'type' => 'text'
                 )

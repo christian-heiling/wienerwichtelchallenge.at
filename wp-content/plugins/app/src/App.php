@@ -12,9 +12,14 @@ require 'posttypes/WichtelTypePostType.php';
 require 'posttypes/WishPostType.php';
 
 use app\posttypes\EventPostType;
-use app\posttypes\CityPostType;
 
 class App {
+
+    /**
+     * use a synchron cipher method
+     * see https://www.php.net/manual/de/function.openssl-get-cipher-methods.php
+     */
+    const ENCRYPTION_CIPHER = 'AES-128-CBC';
 
     protected static $instance;
     private $controllers;
@@ -76,8 +81,12 @@ class App {
         add_action('init', array($this, 'doFullImport'));
         add_action('init', array($this, 'handleAjaxRequest'));
         add_action('init', array($this, 'afterInit'));
-        
-        add_action('bp_email_use_wp_mail', function() { return true; });
+
+        add_action('bp_email_use_wp_mail', function() {
+            return true;
+        });
+        //maybe with this hook we can activate html mails
+        //add_filter('wp_mail_content_type', function() { return 'text/html'; });
     }
 
     public function handleJiraRequests() {
@@ -187,8 +196,6 @@ class App {
     }
 
     public function afterInit() {
-        //$this->getJiraHandler()->doTransition('CHRIS-2006', 81, 'Wurde von abc zurückgelegt.');
-        //exit;
     }
 
     /**
@@ -225,20 +232,20 @@ class App {
             exit;
         }
     }
-    
+
     public function handleAjaxRequest() {
         global $current_user;
-        
+
         if (user_can($current_user, 'administrator') && array_key_exists('ajax-action', $_GET)) {
             $action = $_GET['ajax-action'];
-            
+
             if ($action == 'clearAllWishes') {
                 $this->getJiraHandler()->clearAllWishes();
             } elseif ($action == 'doPartialImport') {
                 if (!array_key_exists('part', $_GET)) {
                     http_response_code(404);
                     exit;
-                }                
+                }
                 $this->getJiraHandler()->doPartialImport($_GET['part']);
             } elseif ($action == 'doFullImport') {
                 $this->getJiraHandler()->doFullImport();
@@ -247,10 +254,40 @@ class App {
             } else {
                 http_response_code(404);
             }
-            
+
             exit;
         }
+    }
 
+    public function encrypt($plaintext) {
+        $cipher = self::ENCRYPTION_CIPHER;
+        $key = SECURE_AUTH_KEY;
+        $salt = SECURE_AUTH_SALT;
+
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = substr($salt, 0, $ivlen);
+        $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+        $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+        $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
+
+        return $ciphertext;
+    }
+
+    public function decrypt($ciphertext) {
+        $cipher = self::ENCRYPTION_CIPHER;
+        $key = SECURE_AUTH_KEY;
+        $salt = SECURE_AUTH_SALT;
+        
+        $c = base64_decode($ciphertext);
+        $ivlen = openssl_cipher_iv_length($cipher);
+        $iv = substr($salt, 0, $ivlen);
+        $hmac = substr($c, $ivlen, $sha2len = 32);
+        $ciphertext_raw = substr($c, $ivlen + $sha2len);
+        $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+        $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+        if (hash_equals($hmac, $calcmac)) { // PHP 5.6+ Rechenzeitangriff-sicherer Vergleich
+            return $original_plaintext;
+        }
     }
 
 }

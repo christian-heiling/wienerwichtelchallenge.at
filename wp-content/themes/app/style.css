@@ -3435,11 +3435,6 @@ a {
         max-width: 80%;
         margin: 0 15%;
         padding: 0 60px; } }
-    @media only screen and (min-width: 1379px) {
-      .entry .entry-content,
-      .entry .entry-summary {
-        max-width: 1024px;
-        padding: 0 60px 0 60px; } }
   .entry .entry-content p {
     word-wrap: break-word; }
   .entry .entry-content .more-link {
