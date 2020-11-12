@@ -1,7 +1,7 @@
 /*
 Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.
-        on line 4 of C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss
-        from line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss
+        on line 4 of C:/xampp/htdocs/wichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss
+        from line 4 of C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss
 
 1: /**
 2:  * Common styles that are used on all the WP pages in the backend
@@ -14,8 +14,8 @@ Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/function
 9:  *\/
 
 Backtrace:
-C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss:4
-C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss:4
+C:/xampp/htdocs/wichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss:4
+C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss:4
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:44:in `import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -66,4 +66,4 @@ C:/Ruby26-x64/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.\A         on line 4 of C:/xampp/htdocs/beta.wienerwichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss\A         from line 4 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss\A \A 1: /**\A 2:  * Common styles that are used on all the WP pages in the backend\A 3:  */\A 4: @import \"modules/media\";\A 5: \A 6: /**\A 7:  * Media details (grid layout)\A 8:  * @since 3.4.0\A 9:  */"; }
+  content: "Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.\A         on line 4 of C:/xampp/htdocs/wichtelchallenge.at/wp-content/plugins/wp-smushit/_src/scss/modules/_media.scss\A         from line 4 of C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\common.scss\A \A 1: /**\A 2:  * Common styles that are used on all the WP pages in the backend\A 3:  */\A 4: @import \"modules/media\";\A 5: \A 6: /**\A 7:  * Media details (grid layout)\A 8:  * @since 3.4.0\A 9:  */"; }

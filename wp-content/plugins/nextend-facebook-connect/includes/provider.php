@@ -65,6 +65,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
             'custom_default_button' => '',
             'custom_icon_button'    => '',
             'login_label'           => '',
+            'register_label'        => '',
             'link_label'            => '',
             'unlink_label'          => '',
             'user_prefix'           => '',
@@ -582,7 +583,7 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
         return $this->getAuthUserData('id');
     }
 
-    public function getConnectButton($buttonStyle = 'default', $redirectTo = null, $trackerData = false) {
+    public function getConnectButton($buttonStyle = 'default', $redirectTo = null, $trackerData = false, $labelType = 'login') {
         $arg = array();
         if (!empty($redirectTo)) {
             $arg['redirect'] = urlencode($redirectTo);
@@ -601,6 +602,12 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
 
         }
 
+        $label                     = $this->settings->get('login_label');
+        $useCustomRegisterLabel = NextendSocialLogin::$settings->get('custom_register_label');
+        if ($labelType == 'register' && $useCustomRegisterLabel) {
+            $label = $this->settings->get('register_label');;
+        }
+
         switch ($buttonStyle) {
             case 'icon':
 
@@ -608,11 +615,11 @@ abstract class NextendSocialProvider extends NextendSocialProviderDummy {
                 break;
             default:
 
-                $button = $this->getDefaultButton($this->settings->get('login_label'));
+                $button = $this->getDefaultButton($label);
                 break;
         }
 
-        return '<a href="' . esc_url(add_query_arg($arg, $this->getLoginUrl())) . '" rel="nofollow" aria-label="' . esc_attr__($this->settings->get('login_label')) . '" data-plugin="nsl" data-action="connect" data-provider="' . esc_attr($this->getId()) . '" data-popupwidth="' . $this->getPopupWidth() . '" data-popupheight="' . $this->getPopupHeight() . '">' . $button . '</a>';
+        return '<a href="' . esc_url(add_query_arg($arg, $this->getLoginUrl())) . '" rel="nofollow" aria-label="' . esc_attr__($label) . '" data-plugin="nsl" data-action="connect" data-provider="' . esc_attr($this->getId()) . '" data-popupwidth="' . $this->getPopupWidth() . '" data-popupheight="' . $this->getPopupHeight() . '">' . $button . '</a>';
     }
 
     public function getLinkButton() {

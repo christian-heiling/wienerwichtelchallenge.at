@@ -256,59 +256,86 @@ class NextendSocialLoginAvatar {
                     if (isset($mime_to_ext[$mime])) {
 
                         $wp_upload_dir = wp_upload_dir();
-                        $filename      = 'user-' . $user_id . '.' . $mime_to_ext[$mime];
 
-                        $filename = wp_unique_filename($wp_upload_dir['path'], $filename);
+                        /**
+                         * The name of the folder inside /wp-content/uploads where the user avatars will be uploaded.
+                         * Can be changed by defining the NSL_AVATARS_FOLDER constant.
+                         */
+                        $nslUploadDirName = 'nsl_avatars';
+                        if (defined('NSL_AVATARS_FOLDER')) {
+                            $nslUploadDirName = NSL_AVATARS_FOLDER;
+                        }
+                        $nslUploadDir = trailingslashit($wp_upload_dir['basedir']) . $nslUploadDirName;
 
-                        $newAvatarPath = trailingslashit($wp_upload_dir['path']) . $filename;
-                        $newFile       = @copy($avatarTempPath, $newAvatarPath);
-                        @unlink($avatarTempPath);
+                        if (wp_mkdir_p($nslUploadDir)) {
 
-                        if (false !== $newFile) {
-                            $url          = $wp_upload_dir['url'] . '/' . basename($filename);
-                            $newAvatarMD5 = md5_file($newAvatarPath);
+                            $filename = wp_hash($user_id) . '.' . $mime_to_ext[$mime];
+                            $filename = wp_unique_filename($nslUploadDir, $filename);
 
-                            if ($overwriteAttachment) {
-                                $originalAvatarImage = get_attached_file($original_attachment_id);
+                            $newAvatarPath = trailingslashit($nslUploadDir) . $filename;
+                            $newFile       = @copy($avatarTempPath, $newAvatarPath);
+                            @unlink($avatarTempPath);
 
-                                // we got the same image, so we do not want to store it
-                                if ($original_attachment_md5 === $newAvatarMD5) {
-                                    @unlink($newAvatarPath);
+                            if (false !== $newFile) {
+                                $url          = $wp_upload_dir['baseurl'] . '/' . $nslUploadDirName . '/' . basename($filename);
+                                $newAvatarMD5 = md5_file($newAvatarPath);
+
+                                if ($overwriteAttachment) {
+                                    $originalAvatarImage = get_attached_file($original_attachment_id);
+
+                                    // we got the same image, so we do not want to store it
+                                    if ($original_attachment_md5 === $newAvatarMD5) {
+                                        @unlink($newAvatarPath);
+                                    } else {
+                                        // Store the new avatar and remove the old one
+                                        @unlink($originalAvatarImage);
+
+                                        foreach (get_intermediate_image_sizes() as $size) {
+                                            /**
+                                             * Delete the previous Avatar sub-sizes to avoid orphan images
+                                             */
+                                            $originalAvatarSubsize = image_get_intermediate_size($original_attachment_id, $size);
+                                            if (isset($originalAvatarSubsize['path'])) {
+                                                $originalAvatarSubsizePath = trailingslashit($wp_upload_dir['basedir']) . $originalAvatarSubsize['path'];
+                                                if (file_exists($originalAvatarSubsizePath)) {
+                                                    @unlink($originalAvatarSubsizePath);
+                                                }
+                                            }
+                                        }
+
+                                        update_attached_file($original_attachment_id, $newAvatarPath);
+
+                                        // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+                                        require_once(ABSPATH . 'wp-admin/includes/image.php');
+
+                                        wp_update_attachment_metadata($original_attachment_id, wp_generate_attachment_metadata($original_attachment_id, $newAvatarPath));
+
+                                        update_user_meta($user_id, $wpdb->get_blog_prefix($blog_id) . 'user_avatar', $original_attachment_id);
+                                        update_user_meta($user_id, 'nsl_user_avatar_md5', $newAvatarMD5);
+                                    }
                                 } else {
-                                    // Store the new avatar and remove the old one
-                                    @unlink($originalAvatarImage);
-                                    update_attached_file($original_attachment_id, $newAvatarPath);
+                                    $attachment = array(
+                                        'guid'           => $url,
+                                        'post_mime_type' => $mime,
+                                        'post_title'     => '',
+                                        'post_content'   => '',
+                                        'post_status'    => 'private',
+                                    );
 
-                                    // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-                                    require_once(ABSPATH . 'wp-admin/includes/image.php');
+                                    $new_attachment_id = wp_insert_attachment($attachment, $newAvatarPath);
+                                    if (!is_wp_error($new_attachment_id)) {
 
-                                    wp_update_attachment_metadata($original_attachment_id, wp_generate_attachment_metadata($original_attachment_id, $newAvatarPath));
+                                        // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+                                        require_once(ABSPATH . 'wp-admin/includes/image.php');
 
-                                    update_user_meta($user_id, $wpdb->get_blog_prefix($blog_id) . 'user_avatar', $original_attachment_id);
-                                    update_user_meta($user_id, 'nsl_user_avatar_md5', $newAvatarMD5);
-                                }
-                            } else {
-                                $attachment = array(
-                                    'guid'           => $url,
-                                    'post_mime_type' => $mime,
-                                    'post_title'     => '',
-                                    'post_content'   => '',
-                                    'post_status'    => 'private',
-                                );
+                                        wp_update_attachment_metadata($new_attachment_id, wp_generate_attachment_metadata($new_attachment_id, $newAvatarPath));
 
-                                $new_attachment_id = wp_insert_attachment($attachment, $newAvatarPath);
-                                if (!is_wp_error($new_attachment_id)) {
+                                        update_post_meta($new_attachment_id, $provider->getId() . '_avatar', $provider->getAuthUserData('id'));
+                                        update_post_meta($new_attachment_id, '_wp_attachment_wp_user_avatar', $user_id);
 
-                                    // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
-                                    require_once(ABSPATH . 'wp-admin/includes/image.php');
-
-                                    wp_update_attachment_metadata($new_attachment_id, wp_generate_attachment_metadata($new_attachment_id, $newAvatarPath));
-
-                                    update_post_meta($new_attachment_id, $provider->getId() . '_avatar', $provider->getAuthUserData('id'));
-                                    update_post_meta($new_attachment_id, '_wp_attachment_wp_user_avatar', $user_id);
-
-                                    update_user_meta($user_id, $wpdb->get_blog_prefix($blog_id) . 'user_avatar', $new_attachment_id);
-                                    update_user_meta($user_id, 'nsl_user_avatar_md5', $newAvatarMD5);
+                                        update_user_meta($user_id, $wpdb->get_blog_prefix($blog_id) . 'user_avatar', $new_attachment_id);
+                                        update_user_meta($user_id, 'nsl_user_avatar_md5', $newAvatarMD5);
+                                    }
                                 }
                             }
                         }

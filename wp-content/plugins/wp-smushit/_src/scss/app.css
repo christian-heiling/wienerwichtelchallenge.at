@@ -1,6 +1,6 @@
 /*
 Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.
-        on line 8 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss
+        on line 8 of C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss
 
 3: 
 4: // This needs to be here.
@@ -15,7 +15,7 @@ Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/function
 13: @import "~@wpmudev/shared-ui/scss/accessibility";
 
 Backtrace:
-C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss:8
+C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss:8
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:67:in `rescue in import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:44:in `import'
 C:/Ruby26-x64/lib/ruby/gems/2.6.0/gems/sass-3.7.4/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -53,4 +53,4 @@ C:/Ruby26-x64/bin/sass:23:in `<main>'
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.\A         on line 8 of C:\xampp\htdocs\beta.wienerwichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss\A \A 3: \A 4: // This needs to be here.\A 5: @import \"modules/variables\";\A 6: \A 7: // Share UI styles\A 8: @import \"~@wpmudev/shared-ui/scss/functions\";\A 9: @import \"~@wpmudev/shared-ui/scss/colors\";\A 10: @import \"~@wpmudev/shared-ui/scss/variables\";\A 11: $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';\A 12: @import \"~@wpmudev/shared-ui/scss/mixins\";\A 13: @import \"~@wpmudev/shared-ui/scss/accessibility\";"; }
+  content: "Error: File to import not found or unreadable: ~@wpmudev/shared-ui/scss/functions.\A         on line 8 of C:\xampp\htdocs\wichtelchallenge.at\wp-content\plugins\wp-smushit\_src\scss\app.scss\A \A 3: \A 4: // This needs to be here.\A 5: @import \"modules/variables\";\A 6: \A 7: // Share UI styles\A 8: @import \"~@wpmudev/shared-ui/scss/functions\";\A 9: @import \"~@wpmudev/shared-ui/scss/colors\";\A 10: @import \"~@wpmudev/shared-ui/scss/variables\";\A 11: $sui-font-path: '~@wpmudev/shared-ui/dist/fonts/';\A 12: @import \"~@wpmudev/shared-ui/scss/mixins\";\A 13: @import \"~@wpmudev/shared-ui/scss/accessibility\";"; }

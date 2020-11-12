@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 5.5
-Stable tag: 3.0.25
+Tested up to: 5.5.3
+Stable tag: 3.0.26
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -117,6 +117,21 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 2. Nextend Social Login and Register in the profile page for account linking
 
 == Changelog ==
+
+= 3.0.26 =
+* Fix: PHP notice by AMP plugin
+* Fix: The orphan thumbnail sizes generated from the avatars will be deleted when the earlier stored avatar has been overridden by the provider.
+* Improvement: Hashed filenames for avatars to avoid tracking back the user avatars over the URL by User ID.
+* Improvement: Avatars are now stored in the dedicated folder called nsl_avatars. The name of the folder can be modified with the NSL_AVATARS_FOLDER constant.
+* Improvement: Ultimate Member – the registration date will appear in the info popup for users registered by social login.
+* Improvement: [2 new filters](https://nextendweb.com/nextend-social-login-docs/backend-developer/#auth-url-args) for developers
+* Improvement: [nsl_disabled_register_error_message](https://nextendweb.com/nextend-social-login-docs/backend-developer/#disabled-reg-message-override) filter will also work when the OAuth flow is being handled over the default login page.
+* Improvement: Facebook provider – Getting Started update.
+* Feature: [Custom label](https://nextendweb.com/nextend-social-login-docs/global-settings/#custom-register-label) for social buttons in register forms and new [shortcode parameter](https://nextendweb.com/nextend-social-login-docs/theme-developer/#shortcode) to use the register labels.
+* Black friday offer
+
+* PRO: Improvement: WooCommerce – [Email template for registration](https://nextendweb.com/nextend-social-login-docs/global-settings-woocommerce/#email-template) setting defines the email template that the registration notification will use when the registration happens with social login. Earlier this was a hidden and built in feature of the [Registration notification sent to](https://nextendweb.com/nextend-social-login-docs/global-settings/#pro-settings) setting.
+
 
 = 3.0.25 =
 * Fix: WishList Member plugin prevented the strong redirects of Nextend Social Login.

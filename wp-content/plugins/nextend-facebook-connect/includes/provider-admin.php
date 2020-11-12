@@ -92,6 +92,7 @@ class NextendSocialProviderAdmin {
 
             switch ($key) {
                 case 'login_label':
+                case 'register_label':
                 case 'link_label':
                 case 'unlink_label':
                     $newData[$key] = wp_kses_post($value);

@@ -71,17 +71,19 @@ class NextendSocialProviderFacebook extends NextendSocialProvider {
         ));
 
         parent::__construct(array(
-            'appid'        => '',
-            'secret'       => '',
-            'skin'         => 'dark',
-            'login_label'  => 'Continue with <b>Facebook</b>',
-            'link_label'   => 'Link account with <b>Facebook</b>',
-            'unlink_label' => 'Unlink account from <b>Facebook</b>'
+            'appid'          => '',
+            'secret'         => '',
+            'skin'           => 'dark',
+            'login_label'    => 'Continue with <b>Facebook</b>',
+            'register_label' => 'Sign up with <b>Facebook</b>',
+            'link_label'     => 'Link account with <b>Facebook</b>',
+            'unlink_label'   => 'Unlink account from <b>Facebook</b>'
         ));
     }
 
     protected function forTranslation() {
         __('Continue with <b>Facebook</b>', 'nextend-facebook-connect');
+        __('Sign up with <b>Facebook</b>', 'nextend-facebook-connect');
         __('Link account with <b>Facebook</b>', 'nextend-facebook-connect');
         __('Unlink account from <b>Facebook</b>', 'nextend-facebook-connect');
     }

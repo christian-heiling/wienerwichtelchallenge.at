@@ -15,6 +15,7 @@ $isPRO = apply_filters('nsl-pro', false);
             window.resetButtonToDefault = function (id) {
                 var defaultButtonValues = {
                     '#login_label': <?php echo wp_json_encode($settings->get('login_label', 'default')); ?>,
+                    '#register_label': <?php echo wp_json_encode($settings->get('register_label', 'default')); ?>,
                     '#link_label': <?php echo wp_json_encode($settings->get('link_label', 'default')); ?>,
                     '#unlink_label': <?php echo wp_json_encode($settings->get('unlink_label', 'default')); ?>,
                     '#custom_default_button': <?php echo wp_json_encode($provider->getRawDefaultButton()); ?>,
@@ -85,6 +86,24 @@ $isPRO = apply_filters('nsl-pro', false);
                     </p>
                 </td>
             </tr>
+
+            <?php
+            $useCustomRegisterLabel = NextendSocialLogin::$settings->get('custom_register_label');
+            if ($useCustomRegisterLabel): ?>
+                <tr>
+                    <th scope="row"><label
+                                for="register_label"><?php _e('Register label', 'nextend-facebook-connect'); ?></label>
+                    </th>
+                    <td>
+                        <input name="register_label" type="text" id="register_label"
+                               value="<?php echo esc_attr($settings->get('register_label')); ?>" class="regular-text">
+                        <p class="description"><a href="#"
+                                                  onclick="return resetButtonToDefault('#register_label');"><?php _e('Reset to default', 'nextend-facebook-connect'); ?></a>
+                        </p>
+                    </td>
+                </tr>
+            <?php endif; ?>
+
             <tr>
                 <th scope="row"><label for="link_label"><?php _e('Link label', 'nextend-facebook-connect'); ?></label>
                 </th>

@@ -84,6 +84,8 @@ abstract class NextendSocialOauth2 extends NextendSocialAuth {
             $args['scope'] = urlencode($this->formatScopes($scopes));
         }
 
+        $args = apply_filters('nsl_' . $this->providerID . '_auth_url_args', $args);
+
         return add_query_arg($args, $this->getEndpointAuthorization());
     }
 

@@ -107,6 +107,12 @@ class NextendSocialUser {
         } else {
             $user_id = email_exists($email);
         }
+
+        /**
+         * Can be used for overriding the account where the social account should be automatically linked to.
+         */
+        $user_id = apply_filters('nsl_match_social_account_to_user_id', $user_id, $this, $this->provider);
+
         if ($user_id === false) { // Real register
             if (apply_filters('nsl_is_register_allowed', true, $this->provider)) {
                 $this->register($providerUserID, $email);
@@ -115,15 +121,51 @@ class NextendSocialUser {
                 Persistent::delete($this->provider->getId() . '_at');
                 Persistent::delete($this->provider->getId() . '_state');
 
+                $registerDisabledMessage     = apply_filters('nsl_disabled_register_error_message', '');
+                $registerDisabledRedirectURL = apply_filters('nsl_disabled_register_redirect_url', '');
+
+                $nslLoginUrl            = NextendSocialLogin::getLoginUrl();
+                $defaultDisabledMessage = __('User registration is currently not allowed.');
 
                 $proxyPage = NextendSocialLogin::getProxyPage();
                 if ($proxyPage) {
+                    if (empty($registerDisabledMessage)) {
+                        /**
+                         * There is no custom message and proxy page is used, so we need to inform the user with our own message.
+                         */
+                        $registerDisabledMessage = $defaultDisabledMessage;
+                    }
+                } else {
+                    if (empty($registerDisabledMessage)) {
+                        if (!empty($registerDisabledRedirectURL)) {
+                            /**
+                             * There is no custom message and it is a custom redirect url, so we need to inform the user with our own message.
+                             */
+                            $registerDisabledMessage = $defaultDisabledMessage;
+                        }
+                    } else {
+                        if (empty($registerDisabledRedirectURL)) {
+                            /**
+                             * By default WordPress displays an error message if the $_GET['registration'] is set to "disabled"
+                             * To avoid displaying the default and the custom error message, the url should not contain it.
+                             */
+                            $registerDisabledRedirectURL = $nslLoginUrl;
+                        }
+                    }
+                }
+
+                if (!empty($registerDisabledMessage)) {
                     $errors = new WP_Error();
-                    $errors->add('registerdisabled', apply_filters('nsl_disabled_register_error_message', __('User registration is currently not allowed.')));
+                    $errors->add('registerdisabled', $registerDisabledMessage);
                     Notices::addError($errors->get_error_message());
                 }
 
-                NextendSocialProvider::redirect(__('Authentication error', 'nextend-facebook-connect'), apply_filters('nsl_disabled_register_redirect_url', add_query_arg('registration', 'disabled', NextendSocialLogin::getLoginUrl())));
+                if (empty($registerDisabledRedirectURL)) {
+                    $registerDisabledRedirectURL = add_query_arg('registration', 'disabled', $nslLoginUrl);
+                }
+
+
+                NextendSocialProvider::redirect(__('Authentication error', 'nextend-facebook-connect'), $registerDisabledRedirectURL);
                 exit;
             }
 
@@ -423,7 +465,11 @@ class NextendSocialUser {
                 $this,
                 'um_get_loginpage'
             ));
-            do_action('um_user_register', $user_id, array());
+            do_action('um_user_register', $user_id, array(
+                'submitted' => array(
+                    'timestamp' => current_time('timestamp')
+                )
+            ));
         }
 
 

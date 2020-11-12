@@ -59,6 +59,7 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
             'consumer_key'       => '',
             'consumer_secret'    => '',
             'login_label'        => 'Continue with <b>Twitter</b>',
+            'register_label'     => 'Sign up with <b>Twitter</b>',
             'link_label'         => 'Link account with <b>Twitter</b>',
             'unlink_label'       => 'Unlink account from <b>Twitter</b>',
             'profile_image_size' => 'normal'
@@ -67,6 +68,7 @@ class NextendSocialProviderTwitter extends NextendSocialProvider {
 
     protected function forTranslation() {
         __('Continue with <b>Twitter</b>', 'nextend-facebook-connect');
+        __('Sign up with <b>Twitter</b>', 'nextend-facebook-connect');
         __('Link account with <b>Twitter</b>', 'nextend-facebook-connect');
         __('Unlink account from <b>Twitter</b>', 'nextend-facebook-connect');
     }

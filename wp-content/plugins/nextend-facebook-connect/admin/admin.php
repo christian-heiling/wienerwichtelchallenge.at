@@ -115,7 +115,7 @@ class NextendSocialLoginAdmin {
 
     public static function admin_init() {
 
-        require_once(dirname(__FILE__).'/sale.php');
+        require_once(dirname(__FILE__) . '/notice.php');
 
         if (current_user_can('manage_options')) {
             if (!isset($_GET['page']) || $_GET['page'] != 'nextend-social-login' || !isset($_GET['view']) || $_GET['view'] != 'fix-redirect-uri') {
@@ -338,6 +338,7 @@ class NextendSocialLoginAdmin {
                 case 'debug':
                 case 'login_restriction':
                 case 'avatars_in_all_media':
+                case 'custom_register_label':
                 case 'terms_show':
                 case 'store_name':
                 case 'store_email':
