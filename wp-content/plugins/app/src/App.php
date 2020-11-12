@@ -99,23 +99,17 @@ class App {
         if (isset($_GET['key'])) {
             $key = $_GET['key'];
 
-            $wishes = get_posts(array(
-                'post_type' => $this->getWishController()->getPostType(),
-                'title' => $key
-            ));
-
-            if (empty($wishes)) {
+            $wish = $this->getWishController()->getWishByKey($key);
+            if (empty($wish)) {
                 return;
             }
-
-            $wish = array_pop($wishes);
-
+            
             if ($action == 'issueUpdate') {
                 $this->getJiraHandler()->doImportSingleIssue($key);
                 exit;
             } elseif ($action == 'sendMail') {
                 $type = $_GET['type'];
-
+                
                 $types = array_map(
                         function($e) {
                     return $e['action'];
@@ -124,6 +118,13 @@ class App {
 
                 if (in_array($type, $types)) {
                     bp_send_email($type, rwmb_get_value('wichtel_mail', [], $wish->ID), array('tokens' => $this->getWishController()->getMailTokens($wish->ID)));
+                    exit;
+                } elseif ($type == 'wishTaken') {
+                    $delivery_type = rwmb_meta('delivery_type', [], $wish->ID);
+
+                    if (!empty($delivery_type)) {
+                        bp_send_email($delivery_type . '.' . $delivery_type, rwmb_get_value('wichtel_mail', [], $wish->ID), array('tokens' => $this->getWishController()->getMailTokens($wish->ID)));
+                    }
                     exit;
                 }
             }
@@ -196,6 +197,7 @@ class App {
     }
 
     public function afterInit() {
+        //$this->getJiraHandler()->doComment('WICHTAUT-1509', 'autosend comment');
     }
 
     /**

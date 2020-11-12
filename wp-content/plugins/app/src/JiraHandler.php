@@ -18,13 +18,12 @@ class JiraHandler {
     const JIRA_FIELD_DESCRIPTION = 'description';
     const JIRA_FIELD_REPORTER = 'reporter';
     const JIRA_FIELD_RECIPIENT = 'customfield_10120';
-    const JIRA_FIELD_ADDRESS = 'customfield_10121';
-    const JIRA_FIELD_ZIP = 'customfield_10122';
     const JIRA_FIELD_END_DATE = 'duedate';
     const JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE = 'customfield_10118';
     const JIRA_FIELD_FOUND_WICHTEL_DATE = 'customfield_10119';
     const JIRA_FIELD_COMPONENTS = 'components';
     const JIRA_FIELD_DELIVERY_TYPE = 'customfield_10603';
+    const JIRA_FIELD_APPROVER = 'customfield_10107';
 
     private $domain;
     private $username;
@@ -68,22 +67,27 @@ class JiraHandler {
                 self::JIRA_FIELD_DESCRIPTION,
                 self::JIRA_FIELD_REPORTER,
                 self::JIRA_FIELD_RECIPIENT,
-                self::JIRA_FIELD_ADDRESS,
-                self::JIRA_FIELD_ZIP,
                 self::JIRA_FIELD_END_DATE,
                 self::JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE,
                 self::JIRA_FIELD_FOUND_WICHTEL_DATE,
                 self::JIRA_FIELD_COMPONENTS,
-                self::JIRA_FIELD_DELIVERY_TYPE
+                self::JIRA_FIELD_DELIVERY_TYPE,
+                self::JIRA_FIELD_APPROVER
             )
         );
 
         return $this->doPost('/rest/api/2/search', json_encode($post_params));
     }
 
-    public function doTransition($issue_id, $transition_id, $updateFields = [], $comment = 'Transition') {        
+    public function doTransition($issue_id, $transition_id, $updateFields = [], $comment = '') {        
         $postData = array(
-            'update' => array(
+            'transition' => array(
+                'id' => $transition_id
+            )
+        );
+        
+        if (!empty($comment)) {
+            $postData['update'] = array(
                 'comment' => array(
                     array(
                         'add' => array(
@@ -91,11 +95,8 @@ class JiraHandler {
                         )
                     )
                 )
-            ),
-            'transition' => array(
-                'id' => $transition_id
-            )
-        );
+            );
+        }
 
         if (!empty($updateFields)) {
             $postData['fields'] = $updateFields;
@@ -104,7 +105,17 @@ class JiraHandler {
         $postData = json_encode($postData);
 
         $this->doPost('/rest/api/2/issue/' . $issue_id . '/transitions', $postData);
-        $this->doImportSingleIssue($issue_id);
+        return $this->doImportSingleIssue($issue_id);
+    }
+    
+    public function doComment($issue_id, $comment) {
+        $postData = array(
+            'body' => $comment
+        );
+
+        $postData = json_encode($postData);
+
+        $this->doPost('/rest/api/2/issue/' . $issue_id . '/comment', $postData);
     }
 
     public function doImportSingleIssue($issue_id) {
@@ -138,6 +149,8 @@ class JiraHandler {
 
         // create wish
         $this->createWish($i);
+        
+        return $i;
     }
 
     private function getSearchWishQuery() {
@@ -335,13 +348,12 @@ class JiraHandler {
             'description' => $f->{self::JIRA_FIELD_DESCRIPTION},
             'reporter_mail' => $f->{self::JIRA_FIELD_REPORTER}->name,
             'recipient' => $f->{self::JIRA_FIELD_RECIPIENT},
-            'address' => $f->{self::JIRA_FIELD_ADDRESS},
-            'zip' => $f->{self::JIRA_FIELD_ZIP},
             'end_date' => substr($f->{self::JIRA_FIELD_END_DATE}, 0, 10),
             'last_wichtel_delivery_date' => substr($f->{self::JIRA_FIELD_LAST_WICHTEL_DELIVERY_DATE}, 0, 10),
             'found_wichtel_date' => substr($f->{self::JIRA_FIELD_FOUND_WICHTEL_DATE}, 0, 10),
             'priority' => ceil(rand(0, 1000)),
-            'delivery_type' => $f->{self::JIRA_FIELD_DELIVERY_TYPE}
+            'delivery_type' => $f->{self::JIRA_FIELD_DELIVERY_TYPE},
+            'approve_id' => $f->{self::JIRA_FIELD_APPROVER}[0]->id
         ];
 
         if (!empty($metas['reporter_mail'])) {

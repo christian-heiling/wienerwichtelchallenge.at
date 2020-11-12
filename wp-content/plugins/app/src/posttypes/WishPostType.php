@@ -115,15 +115,22 @@ MAILCONTENT;
                 'post_title' => __('[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen willst!', 'app'),
                 'post_content' => $content,
                 'post_excerpt' => $content,
-                'action' => 'wishTaken',
-                'action_description' => __('Wichtel hat sich bereit erklärt einen Wunsch zu erfüllen', 'app')
+                'action' => 'wishTaken.postal',
+                'action_description' => __('Wichtel want to takeover a wish and send it later by post', 'app')
+            ),
+            array(
+                'post_title' => __('[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen willst!', 'app'),
+                'post_content' => $content,
+                'post_excerpt' => $content,
+                'action' => 'wishTaken.personal',
+                'action_description' => __('Wichtel want to takeover a wish and bring it later directly to the institution', 'app')
             ),
             array(
                 'post_title' => __('[{{{site.name}}}] Nur mehr {{wish.wichtel_end_diff_in_days}} Tage den Wunsch {{wish.title}} zu erfüllen.', 'app'),
                 'post_content' => $content,
                 'post_excerpt' => $content,
                 'action' => 'wishRemember',
-                'action_description' => __('nach 3 Tagen: Erinnerungsmail', 'app')
+                'action_description' => __('after 7 days: remember mail', 'app')
             ),
             array(
                 'post_title' => __('[{{{site.name}}}] Hast du den Wunsch {{wish.title}} erfüllt?', 'app'),
@@ -272,16 +279,23 @@ MAILCONTENT;
         if (empty($wish_id)) {
             $wish_id = get_the_ID();
         }
-
+        
         $found_wichtel = rwmb_get_value('found_wichtel_date', [], $wish_id);
+        
         $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date', [], $wish_id));
-
+        
         if (!empty($found_wichtel)) {
-            return $lastWichtelDeliveryDate;
+            $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
+            $currentLastWichtelDeliveryDate->add(new \DateInterval('P14D'));
+            
+            if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
+                $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
+            }
+            return $currentLastWichtelDeliveryDate;
         } else {
             $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
-            $currentLastWichtelDeliveryDate->add(new \DateInterval('P7D'));
-
+            $currentLastWichtelDeliveryDate->add(new \DateInterval('P14D'));
+            
             if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
                 $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
             }
@@ -528,7 +542,7 @@ MAILCONTENT;
             return;
         }
 
-        // is user logged in 
+        // is user not logged in 
         // then abort
         if (get_current_user_id() == 0) {
             return;
@@ -558,48 +572,13 @@ MAILCONTENT;
         $transition_id = $o->get('jira_transition', $_GET['transition']);
         $single_wish_link = get_permalink();
 
-        // calculated related Comment
-        $query = new \WP_Query(array(
-            'posts_per_page' => -1,
-            'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
-            'post_status' => 'any',
-            'meta_query' => array(
-                array(
-                    'key' => 'key',
-                    'value' => rwmb_get_value('key')
-                )
-            )
-        ));
-
-        $posts = $query->get_posts();
-        $wish = array_pop($posts);
-
+        // calculated related fields
         global $current_user;
-        $fields = array();
-        
-        /**
-         * @todo Remove me, only for testing
-         */
-        $_GET['delivery_type'] = 'personal';
+        $wishKey = rwmb_get_value('key');
+        $wish = $this->getWishByKey($wishKey);
 
-        $comment = 'Transition';
-        
-        //prepare replace pattern
-        $replace_pattern = array(
-            'wichtel_name' => $current_user->data->display_name,
-            'wish_title' => rwmb_get_value('summary', [], $wish->ID),
-            'wish_key' => rwmb_get_value('key', [], $wish->ID),
-            'wish_recipient' => rwmb_get_value('recipient', [], $wish->ID)
-        );
-        
-        $search = array();
-        $replace = array();
-        
-        foreach($replace_pattern as $key => $value) {
-            $search[] = '%' . $key . '%';
-            $replace[] = $value;
-        }
-        
+        $fields = array();
+
         if ($_GET['transition'] == self::TRANSITION_ASSIGN) {
             $fields = array(
                 \app\JiraHandler::JIRA_FIELD_WICHTEL_ID => $current_user->data->ID,
@@ -607,58 +586,105 @@ MAILCONTENT;
                 \app\JiraHandler::JIRA_FIELD_WICHTEL_MAIL => $current_user->data->user_email,
                 \app\JiraHandler::JIRA_FIELD_DELIVERY_TYPE => $_GET['delivery_type']
             );
+        }
 
+        // do transition and wait for reimport
+
+        $i = \app\App::getInstance()->getJiraHandler()->doTransition(
+                $wishKey, $transition_id, $fields
+        );
+
+        // requery wish
+        $wish = $this->getWishByKey($wishKey);
+
+        $replace_pattern = array(
+            'wichtel_name' => $current_user->data->display_name,
+            'wish_title' => $i->fields->{\app\JiraHandler::JIRA_FIELD_SUMMARY},
+            'wish_key' => $i->{\app\JiraHandler::JIRA_FIELD_KEY},
+            'wish_recipient' => $i->fields->{\app\JiraHandler::JIRA_FIELD_RECIPIENT},
+            'approve_link' => $this->calculateApproveLink($wishKey, $i->fields->{\app\JiraHandler::JIRA_FIELD_APPROVER}[0]->id)
+        );
+
+        // prepare comments
+        $search = array();
+        $replace = array();
+        $comment = '';
+
+        foreach ($replace_pattern as $key => $value) {
+            $search[] = '%' . $key . '%';
+            $replace[] = $value;
+        }
+
+        if ($_GET['transition'] == self::TRANSITION_ASSIGN) {
             $comment = __("*Found a Wichtel!*\n\nWichtel %wichtel_name% want to fulfill the wish %wish_title% (%wish_key%).\nThe present is for %wish_recipient%.", 'app');
-            
         } elseif ($_GET['transition'] == self::TRANSITION_FULFILL) {
-            $delivery_type = rwmb_get_value('delivery_type', [], $wish->ID);
-            
+            $delivery_type = $i->fields->{\app\JiraHandler::JIRA_FIELD_DELIVERY_TYPE};
+
             if ($delivery_type == 'personal') {
-                $comment = __("*Present delivered directly to the institution!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) directly to the institution.\nThe present is for %wish_recipient%\n\n(!) Please confirm.", 'app');
+                $comment = __("*Present delivered directly to the institution!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) directly to the institution.\nThe present is for %wish_recipient%\n\n(!) Please confirm.\n\n%approve_link%", 'app');
             } elseif ($delivery_type == 'postal') {
-                $comment = __("*Present brought to the post office!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) to the post office. It should arrive in the next few days.\nThe present is for %wish_recipient%\n\n(!) Please confirm when the present arrive.", 'app');
+                $comment = __("*Present brought to the post office!*\n\nWichtel %wichtel_name% has indicated that he/she brought the present %wish_title% (%wish_key%) to the post office. It should arrive in the next few days.\nThe present is for %wish_recipient%\n\n(!) Please confirm when the present arrive.\n\n%approve_link%", 'app');
             } else {
-                $comment = __("*Present delivered!*\n\nWichtel %wichtel_name% has indicated that he/she the present %wish_title% (%wish_key%).\nThe present is for %wish_recipient%\n\n(!) Please confirm.", 'app');
+                $comment = __("*Present delivered!*\n\nWichtel %wichtel_name% has indicated that he/she the present %wish_title% (%wish_key%).\nThe present is for %wish_recipient%\n\n(!) Please confirm.\n\n%approve_link%", 'app');
             }
         } elseif ($_GET['transition'] == self::TRANSITION_PUT_BACK) {
             $comment = __(":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n\n It was for %wish_recipient%.\nTherefore we are looking for a new Wichtel.", 'app');
         }
-        
+
         $comment = str_replace($search, $replace, $comment);
 
-        // do transition        
-        \app\App::getInstance()->getJiraHandler()->doTransition(
-                rwmb_get_value('key', [], $wish->ID), $transition_id, $fields, $comment
-        );
+        // send comment
+        \app\App::getInstance()->getJiraHandler()->doComment($wishKey, $comment);
 
-        sleep(0.5);
-        
         // afterwards redirect to the single wish page
         header('Location: ' . $single_wish_link);
         exit;
     }
 
     public function addShortcodes() {
-        $boxes = $this->addMetaBox([]);
-        $fields = array_pop($boxes)['fields'];
 
-        foreach ($fields as $field) {
-            $field_id = $field['id'];
 
-            if (get_post_type() == $this->getPostType()) {
+        if (get_post_type() == $this->getPostType()) {
+            $boxes = $this->addMetaBox([]);
+            $fields = array_pop($boxes)['fields'];
+
+            foreach ($fields as $field) {
+                $field_id = $field['id'];
+
                 add_shortcode($field_id, function() use ($field_id) {
                     return rwmb_get_value($field_id);
                 });
+            }
 
-                add_shortcode('wichtel_end_date_delta_in_days', function() {
-                    return $this->getCurrentWichtelLastDeliveryDateDeltaInDays();
-                });
+            add_shortcode('wichtel_end_date_delta_in_days', function() {
+                return $this->getCurrentWichtelLastDeliveryDateDeltaInDays();
+            });
 
-                add_shortcode('wichtel_end_date', function() {
-                    return date_i18n(get_option('date_format'), $this->getCurrentWichtelLastDeliveryDate()->getTimestamp());
-                });
+            add_shortcode('wichtel_end_date', function() {
+                return date_i18n(get_option('date_format'), $this->getCurrentWichtelLastDeliveryDate()->getTimestamp());
+            });
+
+            $boxes = \app\App::getInstance()->getSocialOrganisationController()->addMetaBox([]);
+
+            foreach ($boxes as $box) {
+                $fields = $box['fields'];
+                foreach ($fields as $field) {
+                    $field_id = $field['id'];
+
+                    add_shortcode('social_organisation_' . $field_id, function() use ($field_id) {
+                        return rwmb_get_value($field_id);
+                    });
+                }
             }
         }
+    }
+
+    public function calculateApproveLink($key, $approveId) {
+        $link_pattern = '[%button_name%|https://wichtelchallenge.collabri.at/servicedesk/customer/user/approval-action/%key%/%approve_id%/%action%/]';
+
+        $approveLink = str_replace(array('%button_name%', '%key%', '%approve_id%', '%action%'), array(__('I confirm that the present is arrived', 'app'), $key, $approveId, 'approve'), $link_pattern);
+
+        return $approveLink;
     }
 
     public function addAdditionalScripts() {
@@ -801,6 +827,11 @@ MAILCONTENT;
                     'id' => 'delivery_type',
                     'name' => 'delivery_type',
                     'type' => 'text'
+                ],
+                [
+                    'id' => 'approve_id',
+                    'name' => 'approve_id',
+                    'type' => 'text'
                 ]
         ));
         return $meta_boxes;
@@ -848,8 +879,8 @@ MAILCONTENT;
             foreach ($s as $trans_name) {
                 $url = get_permalink($w) . '?transition=' . $trans_name . '&fl=' . \app\App::getInstance()->encrypt($wMeta['wichtel_mail']);
                 if ($trans_name == self::TRANSITION_ASSIGN) {
-                    $tokens['wish.' . $trans_name . 'postal.url'] = $url . '&deliveryType=postal';
-                    $tokens['wish.' . $trans_name . 'personal.url'] = $url . '&deliverType=personal';
+                    $tokens['wish.' . $trans_name . '.postal.url'] = $url . '&delivery_type=postal';
+                    $tokens['wish.' . $trans_name . '.personal.url'] = $url . '&delivery_type=personal';
                 } else {
                     $tokens['wish.' . $trans_name . '.url'] = $url;
                 }
@@ -865,6 +896,22 @@ MAILCONTENT;
             $tokens['organisation.' . $key] = trim(strip_tags($value[0]));
         }
 
+        // rename organisation.covid19
+        $tokens['organisation.covid19'] = $tokens['organisation.covid19_regulations'];
+        unset($tokens['organisation.covid19_regulations']);
+        
+        // deliver always addressee, street, zip, city depending on the delivery type
+        if (!empty($tokens['wish.delivery_type']) && $tokens['wish.delivery_type'] == 'postal') {
+            $tokens['organisation.addressee'] = $tokens['organisation.postal_addressee'];
+            $tokens['organisation.street'] = $tokens['organisation.postal_street'];
+            $tokens['organisation.zip'] = $tokens['organisation.postal_zip'];
+            $tokens['organisation.city'] = $tokens['organisation.postal_city'];          
+        }
+        
+        unset($tokens['organisation.postal_addressee']);
+        unset($tokens['organisation.postal_street']);
+        unset($tokens['organisation.postal_zip']);
+        unset($tokens['organisation.postal_city']);
 
         return $tokens;
     }
@@ -914,10 +961,16 @@ MAILCONTENT;
         $text = '';
         foreach ($this->getStates() as $state_name) {
             if ($o->get('jira_state', $state_name) == rwmb_get_value('status_id')) {
-                $text = $o->get('jira_state_pre', $state_name);
+                if ($state_name == 'in_arbeit') {
+                    $text = $o->get('jira_state_pre', $state_name . '_' . rwmb_meta('delivery_type'));
+                } else {
+                    $text = $o->get('jira_state_pre', $state_name);
+                }
+
                 break;
             }
         }
+
         echo do_shortcode($text);
     }
 
@@ -984,10 +1037,20 @@ MAILCONTENT;
                 $popup_html .= '<div class="wish-buttons">';
 
                 $popup_html .= '<div class="wp-block-button wish-button-primary">';
-                $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink() . '?transition=' . $trans_name . '">';
 
-                $popup_html .= __('Confirm', 'app');
-                $popup_html .= '</a>';
+                if ($trans_name == 'vergeben') {
+                    $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink() . '?transition=' . $trans_name . '&delivery_type=postal">';
+                    $popup_html .= __('I will send the present by post', 'app');
+                    $popup_html .= '</a>&nbsp;';
+                    $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink() . '?transition=' . $trans_name . '&delivery_type=personal">';
+                    $popup_html .= __('I will bring the present to the institution', 'app');
+                    $popup_html .= '</a>';
+                } else {
+                    $popup_html .= '<a class="wp-block-button__link" href="' . get_permalink() . '?transition=' . $trans_name . '">';
+                    $popup_html .= __('Confirm', 'app');
+                    $popup_html .= '</a>';
+                }
+
                 $popup_html .= '</div>';
             }
 
@@ -1028,6 +1091,23 @@ MAILCONTENT;
 
     public function getSortableColumns() {
         return [];
+    }
+
+    public function getWishByKey($key) {
+        $query = new \WP_Query(array(
+            'posts_per_page' => -1,
+            'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
+            'post_status' => 'any',
+            'meta_query' => array(
+                array(
+                    'key' => 'key',
+                    'value' => $key
+                )
+            )
+        ));
+
+        $posts = $query->get_posts();
+        return array_pop($posts);
     }
 
 }

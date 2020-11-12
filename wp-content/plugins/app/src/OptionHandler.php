@@ -118,6 +118,17 @@ class OptionHandler {
         foreach ($fields as $field) {
             $shortcodes[] = '<code>[' . $field['id'] . ']</code>';
         }
+
+        $boxes = App::getInstance()->getSocialOrganisationController()->addMetaBox([]);
+        foreach ($boxes as $box) {
+            $fields = $box['fields'];
+            foreach ($fields as $field) {
+                $field_id = $field['id'];
+
+                $shortcodes[] = '<code>[social_organisation_' . $field['id'] . ']</code>';
+            }
+        }
+
         $shortcodes_description = sprintf(__('You can use following snippets to add content from the wish: %s', 'app'), implode(', ', $shortcodes));
 
         $meta_boxes[] = array(
@@ -243,8 +254,17 @@ class OptionHandler {
                     'desc' => $shortcodes_description
                 ),
                 array(
-                    'id' => 'jira_state_pre_' . WishPostType::STATE_IN_PROGRESS,
-                    'name' => __('In progress', 'app'),
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_IN_PROGRESS . '_postal',
+                    'name' => __('In progress and postal delivery', 'app'),
+                    'type' => 'wysiwyg',
+                    'options' => array(
+                        'textarea_rows' => 8
+                    ),
+                    'desc' => $shortcodes_description
+                ),
+                array(
+                    'id' => 'jira_state_pre_' . WishPostType::STATE_IN_PROGRESS . '_personal',
+                    'name' => __('In progress and personal delivery', 'app'),
                     'type' => 'wysiwyg',
                     'options' => array(
                         'textarea_rows' => 8
