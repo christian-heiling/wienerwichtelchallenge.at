@@ -47,7 +47,30 @@ $o = \app\App::getInstance()->getOptions();
         <p class="institution-info">
             <?php $so_id = rwmb_get_value('social_organisation_id'); ?>
             <?php echo get_the_title($so_id); ?>,
-            <?php echo rwmb_meta('zip', [], $so_id); ?> <?php echo rwmb_meta('city', [], $so_id); ?>
+            <?php 
+            if (empty(rwmb_meta('zip', [], $so_id))) {
+                echo rwmb_meta('postal_zip', [], $so_id) . ' ' . rwmb_meta('postal_city', [], $so_id) . ', ';
+            } else {
+                echo rwmb_meta('zip', [], $so_id) . ' ' . rwmb_meta('city', [], $so_id) . ', ';
+            }
+            ?>
+            <?php
+            $delivery_options = rwmb_get_value('delivery_options', [], $so_id);
+            
+            $delivery_option_string = [];
+            
+            if (is_array($delivery_options) && in_array('postal', $delivery_options)) {
+                $delivery_option_string[] = __('Postal delivery', 'app');
+            }
+            
+            if (is_array($delivery_options) && in_array('personal', $delivery_options)) {
+                $delivery_option_string[] = __('Personal delivery', 'app');
+            }
+            
+            $delivery_option_string = implode(',&nbsp;', $delivery_option_string);
+            
+            echo  __('Delivery Options', 'app') . ':&nbsp;' . $delivery_option_string;
+            ?>
         </p>
     </footer><!-- .entry-footer -->
 </div>

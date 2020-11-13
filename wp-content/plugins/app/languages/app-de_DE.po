@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2020-11-12 20:56+0100\n"
-"PO-Revision-Date: 2020-11-12 20:59+0100\n"
+"PO-Revision-Date: 2020-11-13 09:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -366,7 +366,7 @@ msgstr "Handlungsfeld"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:91
 msgid "Delivery Options"
-msgstr "Abgabearten"
+msgstr "Abgabemöglichkeiten"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:94
 msgid "Personal"
