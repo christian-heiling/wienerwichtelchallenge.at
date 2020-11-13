@@ -49,11 +49,12 @@ $o = \app\App::getInstance()->getOptions();
             <?php echo get_the_title($so_id); ?>,
             <?php 
             if (empty(rwmb_meta('zip', [], $so_id))) {
-                echo rwmb_meta('postal_zip', [], $so_id) . ' ' . rwmb_meta('postal_city', [], $so_id) . ', ';
+                echo rwmb_meta('postal_zip', [], $so_id) . ' ' . rwmb_meta('postal_city', [], $so_id);
             } else {
-                echo rwmb_meta('zip', [], $so_id) . ' ' . rwmb_meta('city', [], $so_id) . ', ';
+                echo rwmb_meta('zip', [], $so_id) . ' ' . rwmb_meta('city', [], $so_id);
             }
             ?>
+            <br>
             <?php
             $delivery_options = rwmb_get_value('delivery_options', [], $so_id);
             
