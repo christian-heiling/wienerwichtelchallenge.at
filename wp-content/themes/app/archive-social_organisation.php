@@ -36,12 +36,16 @@ $map = explode(',', $map);
 
 <?php
 foreach ($controller->getAll() as $organisation) {
+    if (empty(rwmb_get_value('zip', [], $organisation->ID))) {
+        continue;
+    }
+    
     $map = rwmb_get_value('map', [], $organisation->ID);
 
     $popupText = '<strong>' . $organisation->post_title . '</strong><br>'
-            . 'Handlungsfeld: ' . rwmb_get_value('field_of_action', [], $organisation->ID) . '<br>'
+            . __('Field of Action', 'app') . ': ' . rwmb_get_value('field_of_action', [], $organisation->ID) . '<br>'
             . '<a href=\\"' . get_permalink($organisation) . '\\">Mehr erfahren</a>';
-
+    
     echo 'L.marker([' . $map['latitude'] . ', ' . $map['longitude'] . ']).addTo(mymap).bindPopup("' . $popupText . '");';
 }
 ?>
