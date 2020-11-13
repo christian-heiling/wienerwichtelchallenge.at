@@ -418,13 +418,8 @@ MAILCONTENT;
     }
 
     public function restrictAccess() {
-
+   
         $options = \app\App::getInstance()->getOptions();
-
-        if (get_current_user_id() == 0 && !isset($_GET['fl'])) {
-            header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
-            exit;
-        }
 
         // is user logged in and fast login flag is set
         // then login
