@@ -123,7 +123,7 @@ class App {
                     $delivery_type = rwmb_meta('delivery_type', [], $wish->ID);
 
                     if (!empty($delivery_type)) {
-                        bp_send_email($delivery_type . '.' . $delivery_type, rwmb_get_value('wichtel_mail', [], $wish->ID), array('tokens' => $this->getWishController()->getMailTokens($wish->ID)));
+                        bp_send_email($type . '.' . $delivery_type, rwmb_get_value('wichtel_mail', [], $wish->ID), array('tokens' => $this->getWishController()->getMailTokens($wish->ID)));
                     }
                     exit;
                 }
