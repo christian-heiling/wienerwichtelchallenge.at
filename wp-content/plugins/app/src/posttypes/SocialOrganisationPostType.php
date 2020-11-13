@@ -273,9 +273,21 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoEntryMeta() {
-        $this->outputMetaBoxContentWithSpans(array(
-            'carrier', 'field_of_action', 'zip'
-        ));
+        echo '<span>';
+        if (!empty(trim(rwmb_meta('zip')))) {
+            echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
+        } else {
+            echo rwmb_meta('postal_zip') . ' ' . rwmb_meta('postal_city');
+        }
+        echo '</span>';
+        
+        echo '<span>' . __('Field of Action', 'app') . ': ';
+        $this->outputField('field_of_action', 'text');
+        echo '</span>';
+        
+        echo '<span>' . __('Carrier', 'app') . ': ';
+        $this->outputField('carrier', 'text');
+        echo '</span>';
     }
 
     public function echoEntryContent() {
@@ -300,7 +312,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             <?php
         }
 
-        echo '<p>' . rwmb_meta('description') . '</p>';
+        echo '<p>' . strip_tags(rwmb_meta('description'), '<br><ol><li><ul><p><strong><em>') . '</p>';
 
         echo '</div>';
         echo '<div class="wp-block-column">';
@@ -333,7 +345,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             echo '<h2>' . __('Personal Delivery', 'app') . '</h2>';
 
             echo '<h4>' . __('COVID19 Regulations', 'app') . '</h4>';
-            echo '<p>' . rwmb_meta('covid19_regulations') . '</p>';
+            echo '<p>' . strip_tags(rwmb_meta('covid19_regulations'), '<br><ol><li><ul><p><strong><em>') . '</p>';
 
             $this->outputMetaBoxContentWithHeadings(
                     array(
@@ -469,7 +481,7 @@ class SocialOrganisationPostType extends AbstractPostType {
     }
 
     public function echoExcerptContent() {
-        echo rwmb_meta('teaser');
+        echo strip_tags(rwmb_meta('teaser'));
     }
 
     public function getAll() {

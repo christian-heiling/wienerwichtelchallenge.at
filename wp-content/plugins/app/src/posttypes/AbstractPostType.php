@@ -258,7 +258,7 @@ abstract class AbstractPostType {
                     )
             );
         } else {
-            echo rwmb_meta($id);
+            echo strip_tags(rwmb_meta($id), '<br><ol><li><ul><p><strong><em>');
         }
     }
 
