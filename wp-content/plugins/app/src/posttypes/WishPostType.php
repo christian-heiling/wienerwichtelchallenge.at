@@ -872,7 +872,9 @@ MAILCONTENT;
         }
         foreach ($this->getTransitionsByState() as $s) {
             foreach ($s as $trans_name) {
-                $url = get_permalink($w) . '?transition=' . $trans_name . '&fl=' . urlencode(\app\App::getInstance()->encrypt(array_pop($wMeta['wichtel_mail'])));
+                // for the beginning do not use fast logins
+                $url = get_permalink($w) . '?transition=' . $trans_name;
+                //$url = get_permalink($w) . '?transition=' . $trans_name . '&fl=' . urlencode(\app\App::getInstance()->encrypt(array_pop($wMeta['wichtel_mail'])));
                 if ($trans_name == self::TRANSITION_ASSIGN) {
                     $tokens['wish.' . $trans_name . '.postal.url'] = $url . '&delivery_type=postal';
                     $tokens['wish.' . $trans_name . '.personal.url'] = $url . '&delivery_type=personal';
