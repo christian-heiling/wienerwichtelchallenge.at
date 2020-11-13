@@ -85,6 +85,20 @@ class App {
         add_action('bp_email_use_wp_mail', function() {
             return true;
         });
+
+        add_action('template_redirect', function() {
+            $post_type = get_post_type();
+            
+            $organisation_post_type = $this->getSocialOrganisationController()->getPostType();
+            $wish_post_type = $this->getWishController()->getPostType();
+
+            if (($organisation_post_type == $post_type && is_single() || $wish_post_type == $post_type)) {
+                header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+                header('Pragma: no-cache');
+                header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+            }
+        });
+        
         //maybe with this hook we can activate html mails
         //add_filter('wp_mail_content_type', function() { return 'text/html'; });
     }
@@ -103,13 +117,13 @@ class App {
             if (empty($wish)) {
                 return;
             }
-            
+
             if ($action == 'issueUpdate') {
                 $this->getJiraHandler()->doImportSingleIssue($key);
                 exit;
             } elseif ($action == 'sendMail') {
                 $type = $_GET['type'];
-                
+
                 $types = array_map(
                         function($e) {
                     return $e['action'];
@@ -279,7 +293,7 @@ class App {
         $cipher = self::ENCRYPTION_CIPHER;
         $key = SECURE_AUTH_KEY;
         $salt = SECURE_AUTH_SALT;
-        
+
         $c = base64_decode($ciphertext);
         $ivlen = openssl_cipher_iv_length($cipher);
         $iv = substr($salt, 0, $ivlen);
