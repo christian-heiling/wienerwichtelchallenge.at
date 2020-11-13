@@ -867,7 +867,7 @@ MAILCONTENT;
                 $cDate = new \DateTime($value);
                 $tokens['wish.' . $key] = date_i18n(get_option('date_format'), $cDate->getTimestamp());
             } else {
-                $tokens['wish.' . $key] = trim(strip_tags($value));
+                $tokens['wish.' . $key] = trim(strip_tags(str_replace("<br>", "\n", $value)));
             }
         }
         foreach ($this->getTransitionsByState() as $s) {
@@ -890,7 +890,19 @@ MAILCONTENT;
             if (substr($key, 0, 1) == '_') {
                 continue;
             }
-            $tokens['organisation.' . $key] = trim(strip_tags($value[0]));
+            
+            $value = $value[0];
+            
+            // remove all attributes
+            $value = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/si",'<$1$2>', $value);
+            
+            // replace br with linebreaks
+            $value = str_replace(array('<br>', '<br/>'), "\n", $value);
+            
+            // strip tags
+            $value = strip_tags($value);
+            
+            $tokens['organisation.' . $key] = $value;
         }
 
         // rename organisation.covid19
