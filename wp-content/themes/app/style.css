@@ -4982,4 +4982,16 @@ ul.wish-region-menu {
     height: inherit;
     object-position: 50% 50%; }
 
+/* info box */
+.entry .entry-content > .ad {
+  margin-bottom: 2em; }
+
+.entry .entry-content > .ad > .info-box {
+  text-align: center;
+  padding: 1em;
+  background-color: #f2f2f2; }
+  .entry .entry-content > .ad > .info-box p {
+    text-align: center;
+    color: #111111; }
+
 /*# sourceMappingURL=style.css.map */

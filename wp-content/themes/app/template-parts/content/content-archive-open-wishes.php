@@ -53,7 +53,7 @@ if (have_posts()) {
             $ad = $ads[array_rand($ads)];
 
             // echo ad
-            echo '<div style="display: flex">' . do_shortcode($ad) . '<br></div>';
+            echo '<div class="ad">' . do_shortcode($ad) . '</div>';
         }
     }
 
