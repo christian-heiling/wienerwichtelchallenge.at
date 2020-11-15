@@ -92,7 +92,7 @@ class App {
             $organisation_post_type = $this->getSocialOrganisationController()->getPostType();
             $wish_post_type = $this->getWishController()->getPostType();
 
-            if (($organisation_post_type == $post_type && is_single()) || $wish_post_type == $post_type || is_home()) {
+            if (($organisation_post_type == $post_type && is_single()) || $wish_post_type == $post_type || is_front_page()) {
                 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
                 header('Pragma: no-cache');
                 header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
