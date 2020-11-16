@@ -79,13 +79,13 @@ class JiraHandler {
         return $this->doPost('/rest/api/2/search', json_encode($post_params));
     }
 
-    public function doTransition($issue_id, $transition_id, $updateFields = [], $comment = '') {        
+    public function doTransition($issue_id, $transition_id, $updateFields = [], $comment = '') {
         $postData = array(
             'transition' => array(
                 'id' => $transition_id
             )
         );
-        
+
         if (!empty($comment)) {
             $postData['update'] = array(
                 'comment' => array(
@@ -107,7 +107,7 @@ class JiraHandler {
         $this->doPost('/rest/api/2/issue/' . $issue_id . '/transitions', $postData);
         return $this->doImportSingleIssue($issue_id);
     }
-    
+
     public function doComment($issue_id, $comment) {
         $postData = array(
             'body' => $comment
@@ -119,7 +119,7 @@ class JiraHandler {
     }
 
     public function doImportSingleIssue($issue_id) {
-
+        wp_cache_flush();
 
         // request wish
         $i = $this->doGet('/rest/api/2/issue/' . $issue_id . '/');
@@ -144,12 +144,12 @@ class JiraHandler {
         $posts = $query->get_posts();
 
         foreach ($posts as $post) {
-            wp_delete_post($post->ID);
+            wp_delete_post($post->ID, true);
         }
 
         // create wish
         $this->createWish($i);
-        
+
         return $i;
     }
 
@@ -168,6 +168,7 @@ class JiraHandler {
 
     public function doPartialImport($part, $debug = false) {
         wp_suspend_cache_addition();
+        wp_cache_flush();
         $start = microtime(true);
 
         $options = App::getInstance()->getOptions();
@@ -228,6 +229,8 @@ class JiraHandler {
 
     public function doFullImport($debug = false) {
         wp_suspend_cache_addition();
+        wp_cache_flush();
+
         $start = microtime(true);
 
         $options = App::getInstance()->getOptions();
@@ -290,6 +293,10 @@ class JiraHandler {
     }
 
     public function clearAllWishes() {
+        
+        wp_suspend_cache_addition();
+        wp_cache_flush();
+        
         $wish_post_type = App::getInstance()->getWishController()->getPostType();
 
         global $wpdb;
