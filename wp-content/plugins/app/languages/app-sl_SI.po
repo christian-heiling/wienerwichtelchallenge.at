@@ -7,20 +7,20 @@ msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2020-11-12 20:56+0100\n"
-"PO-Revision-Date: 2020-11-15 18:25+0100\n"
+"PO-Revision-Date: 2020-11-16 17:59+0000\n"
 "Last-Translator: Ana Mohoric\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3||n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Poedit 2.2\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : "
+"n%100==3||n%100==4 ? 2 : 3;\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_x\n"
-"X-Loco-Version: 2.4.3; wp-5.5.1\n"
+"X-Loco-Version: 2.4.4; wp-5.5.3\n"
 "X-Poedit-SearchPath-0: plugins/app\n"
 "X-Poedit-SearchPath-1: themes/app\n"
 
@@ -71,7 +71,7 @@ msgstr "Noga"
 
 #: plugins/app/src/OptionHandler.php:184
 msgid "Start Year of Copyright"
-msgstr "Prvo leto uporabe Copyright"
+msgstr "Prvo leto uporabe avtorskih pravic"
 
 #: plugins/app/src/OptionHandler.php:191
 msgid "JIRA Connection Settings"
@@ -103,7 +103,7 @@ msgstr "Odpri"
 
 #: plugins/app/src/OptionHandler.php:227
 msgid "In progress"
-msgstr "In progress"
+msgstr "V teku"
 
 #: plugins/app/src/OptionHandler.php:232 plugins/app/src/OptionHandler.php:276
 msgid "Wish fulfilled"
@@ -115,17 +115,15 @@ msgstr "Darilo potrjeno"
 
 #: plugins/app/src/OptionHandler.php:244
 msgid "Before Wish Letter"
-msgstr "Before Wish Letter"
+msgstr "Pred seznamom želja"
 
 #: plugins/app/src/OptionHandler.php:258
 msgid "In progress and postal delivery"
-msgstr ""
+msgstr "V poteku oz. na pošti"
 
 #: plugins/app/src/OptionHandler.php:267
-#, fuzzy
-#| msgid "Personal Delivery"
 msgid "In progress and personal delivery"
-msgstr "Osebna predaja"
+msgstr "V teku in osebna predaja"
 
 #: plugins/app/src/OptionHandler.php:296
 msgid "JIRA Transition Ids"
@@ -133,17 +131,17 @@ msgstr "JIRA Transition Ids"
 
 #: plugins/app/src/OptionHandler.php:301 plugins/app/src/OptionHandler.php:323
 msgid "Assign: open => In progress"
-msgstr "Assign: open => In progress"
+msgstr "Označi: na voljo => v teku"
 
 #: plugins/app/src/OptionHandler.php:306 plugins/app/src/OptionHandler.php:332
 #: plugins/app/src/OptionHandler.php:371
 msgid "Fulfilling: In progress => Wish fulfilled"
-msgstr "Fulfilling: In progress => Wish fulfilled"
+msgstr "Uresničevanje: v teku => želja je uresničena"
 
 #: plugins/app/src/OptionHandler.php:311 plugins/app/src/OptionHandler.php:341
 #: plugins/app/src/OptionHandler.php:376
 msgid "Return: In progress => Open"
-msgstr "Return: In progress => Open"
+msgstr "Sproščanje: V teku => na voljo"
 
 #: plugins/app/src/OptionHandler.php:318
 msgid "Transition: Confirm Question"
@@ -151,7 +149,7 @@ msgstr "Transition: Confirm Question"
 
 #: plugins/app/src/OptionHandler.php:350
 msgid "Fallback: If user is not logged in"
-msgstr "Fallback: If user is not logged in"
+msgstr "Napaka: če uporabnik ni prijavljen"
 
 #: plugins/app/src/OptionHandler.php:361
 msgid "Transition: Button Caption"
@@ -159,7 +157,7 @@ msgstr "Transition: Button Caption"
 
 #: plugins/app/src/OptionHandler.php:366
 msgid "Assign: Open => In progress"
-msgstr "Assign: Open => In progress"
+msgstr "Označi: na voljo => v teku"
 
 #: plugins/app/src/OptionHandler.php:383 plugins/app/src/OptionHandler.php:403
 #: plugins/app/src/posttypes/EventPostType.php:150
@@ -204,7 +202,7 @@ msgstr "Teaser"
 
 #: plugins/app/src/OptionHandler.php:426
 msgid "Event Options"
-msgstr "Event Options"
+msgstr "Možnosti dogodka"
 
 #: plugins/app/src/OptionHandler.php:431 plugins/app/src/OptionHandler.php:446
 #: plugins/app/src/OptionHandler.php:462
@@ -221,11 +219,11 @@ msgstr "Sponzorji možnosti"
 
 #: plugins/app/src/OptionHandler.php:472
 msgid "Ads"
-msgstr "Ads"
+msgstr "Oglasi"
 
 #: plugins/app/src/OptionHandler.php:477
 msgid "Ad Banner"
-msgstr "Ad Banner"
+msgstr "Prostor za oglas"
 
 #: plugins/app/src/OptionHandler.php:488
 msgid "Amazon.de Affiliate"
@@ -249,7 +247,7 @@ msgstr "Jira Import"
 
 #: plugins/app/src/posttypes/EventPostType.php:8
 msgid "Events"
-msgstr "Events"
+msgstr "Dogodki"
 
 #: plugins/app/src/posttypes/EventPostType.php:20
 msgid "events-slug"
@@ -259,7 +257,7 @@ msgstr "events-slug"
 #: plugins/app/src/posttypes/EventPostType.php:130
 #: plugins/app/src/posttypes/EventPostType.php:224
 msgid "Location"
-msgstr "Location"
+msgstr "Lokacija"
 
 #: plugins/app/src/posttypes/EventPostType.php:106
 msgid "Time"
@@ -271,16 +269,16 @@ msgstr "Začetek"
 
 #: plugins/app/src/posttypes/EventPostType.php:117
 msgid "Ends"
-msgstr "Ends"
+msgstr "Zaključiti"
 
 #: plugins/app/src/posttypes/EventPostType.php:125
 msgid "Location Infos"
-msgstr "Location Infos"
+msgstr "Podatki o lokaciji"
 
 #: plugins/app/src/posttypes/EventPostType.php:157
 #: plugins/app/src/posttypes/EventPostType.php:288
 msgid "Public Reachable via"
-msgstr "Public Reachable via"
+msgstr "Javni dostop"
 
 #: plugins/app/src/posttypes/EventPostType.php:164
 msgid "Description"
@@ -329,7 +327,7 @@ msgstr "Začni pri"
 
 #: plugins/app/src/posttypes/EventPostType.php:226
 msgid "End at"
-msgstr "End at"
+msgstr "Zaključi"
 
 #: plugins/app/src/posttypes/EventPostType.php:227
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:256
@@ -371,7 +369,7 @@ msgstr "Oseba"
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:84
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:253
 msgid "Field of Action"
-msgstr "Field of Action"
+msgstr "Področje delovanja"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:91
 msgid "Delivery Options"
@@ -431,7 +429,7 @@ msgstr "Associated Jira Users"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:234
 msgid "Asylum and Migration"
-msgstr ""
+msgstr "Azil in migracije"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:235
 msgid "Health"
@@ -447,7 +445,7 @@ msgstr "Osebe z invalidnostjo"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:238
 msgid "Neighborhood Aid"
-msgstr "Neighborhood Aid"
+msgstr "Pomoč skupnosti"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:239
 msgid "Addicted People"
@@ -527,13 +525,14 @@ msgstr ""
 
 #: plugins/app/src/posttypes/WishPostType.php:119
 msgid "Wichtel want to takeover a wish and send it later by post"
-msgstr ""
+msgstr "Nekdo bi rad uresničil željo ter darilo poslal po pošti"
 
 #: plugins/app/src/posttypes/WishPostType.php:126
 msgid ""
 "Wichtel want to takeover a wish and bring it later directly to the "
 "institution"
 msgstr ""
+"Nekdo bi rad uresničil željo ter darilo dostavil direktno na organizacijo"
 
 #: plugins/app/src/posttypes/WishPostType.php:129
 msgid ""
@@ -545,7 +544,7 @@ msgstr ""
 
 #: plugins/app/src/posttypes/WishPostType.php:133
 msgid "after 7 days: remember mail"
-msgstr ""
+msgstr "po 7 dneh: opomnik"
 
 #: plugins/app/src/posttypes/WishPostType.php:136
 msgid "[{{{site.name}}}] Hast du den Wunsch {{wish.title}} erfüllt?"
@@ -589,19 +588,15 @@ msgid "wish-region-slug"
 msgstr "wish-region-slug"
 
 #: plugins/app/src/posttypes/WishPostType.php:619
-#, fuzzy
-#| msgid ""
-#| "Found a Wichtel!\n"
-#| " Wichtel %1 want to fulfill the wish %2 (%3) with the recipient "
-#| "identification %4"
 msgid ""
 "*Found a Wichtel!*\n"
 "\n"
 "Wichtel %wichtel_name% want to fulfill the wish %wish_title% (%wish_key%).\n"
 "The present is for %wish_recipient%."
 msgstr ""
-"Našli smo dobro vilo!\n"
-" Oseba %1 bi rada izpolnila željo %2 (%3) s šifro prejemnika %4"
+"*Našli smo dobro vilo!*\n"
+" Oseba %wichtel_name% bi rada izpolnila željo%wish_title% (%wish_key%) s "
+"šifro prejemnika %wish_recipient%."
 
 #: plugins/app/src/posttypes/WishPostType.php:624
 msgid ""
@@ -615,6 +610,15 @@ msgid ""
 "\n"
 "%approve_link%"
 msgstr ""
+"*Darilo je bilo dostavljeno na organizacijo!*\n"
+"\n"
+"Obdarovalec %wichtel_name% je sporočil(a), da je bilo darilo %wish_title% "
+"(%wish_key%) dostavljeno direktno na organizacijo.\n"
+"Darilo je za %wish_recipient%\n"
+"\n"
+"(!) Prosimo, potrdite.\n"
+"\n"
+"%approve_link%"
 
 #: plugins/app/src/posttypes/WishPostType.php:626
 msgid ""
@@ -629,6 +633,16 @@ msgid ""
 "\n"
 "%approve_link%"
 msgstr ""
+"*Darilo bo kmalu dostavljeno!*\n"
+"\n"
+"Obdarovalec %wichtel_name% je sporočil(a), da je oddal(a) darilo "
+"%wish_title% (%wish_key%) na pošto. Paket je na poti in bodostavljen v "
+"naslendjih dneh. \n"
+"Darilo je za %wish_recipient%\n"
+"\n"
+"(!) Prosimo, potrdite, ko bo darilo prispelo.\n"
+"\n"
+"%approve_link%"
 
 #: plugins/app/src/posttypes/WishPostType.php:628
 msgid ""
@@ -642,25 +656,32 @@ msgid ""
 "\n"
 "%approve_link%"
 msgstr ""
+"*Darilo je prispelo!*\n"
+"\n"
+"Obdarovalec %wichtel_name% je sporočil, da je osebno dostavil darilo "
+"%wish_title% (%wish_key%).\n"
+"Darilo je za %wish_recipient%\n"
+"\n"
+"(!) Prosimo, potrdite.\n"
+"\n"
+"%approve_link%"
 
 #: plugins/app/src/posttypes/WishPostType.php:631
-#, fuzzy
-#| msgid ""
-#| "Wichtel %1 do not like to fulfill wish %2 (%3) with the recipient "
-#| "identification %4. Therefore we are looking for a new Wichtel for this "
-#| "wish."
 msgid ""
 ":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n"
 "\n"
 " It was for %wish_recipient%.\n"
 "Therefore we are looking for a new Wichtel."
 msgstr ""
-"Dobra vila %1 noče uresničiti želje %2 (%3) s šifro prejemnika %4. Iščemo "
-"novo dobro vilo, ki bi uresničila željo."
+":( *Obdarovalec %wichtel_name% ne more uresničiti želje %wish_title% "
+"(%wish_key%)*\n"
+"\n"
+"Darilo je bilo namenjeno %wish_recipient%.\n"
+"Išečmo drugo dobro vilo."
 
 #: plugins/app/src/posttypes/WishPostType.php:685
 msgid "I confirm that the present is arrived"
-msgstr ""
+msgstr "Potrjujem, da je darilo prispelo"
 
 #: plugins/app/src/posttypes/WishPostType.php:701
 msgid "Wishes"
@@ -691,15 +712,15 @@ msgstr "Več o tem"
 
 #: plugins/app/src/posttypes/WishPostType.php:1027
 msgid "Log in"
-msgstr "Log in"
+msgstr "Prijava"
 
 #: plugins/app/src/posttypes/WishPostType.php:1043
 msgid "I will send the present by post"
-msgstr ""
+msgstr "Darilo bom poslal po pošti"
 
 #: plugins/app/src/posttypes/WishPostType.php:1046
 msgid "I will bring the present to the institution"
-msgstr ""
+msgstr "Darilo bom odnesel na socialno organizacijo"
 
 #: plugins/app/src/posttypes/WishPostType.php:1050
 msgid "Confirm"
@@ -727,23 +748,23 @@ msgstr "ni prostih želja"
 
 #: themes/app/footer.php:43
 msgid "Our supporters"
-msgstr ""
+msgstr "Naši sponzorji in ambasadorji"
 
 #: themes/app/footer.php:60
 msgid "We support"
-msgstr ""
+msgstr "Mi podpiramo"
 
 #: themes/app/functions.php:12
 msgid "Page Sidebar"
-msgstr "Page Sidebar"
+msgstr "Stranski meni"
 
 #: themes/app/functions.php:13
 msgid "Post Sidebar"
-msgstr "Post Sidebar"
+msgstr "Stranski meni"
 
 #: themes/app/functions.php:14
 msgid "Event Sidebar"
-msgstr "Event Sidebar"
+msgstr "Stranski meni dogodka"
 
 #: themes/app/functions.php:15
 msgid "Social Organisation Sidebar"
@@ -751,33 +772,31 @@ msgstr "Socialnovarstvene organizacije Sidebar"
 
 #: themes/app/functions.php:16
 msgid "Sponsor Sidebar"
-msgstr "Sponzorji Sidebar"
+msgstr "Sponzorji stranski meni"
 
 #: themes/app/template-parts/content/content-excerpt.php:22
 msgid "Featured"
-msgstr "Featured"
+msgstr "Izpostavljeno"
 
 #: themes/app/template-parts/content/content-single-wish.php:68
 msgid "You have following possibilities to deliver your present:"
-msgstr ""
+msgstr "Na voljo so naslednje možnosti dostave paketa:"
 
 #: themes/app/template-parts/content/content-single-wish.php:73
-#, fuzzy
-#| msgid "Postal Delivery"
 msgid "Postal delivery"
-msgstr "Poštna pošiljka"
+msgstr "Poštna pošiljka "
 
 #: themes/app/template-parts/content/content-single-wish.php:74
 msgid "If you want to stay at home."
-msgstr ""
+msgstr "Če bi raje ostali doma."
 
 #: themes/app/template-parts/content/content-single-wish.php:76
 msgid "Write following on your package:"
-msgstr ""
+msgstr "Na paket prosim dopišite naslednje:"
 
 #: themes/app/template-parts/content/content-single-wish.php:86
 msgid "Wichtel-Present for %recipient%"
-msgstr ""
+msgstr "Uresničena želja za %recipient%"
 
 #: themes/app/template-parts/content/content-single-wish.php:98
 #: themes/app/template-parts/content/content-single-wish.php:136
@@ -785,32 +804,32 @@ msgid ""
 "All blured out data you will see after confirming that you want to fulfill "
 "this wish."
 msgstr ""
+"Informacijo, ki je trenutno zamegljena, bo vidna po tem, ko potrdite, da "
+"boste uresničili željo."
 
 #: themes/app/template-parts/content/content-single-wish.php:105
-#, fuzzy
-#| msgid "Personal Delivery"
 msgid "Personal delivery"
-msgstr "Osebna predaja"
+msgstr "Osebna predaja "
 
 #: themes/app/template-parts/content/content-single-wish.php:106
 msgid "If you are living next to the social institiution and want to visit."
-msgstr ""
+msgstr "Če živite v bližini organizacije in jo želite obiskati."
 
 #: themes/app/template-parts/content/content-single-wish.php:115
 msgid ""
 "Please write \"%recipient%\" on your present to assure that the right person "
 "will get it."
 msgstr ""
+"Prosimo, opremite paket s šifro \"%recipient%\" , tako bo darilo lahko "
+"prišlo v prave roke."
 
 #: themes/app/template-parts/content/content-single-wish.php:117
 msgid "Be aware of following COVID-19 rules:"
-msgstr ""
+msgstr "Prosimo, upoštevajte naslednje protikoronske ukrepe:"
 
 #: themes/app/template-parts/content/content-single-wish.php:120
-#, fuzzy
-#| msgid "Drop-off Point"
 msgid "Drop-off-point"
-msgstr "Mesto predaje paketa"
+msgstr "Mesto predaje paketa "
 
 #: themes/app/template-parts/content/content-single-wish.php:161
 msgid "Contact for Quenstions"
@@ -867,58 +886,3 @@ msgstr "Sekunda"
 #: themes/app/template-parts/header/event-countdown.php:54
 msgid "Seconds"
 msgstr "Sekund"
-
-#~ msgid "Wichtel hat sich bereit erklärt einen Wunsch zu erfüllen"
-#~ msgstr "Nekdo je potrdil, da bi uresničil izbrano željo."
-
-#~ msgid "nach 3 Tagen: Erinnerungsmail"
-#~ msgstr "po 3 dneh: opomnik"
-
-#~ msgid ""
-#~ "Present delivered!\n"
-#~ " Wichtel %1 has delivered the present %2 (%3) with the recipient "
-#~ "identification %4"
-#~ msgstr ""
-#~ "Darilo je prispelo!\n"
-#~ " Dobra vila %1 je poslala darilo %2 (%3) s šifro prejemnika %4"
-
-#~ msgid "Delivery Infos"
-#~ msgstr "Informacije o pošiljki"
-
-#~ msgid "Du hast folgende Möglichkeiten, dein Geschenk abzugeben:"
-#~ msgstr "Imaš naslednje možnosti oddaje paketa:"
-
-#~ msgid "Persönliche Abgabe"
-#~ msgstr "Osebna predaja"
-
-#~ msgid ""
-#~ "Wenn du in der Nähe wohnst und die Einrichtung persönlich kennenlernen "
-#~ "willst."
-#~ msgstr "Če živiš v bližini in bi rad(a) osebno spoznal(a) organizacijo."
-
-#~ msgid "Abgabezeiten"
-#~ msgstr "Delovni čas"
-
-#~ msgid "Als Amazon.de-Geschenk"
-#~ msgstr "Kot Amazon.de-darilo"
-
-#~ msgid "Wenn du nicht in der Nähe wohnst und kein Geschenk verpacken willst"
-#~ msgstr "Če ne živiš v bližini in ne bi sam(a) oddal(a) darila."
-
-#~ msgid "Mit der Post"
-#~ msgstr "Po pošti"
-
-#~ msgid ""
-#~ "Wenn du nicht in der Nähe wohnst und dein Geschenk selbst liebevoll "
-#~ "verpacken willst"
-#~ msgstr "Če živiš v bližini in bi rad(a) sam(a) oddala darilo."
-
-#~ msgid ""
-#~ "Schreibe die Empfängerkennung auf das Geschenk und sende das Paket an:"
-#~ msgstr "Opremi paket s šifro prejemnika in ga pošlji na naslov:"
-
-#~ msgid "Empfängerkennung"
-#~ msgstr "Šifra prejemnika"
-
-#~ msgid "Ort der Abgabe"
-#~ msgstr "Kraj predaje paketa"
