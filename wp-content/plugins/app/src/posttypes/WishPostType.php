@@ -447,9 +447,15 @@ MAILCONTENT;
             // ... is not open
             // and not related to the user and not admin or editor
             if (rwmb_meta('status_id') !== $options->get('jira_state', self::STATE_OPEN)) {
-                // 302 redirect it to the wish overview page
-
+                
+                if (get_current_user_id() == 0) {
+                    // login to do that
+                    header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
+                    exit;
+                } 
+                
                 if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
+                    // to show it is permitted
                     header('Location: ' . home_url('/' . $this->getSlug() . '/'));
                     exit;
                 }
