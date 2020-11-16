@@ -88,7 +88,7 @@ class App {
 
         add_action('template_redirect', function() {
             $post_type = get_post_type();
-            
+
             $organisation_post_type = $this->getSocialOrganisationController()->getPostType();
             $wish_post_type = $this->getWishController()->getPostType();
 
@@ -98,16 +98,21 @@ class App {
                 header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
             }
         });
-        
+
         add_filter('auth_cookie_expiration', function($length, $user_id, $remember) {
             return 2 * MONTH_IN_SECONDS;
         }, 999, 3);
-        
+
         //maybe with this hook we can activate html mails
         //add_filter('wp_mail_content_type', function() { return 'text/html'; });
     }
 
     public function handleJiraRequests() {
+
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+
         if (isset($_GET['action'])) {
             $action = $_GET['action'];
         } else {
@@ -243,6 +248,11 @@ class App {
     }
 
     public function doFullImport() {
+
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+
         global $current_user;
         if (user_can($current_user, 'administrator') && array_key_exists('doFullImport', $_GET) && $_GET['doFullImport'] == 1) {
             $this->getJiraHandler()->doFullImport();
@@ -254,6 +264,11 @@ class App {
     }
 
     public function handleAjaxRequest() {
+
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+
         global $current_user;
 
         if (user_can($current_user, 'administrator') && array_key_exists('ajax-action', $_GET)) {
