@@ -279,15 +279,15 @@ MAILCONTENT;
         if (empty($wish_id)) {
             $wish_id = get_the_ID();
         }
-        
+
         $found_wichtel = rwmb_get_value('found_wichtel_date', [], $wish_id);
-        
+
         $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date', [], $wish_id));
-        
+
         if (!empty($found_wichtel)) {
             $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
             $currentLastWichtelDeliveryDate->add(new \DateInterval('P14D'));
-            
+
             if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
                 $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
             }
@@ -295,7 +295,7 @@ MAILCONTENT;
         } else {
             $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);
             $currentLastWichtelDeliveryDate->add(new \DateInterval('P14D'));
-            
+
             if ($currentLastWichtelDeliveryDate->getTimestamp() > $lastWichtelDeliveryDate->getTimestamp()) {
                 $currentLastWichtelDeliveryDate = $lastWichtelDeliveryDate;
             }
@@ -418,7 +418,7 @@ MAILCONTENT;
     }
 
     public function restrictAccess() {
-   
+
         $options = \app\App::getInstance()->getOptions();
 
         // is user logged in and fast login flag is set
@@ -447,13 +447,13 @@ MAILCONTENT;
             // ... is not open
             // and not related to the user and not admin or editor
             if (rwmb_meta('status_id') !== $options->get('jira_state', self::STATE_OPEN)) {
-                
+
                 if (get_current_user_id() == 0) {
                     // login to do that
                     header('Location: ' . wp_login_url(get_permalink() . '?' . $_SERVER['QUERY_STRING']));
                     exit;
-                } 
-                
+                }
+
                 if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
                     // to show it is permitted
                     header('Location: ' . home_url('/' . $this->getSlug() . '/'));
@@ -536,6 +536,11 @@ MAILCONTENT;
     }
 
     public function handleTransition() {
+
+        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        header('Pragma: no-cache');
+        header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+
         $o = \app\App::getInstance()->getOptions();
 
         // is a transition?
@@ -896,33 +901,33 @@ MAILCONTENT;
             if (substr($key, 0, 1) == '_') {
                 continue;
             }
-            
+
             $value = $value[0];
-            
+
             // remove all attributes
-            $value = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/si",'<$1$2>', $value);
-            
+            $value = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/si", '<$1$2>', $value);
+
             // replace br with linebreaks
             $value = str_replace(array('<br>', '<br/>'), "\n", $value);
-            
+
             // strip tags
             $value = strip_tags($value);
-            
+
             $tokens['organisation.' . $key] = $value;
         }
 
         // rename organisation.covid19
         $tokens['organisation.covid19'] = $tokens['organisation.covid19_regulations'];
         unset($tokens['organisation.covid19_regulations']);
-        
+
         // deliver always addressee, street, zip, city depending on the delivery type
         if (!empty($tokens['wish.delivery_type']) && $tokens['wish.delivery_type'] == 'postal') {
             $tokens['organisation.addressee'] = $tokens['organisation.postal_addressee'];
             $tokens['organisation.street'] = $tokens['organisation.postal_street'];
             $tokens['organisation.zip'] = $tokens['organisation.postal_zip'];
-            $tokens['organisation.city'] = $tokens['organisation.postal_city'];          
+            $tokens['organisation.city'] = $tokens['organisation.postal_city'];
         }
-        
+
         unset($tokens['organisation.postal_addressee']);
         unset($tokens['organisation.postal_street']);
         unset($tokens['organisation.postal_zip']);
