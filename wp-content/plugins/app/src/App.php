@@ -99,6 +99,10 @@ class App {
             }
         });
         
+        add_filter('auth_cookie_expiration', function($length, $user_id, $remember) {
+            return 2 * MONTH_IN_SECONDS;
+        }, 999, 3);
+        
         //maybe with this hook we can activate html mails
         //add_filter('wp_mail_content_type', function() { return 'text/html'; });
     }
