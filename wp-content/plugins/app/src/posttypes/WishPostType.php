@@ -556,7 +556,7 @@ MAILCONTENT;
 
         // check if a transition is valid ...
         // if not vergeben then wichtel_id must be equal current user id
-        if ($_GET['transition'] !== self::TRANSITION_ASSIGN && rwmb_get_value('wichtel_id') != get_current_user_id()) {
+        if ($_GET['transition'] !== self::TRANSITION_ASSIGN && (rwmb_get_value('wichtel_id') != get_current_user_id()) && !current_user_can('administrator')) {
             return;
         }
 
@@ -604,7 +604,7 @@ MAILCONTENT;
         $wish = $this->getWishByKey($wishKey);
 
         $replace_pattern = array(
-            'wichtel_name' => $current_user->data->display_name,
+            'wichtel_name' => $i->fields->{\app\JiraHandler::JIRA_FIELD_WICHTEL_NAME},
             'wish_title' => $i->fields->{\app\JiraHandler::JIRA_FIELD_SUMMARY},
             'wish_key' => $i->{\app\JiraHandler::JIRA_FIELD_KEY},
             'wish_recipient' => $i->fields->{\app\JiraHandler::JIRA_FIELD_RECIPIENT},
