@@ -181,7 +181,6 @@ class SocialOrganisationPostType extends AbstractPostType {
                         'teeny' => true
                     )
                 )
-                
             )
         );
 
@@ -231,19 +230,32 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionOptions() {
         $field_of_actions = array(
-            __('Asylum and Migration', 'app'),
-            __('Health', 'app'),
-            __('Childrens', 'app'),
-            __('People with Disablities', 'app'),
-            __('Neighborhood Aid', 'app'),
-            __('Addicted People', 'app'),
-            __('Homeless People', 'app')
+            array('value' => 'Asly und Migration', 'label' => __('Asylum and Migration', 'app')),
+            array('value' => 'Gesundheit', 'label' => __('Health', 'app')),
+            array('value' => 'Kinder- und Jugendhilfe', 'label' => __('Childrens', 'app')),
+            array('value' => 'Menschen mit Behinderungen', 'label' => __('People with Disablities', 'app')),
+            array('value' => 'Nachbarschaftshilfe', 'label' => __('Neighborhood Aid', 'app')),
+            array('value' => 'Suchthilfe', 'label' => __('Addicted People', 'app')),
+            array('value' => 'Wohnungslosenhilfe', 'label' => __('Homeless People', 'app'))
         );
 
-        $field_of_actions = array_combine($field_of_actions, $field_of_actions);
-        asort($field_of_actions);
+        usort($field_of_actions, function($a, $b) {
+            return strcasecmp($a['label'], $b['label']);
+        });
 
         return $field_of_actions;
+    }
+
+    public function getFieldOfActionLabelByValue($value) {
+        $options = $this->getFieldOfActionOptions();
+        
+        foreach($options as $o) {
+            if ($o['value'] == $value) {
+                return $o['label'];
+            }
+        }
+        
+        return '';
     }
 
     public function setColumnHead() {
@@ -280,11 +292,11 @@ class SocialOrganisationPostType extends AbstractPostType {
             echo rwmb_meta('postal_zip') . ' ' . rwmb_meta('postal_city');
         }
         echo '</span>';
-        
+
         echo '<span>' . __('Field of Action', 'app') . ': ';
-        $this->outputField('field_of_action', 'text');
+        echo $this->getFieldOfActionLabelByValue(rwmb_meta('field_of_action'));
         echo '</span>';
-        
+
         echo '<span>' . __('Carrier', 'app') . ': ';
         $this->outputField('carrier', 'text');
         echo '</span>';
@@ -316,7 +328,7 @@ class SocialOrganisationPostType extends AbstractPostType {
 
         echo '</div>';
         echo '<div class="wp-block-column">';
-        
+
         $this->outputMetaBoxContentWithHeadings(
                 array(
             array(
@@ -329,11 +341,11 @@ class SocialOrganisationPostType extends AbstractPostType {
             'first_heading' => '2'
                 )
         );
-        
+
         echo '<a href="' . rwmb_meta('link') . '">' . rwmb_meta('link') . '</a>';
-        
+
         if (in_array('postal', rwmb_meta('delivery_options'))) {
-        echo '<h2>' . __('Postal Delivery', 'app') . '</h2>';
+            echo '<h2>' . __('Postal Delivery', 'app') . '</h2>';
             echo '<p>';
             echo rwmb_meta('postal_addressee') . '<br>';
             echo rwmb_meta('postal_street') . '<br>';
@@ -359,14 +371,14 @@ class SocialOrganisationPostType extends AbstractPostType {
                 'first_heading' => '3'
                     )
             );
-            
+
             echo '<h4>' . __('Drop-off Point', 'app') . '</h4>';
             echo '<p>';
             echo rwmb_meta('addressee') . '<br>';
             echo rwmb_meta('street') . '<br>';
             echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
             echo '</p>';
-            
+
             $this->outputMetaBoxContentWithHeadings(
                     array(
                 array(
@@ -380,10 +392,10 @@ class SocialOrganisationPostType extends AbstractPostType {
                     )
             );
         }
-        
+
         echo '</div>';
         echo '</div>';
-        
+
         $o = \app\App::getInstance()->getOptions();
         $wishListState = $o->get('wish_list_status');
 
@@ -454,7 +466,8 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function echoExcerptMeta() {
 
-        $logo = array_pop(rwmb_meta('logo', array('limit' => 1)));
+        $logo = rwmb_meta('logo', array('limit' => 1));
+        $logo = array_pop($logo);
         ?>
         <figure class="social-organisation-logo wp-block-image is-resized overflow">
             <img src="<?php echo $logo['full_url'] ?>"
@@ -465,7 +478,7 @@ class SocialOrganisationPostType extends AbstractPostType {
                  width="1920"
                  height="516">
         </figure>
-        
+
         <?php
         echo '<span>';
         if (!empty(trim(rwmb_meta('zip')))) {
@@ -474,7 +487,7 @@ class SocialOrganisationPostType extends AbstractPostType {
             echo rwmb_meta('postal_zip') . ' ' . rwmb_meta('postal_city');
         }
         echo '</span>';
-        
+
         echo '<span>' . __('Carrier', 'app') . ': ';
         $this->outputField('carrier', 'text');
         echo '</span>';

@@ -8,6 +8,22 @@ class WishPostType extends AbstractPostType {
     const STATE_IN_PROGRESS = 'in_arbeit';
     const STATE_FULFILLED = 'erfuellt';
     const STATE_DONE = 'abgeschlossen';
+    
+    public function getTranslationForState($state) {
+        $trans = array(
+            'Offen' => __('Open', 'app'),
+            'In Arbeit' => __('In progress', 'app'),
+            'Erfüllt' => __('Wish fulfilled', 'app'),
+            'Abgeschlossen' => __('Present confirmed', 'app'),
+        );
+        
+        if (array_key_exists($state, $trans)) {
+            return $trans[$state];
+        } else {
+            return $state;
+        }
+    }
+    
     const TRANSITION_ASSIGN = 'vergeben';
     const TRANSITION_FULFILL = 'erfuellen';
     const TRANSITION_PUT_BACK = 'zuruecklegen';

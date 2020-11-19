@@ -171,7 +171,7 @@ if (empty($deliveryOptions)) {
             <h2><?php echo sprintf(__('About %s', 'app'), get_the_title($institution_id)); ?></h2>
             <p><?php echo rwmb_meta('teaser', [], $institution_id); ?></p>
             <p><a href="<?php echo get_permalink($institution_id); ?>">
-                    Mehr Infos über <?php echo $institution->post_title; ?></a>
+                    <?php echo __('Read more...'); ?></a>
             </p>
         <?php endif; ?>
     </div><!-- .entry-content -->

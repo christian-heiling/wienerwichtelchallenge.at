@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2020-11-12 20:56+0100\n"
-"PO-Revision-Date: 2020-11-16 17:59+0000\n"
+"PO-Revision-Date: 2020-11-17 20:23+0000\n"
 "Last-Translator: Ana Mohoric\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
@@ -251,7 +251,7 @@ msgstr "Dogodki"
 
 #: plugins/app/src/posttypes/EventPostType.php:20
 msgid "events-slug"
-msgstr "events-slug"
+msgstr "dogodki"
 
 #: plugins/app/src/posttypes/EventPostType.php:85
 #: plugins/app/src/posttypes/EventPostType.php:130
@@ -346,7 +346,7 @@ msgstr "Socialnovarstvene organizacije"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:54
 msgid "organisations-slug"
-msgstr "organisations-slug"
+msgstr "organizacije"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:64
 #: plugins/app/src/posttypes/SponsorPostType.php:30
@@ -487,7 +487,7 @@ msgstr "Sponzorji"
 
 #: plugins/app/src/posttypes/SponsorPostType.php:16
 msgid "sponsors-slug"
-msgstr "sponsors-slug"
+msgstr "sponzorji"
 
 #: plugins/app/src/posttypes/SponsorPostType.php:35
 #: plugins/app/src/posttypes/SponsorPostType.php:74
@@ -512,7 +512,7 @@ msgstr "Tipi dobrih vil"
 
 #: plugins/app/src/posttypes/WichtelTypePostType.php:20
 msgid "wichtel-type-slugs"
-msgstr "wichtel-type-slugs"
+msgstr "tipi-obdarovalcev"
 
 #: plugins/app/src/posttypes/WishPostType.php:115
 #: plugins/app/src/posttypes/WishPostType.php:122
@@ -585,7 +585,7 @@ msgstr "Regije"
 
 #: plugins/app/src/posttypes/WishPostType.php:411
 msgid "wish-region-slug"
-msgstr "wish-region-slug"
+msgstr "zelje-po-regijah"
 
 #: plugins/app/src/posttypes/WishPostType.php:619
 msgid ""
@@ -689,7 +689,7 @@ msgstr "Želje"
 
 #: plugins/app/src/posttypes/WishPostType.php:713
 msgid "wish-slugs"
-msgstr "wish-slugs"
+msgstr "zelje"
 
 #: plugins/app/src/posttypes/WishPostType.php:921
 msgid "JIRA ID"

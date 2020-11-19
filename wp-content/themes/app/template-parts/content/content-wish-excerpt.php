@@ -18,7 +18,7 @@ $o = \app\App::getInstance()->getOptions();
 <div class="wish-letter-mini">
     <header class="wish-header">
         <span class="key">#<?php echo rwmb_meta('key'); ?></span>
-        <span class="status"><?php echo rwmb_meta('status_name'); ?></span>
+        <span class="status"><?php echo $controller->getTranslationForState(rwmb_meta('status_name')); ?></span>
         <div style="clear: both;"></div>
         <img class="status-icon" src="<?php echo get_stylesheet_directory_uri() . '/images/' . $controller->getState() . '.png'; ?>" width="72" height="72" />
         
