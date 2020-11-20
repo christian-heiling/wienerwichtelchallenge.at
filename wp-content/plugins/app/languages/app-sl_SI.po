@@ -6,17 +6,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-11-12 20:56+0100\n"
-"PO-Revision-Date: 2020-11-17 20:23+0000\n"
+"POT-Creation-Date: 2020-11-20 23:50+0100\n"
+"PO-Revision-Date: 2020-11-20 23:51+0100\n"
 "Last-Translator: Ana Mohoric\n"
 "Language-Team: Slovenian\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : "
-"n%100==3||n%100==4 ? 2 : 3;\n"
-"X-Generator: Loco https://localise.biz/\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3||n"
+"%100==4 ? 2 : 3;\n"
+"X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_x\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: plugins/app\n"
 "X-Poedit-SearchPath-1: themes/app\n"
 
-#: plugins/app/src/App.php:218
+#: plugins/app/src/App.php:234
 msgid "Full Import"
 msgstr "Full Import"
 
@@ -98,18 +98,22 @@ msgid "JIRA State Ids"
 msgstr "JIRA State Ids"
 
 #: plugins/app/src/OptionHandler.php:222 plugins/app/src/OptionHandler.php:249
+#: plugins/app/src/posttypes/WishPostType.php:14
 msgid "Open"
 msgstr "Odpri"
 
 #: plugins/app/src/OptionHandler.php:227
+#: plugins/app/src/posttypes/WishPostType.php:15
 msgid "In progress"
 msgstr "V teku"
 
 #: plugins/app/src/OptionHandler.php:232 plugins/app/src/OptionHandler.php:276
+#: plugins/app/src/posttypes/WishPostType.php:16
 msgid "Wish fulfilled"
 msgstr "Želja je uresničena"
 
 #: plugins/app/src/OptionHandler.php:237 plugins/app/src/OptionHandler.php:285
+#: plugins/app/src/posttypes/WishPostType.php:17
 msgid "Present confirmed"
 msgstr "Darilo potrjeno"
 
@@ -168,7 +172,7 @@ msgstr "Zemljevid"
 #: plugins/app/src/OptionHandler.php:388
 #: plugins/app/src/posttypes/EventPostType.php:135
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:144
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:199
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:198
 msgid "Street"
 msgstr "Ulica"
 
@@ -176,16 +180,16 @@ msgstr "Ulica"
 #: plugins/app/src/posttypes/EventPostType.php:89
 #: plugins/app/src/posttypes/EventPostType.php:140
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:149
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:204
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:255
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:203
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:267
 msgid "ZIP"
 msgstr "PLZ"
 
 #: plugins/app/src/OptionHandler.php:398
 #: plugins/app/src/posttypes/EventPostType.php:145
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:154
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:209
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:254
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:208
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:266
 msgid "City"
 msgstr "Kraj"
 
@@ -317,7 +321,7 @@ msgstr "URL"
 #: plugins/app/src/posttypes/EventPostType.php:223
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
-#: plugins/app/src/posttypes/WishPostType.php:922
+#: plugins/app/src/posttypes/WishPostType.php:958
 msgid "Title"
 msgstr "Naslov"
 
@@ -330,7 +334,7 @@ msgid "End at"
 msgstr "Zaključi"
 
 #: plugins/app/src/posttypes/EventPostType.php:227
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:256
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:268
 #: plugins/app/src/posttypes/SponsorPostType.php:75
 #: plugins/app/src/posttypes/WichtelTypePostType.php:49
 msgid "Date"
@@ -361,17 +365,21 @@ msgid "Logo"
 msgstr "Logo"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:79
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:252
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:466
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:264
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:300
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:491
 msgid "Carrier"
 msgstr "Oseba"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:84
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:253
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:265
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:296
+#: themes/app/archive-social_organisation.php:46
 msgid "Field of Action"
 msgstr "Področje delovanja"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:91
+#: themes/app/template-parts/content/content-wish-excerpt.php:73
 msgid "Delivery Options"
 msgstr "Možnosti pošiljanja"
 
@@ -396,12 +404,12 @@ msgid "About the Social Organisation"
 msgstr "O socialnovarstveni ustanovi"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:134
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:333
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:357
 msgid "Personal Delivery"
 msgstr "Osebna predaja"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:139
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:194
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:193
 msgid "Addressee"
 msgstr "Naslov"
 
@@ -413,71 +421,71 @@ msgstr "COVID-19 ukrepi"
 msgid "Delivery hours"
 msgstr "Delovni čas"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:189
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:324
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:188
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:348
 msgid "Postal Delivery"
 msgstr "Poštna pošiljka"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:216
-#: plugins/app/src/posttypes/WishPostType.php:723
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:215
+#: plugins/app/src/posttypes/WishPostType.php:745
 msgid "JIRA"
 msgstr "JIRA"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:221
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:220
 msgid "Associated Jira Users"
 msgstr "Associated Jira Users"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:234
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:233
 msgid "Asylum and Migration"
 msgstr "Azil in migracije"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:235
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:234
 msgid "Health"
 msgstr "Varovanje zdravja"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:236
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:235
 msgid "Childrens"
 msgstr "Otroci"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:237
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:236
 msgid "People with Disablities"
 msgstr "Osebe z invalidnostjo"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:238
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:237
 msgid "Neighborhood Aid"
 msgstr "Pomoč skupnosti"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:239
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:238
 msgid "Addicted People"
 msgstr "Osebe z zasvojenostjo"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:240
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:239
 msgid "Homeless People"
 msgstr "Brezdomci"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:251
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:263
 msgid "Social Organisation"
 msgstr "Socialnovarstvena organizacija"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:335
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:359
 msgid "COVID19 Regulations"
 msgstr "COVID-19 ukrepi"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:351
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:375
 msgid "Drop-off Point"
 msgstr "Mesto predaje paketa"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:379
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:403
 #: themes/app/archive-wish.php:78
 msgid "Fulfilled Wishes"
 msgstr "Uresničene želje"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:404
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:428
 #: themes/app/archive-wish.php:83
 msgid "Open Wishes"
 msgstr "Pokaži željo"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:439
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:463
 msgid "no wishes found"
 msgstr "ni najdenih želja"
 
@@ -514,8 +522,8 @@ msgstr "Tipi dobrih vil"
 msgid "wichtel-type-slugs"
 msgstr "tipi-obdarovalcev"
 
-#: plugins/app/src/posttypes/WishPostType.php:115
-#: plugins/app/src/posttypes/WishPostType.php:122
+#: plugins/app/src/posttypes/WishPostType.php:131
+#: plugins/app/src/posttypes/WishPostType.php:138
 msgid ""
 "[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen "
 "willst!"
@@ -523,18 +531,18 @@ msgstr ""
 "[{{{site.name}}}] Hvala že vnaprej, da si se odločil(a) uresničiti željo "
 "{{wish.title}}!"
 
-#: plugins/app/src/posttypes/WishPostType.php:119
+#: plugins/app/src/posttypes/WishPostType.php:135
 msgid "Wichtel want to takeover a wish and send it later by post"
 msgstr "Nekdo bi rad uresničil željo ter darilo poslal po pošti"
 
-#: plugins/app/src/posttypes/WishPostType.php:126
+#: plugins/app/src/posttypes/WishPostType.php:142
 msgid ""
 "Wichtel want to takeover a wish and bring it later directly to the "
 "institution"
 msgstr ""
 "Nekdo bi rad uresničil željo ter darilo dostavil direktno na organizacijo"
 
-#: plugins/app/src/posttypes/WishPostType.php:129
+#: plugins/app/src/posttypes/WishPostType.php:145
 msgid ""
 "[{{{site.name}}}] Nur mehr {{wish.wichtel_end_diff_in_days}} Tage den Wunsch "
 "{{wish.title}} zu erfüllen."
@@ -542,28 +550,28 @@ msgstr ""
 "[{{{site.name}}}] Ostaja le še {{wish.wichtel_end_diff_in_days}} dni do "
 "uresničitve želje {{wish.title}}."
 
-#: plugins/app/src/posttypes/WishPostType.php:133
+#: plugins/app/src/posttypes/WishPostType.php:149
 msgid "after 7 days: remember mail"
 msgstr "po 7 dneh: opomnik"
 
-#: plugins/app/src/posttypes/WishPostType.php:136
+#: plugins/app/src/posttypes/WishPostType.php:152
 msgid "[{{{site.name}}}] Hast du den Wunsch {{wish.title}} erfüllt?"
 msgstr "[{{{site.name}}}] Si že uresničil željo {{wish.title}}?"
 
-#: plugins/app/src/posttypes/WishPostType.php:140
+#: plugins/app/src/posttypes/WishPostType.php:156
 msgid ""
 "am letzten Abgabedatum für den Wichtel: Wunsch erfüllt oder zurücklegen?"
 msgstr ""
 "zadnji dan uresničevanja želja: je bila želja uresničena ali sproščena?"
 
-#: plugins/app/src/posttypes/WishPostType.php:143
+#: plugins/app/src/posttypes/WishPostType.php:159
 msgid ""
 "[{{{site.name}}}] Dein Wunsch wurde zurückgelegt, weil du dich leider nicht "
 "mehr bei uns gemeldet hast"
 msgstr ""
 "[{{{site.name}}}] Ker nismo prejeli odgovora, smo izbrano željo sprostili"
 
-#: plugins/app/src/posttypes/WishPostType.php:147
+#: plugins/app/src/posttypes/WishPostType.php:163
 msgid ""
 "Nach dem letzten Abgabedatum für den Wichtel: Info das der Wunsch "
 "zurückgegeben worden ist"
@@ -571,23 +579,23 @@ msgstr ""
 "Po zadnjem dnevu oddaje paketov za pošiljatelje: Informacija, da se je želja "
 "ponovno sprostila"
 
-#: plugins/app/src/posttypes/WishPostType.php:150
+#: plugins/app/src/posttypes/WishPostType.php:166
 msgid "[{{{site.name}}}] Danke für dein Geschenk {{wish.title}}"
 msgstr "[{{{site.name}}}] Hvala za darilo {{wish.title}}"
 
-#: plugins/app/src/posttypes/WishPostType.php:154
+#: plugins/app/src/posttypes/WishPostType.php:170
 msgid "Nachdem die Einrichtung die Geschenkannahme bestätigt hat"
 msgstr "Po potrditvi prejema paketa s strani organizacije"
 
-#: plugins/app/src/posttypes/WishPostType.php:405
+#: plugins/app/src/posttypes/WishPostType.php:421
 msgid "Wish Regions"
 msgstr "Regije"
 
-#: plugins/app/src/posttypes/WishPostType.php:411
+#: plugins/app/src/posttypes/WishPostType.php:427
 msgid "wish-region-slug"
 msgstr "zelje-po-regijah"
 
-#: plugins/app/src/posttypes/WishPostType.php:619
+#: plugins/app/src/posttypes/WishPostType.php:641
 msgid ""
 "*Found a Wichtel!*\n"
 "\n"
@@ -598,7 +606,7 @@ msgstr ""
 " Oseba %wichtel_name% bi rada izpolnila željo%wish_title% (%wish_key%) s "
 "šifro prejemnika %wish_recipient%."
 
-#: plugins/app/src/posttypes/WishPostType.php:624
+#: plugins/app/src/posttypes/WishPostType.php:646
 msgid ""
 "*Present delivered directly to the institution!*\n"
 "\n"
@@ -620,7 +628,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:626
+#: plugins/app/src/posttypes/WishPostType.php:648
 msgid ""
 "*Present brought to the post office!*\n"
 "\n"
@@ -635,16 +643,16 @@ msgid ""
 msgstr ""
 "*Darilo bo kmalu dostavljeno!*\n"
 "\n"
-"Obdarovalec %wichtel_name% je sporočil(a), da je oddal(a) darilo "
-"%wish_title% (%wish_key%) na pošto. Paket je na poti in bodostavljen v "
-"naslendjih dneh. \n"
+"Obdarovalec %wichtel_name% je sporočil(a), da je oddal(a) darilo %wish_title"
+"% (%wish_key%) na pošto. Paket je na poti in bodostavljen v naslendjih "
+"dneh. \n"
 "Darilo je za %wish_recipient%\n"
 "\n"
 "(!) Prosimo, potrdite, ko bo darilo prispelo.\n"
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:628
+#: plugins/app/src/posttypes/WishPostType.php:650
 msgid ""
 "*Present delivered!*\n"
 "\n"
@@ -666,7 +674,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:631
+#: plugins/app/src/posttypes/WishPostType.php:653
 msgid ""
 ":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n"
 "\n"
@@ -679,54 +687,54 @@ msgstr ""
 "Darilo je bilo namenjeno %wish_recipient%.\n"
 "Išečmo drugo dobro vilo."
 
-#: plugins/app/src/posttypes/WishPostType.php:685
+#: plugins/app/src/posttypes/WishPostType.php:707
 msgid "I confirm that the present is arrived"
 msgstr "Potrjujem, da je darilo prispelo"
 
-#: plugins/app/src/posttypes/WishPostType.php:701
+#: plugins/app/src/posttypes/WishPostType.php:723
 msgid "Wishes"
 msgstr "Želje"
 
-#: plugins/app/src/posttypes/WishPostType.php:713
+#: plugins/app/src/posttypes/WishPostType.php:735
 msgid "wish-slugs"
 msgstr "zelje"
 
-#: plugins/app/src/posttypes/WishPostType.php:921
+#: plugins/app/src/posttypes/WishPostType.php:957
 msgid "JIRA ID"
 msgstr "JIRA ID"
 
-#: plugins/app/src/posttypes/WishPostType.php:923
-#: plugins/app/src/posttypes/WishPostType.php:924
-#: plugins/app/src/posttypes/WishPostType.php:925
+#: plugins/app/src/posttypes/WishPostType.php:959
+#: plugins/app/src/posttypes/WishPostType.php:960
+#: plugins/app/src/posttypes/WishPostType.php:961
 msgid "Beschreibung"
 msgstr "Opis"
 
-#: plugins/app/src/posttypes/WishPostType.php:926
+#: plugins/app/src/posttypes/WishPostType.php:962
 msgid "Status"
 msgstr "Status"
 
-#: plugins/app/src/posttypes/WishPostType.php:1007
+#: plugins/app/src/posttypes/WishPostType.php:1043
 #: themes/app/template-parts/header/event-countdown.php:13
 msgid "Read more"
 msgstr "Več o tem"
 
-#: plugins/app/src/posttypes/WishPostType.php:1027
+#: plugins/app/src/posttypes/WishPostType.php:1063
 msgid "Log in"
 msgstr "Prijava"
 
-#: plugins/app/src/posttypes/WishPostType.php:1043
+#: plugins/app/src/posttypes/WishPostType.php:1079
 msgid "I will send the present by post"
 msgstr "Darilo bom poslal po pošti"
 
-#: plugins/app/src/posttypes/WishPostType.php:1046
+#: plugins/app/src/posttypes/WishPostType.php:1082
 msgid "I will bring the present to the institution"
 msgstr "Darilo bom odnesel na socialno organizacijo"
 
-#: plugins/app/src/posttypes/WishPostType.php:1050
+#: plugins/app/src/posttypes/WishPostType.php:1086
 msgid "Confirm"
 msgstr "Potrdi"
 
-#: plugins/app/src/posttypes/WishPostType.php:1073
+#: plugins/app/src/posttypes/WishPostType.php:1109
 msgid "alle Details sehen"
 msgstr "pokaži več"
 
@@ -774,6 +782,10 @@ msgstr "Socialnovarstvene organizacije Sidebar"
 msgid "Sponsor Sidebar"
 msgstr "Sponzorji stranski meni"
 
+#: themes/app/template-parts/content/content-archive-my-wishes.php:35
+msgid "My Wishes"
+msgstr "Moje želje"
+
 #: themes/app/template-parts/content/content-excerpt.php:22
 msgid "Featured"
 msgstr "Izpostavljeno"
@@ -783,6 +795,7 @@ msgid "You have following possibilities to deliver your present:"
 msgstr "Na voljo so naslednje možnosti dostave paketa:"
 
 #: themes/app/template-parts/content/content-single-wish.php:73
+#: themes/app/template-parts/content/content-wish-excerpt.php:64
 msgid "Postal delivery"
 msgstr "Poštna pošiljka "
 
@@ -808,6 +821,7 @@ msgstr ""
 "boste uresničili željo."
 
 #: themes/app/template-parts/content/content-single-wish.php:105
+#: themes/app/template-parts/content/content-wish-excerpt.php:68
 msgid "Personal delivery"
 msgstr "Osebna predaja "
 
@@ -839,6 +853,12 @@ msgstr "Kontakt za vprašanja"
 #, php-format
 msgid "About %s"
 msgstr "Informacije %s"
+
+#: themes/app/template-parts/content/content-single-wish.php:174
+#, fuzzy
+#| msgid "Read more"
+msgid "Read more..."
+msgstr "Več o tem"
 
 #: themes/app/template-parts/content/content-single.php:34
 #, php-format

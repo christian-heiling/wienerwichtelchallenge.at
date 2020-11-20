@@ -32,7 +32,7 @@ $query = new WP_Query($query_options);
 
 if ($query->have_posts()) {
     ?>
-    <h2>Meine Wünsche</h2>
+    <h2><?php echo __('My Wishes', 'app'); ?></h2>
     <?php
 }
 
