@@ -68,9 +68,9 @@ $o = \app\App::getInstance()->getOptions();
                 $delivery_option_string[] = __('Personal delivery', 'app');
             }
             
-            $delivery_option_string = implode(',&nbsp;', $delivery_option_string);
+            $delivery_option_string = implode(', ', $delivery_option_string);
             
-            echo  __('Delivery Options', 'app') . ':&nbsp;' . $delivery_option_string;
+            echo  __('Delivery Options', 'app') . ': ' . $delivery_option_string;
             ?>
         </p>
     </footer><!-- .entry-footer -->
