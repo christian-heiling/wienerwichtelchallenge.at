@@ -6,7 +6,7 @@ Description:  Wichtel Challenge Theme based on twentynineteen
 Author:       Christian Heiling
 Author URI:   [http://deinedomain.at]
 Template:     twentynineteen
-Version:      1.1.0
+Version:      1.2.0
 Text Domain:  app
 */
 /*--------------------------------------------------------------
@@ -4860,29 +4860,30 @@ svg {
   background-color: #FFEFD5; }
   .wish-letter-mini .key {
     font-size: 0.7272727273em;
-    float: right; }
-  .wish-letter-mini .status {
-    font-size: 0.7272727273em;
-    float: left; }
+    text-align: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    display: block; }
   .wish-letter-mini .status-icon {
     padding-top: 0;
     display: block;
     margin-left: auto;
     margin-right: auto; }
   .wish-letter-mini h1 {
-    padding-top: 0.5rem;
-    padding-bottom: 0;
+    padding-top: 1rem;
+    padding-bottom: 0rem;
     margin: 0;
     font-size: 1.65em;
     text-align: center; }
   .wish-letter-mini .institution-info {
-    font-size: 0.7272727273em;
+    font-size: 0.9090909091em;
     text-align: center;
     margin-top: 1.5rem;
     margin-bottom: 0;
-    padding-bottom: 0; }
+    padding-bottom: 1rem; }
   .wish-letter-mini .description {
-    text-align: center; }
+    text-align: center;
+    padding-top: 0; }
 
 .entry .entry-content > .wish-letter {
   background-color: #FFEFD5;

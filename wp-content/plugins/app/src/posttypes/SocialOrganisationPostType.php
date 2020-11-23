@@ -248,13 +248,13 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionLabelByValue($value) {
         $options = $this->getFieldOfActionOptions();
-        
-        foreach($options as $o) {
+
+        foreach ($options as $o) {
             if ($o['value'] == $value) {
                 return $o['label'];
             }
         }
-        
+
         return '';
     }
 
@@ -304,6 +304,7 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function echoEntryContent() {
 
+        $name = get_the_title();
         $logos = rwmb_meta('logo', array('limit' => 1));
 
         echo '<div class="wp-block-columns">';
@@ -379,18 +380,6 @@ class SocialOrganisationPostType extends AbstractPostType {
             echo rwmb_meta('zip') . ' ' . rwmb_meta('city');
             echo '</p>';
 
-            $this->outputMetaBoxContentWithHeadings(
-                    array(
-                array(
-                    'section_name' => '',
-                    'field_ids' => array(
-                        'map',
-                    )
-                )
-                    ), array(
-                'first_heading' => '3'
-                    )
-            );
         }
 
         echo '</div>';
@@ -400,7 +389,7 @@ class SocialOrganisationPostType extends AbstractPostType {
         $wishListState = $o->get('wish_list_status');
 
         if ($wishListState == 'done') {
-            echo '<h2>' . sprintf(__('Fulfilled Wishes', 'app')) . '</h2>';
+            echo '<h2>' . sprintf(__('Fulfilled Wishes from $name', 'app')) . '</h2>';
             $query = new \WP_Query(array(
                 'post_type' => \app\App::getInstance()->getWishController()->getPostType(),
                 'meta_key' => 'social_organisation_id',
@@ -425,7 +414,7 @@ class SocialOrganisationPostType extends AbstractPostType {
                 'order' => 'ASC'
             ));
         } else {
-            echo '<h2>' . sprintf(__('Open Wishes', 'app')) . '</h2>';
+            echo '<h2 id="wishes">' . str_replace('%name%', $name, __('Open Wishes from %name%', 'app')) . '</h2>';
 
             $query = new \WP_Query(array(
                 'post_type' => \app\App::getInstance()->getWishController()->getPostType(),

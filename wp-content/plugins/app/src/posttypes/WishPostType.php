@@ -67,6 +67,10 @@ class WishPostType extends AbstractPostType {
 
         add_action('pre_get_posts', array($this, 'limitQuery'));
     }
+    
+    function getTextWithLinks($text) {
+        return preg_replace("/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/", '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
+    }
 
     function limitQuery($query) {
         if (!is_admin() && $query->is_main_query() && is_archive() && $query->get('post_type') == $this->getPostType()) {

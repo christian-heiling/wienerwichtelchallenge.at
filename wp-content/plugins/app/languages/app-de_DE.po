@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-11-20 23:50+0100\n"
-"PO-Revision-Date: 2020-11-20 23:51+0100\n"
+"POT-Creation-Date: 2020-11-23 20:00+0100\n"
+"PO-Revision-Date: 2020-11-23 20:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -314,7 +314,7 @@ msgstr "URL"
 #: plugins/app/src/posttypes/EventPostType.php:223
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
-#: plugins/app/src/posttypes/WishPostType.php:958
+#: plugins/app/src/posttypes/WishPostType.php:962
 msgid "Title"
 msgstr "Titel"
 
@@ -360,7 +360,7 @@ msgstr "Logo"
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:79
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:264
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:300
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:491
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:492
 msgid "Carrier"
 msgstr "Träger"
 
@@ -372,7 +372,7 @@ msgid "Field of Action"
 msgstr "Handlungsfeld"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:91
-#: themes/app/template-parts/content/content-wish-excerpt.php:73
+#: themes/app/template-parts/content/content-wish-excerpt.php:50
 msgid "Delivery Options"
 msgstr "Abgabemöglichkeiten"
 
@@ -397,7 +397,7 @@ msgid "About the Social Organisation"
 msgstr "Über die Einrichtung"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:134
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:357
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:358
 msgid "Personal Delivery"
 msgstr "persönliche Abgabe"
 
@@ -415,12 +415,12 @@ msgid "Delivery hours"
 msgstr "Abgabezeiten"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:188
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:348
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:349
 msgid "Postal Delivery"
 msgstr "Paketversand"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:215
-#: plugins/app/src/posttypes/WishPostType.php:745
+#: plugins/app/src/posttypes/WishPostType.php:749
 msgid "JIRA"
 msgstr "JIRA"
 
@@ -460,25 +460,23 @@ msgstr "Wohnungslosenhilfe"
 msgid "Social Organisation"
 msgstr "Einrichtung"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:359
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:360
 msgid "COVID19 Regulations"
 msgstr "COVID-19 Maßnahmen"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:375
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:376
 msgid "Drop-off Point"
 msgstr "Abgabeort"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:403
-#: themes/app/archive-wish.php:78
-msgid "Fulfilled Wishes"
-msgstr "Erfüllte Wünsche"
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:404
+msgid "Fulfilled Wishes from $name"
+msgstr "Erfüllte Wünsche von $name"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:428
-#: themes/app/archive-wish.php:83
-msgid "Open Wishes"
-msgstr "Offene Wünsche"
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:429
+msgid "Open Wishes from %name%"
+msgstr "Offene Wünsche von %name%"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:463
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:464
 msgid "no wishes found"
 msgstr "keine Wünsche gefunden"
 
@@ -515,8 +513,8 @@ msgstr "Wichteltypen"
 msgid "wichtel-type-slugs"
 msgstr "wichtel"
 
-#: plugins/app/src/posttypes/WishPostType.php:131
-#: plugins/app/src/posttypes/WishPostType.php:138
+#: plugins/app/src/posttypes/WishPostType.php:135
+#: plugins/app/src/posttypes/WishPostType.php:142
 msgid ""
 "[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen "
 "willst!"
@@ -524,13 +522,13 @@ msgstr ""
 "[{{{site.name}}}] Danke vorab, dass du den Wunsch {{wish.title}} erfüllen "
 "willst!"
 
-#: plugins/app/src/posttypes/WishPostType.php:135
+#: plugins/app/src/posttypes/WishPostType.php:139
 msgid "Wichtel want to takeover a wish and send it later by post"
 msgstr ""
 "Wichtel möchte einen Wunsch übernehmen und das Geschenk später per Post "
 "zusenden"
 
-#: plugins/app/src/posttypes/WishPostType.php:142
+#: plugins/app/src/posttypes/WishPostType.php:146
 msgid ""
 "Wichtel want to takeover a wish and bring it later directly to the "
 "institution"
@@ -538,7 +536,7 @@ msgstr ""
 "Wichtel möchte einen Wunsch übernehmen und das Geschenk später persönlich "
 "abgeben"
 
-#: plugins/app/src/posttypes/WishPostType.php:145
+#: plugins/app/src/posttypes/WishPostType.php:149
 msgid ""
 "[{{{site.name}}}] Nur mehr {{wish.wichtel_end_diff_in_days}} Tage den Wunsch "
 "{{wish.title}} zu erfüllen."
@@ -546,53 +544,53 @@ msgstr ""
 "[{{{site.name}}}] Nur mehr {{wish.wichtel_end_diff_in_days}} Tage den Wunsch "
 "{{wish.title}} zu erfüllen."
 
-#: plugins/app/src/posttypes/WishPostType.php:149
+#: plugins/app/src/posttypes/WishPostType.php:153
 msgid "after 7 days: remember mail"
 msgstr "nach 7 Tagen: Erinnerungsmail"
 
-#: plugins/app/src/posttypes/WishPostType.php:152
+#: plugins/app/src/posttypes/WishPostType.php:156
 msgid "[{{{site.name}}}] Hast du den Wunsch {{wish.title}} erfüllt?"
 msgstr "[{{{site.name}}}] Hast du den Wunsch {{wish.title}} erfüllt?"
 
-#: plugins/app/src/posttypes/WishPostType.php:156
+#: plugins/app/src/posttypes/WishPostType.php:160
 msgid ""
 "am letzten Abgabedatum für den Wichtel: Wunsch erfüllt oder zurücklegen?"
 msgstr ""
 "am letzten Abgabedatum für den Wichtel: Wunsch erfüllt oder zurücklegen?"
-
-#: plugins/app/src/posttypes/WishPostType.php:159
-msgid ""
-"[{{{site.name}}}] Dein Wunsch wurde zurückgelegt, weil du dich leider nicht "
-"mehr bei uns gemeldet hast"
-msgstr ""
-"[{{{site.name}}}] Dein Wunsch wurde zurückgelegt, weil du dich leider nicht "
-"mehr bei uns gemeldet hast"
 
 #: plugins/app/src/posttypes/WishPostType.php:163
 msgid ""
+"[{{{site.name}}}] Dein Wunsch wurde zurückgelegt, weil du dich leider nicht "
+"mehr bei uns gemeldet hast"
+msgstr ""
+"[{{{site.name}}}] Dein Wunsch wurde zurückgelegt, weil du dich leider nicht "
+"mehr bei uns gemeldet hast"
+
+#: plugins/app/src/posttypes/WishPostType.php:167
+msgid ""
 "Nach dem letzten Abgabedatum für den Wichtel: Info das der Wunsch "
 "zurückgegeben worden ist"
 msgstr ""
 "Nach dem letzten Abgabedatum für den Wichtel: Info das der Wunsch "
 "zurückgegeben worden ist"
 
-#: plugins/app/src/posttypes/WishPostType.php:166
+#: plugins/app/src/posttypes/WishPostType.php:170
 msgid "[{{{site.name}}}] Danke für dein Geschenk {{wish.title}}"
 msgstr "[{{{site.name}}}] Danke für dein Geschenk {{wish.title}}"
 
-#: plugins/app/src/posttypes/WishPostType.php:170
+#: plugins/app/src/posttypes/WishPostType.php:174
 msgid "Nachdem die Einrichtung die Geschenkannahme bestätigt hat"
 msgstr "Nachdem die Einrichtung die Geschenkannahme bestätigt hat"
 
-#: plugins/app/src/posttypes/WishPostType.php:421
+#: plugins/app/src/posttypes/WishPostType.php:425
 msgid "Wish Regions"
 msgstr "Regionen"
 
-#: plugins/app/src/posttypes/WishPostType.php:427
+#: plugins/app/src/posttypes/WishPostType.php:431
 msgid "wish-region-slug"
 msgstr "wunschliste"
 
-#: plugins/app/src/posttypes/WishPostType.php:641
+#: plugins/app/src/posttypes/WishPostType.php:645
 msgid ""
 "*Found a Wichtel!*\n"
 "\n"
@@ -604,7 +602,7 @@ msgstr ""
 "Wichtel %wichtel_name% möchte den %wish_title% (%wish_key%) erfüllen.\n"
 "Das Geschenk ist für %wish_recipient%."
 
-#: plugins/app/src/posttypes/WishPostType.php:646
+#: plugins/app/src/posttypes/WishPostType.php:650
 msgid ""
 "*Present delivered directly to the institution!*\n"
 "\n"
@@ -627,7 +625,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:648
+#: plugins/app/src/posttypes/WishPostType.php:652
 msgid ""
 "*Present brought to the post office!*\n"
 "\n"
@@ -650,7 +648,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:650
+#: plugins/app/src/posttypes/WishPostType.php:654
 msgid ""
 "*Present delivered!*\n"
 "\n"
@@ -672,7 +670,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:653
+#: plugins/app/src/posttypes/WishPostType.php:657
 msgid ""
 ":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n"
 "\n"
@@ -685,54 +683,54 @@ msgstr ""
 "Es war der Wunsch von %wish_recipient%.\n"
 "Deshalb suchen wir ab jetzt einen neuen Wichtel."
 
-#: plugins/app/src/posttypes/WishPostType.php:707
+#: plugins/app/src/posttypes/WishPostType.php:711
 msgid "I confirm that the present is arrived"
 msgstr "Ich bestätige, dass das Geschenk angekommen ist"
 
-#: plugins/app/src/posttypes/WishPostType.php:723
+#: plugins/app/src/posttypes/WishPostType.php:727
 msgid "Wishes"
 msgstr "Wünsche"
 
-#: plugins/app/src/posttypes/WishPostType.php:735
+#: plugins/app/src/posttypes/WishPostType.php:739
 msgid "wish-slugs"
 msgstr "wuensche"
 
-#: plugins/app/src/posttypes/WishPostType.php:957
+#: plugins/app/src/posttypes/WishPostType.php:961
 msgid "JIRA ID"
 msgstr "JIRA ID"
 
-#: plugins/app/src/posttypes/WishPostType.php:959
-#: plugins/app/src/posttypes/WishPostType.php:960
-#: plugins/app/src/posttypes/WishPostType.php:961
+#: plugins/app/src/posttypes/WishPostType.php:963
+#: plugins/app/src/posttypes/WishPostType.php:964
+#: plugins/app/src/posttypes/WishPostType.php:965
 msgid "Beschreibung"
 msgstr "Beschreibung"
 
-#: plugins/app/src/posttypes/WishPostType.php:962
+#: plugins/app/src/posttypes/WishPostType.php:966
 msgid "Status"
 msgstr "Status"
 
-#: plugins/app/src/posttypes/WishPostType.php:1043
+#: plugins/app/src/posttypes/WishPostType.php:1047
 #: themes/app/template-parts/header/event-countdown.php:13
 msgid "Read more"
 msgstr "Erfahre mehr"
 
-#: plugins/app/src/posttypes/WishPostType.php:1063
+#: plugins/app/src/posttypes/WishPostType.php:1067
 msgid "Log in"
 msgstr "Log in"
 
-#: plugins/app/src/posttypes/WishPostType.php:1079
+#: plugins/app/src/posttypes/WishPostType.php:1083
 msgid "I will send the present by post"
 msgstr "Ich werde das Geschenk mit der Post versenden"
 
-#: plugins/app/src/posttypes/WishPostType.php:1082
+#: plugins/app/src/posttypes/WishPostType.php:1086
 msgid "I will bring the present to the institution"
 msgstr "Ich werde das Geschenk direkt zu der Einrichtung bringen"
 
-#: plugins/app/src/posttypes/WishPostType.php:1086
+#: plugins/app/src/posttypes/WishPostType.php:1090
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#: plugins/app/src/posttypes/WishPostType.php:1109
+#: plugins/app/src/posttypes/WishPostType.php:1113
 msgid "alle Details sehen"
 msgstr "alle Details sehen"
 
@@ -747,6 +745,14 @@ msgstr "Kommende Events"
 #: themes/app/archive-event.php:121
 msgid "Past Events"
 msgstr "Vergangene Events"
+
+#: themes/app/archive-wish.php:78
+msgid "Fulfilled Wishes"
+msgstr "Erfüllte Wünsche"
+
+#: themes/app/archive-wish.php:83
+msgid "Open Wishes"
+msgstr "Offene Wünsche"
 
 #: themes/app/archive-wish.php:98
 msgid "no open Wishes"
@@ -793,7 +799,7 @@ msgid "You have following possibilities to deliver your present:"
 msgstr "Du hast folgende Möglichkeiten dein Geschenk abzugeben:"
 
 #: themes/app/template-parts/content/content-single-wish.php:73
-#: themes/app/template-parts/content/content-wish-excerpt.php:64
+#: themes/app/template-parts/content/content-wish-excerpt.php:41
 msgid "Postal delivery"
 msgstr "Paketversand"
 
@@ -819,7 +825,7 @@ msgstr ""
 "diesen Wunsch zu erfüllen."
 
 #: themes/app/template-parts/content/content-single-wish.php:105
-#: themes/app/template-parts/content/content-wish-excerpt.php:68
+#: themes/app/template-parts/content/content-wish-excerpt.php:45
 msgid "Personal delivery"
 msgstr "Persönliche Abgabe"
 
