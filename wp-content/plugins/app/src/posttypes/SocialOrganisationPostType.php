@@ -230,17 +230,17 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionOptions() {
         $field_of_actions = array(
-            array('value' => 'Asly und Migration', 'label' => __('Asylum and Migration', 'app')),
-            array('value' => 'Gesundheit', 'label' => __('Health', 'app')),
-            array('value' => 'Kinder- und Jugendhilfe', 'label' => __('Childrens', 'app')),
-            array('value' => 'Menschen mit Behinderungen', 'label' => __('People with Disablities', 'app')),
-            array('value' => 'Nachbarschaftshilfe', 'label' => __('Neighborhood Aid', 'app')),
-            array('value' => 'Suchthilfe', 'label' => __('Addicted People', 'app')),
-            array('value' => 'Wohnungslosenhilfe', 'label' => __('Homeless People', 'app'))
+            'Asly und Migration' => __('Asylum and Migration', 'app'),
+            'Gesundheit' => __('Health', 'app'),
+            'Kinder- und Jugendhilfe' => __('Childrens', 'app'),
+            'Menschen mit Behinderungen' => __('People with Disablities', 'app'),
+            'Nachbarschaftshilfe' => __('Neighborhood Aid', 'app'),
+            'Suchthilfe' => __('Addicted People', 'app'),
+            'Wohnungslosenhilfe' => __('Homeless People', 'app')
         );
 
-        usort($field_of_actions, function($a, $b) {
-            return strcasecmp($a['label'], $b['label']);
+        uasort($field_of_actions, function($a, $b) {
+            return strcasecmp($a, $b);
         });
 
         return $field_of_actions;
