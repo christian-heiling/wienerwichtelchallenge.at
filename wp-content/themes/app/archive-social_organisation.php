@@ -78,7 +78,7 @@ foreach ($controller->getFieldOfActionOptions() as $fieldOfAction):
 
                 <article class="hentry entry">
                     <header class="entry-header">
-                        <h2 class="entry-title"><?php echo $fieldOfAction['label']; ?></h2>
+                        <h2 class="entry-title"><?php echo $controller->getFieldOfActionLabelByValue($fieldOfAction); ?></h2>
                     </header>
 
 

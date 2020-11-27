@@ -248,10 +248,10 @@ class SocialOrganisationPostType extends AbstractPostType {
 
     public function getFieldOfActionLabelByValue($value) {
         $options = $this->getFieldOfActionOptions();
-
-        foreach ($options as $o) {
-            if ($o['value'] == $value) {
-                return $o['label'];
+ 
+        foreach ($options as $v => $l) {
+            if ($v == $value) {
+                return $l;
             }
         }
 
