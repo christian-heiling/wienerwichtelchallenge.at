@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-10-21 15:11+0530\n"
-"PO-Revision-Date: 2020-10-21 15:18+0530\n"
+"POT-Creation-Date: 2020-11-17 11:28+0530\n"
+"PO-Revision-Date: 2020-11-17 11:29+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Poedit-KeywordsList: __;_e\n"
@@ -18,6 +18,7 @@ msgstr ""
 #: admin/class-cookie-law-info-admin.php:147
 #: admin/class-cookie-law-info-admin.php:148
 #: admin/class-cookie-law-info-admin.php:247
+#: admin/partials/cookie-law-info-admin_settings.php:31
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -45,9 +46,9 @@ msgstr "Přehled ochrany osobních údajů"
 #: admin/class-cookie-law-info-admin.php:334
 #: admin/class-cookie-law-info-admin.php:378
 #: admin/modules/cli-policy-generator/classes/class-policy-generator-ajax.php:22
-#: public/modules/script-blocker/script-blocker.php:123
-#: public/modules/script-blocker/script-blocker.php:144
-#: public/modules/script-blocker/script-blocker.php:299
+#: public/modules/script-blocker/script-blocker.php:133
+#: public/modules/script-blocker/script-blocker.php:173
+#: public/modules/script-blocker/script-blocker.php:310
 msgid "You do not have sufficient permission to perform this operation"
 msgstr "Nemáte dostatečná oprávnění k provedení této operace"
 
@@ -167,7 +168,7 @@ msgid "Confirm"
 msgstr "Potvrdit"
 
 #: admin/modules/ccpa/ccpa.php:108
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:121
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:154
 msgid "Cancel"
 msgstr "Zrušit"
 
@@ -295,7 +296,7 @@ msgstr "Nadpis"
 #: admin/views/admin_necessary_cookie.php:39
 #: admin/views/admin_non_necessary_cookie.php:54
 #: public/modules/script-blocker/views/settings.php:142
-#: public/modules/shortcode/shortcode.php:217
+#: public/modules/shortcode/shortcode.php:220
 msgid "Description"
 msgstr "Popis"
 
@@ -320,90 +321,109 @@ msgid "Live preview"
 msgstr "Živý náhled"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:43
-msgid "The plugin is more complex to set up"
-msgstr "Nastavení pluginu je složitější"
+msgid "The plugin is complex to set up"
+msgstr "Nastavení pluginu je složité"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:45
 msgid "Please describe which area you are facing difficulties"
 msgstr "Popište, ve které oblasti máte potíže"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:49
-msgid "A conflict with another plugin or theme"
-msgstr "Konflikt s jiným pluginem nebo tématem"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:51
-msgid "Which plugin or theme?"
-msgstr "Jaký plugin nebo téma?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:55
-msgid "Language translation issues"
-msgstr "Problémy s překladem jazyků"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:57
-msgid ""
-"Which plugin are you using for language translation? Could you tell us a bit "
-"more?"
-msgstr "Jaký plugin používáte pro jazykový překlad? Můžete nám říct něco víc?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:61
-msgid "Caching issues"
-msgstr "Problémy s ukládáním do mezipaměti"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:63
-msgid "Which caching plugin are you using? Could you tell us a bit more?"
-msgstr ""
-"Který plugin pro ukládání do mezipaměti používáte? Můžete nám říct něco víc?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:67
 msgid "I found a better plugin"
 msgstr "Našel jsem lepší plugin"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:69
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:51
 msgid "Which plugin?"
 msgstr "Jaký plugin?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:73
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:55
 msgid "The plugin is great, but I need specific feature that you don't support"
 msgstr ""
 "Plugin je skvělý, ale já potřebuji specifickou funkci, kterou nepodporuje"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:75
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:57
 msgid "Could you tell us more about that feature?"
 msgstr "Můžete nám říci více o této funkci?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:79
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:61
 msgid "The plugin didn't work as expected"
 msgstr "Plugin nefungoval podle mých očekávání"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:81
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:63
 msgid "What did you expect?"
 msgstr "Co jste očekávali?"
 
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:67
+msgid "A conflict with another plugin or theme"
+msgstr "Konflikt s jiným pluginem nebo tématem"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:69
+msgid "Which plugin or theme?"
+msgstr "Jaký plugin nebo téma?"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:73
+msgid "Translation issues"
+msgstr "Problémy s překladem"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:77
+msgid "Incorrect/missing translation"
+msgstr "Nesprávný / chybějící překlad"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:79
+msgid "Name the language"
+msgstr "Pojmenujte jazyk"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:83
+msgid ""
+"Unable to translate my dynamic content e.g, cookie message, button text etc"
+msgstr ""
+"Nelze přeložit můj dynamický obsah, např. Zprávu o cookies, text tlačítka atd"
+
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:85
+msgid "Name the language and the translator plugin that you are using"
+msgstr "Pojmenujte jazyk a plugin překladače, který používáte"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:91
+msgid "Upgrade to pro"
+msgstr "Upgradujte na profesionální"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:95
 #: admin/views/admin-settings-general.php:10
-#: admin/views/admin-settings-general.php:132
+#: admin/views/admin-settings-general.php:66
 msgid "Other"
 msgstr "Jiný"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:87
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:97
 msgid "Could you tell us a bit more?"
 msgstr "Můžete nám říct něco víc?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:106
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:117
 msgid "If you have a moment, please let us know why you are deactivating:"
 msgstr "Pokud máte chvilku, dejte nám prosím vědět, proč deaktivujete:"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:116
-msgid "I rather wouldn't say"
-msgstr "Raději bych neřekl"
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:144
+msgid ""
+"We do not collect any personal data when you submit this form. It's your "
+"feedback that we value."
+msgstr ""
+"Při odeslání tohoto formuláře neshromažďujeme žádné osobní údaje. Vážíme si "
+"vaší zpětné vazby."
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:119
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:145
+msgid "Privacy Policy"
+msgstr "Zásady ochrany osobních údajů"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:152
 msgid "Go to support"
 msgstr "Přejít na podporu"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:120
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:153
 msgid "Submit & Deactivate"
 msgstr "Odeslat & Deaktivovat"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:155
+msgid "I rather wouldn't say"
+msgstr "Raději bych neřekl"
 
 #: admin/partials/cookie-law-info-admin_settings.php:25
 #: admin/views/admin_necessary_cookie.php:20
@@ -424,10 +444,6 @@ msgstr "Nastavení se obnoví na výchozí hodnoty."
 #: admin/partials/cookie-law-info-admin_settings.php:28
 msgid "Unable to reset settings."
 msgstr "Nelze obnovit nastavení."
-
-#: admin/partials/cookie-law-info-admin_settings.php:31
-msgid "Cookie Law Settings"
-msgstr "Nastavení souborů cookie v zákon"
 
 #: admin/partials/cookie-law-info-admin_settings.php:39
 msgid "Cookie bar is currently active"
@@ -607,13 +623,11 @@ msgstr "Otevřít URL v novém okně?"
 #: admin/views/admin-settings-buttons.php:311
 #: admin/views/admin-settings-general.php:38
 #: admin/views/admin-settings-general.php:54
-#: admin/views/admin-settings-general.php:71
-#: admin/views/admin-settings-general.php:140
-#: admin/views/admin-settings-general.php:148
-#: admin/views/admin-settings-general.php:155
+#: admin/views/admin-settings-general.php:74
+#: admin/views/admin-settings-general.php:82
+#: admin/views/admin-settings-general.php:89
 #: admin/views/admin-settings-messagebar.php:86
 #: admin/views/admin-settings-messagebar.php:110
-#: admin/views/admin-settings-messagebar.php:150
 #: admin/views/admin_non_necessary_cookie.php:32
 msgid "Yes"
 msgstr "Ano"
@@ -624,13 +638,11 @@ msgstr "Ano"
 #: admin/views/admin-settings-buttons.php:312
 #: admin/views/admin-settings-general.php:39
 #: admin/views/admin-settings-general.php:55
-#: admin/views/admin-settings-general.php:72
-#: admin/views/admin-settings-general.php:141
-#: admin/views/admin-settings-general.php:149
-#: admin/views/admin-settings-general.php:156
+#: admin/views/admin-settings-general.php:75
+#: admin/views/admin-settings-general.php:83
+#: admin/views/admin-settings-general.php:90
 #: admin/views/admin-settings-messagebar.php:87
 #: admin/views/admin-settings-messagebar.php:111
-#: admin/views/admin-settings-messagebar.php:151
 #: admin/views/admin_non_necessary_cookie.php:33
 #: public/modules/script-blocker/views/settings.php:139
 msgid "No"
@@ -754,81 +766,15 @@ msgstr ""
 msgid "This option will not work along with `Popup overlay`."
 msgstr "Tato volba nebude fungovat spolu s `Popup overlay`."
 
-#: admin/views/admin-settings-general.php:66
-#: admin/views/admin-settings-messagebar.php:145
-msgid "Show Again Tab"
-msgstr "Zobrazit znovu Tab"
-
 #: admin/views/admin-settings-general.php:69
-#: admin/views/admin-settings-messagebar.php:148
-msgid "Use Show Again Tab?"
-msgstr "Použít znovu zobrazit kartu?"
-
-#: admin/views/admin-settings-general.php:77
-#: admin/views/admin-settings-general.php:94
-#: admin/views/admin-settings-messagebar.php:156
-#: admin/views/admin-settings-messagebar.php:173
-msgid "Tab Position"
-msgstr "Pozice"
-
-#: admin/views/admin-settings-general.php:82
-#: admin/views/admin-settings-general.php:85
-#: admin/views/admin-settings-messagebar.php:161
-#: admin/views/admin-settings-messagebar.php:164
-msgid "Right"
-msgstr "Vpravo"
-
-#: admin/views/admin-settings-general.php:83
-#: admin/views/admin-settings-general.php:86
-#: admin/views/admin-settings-messagebar.php:162
-#: admin/views/admin-settings-messagebar.php:165
-msgid "Left"
-msgstr "Vlevo"
-
-#: admin/views/admin-settings-general.php:101
-#: admin/views/admin-settings-messagebar.php:180
-msgid "Bottom Right"
-msgstr "Vpravo dole"
-
-#: admin/views/admin-settings-general.php:104
-#: admin/views/admin-settings-messagebar.php:183
-msgid "Bottom Left"
-msgstr "Vlevo dole"
-
-#: admin/views/admin-settings-general.php:107
-#: admin/views/admin-settings-messagebar.php:186
-msgid "Top Right"
-msgstr "Vpravo nahoře"
-
-#: admin/views/admin-settings-general.php:110
-#: admin/views/admin-settings-messagebar.php:189
-msgid "Top Left"
-msgstr "Vlevo nahoře"
-
-#: admin/views/admin-settings-general.php:117
-#: admin/views/admin-settings-messagebar.php:196
-msgid "From Left Margin"
-msgstr "Levý okraj"
-
-#: admin/views/admin-settings-general.php:120
-#: admin/views/admin-settings-messagebar.php:199
-msgid "Specify"
-msgstr "Upřesněte"
-
-#: admin/views/admin-settings-general.php:124
-#: admin/views/admin-settings-messagebar.php:203
-msgid "Show More Text"
-msgstr "Zobrazit více"
-
-#: admin/views/admin-settings-general.php:135
 msgid "Reload after \"scroll accept\" event?"
 msgstr "Znovu načíst po události \"posun akceptovat\"?"
 
-#: admin/views/admin-settings-general.php:146
+#: admin/views/admin-settings-general.php:80
 msgid "Reload after Accept button click"
 msgstr "Znovu načíst po kliknutí na tlačítko Accept"
 
-#: admin/views/admin-settings-general.php:153
+#: admin/views/admin-settings-general.php:87
 msgid "Reload after Reject button click"
 msgstr "Znovu načíst po klepnutí na tlačítko Odmítnout"
 
@@ -960,8 +906,9 @@ msgid "Cookie bar"
 msgstr "Soubor cookie"
 
 #: admin/views/admin-settings-messagebar.php:10
-msgid "Show again tab"
-msgstr "Zobrazit znovu Tab"
+#: admin/views/admin-settings-messagebar.php:145
+msgid "Revisit consent"
+msgstr "Znovu souhlas"
 
 #: admin/views/admin-settings-messagebar.php:15
 msgid "Cookie Bar"
@@ -1080,21 +1027,101 @@ msgstr "Připnutý"
 msgid "On hide"
 msgstr "Na skrýt"
 
+#: admin/views/admin-settings-messagebar.php:145
+msgid "previously"
+msgstr "dříve"
+
+#: admin/views/admin-settings-messagebar.php:145
+msgid "Show again tab"
+msgstr "Zobrazit znovu Tab"
+
+#: admin/views/admin-settings-messagebar.php:147
+msgid ""
+"Revisit consent will allow the visitors to view/edit/revoke their prior "
+"preferences. This can be done via a widget and/or a shortcode. A small "
+"privacy widget is automatically displayed at the footer of your website if "
+"the widget option is enabled. You can also manually insert a link to manage "
+"consent by adding the shortcode <b>[wt_cli_manage_consent]</b> to your "
+"website."
+msgstr ""
+"Opětovný souhlas umožní návštěvníkům zobrazit / upravit / odvolat jejich "
+"předchozí preference. To lze provést pomocí widgetu a / nebo zkráceného "
+"kódu. Pokud je povolena možnost widgetu, v zápatí vašeho webu se automaticky "
+"zobrazí malý widget ochrany osobních údajů. Můžete také ručně vložit odkaz "
+"pro správu souhlasu přidáním <b>zkráceného kódu [wt_cli_manage_consent]</b> "
+"na svůj web."
+
+#: admin/views/admin-settings-messagebar.php:152
+msgid "Enable revisit consent widget"
+msgstr "Povolit widget pro opětovný souhlas"
+
+#: admin/views/admin-settings-messagebar.php:152
+msgid ""
+"By enabling this option a small privacy widget is automatically displayed at "
+"the footer of your website."
+msgstr ""
+"Povolením této možnosti se v zápatí vašeho webu automaticky zobrazí malý "
+"widget ochrany osobních údajů."
+
+#: admin/views/admin-settings-messagebar.php:163
+#: admin/views/admin-settings-messagebar.php:180
+msgid "Tab Position"
+msgstr "Pozice"
+
+#: admin/views/admin-settings-messagebar.php:168
+#: admin/views/admin-settings-messagebar.php:171
+msgid "Right"
+msgstr "Vpravo"
+
+#: admin/views/admin-settings-messagebar.php:169
+#: admin/views/admin-settings-messagebar.php:172
+msgid "Left"
+msgstr "Vlevo"
+
+#: admin/views/admin-settings-messagebar.php:187
+msgid "Bottom Right"
+msgstr "Vpravo dole"
+
+#: admin/views/admin-settings-messagebar.php:190
+msgid "Bottom Left"
+msgstr "Vlevo dole"
+
+#: admin/views/admin-settings-messagebar.php:193
+msgid "Top Right"
+msgstr "Vpravo nahoře"
+
+#: admin/views/admin-settings-messagebar.php:196
+msgid "Top Left"
+msgstr "Vlevo nahoře"
+
+#: admin/views/admin-settings-messagebar.php:203
+msgid "From Right Margin"
+msgstr "Od pravého okraje"
+
+#: admin/views/admin-settings-messagebar.php:203
+msgid "From Left Margin"
+msgstr "Levý okraj"
+
+#: admin/views/admin-settings-messagebar.php:206
+msgid "Specify"
+msgstr "Upřesněte"
+
+#: admin/views/admin-settings-messagebar.php:215
+#: admin/views/admin_necessary_cookie.php:33
+#: admin/views/admin_non_necessary_cookie.php:48
+msgid "Title"
+msgstr "Nadpis"
+
 #: admin/views/admin-settings-save-button.php:12
 #: admin/views/admin_necessary_cookie.php:52
 #: admin/views/admin_non_necessary_cookie.php:87
-#: public/modules/script-blocker/script-blocker.php:208
+#: public/modules/script-blocker/script-blocker.php:219
 msgid "Update Settings"
 msgstr "Aktualizovat nastavení"
 
 #: admin/views/admin_necessary_cookie.php:26
 msgid "Necessary Cookie Settings"
 msgstr "Nezbytné nastavení souborů cookie"
-
-#: admin/views/admin_necessary_cookie.php:33
-#: admin/views/admin_non_necessary_cookie.php:48
-msgid "Title"
-msgstr "Nadpis"
 
 #: admin/views/admin_non_necessary_cookie.php:23
 msgid "Non-necessary Cookie Settings"
@@ -1294,7 +1321,7 @@ msgstr ""
 "Po každé aktualizaci pluginu se ujistěte, že je mezipaměť vymazána, zejména "
 "pokud máte minifikované soubory JS a / nebo CSS."
 
-#: includes/class-cookie-law-info-review_request.php:54
+#: includes/class-cookie-law-info-review_request.php:52
 #, php-format
 msgid ""
 "Hey, we at %sWebToffee%s would like to thank you for using our plugin. We "
@@ -1305,15 +1332,15 @@ msgstr ""
 "pluginu. Opravdu bychom ocenili, kdybyste si našli chvilku a upustili od "
 "rychlé kontroly, která nás bude inspirovat, abychom pokračovali."
 
-#: includes/class-cookie-law-info-review_request.php:57
+#: includes/class-cookie-law-info-review_request.php:55
 msgid "Remind me later"
 msgstr "Připomenout později"
 
-#: includes/class-cookie-law-info-review_request.php:58
+#: includes/class-cookie-law-info-review_request.php:56
 msgid "Not interested"
 msgstr "Nemám zájem"
 
-#: includes/class-cookie-law-info-review_request.php:59
+#: includes/class-cookie-law-info-review_request.php:57
 msgid "Review now"
 msgstr "Zkontrolovat nyní"
 
@@ -1326,7 +1353,7 @@ msgid "Cookie List"
 msgstr "Seznam cookie"
 
 #: public/class-cookie-law-info-public.php:253
-#: public/modules/shortcode/shortcode.php:205
+#: public/modules/shortcode/shortcode.php:208
 msgid "Cookie"
 msgstr "Sušenka"
 
@@ -1362,38 +1389,38 @@ msgstr "Nic nebylo nalezeno"
 msgid "Nothing found in Trash"
 msgstr "Nic jsme v koši nenašli"
 
-#: public/modules/script-blocker/script-blocker.php:148
-#: public/modules/script-blocker/script-blocker.php:149
+#: public/modules/script-blocker/script-blocker.php:156
+#: public/modules/script-blocker/script-blocker.php:157
 msgid "Script Blocker"
 msgstr "Script Blocker"
 
-#: public/modules/script-blocker/script-blocker.php:171
+#: public/modules/script-blocker/script-blocker.php:182
 msgid "Status updated"
 msgstr "Stav aktualizován"
 
-#: public/modules/script-blocker/script-blocker.php:195
+#: public/modules/script-blocker/script-blocker.php:206
 msgid "Advanced script rendering"
 msgstr "Pokročilé vykreslování skriptů"
 
-#: public/modules/script-blocker/script-blocker.php:197
+#: public/modules/script-blocker/script-blocker.php:208
 #: public/modules/script-blocker/views/settings.php:7
 msgid "Enable"
 msgstr "Povolit"
 
-#: public/modules/script-blocker/script-blocker.php:198
+#: public/modules/script-blocker/script-blocker.php:209
 #: public/modules/script-blocker/views/settings.php:7
 msgid "Disable"
 msgstr "Zakázáno"
 
-#: public/modules/script-blocker/script-blocker.php:199
+#: public/modules/script-blocker/script-blocker.php:210
 msgid ""
 "Advanced script rendering will render the blocked scripts using javascript "
-"thus by eliminating the need of a page refresh. It is also optimized for "
-"caching as there is no server-side processing after giving the consent."
+"thus eliminating the need for a page refresh. It is also optimized for "
+"caching since there is no server-side processing after obtaining the consent."
 msgstr ""
 "Pokročilé vykreslování skriptů vykreslí blokované skripty pomocí "
 "JavaScriptu, čímž eliminuje potřebu obnovy stránky. Je také optimalizován "
-"pro ukládání do mezipaměti, protože po udělení souhlasu neexistuje žádné "
+"pro ukládání do mezipaměti, protože po získání souhlasu neexistuje žádné "
 "zpracování na straně serveru."
 
 #: public/modules/script-blocker/views/settings.php:9
@@ -1461,47 +1488,47 @@ msgstr "Zakázáno: Pluginy budou vykresleny před získáním souhlasu."
 msgid "Inactive"
 msgstr "Deaktivní"
 
-#: public/modules/shortcode/shortcode.php:96
+#: public/modules/shortcode/shortcode.php:99
 msgid "Your current state:"
 msgstr "Váš aktuální stav:"
 
-#: public/modules/shortcode/shortcode.php:101
+#: public/modules/shortcode/shortcode.php:104
 msgid "Consent accepted."
 msgstr "Souhlas byl přijat."
 
-#: public/modules/shortcode/shortcode.php:104
+#: public/modules/shortcode/shortcode.php:107
 msgid "Consent rejected."
 msgstr "Souhlas byl zamítnut."
 
-#: public/modules/shortcode/shortcode.php:108
+#: public/modules/shortcode/shortcode.php:111
 msgid "No consent given."
 msgstr "Nebyl dán souhlas."
 
-#: public/modules/shortcode/shortcode.php:110
+#: public/modules/shortcode/shortcode.php:113
 msgid "Manage your consent."
 msgstr "Spravujte svůj souhlas."
 
-#: public/modules/shortcode/shortcode.php:147
+#: public/modules/shortcode/shortcode.php:150
 msgid "Delete Cookies"
 msgstr "Odstranit soubory cookie"
 
-#: public/modules/shortcode/shortcode.php:183
+#: public/modules/shortcode/shortcode.php:186
 msgid "No records found"
 msgstr "Nenalezeny žádné záznamy"
 
-#: public/modules/shortcode/shortcode.php:209
+#: public/modules/shortcode/shortcode.php:212
 msgid "Type"
 msgstr "Typ"
 
-#: public/modules/shortcode/shortcode.php:213
+#: public/modules/shortcode/shortcode.php:216
 msgid "Duration"
 msgstr "Délka"
 
-#: public/modules/shortcode/shortcode.php:530
+#: public/modules/shortcode/shortcode.php:533
 msgid "Close the cookie bar"
 msgstr "Zavřete lištu cookie"
 
-#: public/modules/shortcode/shortcode.php:530
+#: public/modules/shortcode/shortcode.php:533
 msgid "Close and Accept"
 msgstr "Zavřít a přijmout"
 
@@ -1520,6 +1547,32 @@ msgstr "Zobrazit více"
 #: public/views/cookie-law-info_popup_content.php:9
 msgid "Show less"
 msgstr "Ukaž méně"
+
+#~ msgid ""
+#~ "Which plugin are you using for language translation? Could you tell us a "
+#~ "bit more?"
+#~ msgstr ""
+#~ "Jaký plugin používáte pro jazykový překlad? Můžete nám říct něco víc?"
+
+#~ msgid "Caching issues"
+#~ msgstr "Problémy s ukládáním do mezipaměti"
+
+#~ msgid "Which caching plugin are you using? Could you tell us a bit more?"
+#~ msgstr ""
+#~ "Který plugin pro ukládání do mezipaměti používáte? Můžete nám říct něco "
+#~ "víc?"
+
+#~ msgid "Cookie Law Settings"
+#~ msgstr "Nastavení souborů cookie v zákon"
+
+#~ msgid "Show Again Tab"
+#~ msgstr "Zobrazit znovu Tab"
+
+#~ msgid "Use Show Again Tab?"
+#~ msgstr "Použít znovu zobrazit kartu?"
+
+#~ msgid "Show More Text"
+#~ msgstr "Zobrazit více"
 
 #~ msgid "Non-necessary Cookie"
 #~ msgstr "Nepotřebný soubor cookie"
@@ -1724,9 +1777,6 @@ msgstr "Ukaž méně"
 #~ "Tento web používá soubory cookie ke zlepšení své zkušenosti. Budeme "
 #~ "předpokládat, že jste v pořádku s tím, ale můžete opt-out Chcete-li. "
 #~ "[cookie_button] [cookie_settings] [cookie_link]"
-
-#~ msgid "Privacy & Cookies Policy"
-#~ msgstr "Soukromí & politika ohledně Cookies"
 
 #~ msgid "Cookie Category"
 #~ msgstr "Kategorie souborů cookie"

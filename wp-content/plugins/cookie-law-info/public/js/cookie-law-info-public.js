@@ -99,7 +99,7 @@ var CLI=
         this.attachDelete();
         this.attachEvents();
 		this.configButtons();
-		
+		this.reviewConsent();
 		var cli_hidebar_on_readmore=this.hideBarInReadMoreLink();
         if( Boolean( this.settings.scroll_close ) ===true && cli_hidebar_on_readmore===false) 
         {
@@ -204,7 +204,7 @@ var CLI=
 	},
 	settingsPopUp:function()
 	{	
-		jQuery('.cli_settings_button').click(function (e) {
+		jQuery(document).on('click','.cli_settings_button',function(e){
 			e.preventDefault();
 			CLI.settingsModal.addClass("cli-show").css({'opacity':0}).animate({'opacity':1});
 			CLI.settingsModal.removeClass('cli-blowup cli-out').addClass("cli-blowup");
@@ -936,6 +936,12 @@ var CLI=
 			exist = true;
 		}
 		return exist;
+	},
+	reviewConsent : function()
+	{	
+		jQuery(document).on('click','.cli_manage_current_consent,.wt-cli-manage-consent-link',function(){
+			CLI.displayHeader();
+		});
 	}
 }
 var cliBlocker = 

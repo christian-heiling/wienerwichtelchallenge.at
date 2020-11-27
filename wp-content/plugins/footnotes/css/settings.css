@@ -1,0 +1,133 @@
+/**
+ * Created by Stefan Herndler.
+ * User: Stefan
+ * Created-Date: 15.05.14
+ * Created-Time: 16:21
+ * Since: 1.0
+ * Version: 2.1.3
+ *
+ * Last modified: 2020-11-24T0957+0100
+ */
+
+
+/* MCI Footnotes logo
+ *
+ * The classes with 'heading' fix display in dashboard
+ * See class/config.php and css/public.css
+ */
+
+ .postbox-header {
+    position: relative;
+    padding: 0 20px;
+}
+.footnotes_logo_heading {
+    display: inline-block;
+    float: left;
+    position: absolute;
+}
+.footnotes_logo_part1_heading {
+    left: 20px;
+}
+.footnotes_logo_part2_heading {
+    left: 51px;
+}
+.footnotes_heart_heading {
+    color:#ff6d3b;
+    font-weight:bold;
+    position: absolute;
+    left: 96px;
+}
+
+/*
+On User Request: limited to a number of IDs to not affect all dashboards
+<https://wordpress.org/support/topic/all-input-have-width-80/>
+*/
+#footnote_inputfield_placeholder_start_user_defined,
+#footnote_inputfield_placeholder_end_user_defined,
+#footnote_inputfield_readon_label,
+#footnote_inputfield_references_label,
+#footnote_inputfield_custom_css
+/*input[type=text], input[type=password], textarea, select*/ {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    width: 80% !important;
+}
+
+textarea {
+    height: 250px;
+}
+
+label {
+    display: inline-block;
+}
+
+.postbox > h3 {
+    height: 32px !important;
+    line-height: 32px !important;
+}
+
+.postbox > h3 > span {
+    padding-left: 10px;
+}
+
+.postbox > .inside > table {
+    border: none !important;
+}
+
+.postbox > .inside >table > tbody > tr > td:first-child {
+    width: 15% !important;
+    font-weight: bold !important;
+}
+
+.footnote_placeholder_box_container {
+    text-align: center !important;
+}
+
+span.footnote_highlight_placeholder {
+    font-weight: bold !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.footnote_placeholder_box_example {
+    border: 2px solid #2bb975 !important;
+    border-radius: 4px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    width: 50% !important;
+    display: block !important;
+    margin: 20px auto !important;
+    text-align: center !important;
+}
+
+/*
+initialized from style attributes in templates
+IE doesn’t support nth child, but these are not critical
+*/
+.expert-lookup tr th:first-child,
+.expert-lookup tr td:first-child {
+    width: 170px !important;
+}
+.expert-lookup tr th:nth-child(2),
+.expert-lookup tr td:nth-child(2) {
+    width: 65px !important;
+}
+.expert-lookup tr th:nth-child(3),
+.expert-lookup tr td:nth-child(3) {
+    width: 200px !important;
+}
+.expert-lookup tr td:nth-child(3) input {
+    width: 190px;
+}
+.expert-lookup tr th:last-child,
+.expert-lookup tr td:last-child {
+    white-space: nowrap;
+}
+
+.footnotes-description {
+    padding: 0 10%;
+}
+.footnotes-description p {
+    font-size: 1.4em;
+    font-style: italic;
+}

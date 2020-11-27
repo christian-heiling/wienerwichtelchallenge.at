@@ -17,11 +17,9 @@ class Cookie_Law_Info_Review_Request
     private $plugin_title               =   "GDPR Cookie Consent (CCPA Ready)";
     private $review_url                 =   "https://wordpress.org/support/plugin/cookie-law-info/reviews/#new-post";
     private $plugin_prefix              =   "wt_cli"; /* must be unique name */
-    private $activation_hook            =   "wt_cli_activate"; /* hook for activation, to store activated date */
-    private $deactivation_hook          =   "wt_cli_deactivate"; /* hook for deactivation, to delete activated date */
     private $days_to_show_banner        =   15; /* when did the banner to show */
     private $remind_days                =   15; /* remind interval in days */
-    private $webtoffee_logo_url         =   CLI_PLUGIN_URL . 'images/webtoffee-logo_small.png';
+    private $webtoffee_logo_url         =   '';
 
 
 
@@ -47,8 +45,8 @@ class Cookie_Law_Info_Review_Request
         //Set config vars
         $this->set_vars();
 
-        add_action($this->activation_hook, array($this, 'on_activate'));
-        add_action($this->deactivation_hook, array($this, 'on_deactivate'));
+        register_activation_hook(CLI_PLUGIN_FILENAME , array($this, 'on_activate'));
+        register_deactivation_hook(CLI_PLUGIN_FILENAME, array($this, 'on_deactivate'));
 
         if ($this->check_condition()) /* checks the banner is active now */ {
             $this->banner_message = sprintf(__("Hey, we at %sWebToffee%s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.", 'cookie-law-info'), '<b>', '</b>');
@@ -77,6 +75,8 @@ class Cookie_Law_Info_Review_Request
         $this->start_date                   =   absint(get_option($this->start_date_option_name));
         $banner_state                       =   absint(get_option($this->banner_state_option_name));
         $this->current_banner_state         =   ($banner_state == 0 ? $this->current_banner_state : $banner_state);
+        $this->webtoffee_logo_url           =    CLI_PLUGIN_URL . 'images/webtoffee-logo_small.png';
+
     }
 
     /**
@@ -84,8 +84,10 @@ class Cookie_Law_Info_Review_Request
      *	Saves activation date
      */
     public function on_activate()
-    {
-        $this->reset_start_date();
+    {   
+        if( $this->start_date == 0 ) {
+            $this->reset_start_date();
+        }
     }
 
     /**
@@ -101,7 +103,7 @@ class Cookie_Law_Info_Review_Request
      *	Reset the start date. 
      */
     private function reset_start_date()
-    {
+    {   
         update_option($this->start_date_option_name, time());
     }
 

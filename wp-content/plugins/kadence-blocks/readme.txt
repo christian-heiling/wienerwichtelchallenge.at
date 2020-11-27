@@ -4,7 +4,7 @@ Tags: gutenberg, blocks, page builder, google fonts, dual buttons, svg icons, ed
 Donate link: https://www.kadencewp.com/about-us/
 Requires at least: 5.2
 Tested up to: 5.5.3
-Stable tag: 1.9.3
+Stable tag: 1.9.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,20 @@ Install the plugin into the `/wp-content/plugins/` folder, and activate it.
 6. Editor Width settings inside Gutenberg
 
 == Changelog ==
+
+= 1.9.5 =
+* Fix: Issue with rendering when previously had selected muli font.
+
+= 1.9.4 =
+* Update font list, change muli to mulish.
+* Update: Better column Padding/Margin Controls.
+* Fix: Anchor Header issue.
+* Update: Better inheriting of font options from global settings in Kadence Theme.
+* Fix: Gallery Captions Tablet and Mobile sizes.
+* Fix: issue with TOC in certain contexts.
+* Fix: RTL issue in editor.
+* Update: Show Error Message Below submit for validation errors.
+* Add: Error Message to issue with recaptcha v3 failing on second post without reloading the page.
 
 = 1.9.3 =
 * Add: Polyfill for Safari Scroll to ID.

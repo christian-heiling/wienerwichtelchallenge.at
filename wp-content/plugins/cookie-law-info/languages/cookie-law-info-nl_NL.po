@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2020-10-21 16:11+0530\n"
-"PO-Revision-Date: 2020-10-21 16:13+0530\n"
+"POT-Creation-Date: 2020-11-17 11:34+0530\n"
+"PO-Revision-Date: 2020-11-17 11:34+0530\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-KeywordsList: __;_e\n"
@@ -18,6 +18,7 @@ msgstr ""
 #: admin/class-cookie-law-info-admin.php:147
 #: admin/class-cookie-law-info-admin.php:148
 #: admin/class-cookie-law-info-admin.php:247
+#: admin/partials/cookie-law-info-admin_settings.php:31
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -45,9 +46,9 @@ msgstr "Privacy-Overzicht"
 #: admin/class-cookie-law-info-admin.php:334
 #: admin/class-cookie-law-info-admin.php:378
 #: admin/modules/cli-policy-generator/classes/class-policy-generator-ajax.php:22
-#: public/modules/script-blocker/script-blocker.php:123
-#: public/modules/script-blocker/script-blocker.php:144
-#: public/modules/script-blocker/script-blocker.php:299
+#: public/modules/script-blocker/script-blocker.php:133
+#: public/modules/script-blocker/script-blocker.php:173
+#: public/modules/script-blocker/script-blocker.php:310
 msgid "You do not have sufficient permission to perform this operation"
 msgstr "U hebt niet voldoende machtigingen voor deze bewerking"
 
@@ -167,7 +168,7 @@ msgid "Confirm"
 msgstr "Bevestigen"
 
 #: admin/modules/ccpa/ccpa.php:108
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:121
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:154
 msgid "Cancel"
 msgstr "Annuleren"
 
@@ -296,7 +297,7 @@ msgstr "Heading"
 #: admin/views/admin_necessary_cookie.php:39
 #: admin/views/admin_non_necessary_cookie.php:54
 #: public/modules/script-blocker/views/settings.php:142
-#: public/modules/shortcode/shortcode.php:217
+#: public/modules/shortcode/shortcode.php:220
 msgid "Description"
 msgstr "Omschrijving"
 
@@ -322,91 +323,111 @@ msgid "Live preview"
 msgstr "Live voorvertoning"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:43
-msgid "The plugin is more complex to set up"
-msgstr "De plug-in is complexer om in te stellen"
+msgid "The plugin is complex to set up"
+msgstr "De plug-in is complex om in te stellen"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:45
 msgid "Please describe which area you are facing difficulties"
 msgstr "Beschrijf alstublieft in welk gebied u moeilijkheden ondervindt"
 
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:49
-msgid "A conflict with another plugin or theme"
-msgstr "Een conflict met een andere plug-in of een ander thema"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:51
-msgid "Which plugin or theme?"
-msgstr "Welke plug-in of welk thema?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:55
-msgid "Language translation issues"
-msgstr "Problemen met vertalingen"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:57
-msgid ""
-"Which plugin are you using for language translation? Could you tell us a bit "
-"more?"
-msgstr ""
-"Welke plug-in gebruik je voor taalvertaling? Kunt u ons iets meer vertellen?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:61
-msgid "Caching issues"
-msgstr "Cacheproblemen"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:63
-msgid "Which caching plugin are you using? Could you tell us a bit more?"
-msgstr "Welke caching-plug-in gebruikt u? Kunt u ons iets meer vertellen?"
-
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:67
 msgid "I found a better plugin"
 msgstr "Ik heb een betere plugin gevonden"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:69
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:51
 msgid "Which plugin?"
 msgstr "Welke plugin?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:73
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:55
 msgid "The plugin is great, but I need specific feature that you don't support"
 msgstr ""
 "Deze plugin is prima, maar ik heb een specifieke functie nodig die jullie "
 "niet ondersteunen"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:75
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:57
 msgid "Could you tell us more about that feature?"
 msgstr "Kan je ons meer vertellen over die functie?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:79
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:61
 msgid "The plugin didn't work as expected"
 msgstr "De plugin werkte niet zoals verwacht"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:81
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:63
 msgid "What did you expect?"
 msgstr "Wat was verwachting?"
 
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:67
+msgid "A conflict with another plugin or theme"
+msgstr "Een conflict met een andere plug-in of een ander thema"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:69
+msgid "Which plugin or theme?"
+msgstr "Welke plug-in of welk thema?"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:73
+msgid "Translation issues"
+msgstr "Vertaalproblemen"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:77
+msgid "Incorrect/missing translation"
+msgstr "Onjuiste / ontbrekende vertaling"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:79
+msgid "Name the language"
+msgstr "Noem de taal"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:83
+msgid ""
+"Unable to translate my dynamic content e.g, cookie message, button text etc"
+msgstr ""
+"Kan mijn dynamische inhoud niet vertalen, bijvoorbeeld cookiemelding, "
+"knoptekst enz"
+
 #: admin/modules/uninstall-feedback/uninstall-feedback.php:85
+msgid "Name the language and the translator plugin that you are using"
+msgstr "Noem de taal en de vertaler-plug-in die u gebruikt"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:91
+msgid "Upgrade to pro"
+msgstr "Upgraden naar Pro"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:95
 #: admin/views/admin-settings-general.php:10
-#: admin/views/admin-settings-general.php:132
+#: admin/views/admin-settings-general.php:66
 msgid "Other"
 msgstr "Anders"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:87
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:97
 msgid "Could you tell us a bit more?"
 msgstr "Kun je ons wat meer vertellen?"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:106
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:117
 msgid "If you have a moment, please let us know why you are deactivating:"
 msgstr "Wij horen graag waarom u ervoor kiest om te deactiveren:"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:116
-msgid "I rather wouldn't say"
-msgstr "Zeg ik liever niet"
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:144
+msgid ""
+"We do not collect any personal data when you submit this form. It's your "
+"feedback that we value."
+msgstr ""
+"We verzamelen geen persoonlijke gegevens wanneer u dit formulier verzendt. "
+"Het is uw feedback die we waarderen."
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:119
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:145
+msgid "Privacy Policy"
+msgstr "Privacybeleid"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:152
 msgid "Go to support"
 msgstr "Ga naar ondersteuning"
 
-#: admin/modules/uninstall-feedback/uninstall-feedback.php:120
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:153
 msgid "Submit & Deactivate"
 msgstr "Inzenden & Deactiveren"
+
+#: admin/modules/uninstall-feedback/uninstall-feedback.php:155
+msgid "I rather wouldn't say"
+msgstr "Zeg ik liever niet"
 
 #: admin/partials/cookie-law-info-admin_settings.php:25
 #: admin/views/admin_necessary_cookie.php:20
@@ -427,10 +448,6 @@ msgstr "Instellingen gereset naar standaardinstellingen."
 #: admin/partials/cookie-law-info-admin_settings.php:28
 msgid "Unable to reset settings."
 msgstr "Kon instellingen niet opnieuw instellen."
-
-#: admin/partials/cookie-law-info-admin_settings.php:31
-msgid "Cookie Law Settings"
-msgstr "Cookiewetgeving"
 
 #: admin/partials/cookie-law-info-admin_settings.php:39
 msgid "Cookie bar is currently active"
@@ -613,13 +630,11 @@ msgstr "Open URL in nieuw venster?"
 #: admin/views/admin-settings-buttons.php:311
 #: admin/views/admin-settings-general.php:38
 #: admin/views/admin-settings-general.php:54
-#: admin/views/admin-settings-general.php:71
-#: admin/views/admin-settings-general.php:140
-#: admin/views/admin-settings-general.php:148
-#: admin/views/admin-settings-general.php:155
+#: admin/views/admin-settings-general.php:74
+#: admin/views/admin-settings-general.php:82
+#: admin/views/admin-settings-general.php:89
 #: admin/views/admin-settings-messagebar.php:86
 #: admin/views/admin-settings-messagebar.php:110
-#: admin/views/admin-settings-messagebar.php:150
 #: admin/views/admin_non_necessary_cookie.php:32
 msgid "Yes"
 msgstr "Ja"
@@ -630,13 +645,11 @@ msgstr "Ja"
 #: admin/views/admin-settings-buttons.php:312
 #: admin/views/admin-settings-general.php:39
 #: admin/views/admin-settings-general.php:55
-#: admin/views/admin-settings-general.php:72
-#: admin/views/admin-settings-general.php:141
-#: admin/views/admin-settings-general.php:149
-#: admin/views/admin-settings-general.php:156
+#: admin/views/admin-settings-general.php:75
+#: admin/views/admin-settings-general.php:83
+#: admin/views/admin-settings-general.php:90
 #: admin/views/admin-settings-messagebar.php:87
 #: admin/views/admin-settings-messagebar.php:111
-#: admin/views/admin-settings-messagebar.php:151
 #: admin/views/admin_non_necessary_cookie.php:33
 #: public/modules/script-blocker/views/settings.php:139
 msgid "No"
@@ -763,81 +776,15 @@ msgstr ""
 msgid "This option will not work along with `Popup overlay`."
 msgstr "Deze optie werkt niet samen met `Popup-overlay`."
 
-#: admin/views/admin-settings-general.php:66
-#: admin/views/admin-settings-messagebar.php:145
-msgid "Show Again Tab"
-msgstr "Weergeven Tab"
-
 #: admin/views/admin-settings-general.php:69
-#: admin/views/admin-settings-messagebar.php:148
-msgid "Use Show Again Tab?"
-msgstr "Gebruik het tabblad Weergeven?"
-
-#: admin/views/admin-settings-general.php:77
-#: admin/views/admin-settings-general.php:94
-#: admin/views/admin-settings-messagebar.php:156
-#: admin/views/admin-settings-messagebar.php:173
-msgid "Tab Position"
-msgstr "Positie van het tabblad"
-
-#: admin/views/admin-settings-general.php:82
-#: admin/views/admin-settings-general.php:85
-#: admin/views/admin-settings-messagebar.php:161
-#: admin/views/admin-settings-messagebar.php:164
-msgid "Right"
-msgstr "Rechts"
-
-#: admin/views/admin-settings-general.php:83
-#: admin/views/admin-settings-general.php:86
-#: admin/views/admin-settings-messagebar.php:162
-#: admin/views/admin-settings-messagebar.php:165
-msgid "Left"
-msgstr "Links"
-
-#: admin/views/admin-settings-general.php:101
-#: admin/views/admin-settings-messagebar.php:180
-msgid "Bottom Right"
-msgstr "Rechts onder"
-
-#: admin/views/admin-settings-general.php:104
-#: admin/views/admin-settings-messagebar.php:183
-msgid "Bottom Left"
-msgstr "Linksonder"
-
-#: admin/views/admin-settings-general.php:107
-#: admin/views/admin-settings-messagebar.php:186
-msgid "Top Right"
-msgstr "Rechtsboven"
-
-#: admin/views/admin-settings-general.php:110
-#: admin/views/admin-settings-messagebar.php:189
-msgid "Top Left"
-msgstr "Linksboven"
-
-#: admin/views/admin-settings-general.php:117
-#: admin/views/admin-settings-messagebar.php:196
-msgid "From Left Margin"
-msgstr "Van linkermarge"
-
-#: admin/views/admin-settings-general.php:120
-#: admin/views/admin-settings-messagebar.php:199
-msgid "Specify"
-msgstr "Specifiek"
-
-#: admin/views/admin-settings-general.php:124
-#: admin/views/admin-settings-messagebar.php:203
-msgid "Show More Text"
-msgstr "Meer tekst weergeven"
-
-#: admin/views/admin-settings-general.php:135
 msgid "Reload after \"scroll accept\" event?"
 msgstr "Herladen na \"scrollen accepteren\" -gebeurtenis?"
 
-#: admin/views/admin-settings-general.php:146
+#: admin/views/admin-settings-general.php:80
 msgid "Reload after Accept button click"
 msgstr "Herladen na klikken op Accepteren"
 
-#: admin/views/admin-settings-general.php:153
+#: admin/views/admin-settings-general.php:87
 msgid "Reload after Reject button click"
 msgstr "Opnieuw laden na klikken op Weigeren"
 
@@ -971,8 +918,9 @@ msgid "Cookie bar"
 msgstr "Koekjesbalk"
 
 #: admin/views/admin-settings-messagebar.php:10
-msgid "Show again tab"
-msgstr "Weergeven tabblad"
+#: admin/views/admin-settings-messagebar.php:145
+msgid "Revisit consent"
+msgstr "Herhaal toestemming"
 
 #: admin/views/admin-settings-messagebar.php:15
 msgid "Cookie Bar"
@@ -1092,21 +1040,101 @@ msgstr "Sticky"
 msgid "On hide"
 msgstr "Op hide"
 
+#: admin/views/admin-settings-messagebar.php:145
+msgid "previously"
+msgstr "eerder"
+
+#: admin/views/admin-settings-messagebar.php:145
+msgid "Show again tab"
+msgstr "Weergeven tabblad"
+
+#: admin/views/admin-settings-messagebar.php:147
+msgid ""
+"Revisit consent will allow the visitors to view/edit/revoke their prior "
+"preferences. This can be done via a widget and/or a shortcode. A small "
+"privacy widget is automatically displayed at the footer of your website if "
+"the widget option is enabled. You can also manually insert a link to manage "
+"consent by adding the shortcode <b>[wt_cli_manage_consent]</b> to your "
+"website."
+msgstr ""
+"Door de toestemming opnieuw te bezoeken, kunnen bezoekers hun eerdere "
+"voorkeuren bekijken / bewerken / intrekken. Dit kan via een widget en / of "
+"een shortcode. Een kleine privacywidget wordt automatisch weergegeven in de "
+"voettekst van uw website als de widgetoptie is ingeschakeld. U kunt ook "
+"handmatig een link invoegen om toestemming te beheren door de shortcode "
+"<b>[wt_cli_manage_consent]</b> aan uw website toe te voegen."
+
+#: admin/views/admin-settings-messagebar.php:152
+msgid "Enable revisit consent widget"
+msgstr "Schakel widget voor opnieuw bezoeken van toestemming in"
+
+#: admin/views/admin-settings-messagebar.php:152
+msgid ""
+"By enabling this option a small privacy widget is automatically displayed at "
+"the footer of your website."
+msgstr ""
+"Door deze optie in te schakelen, wordt automatisch een kleine privacywidget "
+"weergegeven onder aan uw website."
+
+#: admin/views/admin-settings-messagebar.php:163
+#: admin/views/admin-settings-messagebar.php:180
+msgid "Tab Position"
+msgstr "Positie van het tabblad"
+
+#: admin/views/admin-settings-messagebar.php:168
+#: admin/views/admin-settings-messagebar.php:171
+msgid "Right"
+msgstr "Rechts"
+
+#: admin/views/admin-settings-messagebar.php:169
+#: admin/views/admin-settings-messagebar.php:172
+msgid "Left"
+msgstr "Links"
+
+#: admin/views/admin-settings-messagebar.php:187
+msgid "Bottom Right"
+msgstr "Rechts onder"
+
+#: admin/views/admin-settings-messagebar.php:190
+msgid "Bottom Left"
+msgstr "Linksonder"
+
+#: admin/views/admin-settings-messagebar.php:193
+msgid "Top Right"
+msgstr "Rechtsboven"
+
+#: admin/views/admin-settings-messagebar.php:196
+msgid "Top Left"
+msgstr "Linksboven"
+
+#: admin/views/admin-settings-messagebar.php:203
+msgid "From Right Margin"
+msgstr "Vanaf de rechtermarge"
+
+#: admin/views/admin-settings-messagebar.php:203
+msgid "From Left Margin"
+msgstr "Van linkermarge"
+
+#: admin/views/admin-settings-messagebar.php:206
+msgid "Specify"
+msgstr "Specifiek"
+
+#: admin/views/admin-settings-messagebar.php:215
+#: admin/views/admin_necessary_cookie.php:33
+#: admin/views/admin_non_necessary_cookie.php:48
+msgid "Title"
+msgstr "Titel"
+
 #: admin/views/admin-settings-save-button.php:12
 #: admin/views/admin_necessary_cookie.php:52
 #: admin/views/admin_non_necessary_cookie.php:87
-#: public/modules/script-blocker/script-blocker.php:208
+#: public/modules/script-blocker/script-blocker.php:219
 msgid "Update Settings"
 msgstr "Bijwerken Instellingen"
 
 #: admin/views/admin_necessary_cookie.php:26
 msgid "Necessary Cookie Settings"
 msgstr "Noodzakelijke cookie-instellingen"
-
-#: admin/views/admin_necessary_cookie.php:33
-#: admin/views/admin_non_necessary_cookie.php:48
-msgid "Title"
-msgstr "Titel"
 
 #: admin/views/admin_non_necessary_cookie.php:23
 msgid "Non-necessary Cookie Settings"
@@ -1299,7 +1327,7 @@ msgstr ""
 "Zorg ervoor dat het cachegeheugen wordt gewist na elke update van de plug-in, "
 "vooral als je verkleinde JS- en / of CSS-bestanden hebt."
 
-#: includes/class-cookie-law-info-review_request.php:54
+#: includes/class-cookie-law-info-review_request.php:52
 #, php-format
 msgid ""
 "Hey, we at %sWebToffee%s would like to thank you for using our plugin. We "
@@ -1310,15 +1338,15 @@ msgstr ""
 "plug-in. We zouden het erg op prijs stellen als u even de tijd neemt om een "
 "korte recensie achter te laten die ons zal inspireren om door te gaan."
 
-#: includes/class-cookie-law-info-review_request.php:57
+#: includes/class-cookie-law-info-review_request.php:55
 msgid "Remind me later"
 msgstr "Herinner me er later aan"
 
-#: includes/class-cookie-law-info-review_request.php:58
+#: includes/class-cookie-law-info-review_request.php:56
 msgid "Not interested"
 msgstr "Niet geïnteresseerd"
 
-#: includes/class-cookie-law-info-review_request.php:59
+#: includes/class-cookie-law-info-review_request.php:57
 msgid "Review now"
 msgstr "Nu beoordelen"
 
@@ -1331,7 +1359,7 @@ msgid "Cookie List"
 msgstr "Cookie lijst"
 
 #: public/class-cookie-law-info-public.php:253
-#: public/modules/shortcode/shortcode.php:205
+#: public/modules/shortcode/shortcode.php:208
 msgid "Cookie"
 msgstr "Koekje"
 
@@ -1367,30 +1395,30 @@ msgstr "Niets gevonden"
 msgid "Nothing found in Trash"
 msgstr "Niets gevonden in de prullenbak"
 
-#: public/modules/script-blocker/script-blocker.php:148
-#: public/modules/script-blocker/script-blocker.php:149
+#: public/modules/script-blocker/script-blocker.php:156
+#: public/modules/script-blocker/script-blocker.php:157
 msgid "Script Blocker"
 msgstr "Scriptblocker"
 
-#: public/modules/script-blocker/script-blocker.php:171
+#: public/modules/script-blocker/script-blocker.php:182
 msgid "Status updated"
 msgstr "Status bijgewerkt"
 
-#: public/modules/script-blocker/script-blocker.php:195
+#: public/modules/script-blocker/script-blocker.php:206
 msgid "Advanced script rendering"
 msgstr "Geavanceerde scriptweergave"
 
-#: public/modules/script-blocker/script-blocker.php:197
+#: public/modules/script-blocker/script-blocker.php:208
 #: public/modules/script-blocker/views/settings.php:7
 msgid "Enable"
 msgstr "Inschakelen"
 
-#: public/modules/script-blocker/script-blocker.php:198
+#: public/modules/script-blocker/script-blocker.php:209
 #: public/modules/script-blocker/views/settings.php:7
 msgid "Disable"
 msgstr "Uitschakelen"
 
-#: public/modules/script-blocker/script-blocker.php:199
+#: public/modules/script-blocker/script-blocker.php:210
 msgid ""
 "Advanced script rendering will render the blocked scripts using javascript "
 "thus eliminating the need for a page refresh. It is also optimized for "
@@ -1468,47 +1496,47 @@ msgstr ""
 msgid "Inactive"
 msgstr "Inactief"
 
-#: public/modules/shortcode/shortcode.php:96
+#: public/modules/shortcode/shortcode.php:99
 msgid "Your current state:"
 msgstr "Uw huidige staat:"
 
-#: public/modules/shortcode/shortcode.php:101
+#: public/modules/shortcode/shortcode.php:104
 msgid "Consent accepted."
 msgstr "Toestemming geaccepteerd."
 
-#: public/modules/shortcode/shortcode.php:104
+#: public/modules/shortcode/shortcode.php:107
 msgid "Consent rejected."
 msgstr "Toestemming afgewezen."
 
-#: public/modules/shortcode/shortcode.php:108
+#: public/modules/shortcode/shortcode.php:111
 msgid "No consent given."
 msgstr "Geen toestemming gegeven."
 
-#: public/modules/shortcode/shortcode.php:110
+#: public/modules/shortcode/shortcode.php:113
 msgid "Manage your consent."
 msgstr "Beheer uw toestemming."
 
-#: public/modules/shortcode/shortcode.php:147
+#: public/modules/shortcode/shortcode.php:150
 msgid "Delete Cookies"
 msgstr "Verwijder cookies"
 
-#: public/modules/shortcode/shortcode.php:183
+#: public/modules/shortcode/shortcode.php:186
 msgid "No records found"
 msgstr "Geen verslagen gevonden"
 
-#: public/modules/shortcode/shortcode.php:209
+#: public/modules/shortcode/shortcode.php:212
 msgid "Type"
 msgstr "Type"
 
-#: public/modules/shortcode/shortcode.php:213
+#: public/modules/shortcode/shortcode.php:216
 msgid "Duration"
 msgstr "Duur"
 
-#: public/modules/shortcode/shortcode.php:530
+#: public/modules/shortcode/shortcode.php:533
 msgid "Close the cookie bar"
 msgstr "Sluit de koekjesbalk"
 
-#: public/modules/shortcode/shortcode.php:530
+#: public/modules/shortcode/shortcode.php:533
 msgid "Close and Accept"
 msgstr "Sluit en accepteer"
 
@@ -1527,6 +1555,31 @@ msgstr "Meer weergeven"
 #: public/views/cookie-law-info_popup_content.php:9
 msgid "Show less"
 msgstr "Laat minder zien"
+
+#~ msgid ""
+#~ "Which plugin are you using for language translation? Could you tell us a "
+#~ "bit more?"
+#~ msgstr ""
+#~ "Welke plug-in gebruik je voor taalvertaling? Kunt u ons iets meer "
+#~ "vertellen?"
+
+#~ msgid "Caching issues"
+#~ msgstr "Cacheproblemen"
+
+#~ msgid "Which caching plugin are you using? Could you tell us a bit more?"
+#~ msgstr "Welke caching-plug-in gebruikt u? Kunt u ons iets meer vertellen?"
+
+#~ msgid "Cookie Law Settings"
+#~ msgstr "Cookiewetgeving"
+
+#~ msgid "Show Again Tab"
+#~ msgstr "Weergeven Tab"
+
+#~ msgid "Use Show Again Tab?"
+#~ msgstr "Gebruik het tabblad Weergeven?"
+
+#~ msgid "Show More Text"
+#~ msgstr "Meer tekst weergeven"
 
 #~ msgid "Non-necessary Cookie"
 #~ msgstr "Niet noodzakelijk Cookie"
@@ -1709,10 +1762,6 @@ msgstr "Laat minder zien"
 #~ "Deze website maakt gebruik van cookies om uw ervaring te verbeteren. Wij "
 #~ "gaan ervan uit dat je bent ok met dit, maar u kunt opt-out als u wenst. "
 #~ "[cookie_button] [cookie_settings] [cookie_link]"
-
-#, fuzzy
-#~ msgid "Privacy & Cookies Policy"
-#~ msgstr "Privacy & Cookies beleid"
 
 #, fuzzy
 #~ msgid "Cookie Category"

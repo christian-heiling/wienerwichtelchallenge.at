@@ -4,7 +4,7 @@ Plugin Name: Loco Translate
 Plugin URI: https://wordpress.org/plugins/loco-translate/
 Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
-Version: 2.4.4
+Version: 2.4.6
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/
@@ -30,7 +30,7 @@ function loco_plugin_file(){
  * @return string
  */
 function loco_plugin_version(){
-    return '2.4.4';
+    return '2.4.6';
 }
 
 
@@ -132,17 +132,17 @@ function loco_require_lib( $path ){
  */
 function loco_check_extension( $name ) {
     static $cache = array();
-    if ( ! isset( $cache[$name] ) ) {
-        if ( extension_loaded($name) ) {
-            $cache[ $name ] = true;
+    if( ! array_key_exists($name,$cache) ) {
+        if( extension_loaded($name) ){
+            $cache[$name] = true;
         }
         else {
-            Loco_error_AdminNotices::warn( sprintf( __('Loco requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
+            Loco_error_AdminNotices::warn( sprintf( __('Loco Translate requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
             $class = 'Loco_compat_'.ucfirst($name).'Extension.php';
             $cache[$name] = class_exists($class);
         }
     }
-    return $cache[ $name ];
+    return $cache[$name];
 }
 
 
@@ -201,6 +201,12 @@ try {
     if ( is_admin() ) {
         new Loco_hooks_AdminHooks;
     }
+    
+    // enable wp cli commands
+    if( class_exists('WP_CLI',false) ) {
+        WP_CLI::add_command('loco','Loco_cli_Commands');
+    }
+
 }
 catch( Exception $e ){ // PHP5+
     trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ),E_USER_NOTICE);

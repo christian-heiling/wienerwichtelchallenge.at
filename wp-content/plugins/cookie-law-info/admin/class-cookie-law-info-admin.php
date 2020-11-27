@@ -246,7 +246,7 @@ class Cookie_Law_Info_Admin {
 	{
 	   $links[] = '<a href="'. get_admin_url(null,'edit.php?post_type='.CLI_POST_TYPE.'&page=cookie-law-info') .'">'.__('Settings','cookie-law-info').'</a>';
 	   $links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank">'.__('Support','cookie-law-info').'</a>';
-	   $links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/" target="_blank">'.__('Premium Upgrade','cookie-law-info').'</a>';
+	   $links[] = '<a href="https://www.webtoffee.com/product/gdpr-cookie-consent/?utm_source=free_plugin_listing&utm_medium=gdpr_basic&utm_campaign=GDPR&utm_content='.CLI_VERSION.'" target="_blank">'.__('Premium Upgrade','cookie-law-info').'</a>';
 	   return $links;
 	}
 	
@@ -417,7 +417,7 @@ class Cookie_Law_Info_Admin {
 	        {
 	            echo '<h3>' . __('ERROR MIGRATING SETTINGS (ERROR: 2)', 'cookie-law-info') . '</h3>';
 	        }
-	        $the_options = Cookie_Law_Info::get_settings();;
+	        $the_options = Cookie_Law_Info::get_settings();
 	    }
 	    if(!empty($_SERVER[ 'HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH'])=='xmlhttprequest')
         {	            

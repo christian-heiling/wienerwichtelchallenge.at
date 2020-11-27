@@ -4,7 +4,7 @@ Donate link: https://www.webtoffee.com/plugins/
 Tags: eu cookie law, GDPR, CCPA, cookie law, cookie consent, eu privacy directive, privacy directive, cookies, privacy, compliance
 Requires at least: 3.3.1
 Tested up to: 5.5
-Stable tag: 1.9.3
+Stable tag: 1.9.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -60,7 +60,7 @@ The plugin supports WPML and qTranslate so your translation needs are covered.
 
 [Read more about the EU Cookie Law](https://cookielawinfo.com/ "More information about the EU Cookie Law")
 
-[GDPR Cookie Consent user guide](https://www.cookielawinfo.com/user-guide/ "GDPR Cookie Consent user guide")
+[GDPR Cookie Consent user guide](https://www.webtoffee.com/gdpr-cookie-consent-plugin-basic-version-user-guide/ "GDPR Cookie Consent user guide")
 
 [Check our javascript solution for running third-party scripts](https://www.webtoffee.com/javascript-solution-for-running-third-party-scripts/ "Javascript solution for running third-party scripts")
 
@@ -105,7 +105,7 @@ For complete list of features and details, Please visit <a rel="nofollow" href="
 There’s a lot of help available on the main plugin website. See:
 
 https://www.cookielawinfo.com/faq
-https://www.cookielawinfo.com/user-guide
+https://www.webtoffee.com/gdpr-cookie-consent-plugin-basic-version-user-guide/
 https://www.cookielawinfo.com/support
 
 = The cookie notice header isn’t displaying ? =
@@ -156,6 +156,11 @@ See http://cookielawinfo.com for more information on what is required.
 4. Header (with custom styles)
 
 == Changelog ==
+
+= 1.9.4 =
+
+* Renamed show again tab to revisit consent
+* New shortcode `wt_cli_manage_consent` option for revisit consent
 
 = 1.9.3 =
 
@@ -450,6 +455,7 @@ See http://cookielawinfo.com for more information on what is required.
 
 == Upgrade Notice ==
 
-= 1.9.3 =
+= 1.9.4 =
 
-* Fix: Editors unable to access the dashboard due to recent security update
+* Renamed show again tab to revisit consent
+* New shortcode `wt_cli_manage_consent` option for revisit consent

@@ -318,14 +318,14 @@ class Cookie_Law_Info_Public
 			$head = __($the_options['bar_heading_text'], 'cookie-law-info');
 			$head = trim(stripslashes($head));
 
-			$notify_html = '<div id="' . $this->cookielawinfo_remove_hash($the_options["notify_div_id"]) . '">' .
+			$notify_html = '<div id="' . $this->cookielawinfo_remove_hash($the_options["notify_div_id"]) . '" data-nosnippet="true">' .
 				($head != "" ? '<h5 class="cli_messagebar_head">' . $head . '</h5>' : '')
 				. '<span>' . $str . '</span></div>';
 
 			//if($the_options['showagain_tab'] === true) 
 			//{
 			$show_again = __(stripslashes($the_options["showagain_text"]), 'cookie-law-info');
-			$notify_html .= '<div id="' . $this->cookielawinfo_remove_hash($the_options["showagain_div_id"]) . '" style="display:none;"><span id="cookie_hdr_showagain">' . $show_again . '</span></div>';
+			$notify_html .= '<div id="' . $this->cookielawinfo_remove_hash($the_options["showagain_div_id"]) . '" style="display:none;" data-nosnippet="true"><span id="cookie_hdr_showagain">' . $show_again . '</span></div>';
 			//}
 			global $wp_query;
 			$current_obj = get_queried_object();

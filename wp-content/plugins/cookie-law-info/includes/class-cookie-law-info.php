@@ -77,7 +77,7 @@ class Cookie_Law_Info {
 		} 
 		else 	
 		{
-			$this->version = '1.9.3';
+			$this->version = '1.9.4';
 		}
 		$this->plugin_name = 'cookie-law-info';
 
@@ -422,9 +422,9 @@ class Cookie_Law_Info {
 	        'reject_close_reload'           => false,
 			'showagain_background' 			=> '#fff',
 			'showagain_border' 				=> '#000',
-			'showagain_text'	 			=> addslashes('Privacy & Cookies Policy'),
+			'showagain_text'	 			=> addslashes('Manage consent'),
 			'showagain_div_id' 				=> '#cookie-law-info-again',
-			'showagain_tab' 				=> true,
+			'showagain_tab' 				=> false,
 			'showagain_x_position' 			=> '100px',
 			'text' 							=> '#333333',
 			'use_colour_picker'				=> true,
@@ -436,7 +436,7 @@ class Cookie_Law_Info {
 			'bar_heading_text'				=>'',
 			'cookie_bar_as'					=>'banner',
 			'popup_showagain_position'		=>'bottom-right', //bottom-right | bottom-left | top-right | top-left
-			'widget_position'		=>	'left', //left | right
+			'widget_position'			=>	'left', //left | right
 		);
 		$settings_v0_9 = apply_filters('wt_cli_plugin_settings', $settings_v0_9);
 		return $key!="" ? $settings_v0_9[$key] : $settings_v0_9;

@@ -15,8 +15,6 @@
         disableEvents: function(){
             jQuery('.wt-cli-script-blocker-disabled').children().click(function(){return false;});
             jQuery('.wt-cli-plugin-inactive').children().click(function(){return false;});
-
-            
         },
         changeStatus: function( element ) {
             

@@ -28,7 +28,7 @@ $all_pages=get_pages($args_for_get_pages);
     var cli_reset_settings_error_message='<?php echo __('Unable to reset settings.', 'cookie-law-info');?>';
 </script>
 <div class="wrap">
-    <h2 class="wp-heading-inline"><?php _e('Cookie Law Settings', 'cookie-law-info'); ?></h2>
+    <h2 class="wp-heading-inline"><?php _e('Settings', 'cookie-law-info'); ?></h2>
     
     <table class="cli_notify_table cli_bar_state">
         <tr valign="middle" class="cli_bar_on" style="<?php echo $the_options['is_on'] == true ? '' : 'display:none;';?>">

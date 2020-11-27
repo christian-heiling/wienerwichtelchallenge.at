@@ -41,7 +41,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         catch( Loco_error_ParseException $e ){
             $path = $file->getRelativePath( loco_constant('WP_CONTENT_DIR') );
-            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file',$path,$type) );
+            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file; %s',$path,$type,$e->getMessage()) );
             throw new Loco_error_ParseException( sprintf('Invalid %s file: %s',$type,basename($path)) );
         }
     }
@@ -98,7 +98,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return string
      */
     public static function ensureUtf8( $src ){
-        loco_check_extension('mbstring');
         $src = loco_remove_bom($src,$cs);
         if( ! $cs ){
             // read PO header, requiring partial parse
@@ -108,15 +107,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             catch( Loco_error_ParseException $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
             }
-            // fall back on detection which will only work for latin1
-            if( ! $cs ){
-                $cs = mb_detect_encoding($src,array('UTF-8','ISO-8859-1'),true);
-            }
         }
-        if( $cs && 'UTF-8' !== $cs ){
-            $src = mb_convert_encoding($src,'UTF-8',array($cs) );
-        }
-        return $src;
+        return loco_convert_utf8($src,$cs,false);
     }
 
 
@@ -176,7 +168,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @param string text domain for JED metadata
      * @param LocoPoMessage[] pre-compiled messages
      * @return string
-     */
+     *
     public function jedize( $domain, array $po ){
         $head = $this->getHeaders();
         // start locale_data with JED header
@@ -185,7 +177,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'lang' => $head['language'],
             'plural-forms' => $head['plural-forms'],
         ) );
-        /* @var LocoPoMessage $msg */
+        // @var LocoPoMessage $msg
         foreach( $po as $msg ){
             $data[ $msg->getKey() ] = $msg->getMsgstrs();
         }
@@ -202,7 +194,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
                 $domain => $data,
             ),
         ), $json_options );
-    }
+    }*/
 
 
     /**

@@ -25,7 +25,7 @@ class Loco_gettext_Extraction {
 
     /**
      * List of files skipped due to memory limit
-     * @var Loco_fs_FileList
+     * @var Loco_fs_FileList|null
      */
     private $skipped;
 
@@ -42,7 +42,6 @@ class Loco_gettext_Extraction {
      */
     public function __construct( Loco_package_Bundle $bundle ){
         loco_check_extension('ctype');
-        loco_check_extension('mbstring');
         if( ! loco_check_extension('tokenizer') ){
             throw new Loco_error_Exception('String extraction not available without required extension');
         }
@@ -50,8 +49,9 @@ class Loco_gettext_Extraction {
         $this->extracted = new LocoExtracted;
         $this->extracted->setDomain('default');
         $this->extras = array();
-        if( $default = $bundle->getDefaultProject() ){
-            $domain = (string) $default->getDomain();
+        $default = $bundle->getDefaultProject();
+        if( $default instanceof Loco_package_Project ){
+            $domain = $default->getDomain()->getName();
             // wildcard stands in for empty text domain, meaning unspecified or dynamic domains will be included.
             // note that strings intended to be in "default" domain must specify explicitly, or be included here too.
             if( '*' === $domain ){
