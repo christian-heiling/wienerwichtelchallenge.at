@@ -55,9 +55,6 @@ foreach ($controller->getAll() as $organisation) {
 <section id="primary" class="content-area event-archive">
     <main id="main" class="site-main">
         <article class="hentry entry">
-            <header class="entry-header">
-                <h2 class="entry-title">Karte</h2>
-            </header>
 
             <div class="entry-content">
                 <div id="mapid"></div>
@@ -67,9 +64,8 @@ foreach ($controller->getAll() as $organisation) {
 </section>
 
 <?php
-foreach ($controller->getFieldOfActionOptions() as $fieldOfAction):
-    ?>
-
+foreach ($controller->getFieldOfActionOptions() as $fieldOfAction => $label): ?>
+    
     <section id="primary" class="content-area event-archive">
         <main id="main" class="site-main">
 
@@ -78,7 +74,7 @@ foreach ($controller->getFieldOfActionOptions() as $fieldOfAction):
 
                 <article class="hentry entry">
                     <header class="entry-header">
-                        <h2 class="entry-title"><?php echo $controller->getFieldOfActionLabelByValue($fieldOfAction); ?></h2>
+                        <h2 class="entry-title"><?php echo $label; ?></h2>
                     </header>
 
 
