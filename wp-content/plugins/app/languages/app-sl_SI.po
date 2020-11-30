@@ -485,6 +485,10 @@ msgstr "Uresničene želje"
 msgid "no wishes found"
 msgstr "ni najdenih želja"
 
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:429
+msgid "Open Wishes from %name%"
+msgstr "Odpri želje od %name%"
+
 #: plugins/app/src/posttypes/SponsorPostType.php:8
 msgid "Sponsors"
 msgstr "Sponzorji"
