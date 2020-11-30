@@ -728,7 +728,7 @@ msgstr "Darilo bom poslal po pošti"
 
 #: plugins/app/src/posttypes/WishPostType.php:1086
 msgid "I will bring the present to the institution"
-msgstr "Darilo bom odnesel na socialno organizacijo"
+msgstr "Darilo bom odnesel na socialnovarstveno organizacijo"
 
 #: plugins/app/src/posttypes/WishPostType.php:1090
 msgid "Confirm"
