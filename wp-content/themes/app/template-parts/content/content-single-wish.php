@@ -60,13 +60,18 @@ if (empty($deliveryOptions)) {
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
     <div class="entry-content">
         <?php
+        $flash = \app\App::getInstance()->getFlash();
+        if (!empty($flash)) {
+            echo '<div class="ad">' . $flash . '</div>';
+        }
+
         $c->echoPreLetter();
         $c->echoCtaButtons();
         ?>
         <br>
         <?php if ($is_in_progress || $is_open): ?>
             <p><?php echo __('You have following possibilities to deliver your present:', 'app'); ?></p>
-            
+
             <div class="wp-block-columns has-<?php echo count($deliveryOptions); ?>-columns">
                 <?php if (in_array('postal', $deliveryOptions) && in_array(rwmb_meta('delivery_type'), array('', 'postal'))) : ?>
                     <div class="wp-block-column">
@@ -111,9 +116,9 @@ if (empty($deliveryOptions)) {
                             $recipient = '<span class="blur">John Doe</span>';
                         }
                         ?>
-                        
+
                         <p><strong><?php echo str_replace('%recipient%', $recipient, __('Please write "%recipient%" on your present to assure that the right person will get it.', 'app')); ?></strong></p>
-                        
+
                         <p><strong><?php echo __('Be aware of following COVID-19 rules:', 'app'); ?></strong></p>
                         <p><?php echo strip_tags(rwmb_meta('covid19_regulations', [], $institution_id)); ?></p>
 

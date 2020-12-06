@@ -8,7 +8,7 @@ class WishPostType extends AbstractPostType {
     const STATE_IN_PROGRESS = 'in_arbeit';
     const STATE_FULFILLED = 'erfuellt';
     const STATE_DONE = 'abgeschlossen';
-    
+
     public function getTranslationForState($state) {
         $trans = array(
             'Offen' => __('Open', 'app'),
@@ -16,14 +16,14 @@ class WishPostType extends AbstractPostType {
             'Erfüllt' => __('Wish fulfilled', 'app'),
             'Abgeschlossen' => __('Present confirmed', 'app'),
         );
-        
+
         if (array_key_exists($state, $trans)) {
             return $trans[$state];
         } else {
             return $state;
         }
     }
-    
+
     const TRANSITION_ASSIGN = 'vergeben';
     const TRANSITION_FULFILL = 'erfuellen';
     const TRANSITION_PUT_BACK = 'zuruecklegen';
@@ -67,7 +67,7 @@ class WishPostType extends AbstractPostType {
 
         add_action('pre_get_posts', array($this, 'limitQuery'));
     }
-    
+
     function getTextWithLinks($text) {
         return preg_replace("/(?i)\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))/", '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
     }
@@ -476,6 +476,11 @@ MAILCONTENT;
 
                 if (get_current_user_id() !== intval(rwmb_get_value('wichtel_id')) && !(current_user_can('editor') || current_user_can('administrator'))) {
                     // to show it is permitted
+                    $summary = rwmb_meta('summary');
+
+                    \app\App::getInstance()->addFlashMessage(
+                            str_replace('%summary%', $summary, __('The wish "%summary%" was taken over by another imp.', 'app')), __('Therefore you landed on the wish list. Here you can find other open wishes', 'app')
+                    );
                     header('Location: ' . home_url('/' . $this->getSlug() . '/'));
                     exit;
                 }
@@ -611,6 +616,11 @@ MAILCONTENT;
                 \app\JiraHandler::JIRA_FIELD_WICHTEL_NAME => $current_user->data->display_name,
                 \app\JiraHandler::JIRA_FIELD_WICHTEL_MAIL => $current_user->data->user_email,
                 \app\JiraHandler::JIRA_FIELD_DELIVERY_TYPE => $_GET['delivery_type']
+            );
+
+            \app\App::getInstance()->addFlashMessage(
+                    str_replace('%mail-address%', $current_user->data->user_email, __('We send all informations about this wish to your mail address %mail-address%.')
+                    ), __('Please also check your spam folder.', 'app')
             );
         }
 

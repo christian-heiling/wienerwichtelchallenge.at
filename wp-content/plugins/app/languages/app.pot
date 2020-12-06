@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-11-23 20:00+0100\n"
+"POT-Creation-Date: 2020-12-06 12:58+0100\n"
 "PO-Revision-Date: 2019-07-31 21:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Wichtel Challenge\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: plugins/app\n"
 "X-Poedit-SearchPath-1: themes/app\n"
 
-#: plugins/app/src/App.php:234
+#: plugins/app/src/App.php:235
 msgid "Full Import"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 #: plugins/app/src/posttypes/EventPostType.php:223
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
-#: plugins/app/src/posttypes/WishPostType.php:962
+#: plugins/app/src/posttypes/WishPostType.php:972
 msgid "Title"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgstr ""
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:79
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:264
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:300
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:492
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:480
 msgid "Carrier"
 msgstr ""
 
@@ -425,7 +425,7 @@ msgid "Postal Delivery"
 msgstr ""
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:215
-#: plugins/app/src/posttypes/WishPostType.php:749
+#: plugins/app/src/posttypes/WishPostType.php:759
 msgid "JIRA"
 msgstr ""
 
@@ -473,15 +473,15 @@ msgstr ""
 msgid "Drop-off Point"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:404
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:392
 msgid "Fulfilled Wishes from $name"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:429
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:417
 msgid "Open Wishes from %name%"
 msgstr ""
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:464
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:452
 msgid "no wishes found"
 msgstr ""
 
@@ -571,7 +571,23 @@ msgstr ""
 msgid "wish-region-slug"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:645
+#: plugins/app/src/posttypes/WishPostType.php:482
+msgid "The wish \"%summary%\" was taken over by another imp."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:482
+msgid "Therefore you landed on the wish list. Here you can find other open wishes"
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:622
+msgid "We send all informations about this wish to your mail address %mail-address%."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:623
+msgid "Please also check your spam folder."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:655
 msgid ""
 "*Found a Wichtel!*\n"
 "\n"
@@ -579,7 +595,7 @@ msgid ""
 "The present is for %wish_recipient%."
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:650
+#: plugins/app/src/posttypes/WishPostType.php:660
 msgid ""
 "*Present delivered directly to the institution!*\n"
 "\n"
@@ -591,7 +607,7 @@ msgid ""
 "%approve_link%"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:652
+#: plugins/app/src/posttypes/WishPostType.php:662
 msgid ""
 "*Present brought to the post office!*\n"
 "\n"
@@ -603,7 +619,7 @@ msgid ""
 "%approve_link%"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:654
+#: plugins/app/src/posttypes/WishPostType.php:664
 msgid ""
 "*Present delivered!*\n"
 "\n"
@@ -615,7 +631,7 @@ msgid ""
 "%approve_link%"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:657
+#: plugins/app/src/posttypes/WishPostType.php:667
 msgid ""
 ":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n"
 "\n"
@@ -623,54 +639,54 @@ msgid ""
 "Therefore we are looking for a new Wichtel."
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:711
+#: plugins/app/src/posttypes/WishPostType.php:721
 msgid "I confirm that the present is arrived"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:727
+#: plugins/app/src/posttypes/WishPostType.php:737
 msgid "Wishes"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:739
+#: plugins/app/src/posttypes/WishPostType.php:749
 msgid "wish-slugs"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:961
+#: plugins/app/src/posttypes/WishPostType.php:971
 msgid "JIRA ID"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:963
-#: plugins/app/src/posttypes/WishPostType.php:964
-#: plugins/app/src/posttypes/WishPostType.php:965
+#: plugins/app/src/posttypes/WishPostType.php:973
+#: plugins/app/src/posttypes/WishPostType.php:974
+#: plugins/app/src/posttypes/WishPostType.php:975
 msgid "Beschreibung"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:966
+#: plugins/app/src/posttypes/WishPostType.php:976
 msgid "Status"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1047
+#: plugins/app/src/posttypes/WishPostType.php:1057
 #: themes/app/template-parts/header/event-countdown.php:13
 msgid "Read more"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1067
+#: plugins/app/src/posttypes/WishPostType.php:1077
 msgid "Log in"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1083
+#: plugins/app/src/posttypes/WishPostType.php:1093
 msgid "I will send the present by post"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1086
+#: plugins/app/src/posttypes/WishPostType.php:1096
 msgid "I will bring the present to the institution"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1090
+#: plugins/app/src/posttypes/WishPostType.php:1100
 msgid "Confirm"
 msgstr ""
 
-#: plugins/app/src/posttypes/WishPostType.php:1113
+#: plugins/app/src/posttypes/WishPostType.php:1123
 msgid "alle Details sehen"
 msgstr ""
 
@@ -686,15 +702,15 @@ msgstr ""
 msgid "Past Events"
 msgstr ""
 
-#: themes/app/archive-wish.php:78
+#: themes/app/archive-wish.php:85
 msgid "Fulfilled Wishes"
 msgstr ""
 
-#: themes/app/archive-wish.php:83
+#: themes/app/archive-wish.php:90
 msgid "Open Wishes"
 msgstr ""
 
-#: themes/app/archive-wish.php:98
+#: themes/app/archive-wish.php:105
 msgid "no open Wishes"
 msgstr ""
 
@@ -734,63 +750,63 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:68
+#: themes/app/template-parts/content/content-single-wish.php:73
 msgid "You have following possibilities to deliver your present:"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:73
+#: themes/app/template-parts/content/content-single-wish.php:78
 #: themes/app/template-parts/content/content-wish-excerpt.php:41
 msgid "Postal delivery"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:74
+#: themes/app/template-parts/content/content-single-wish.php:79
 msgid "If you want to stay at home."
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:76
+#: themes/app/template-parts/content/content-single-wish.php:81
 msgid "Write following on your package:"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:86
+#: themes/app/template-parts/content/content-single-wish.php:91
 msgid "Wichtel-Present for %recipient%"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:98
-#: themes/app/template-parts/content/content-single-wish.php:136
+#: themes/app/template-parts/content/content-single-wish.php:103
+#: themes/app/template-parts/content/content-single-wish.php:141
 msgid "All blured out data you will see after confirming that you want to fulfill this wish."
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:105
+#: themes/app/template-parts/content/content-single-wish.php:110
 #: themes/app/template-parts/content/content-wish-excerpt.php:45
 msgid "Personal delivery"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:106
+#: themes/app/template-parts/content/content-single-wish.php:111
 msgid "If you are living next to the social institiution and want to visit."
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:115
+#: themes/app/template-parts/content/content-single-wish.php:120
 msgid "Please write \"%recipient%\" on your present to assure that the right person will get it."
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:117
+#: themes/app/template-parts/content/content-single-wish.php:122
 msgid "Be aware of following COVID-19 rules:"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:120
+#: themes/app/template-parts/content/content-single-wish.php:125
 msgid "Drop-off-point"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:161
+#: themes/app/template-parts/content/content-single-wish.php:166
 msgid "Contact for Quenstions"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:171
+#: themes/app/template-parts/content/content-single-wish.php:176
 #, php-format
 msgid "About %s"
 msgstr ""
 
-#: themes/app/template-parts/content/content-single-wish.php:174
+#: themes/app/template-parts/content/content-single-wish.php:179
 msgid "Read more..."
 msgstr ""
 

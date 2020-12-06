@@ -18,6 +18,13 @@ get_header();
     <main id="main" class="site-main">
         <article class="hentry entry">
 
+            <?php 
+            $flash = \app\App::getInstance()->getFlash();
+            if (!empty($flash)) {
+                echo '<div class="entry-content"><div class="ad">' . $flash . '</div></div>';
+            }
+            ?>
+            
             <div class="entry-content">
                 <?php echo do_shortcode(app\App::getInstance()->getOptions()->get('wish_archive', 'teaser')); ?>
             </div>

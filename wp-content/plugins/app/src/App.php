@@ -39,6 +39,7 @@ class App {
     }
 
     private function __construct() {
+        session_start();
         $this->initPostTypes();
         $this->initOptionHandler();
 
@@ -87,9 +88,9 @@ class App {
         });
 
         add_action('template_redirect', function() {
-                header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-                header('Pragma: no-cache');
-                header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
+            header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+            header('Pragma: no-cache');
+            header('Expires: Thu, 01 Dec 1990 16:00:00 GMT');
         });
 
         add_filter('auth_cookie_expiration', function($length, $user_id, $remember) {
@@ -316,6 +317,45 @@ class App {
         if (hash_equals($hmac, $calcmac)) { // PHP 5.6+ Rechenzeitangriff-sicherer Vergleich
             return $original_plaintext;
         }
+    }
+
+    public function getFlash() {
+        if (!array_key_exists('message', $_SESSION) || empty($_SESSION['message'])) {
+            return;
+        }
+
+        $m = $_SESSION['message'];
+
+        $title = $m['title'];
+        $mes = $m['message'];
+        $r = '';
+
+        if (!empty($title)) {
+            $r .= '<h2>' . $title . '</h2>';
+        }
+
+        if (!empty($mes)) {
+            $r .= '<p>' . $mes . '</p>';
+        }
+
+        if (!empty($r)) {
+            $r = '<div class="info-box">' . $r . '</div>';
+        }
+
+        session_destroy();
+        
+        return $r;
+    }
+
+    public function addFlashMessage($title, $message = '') {
+        if (!array_key_exists('message', $_SESSION)) {
+            $_SESSION['message'] = null;
+        }
+
+        $_SESSION['message'] = array(
+            'title' => $title,
+            'message' => $message
+        );
     }
 
 }
