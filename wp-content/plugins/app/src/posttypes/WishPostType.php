@@ -549,7 +549,7 @@ MAILCONTENT;
             'rewrite' => array(
                 'slug' => $this->getSlug()
             ),
-            'taxonomies' => array($this->getRegionTaxonomyName()),
+            'taxonomies' => array($this->getRegionTaxonomyName(), 'post_tag'),
             'rest_base' => $this->slugify($this->getPostType()),
             'rest_controller_class' => 'WP_REST_Posts_Controller',
         );
@@ -619,7 +619,7 @@ MAILCONTENT;
             );
 
             \app\App::getInstance()->addFlashMessage(
-                    str_replace('%mail-address%', $current_user->data->user_email, __('We send all informations about this wish to your mail address %mail-address%.')
+                    str_replace('%mail-address%', $current_user->data->user_email, __('We send all informations about this wish to your mail address %mail-address%.', 'app')
                     ), __('Please also check your spam folder.', 'app')
             );
         }
