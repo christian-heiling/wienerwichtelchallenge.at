@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-12-06 12:58+0100\n"
-"PO-Revision-Date: 2020-12-06 13:02+0100\n"
+"POT-Creation-Date: 2020-12-06 13:25+0100\n"
+"PO-Revision-Date: 2020-12-06 13:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -894,6 +894,14 @@ msgstr "Erfahre mehr über <span class=\"screen-reader-text\"> \"%s\"</span>"
 #: themes/app/template-parts/content/content-single.php:47
 msgid "Pages:"
 msgstr "Seiten:"
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:60
+msgid "Only 1 day left"
+msgstr "Noch 1 Tag zeit"
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:62
+msgid "Only #days# days left"
+msgstr "noch #days# Tage Zeit"
 
 #: themes/app/template-parts/header/archive-header.php:24
 #: themes/app/template-parts/header/archive-header.php:26

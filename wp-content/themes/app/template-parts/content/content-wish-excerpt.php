@@ -9,7 +9,7 @@
  * @since 1.0.0
  */
 /**
- * @var app\posttypes\AbstractPostType $controller
+ * @var app\posttypes\WishPostType $controller
  */
 $controller = \app\App::getInstance()->getController(get_post_type());
 $o = \app\App::getInstance()->getOptions();
@@ -53,6 +53,19 @@ $o = \app\App::getInstance()->getOptions();
 
         <img class="status-icon" src="<?php echo get_stylesheet_directory_uri() . '/images/' . $controller->getState() . '.png'; ?>" width="72" height="72" />
 
+        <?php if (in_array($controller->getState(), array(\app\posttypes\WishPostType::STATE_OPEN, \app\posttypes\WishPostType::STATE_IN_PROGRESS))): ?>
+        <p class="days-left">
+            <?php
+            $days_left = $controller->getCurrentWichtelLastDeliveryDateDeltaInDays(get_the_ID());
+            if ($days_left == 1) {
+                echo __('Only 1 day left', 'app');
+            } else {
+                echo str_replace('#days#', $days_left, __('Only #days# days left', 'app'));
+            }
+            ?>
+        </p>
+        <?php endif; ?>
+        
         <?php
         if ($o->get('wish_list_status') == 'done') {
             echo '<h1>' . rwmb_meta('summary') . '</h1>';

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-12-06 12:58+0100\n"
+"POT-Creation-Date: 2020-12-06 13:25+0100\n"
 "PO-Revision-Date: 2019-07-31 21:38+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Wichtel Challenge\n"
@@ -817,6 +817,14 @@ msgstr ""
 
 #: themes/app/template-parts/content/content-single.php:47
 msgid "Pages:"
+msgstr ""
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:60
+msgid "Only 1 day left"
+msgstr ""
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:62
+msgid "Only #days# days left"
 msgstr ""
 
 #: themes/app/template-parts/header/archive-header.php:24
