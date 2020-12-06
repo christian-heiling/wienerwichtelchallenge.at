@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-12-06 13:25+0100\n"
-"PO-Revision-Date: 2020-12-06 13:27+0100\n"
+"POT-Creation-Date: 2020-12-06 18:18+0100\n"
+"PO-Revision-Date: 2020-12-06 18:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -230,15 +230,27 @@ msgstr "Amazon.de Affiliate"
 msgid "Amazon.de Link Text"
 msgstr "Amazon.de Link Text"
 
-#: plugins/app/src/OptionHandler.php:525
+#: plugins/app/src/OptionHandler.php:515
+msgid "Last Minute Wishes"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:520
+msgid "Last Minute Wish when only X days left"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:527
+msgid "Associate to following tag id when last minute"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:544
 msgid "Shuffle Wishes"
 msgstr "Wünsche durchmischen"
 
-#: plugins/app/src/OptionHandler.php:534
+#: plugins/app/src/OptionHandler.php:553
 msgid "Clear all wishes"
 msgstr "Lösche alle Wünsche"
 
-#: plugins/app/src/OptionHandler.php:566
+#: plugins/app/src/OptionHandler.php:585
 msgid "Jira Import"
 msgstr "JIRA Import"
 
@@ -895,11 +907,11 @@ msgstr "Erfahre mehr über <span class=\"screen-reader-text\"> \"%s\"</span>"
 msgid "Pages:"
 msgstr "Seiten:"
 
-#: themes/app/template-parts/content/content-wish-excerpt.php:60
+#: themes/app/template-parts/content/content-wish-excerpt.php:61
 msgid "Only 1 day left"
 msgstr "Noch 1 Tag zeit"
 
-#: themes/app/template-parts/content/content-wish-excerpt.php:62
+#: themes/app/template-parts/content/content-wish-excerpt.php:63
 msgid "Only #days# days left"
 msgstr "noch #days# Tage Zeit"
 
