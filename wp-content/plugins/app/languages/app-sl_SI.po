@@ -6,10 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: app\n"
 "Report-Msgid-Bugs-To: BUG-EMAIL-ADDR <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2020-11-23 19:54+0100\n"
-"PO-Revision-Date: 2020-11-30 21:29+0100\n"
+"POT-Creation-Date: 2020-12-06 18:18+0100\n"
+"PO-Revision-Date: 2020-12-09 21:38+0100\n"
 "Last-Translator: Peter Erjavec\n"
-"Language-Team: Slovenščina\n"
+"Language-Team: Slovenian\n"
 "Language: sl_SI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: plugins/app\n"
 "X-Poedit-SearchPath-1: themes/app\n"
 
-#: plugins/app/src/App.php:234
+#: plugins/app/src/App.php:235
 msgid "Full Import"
 msgstr "Full Import"
 
@@ -47,11 +47,11 @@ msgstr "Stanje seznama želja"
 
 #: plugins/app/src/OptionHandler.php:143
 msgid "show all open wishes"
-msgstr "pokaži vse odprte želje"
+msgstr "prikaži vse odprte želje"
 
 #: plugins/app/src/OptionHandler.php:144
 msgid "show all done wishes"
-msgstr "pokaži vse uresničene želje"
+msgstr "prikaži vse uresničene želje"
 
 #: plugins/app/src/OptionHandler.php:149 plugins/app/src/OptionHandler.php:154
 msgid "Country"
@@ -237,15 +237,27 @@ msgstr "Amazon.de podružnica"
 msgid "Amazon.de Link Text"
 msgstr "Amazon.de link tekst"
 
-#: plugins/app/src/OptionHandler.php:525
+#: plugins/app/src/OptionHandler.php:515
+msgid "Last Minute Wishes"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:520
+msgid "Last Minute Wish when only X days left"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:527
+msgid "Associate to following tag id when last minute"
+msgstr ""
+
+#: plugins/app/src/OptionHandler.php:544
 msgid "Shuffle Wishes"
 msgstr "premešaj želje"
 
-#: plugins/app/src/OptionHandler.php:534
+#: plugins/app/src/OptionHandler.php:553
 msgid "Clear all wishes"
 msgstr "Počisti vse želje"
 
-#: plugins/app/src/OptionHandler.php:566
+#: plugins/app/src/OptionHandler.php:585
 msgid "Jira Import"
 msgstr "Jira Import"
 
@@ -321,7 +333,7 @@ msgstr "URL"
 #: plugins/app/src/posttypes/EventPostType.php:223
 #: plugins/app/src/posttypes/SponsorPostType.php:73
 #: plugins/app/src/posttypes/WichtelTypePostType.php:48
-#: plugins/app/src/posttypes/WishPostType.php:962
+#: plugins/app/src/posttypes/WishPostType.php:972
 msgid "Title"
 msgstr "Naslov"
 
@@ -367,7 +379,7 @@ msgstr "Logo"
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:79
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:264
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:300
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:492
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:480
 msgid "Carrier"
 msgstr "Oseba"
 
@@ -427,7 +439,7 @@ msgid "Postal Delivery"
 msgstr "Poštna pošiljka"
 
 #: plugins/app/src/posttypes/SocialOrganisationPostType.php:215
-#: plugins/app/src/posttypes/WishPostType.php:749
+#: plugins/app/src/posttypes/WishPostType.php:759
 msgid "JIRA"
 msgstr "JIRA"
 
@@ -475,13 +487,19 @@ msgstr "COVID-19 ukrepi"
 msgid "Drop-off Point"
 msgstr "Mesto predaje paketa"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:404
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:392
 #, fuzzy
 #| msgid "Fulfilled Wishes"
 msgid "Fulfilled Wishes from $name"
 msgstr "Uresničene želje"
 
-#: plugins/app/src/posttypes/SocialOrganisationPostType.php:464
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:417
+#, fuzzy
+#| msgid "Fulfilled Wishes"
+msgid "Open Wishes from %name%"
+msgstr "Uresničene želje"
+
+#: plugins/app/src/posttypes/SocialOrganisationPostType.php:452
 msgid "no wishes found"
 msgstr "ni najdenih želja"
 
@@ -591,7 +609,25 @@ msgstr "Regije"
 msgid "wish-region-slug"
 msgstr "zelje-po-regijah"
 
-#: plugins/app/src/posttypes/WishPostType.php:645
+#: plugins/app/src/posttypes/WishPostType.php:482
+msgid "The wish \"%summary%\" was taken over by another imp."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:482
+msgid ""
+"Therefore you landed on the wish list. Here you can find other open wishes"
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:622
+msgid ""
+"We send all informations about this wish to your mail address %mail-address%."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:623
+msgid "Please also check your spam folder."
+msgstr ""
+
+#: plugins/app/src/posttypes/WishPostType.php:655
 msgid ""
 "*Found a Wichtel!*\n"
 "\n"
@@ -602,7 +638,7 @@ msgstr ""
 " Oseba %wichtel_name% bi rada izpolnila željo %wish_title% (%wish_key%) s "
 "šifro prejemnika %wish_recipient%."
 
-#: plugins/app/src/posttypes/WishPostType.php:650
+#: plugins/app/src/posttypes/WishPostType.php:660
 msgid ""
 "*Present delivered directly to the institution!*\n"
 "\n"
@@ -624,7 +660,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:652
+#: plugins/app/src/posttypes/WishPostType.php:662
 msgid ""
 "*Present brought to the post office!*\n"
 "\n"
@@ -647,7 +683,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:654
+#: plugins/app/src/posttypes/WishPostType.php:664
 msgid ""
 "*Present delivered!*\n"
 "\n"
@@ -669,7 +705,7 @@ msgstr ""
 "\n"
 "%approve_link%"
 
-#: plugins/app/src/posttypes/WishPostType.php:657
+#: plugins/app/src/posttypes/WishPostType.php:667
 msgid ""
 ":( *Wichtel %wichtel_name% cannot fulfill wish %wish_title% (%wish_key%)*\n"
 "\n"
@@ -682,56 +718,56 @@ msgstr ""
 "Darilo je bilo namenjeno %wish_recipient%.\n"
 "Išečmo drugo dobro vilo."
 
-#: plugins/app/src/posttypes/WishPostType.php:711
+#: plugins/app/src/posttypes/WishPostType.php:721
 msgid "I confirm that the present is arrived"
 msgstr "Potrjujem, da je darilo prispelo"
 
-#: plugins/app/src/posttypes/WishPostType.php:727
+#: plugins/app/src/posttypes/WishPostType.php:737
 msgid "Wishes"
 msgstr "Želje"
 
-#: plugins/app/src/posttypes/WishPostType.php:739
+#: plugins/app/src/posttypes/WishPostType.php:749
 msgid "wish-slugs"
 msgstr "zelje"
 
-#: plugins/app/src/posttypes/WishPostType.php:961
+#: plugins/app/src/posttypes/WishPostType.php:971
 msgid "JIRA ID"
 msgstr "JIRA ID"
 
-#: plugins/app/src/posttypes/WishPostType.php:963
-#: plugins/app/src/posttypes/WishPostType.php:964
-#: plugins/app/src/posttypes/WishPostType.php:965
+#: plugins/app/src/posttypes/WishPostType.php:973
+#: plugins/app/src/posttypes/WishPostType.php:974
+#: plugins/app/src/posttypes/WishPostType.php:975
 msgid "Beschreibung"
 msgstr "Opis"
 
-#: plugins/app/src/posttypes/WishPostType.php:966
+#: plugins/app/src/posttypes/WishPostType.php:976
 msgid "Status"
 msgstr "Status"
 
-#: plugins/app/src/posttypes/WishPostType.php:1047
+#: plugins/app/src/posttypes/WishPostType.php:1057
 #: themes/app/template-parts/header/event-countdown.php:13
 msgid "Read more"
 msgstr "Več o tem"
 
-#: plugins/app/src/posttypes/WishPostType.php:1067
+#: plugins/app/src/posttypes/WishPostType.php:1077
 msgid "Log in"
 msgstr "Prijava"
 
-#: plugins/app/src/posttypes/WishPostType.php:1083
+#: plugins/app/src/posttypes/WishPostType.php:1093
 msgid "I will send the present by post"
 msgstr "Darilo bom poslal po pošti"
 
-#: plugins/app/src/posttypes/WishPostType.php:1086
+#: plugins/app/src/posttypes/WishPostType.php:1096
 msgid "I will bring the present to the institution"
 msgstr "Darilo bom odnesel na socialno organizacijo"
 
-#: plugins/app/src/posttypes/WishPostType.php:1090
+#: plugins/app/src/posttypes/WishPostType.php:1100
 msgid "Confirm"
 msgstr "Potrdi"
 
-#: plugins/app/src/posttypes/WishPostType.php:1113
+#: plugins/app/src/posttypes/WishPostType.php:1123
 msgid "alle Details sehen"
-msgstr "pokaži več"
+msgstr "Prikaži več"
 
 #: themes/app/archive-event.php:28
 msgid "Running Events"
@@ -745,17 +781,20 @@ msgstr "Prihajajoči dogodki"
 msgid "Past Events"
 msgstr "Pretekli dogodki"
 
-#: themes/app/archive-wish.php:78
+#: themes/app/archive-wish.php:85
 msgid "Fulfilled Wishes"
 msgstr "Uresničene želje"
 
-#: themes/app/archive-wish.php:83
+#: themes/app/archive-wish.php:90
 msgid "Open Wishes"
-msgstr "Pokaži željo"
+msgstr "Seznam želja"
 
-#: themes/app/archive-wish.php:98
+#: themes/app/archive-wish.php:105
 msgid "no open Wishes"
-msgstr "ni prostih želja"
+msgstr ""
+"Trenutno so v tej regiji vse želje že izpolnjene. Lahko pa uresničiš kakšno "
+"željo iz druge regije. V skladu s protikoronskimi ukrepi priporočamo dostavo "
+"po pošti."
 
 #: themes/app/footer.php:43
 msgid "Our supporters"
@@ -793,29 +832,29 @@ msgstr "Moje želje"
 msgid "Featured"
 msgstr "Izpostavljeno"
 
-#: themes/app/template-parts/content/content-single-wish.php:68
+#: themes/app/template-parts/content/content-single-wish.php:73
 msgid "You have following possibilities to deliver your present:"
 msgstr "Na voljo so naslednje možnosti dostave paketa:"
 
-#: themes/app/template-parts/content/content-single-wish.php:73
+#: themes/app/template-parts/content/content-single-wish.php:78
 #: themes/app/template-parts/content/content-wish-excerpt.php:41
 msgid "Postal delivery"
 msgstr "Poštna pošiljka "
 
-#: themes/app/template-parts/content/content-single-wish.php:74
+#: themes/app/template-parts/content/content-single-wish.php:79
 msgid "If you want to stay at home."
 msgstr "Če bi raje ostali doma."
 
-#: themes/app/template-parts/content/content-single-wish.php:76
+#: themes/app/template-parts/content/content-single-wish.php:81
 msgid "Write following on your package:"
 msgstr "Na paket prosim dopišite naslednje:"
 
-#: themes/app/template-parts/content/content-single-wish.php:86
+#: themes/app/template-parts/content/content-single-wish.php:91
 msgid "Wichtel-Present for %recipient%"
 msgstr "Uresničena želja za %recipient%"
 
-#: themes/app/template-parts/content/content-single-wish.php:98
-#: themes/app/template-parts/content/content-single-wish.php:136
+#: themes/app/template-parts/content/content-single-wish.php:103
+#: themes/app/template-parts/content/content-single-wish.php:141
 msgid ""
 "All blured out data you will see after confirming that you want to fulfill "
 "this wish."
@@ -823,16 +862,16 @@ msgstr ""
 "Informacijo, ki je trenutno zamegljena, bo vidna po tem, ko potrdite, da "
 "boste uresničili željo."
 
-#: themes/app/template-parts/content/content-single-wish.php:105
+#: themes/app/template-parts/content/content-single-wish.php:110
 #: themes/app/template-parts/content/content-wish-excerpt.php:45
 msgid "Personal delivery"
 msgstr "Osebna predaja "
 
-#: themes/app/template-parts/content/content-single-wish.php:106
+#: themes/app/template-parts/content/content-single-wish.php:111
 msgid "If you are living next to the social institiution and want to visit."
 msgstr "Če živite v bližini organizacije in jo želite obiskati."
 
-#: themes/app/template-parts/content/content-single-wish.php:115
+#: themes/app/template-parts/content/content-single-wish.php:120
 msgid ""
 "Please write \"%recipient%\" on your present to assure that the right person "
 "will get it."
@@ -840,24 +879,24 @@ msgstr ""
 "Prosimo, opremite paket s šifro \"%recipient%\" , tako bo darilo lahko "
 "prišlo v prave roke."
 
-#: themes/app/template-parts/content/content-single-wish.php:117
+#: themes/app/template-parts/content/content-single-wish.php:122
 msgid "Be aware of following COVID-19 rules:"
 msgstr "Prosimo, upoštevajte naslednje protikoronske ukrepe:"
 
-#: themes/app/template-parts/content/content-single-wish.php:120
+#: themes/app/template-parts/content/content-single-wish.php:125
 msgid "Drop-off-point"
 msgstr "Mesto predaje paketa "
 
-#: themes/app/template-parts/content/content-single-wish.php:161
+#: themes/app/template-parts/content/content-single-wish.php:166
 msgid "Contact for Quenstions"
 msgstr "Kontakt za vprašanja"
 
-#: themes/app/template-parts/content/content-single-wish.php:171
+#: themes/app/template-parts/content/content-single-wish.php:176
 #, php-format
 msgid "About %s"
 msgstr "Informacije %s"
 
-#: themes/app/template-parts/content/content-single-wish.php:174
+#: themes/app/template-parts/content/content-single-wish.php:179
 #, fuzzy
 #| msgid "Read more"
 msgid "Read more..."
@@ -871,6 +910,14 @@ msgstr "Nadaljuj z branjem <span class=\"screen-reader-text\"> \"%s\"</span>"
 #: themes/app/template-parts/content/content-single.php:47
 msgid "Pages:"
 msgstr "Strani:"
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:61
+msgid "Only 1 day left"
+msgstr ""
+
+#: themes/app/template-parts/content/content-wish-excerpt.php:63
+msgid "Only #days# days left"
+msgstr ""
 
 #: themes/app/template-parts/header/archive-header.php:24
 #: themes/app/template-parts/header/archive-header.php:26
