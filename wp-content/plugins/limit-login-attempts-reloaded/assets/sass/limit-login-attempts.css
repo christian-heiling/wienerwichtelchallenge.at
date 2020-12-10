@@ -121,21 +121,35 @@
   .limit-login-page-settings .llar-app-field.active {
     display: table-row; }
 
-.llar-notice-review {
+.llar-notice-review,
+.llar-notice-notify {
   display: flex;
   padding: 15px 20px 0 !important;
   border-left: 4px solid #333 !important; }
-  .llar-notice-review .llar-review-image img {
-    margin-top: 10px; }
-  .llar-notice-review .llar-review-info {
+  .llar-notice-review .llar-review-image img,
+  .llar-notice-notify .llar-review-image img {
+    margin-top: 10px;
+    margin-bottom: 20px; }
+  .llar-notice-review .llar-review-image span,
+  .llar-notice-notify .llar-review-image span {
+    font-size: 80px;
+    color: orange;
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px; }
+  .llar-notice-review .llar-review-info,
+  .llar-notice-notify .llar-review-info {
     flex: 1;
     margin-left: 30px; }
-    .llar-notice-review .llar-review-info .llar-buttons {
+    .llar-notice-review .llar-review-info .llar-buttons,
+    .llar-notice-notify .llar-review-info .llar-buttons {
       display: flex;
       align-items: center; }
-      .llar-notice-review .llar-review-info .llar-buttons li {
+      .llar-notice-review .llar-review-info .llar-buttons li,
+      .llar-notice-notify .llar-review-info .llar-buttons li {
         margin-right: 10px; }
-        .llar-notice-review .llar-review-info .llar-buttons li .dashicons {
+        .llar-notice-review .llar-review-info .llar-buttons li .dashicons,
+        .llar-notice-notify .llar-review-info .llar-buttons li .dashicons {
           margin-right: 5px; }
 
 .llar-accordion .ui-accordion-header {
@@ -192,5 +206,21 @@
     width: 0;
     background-color: #00b357;
     transition: width 0.4s; }
+
+#llar-header-upgrade-message {
+  text-align: center;
+  background-color: #fff;
+  color: #222;
+  padding: 10px;
+  margin-left: -20px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2); }
+  #llar-header-upgrade-message p {
+    margin: 0; }
+    #llar-header-upgrade-message p .dashicons {
+      color: #f2a64c;
+      margin-right: 5px; }
+
+.settings_page_limit-login-attempts .update-nag {
+  display: none; }
 
 /*# sourceMappingURL=limit-login-attempts.css.map */

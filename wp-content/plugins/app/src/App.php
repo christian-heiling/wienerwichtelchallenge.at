@@ -280,6 +280,8 @@ class App {
                 $this->getJiraHandler()->doFullImport();
             } elseif ($action == 'shuffleWishes') {
                 $this->getJiraHandler()->shuffleWishes();
+            } elseif ($action == 'setLastMinuteWishes') {
+                $this->getJiraHandler()->setLastMinuteWishes();
             } else {
                 http_response_code(404);
             }

@@ -302,7 +302,7 @@ MAILCONTENT;
 
         $found_wichtel = rwmb_get_value('found_wichtel_date', [], $wish_id);
 
-        $lastWichtelDeliveryDate = new \DateTime(rwmb_get_value('last_wichtel_delivery_date', [], $wish_id));
+        $lastWichtelDeliveryDate = new \DateTime(rwmb_meta('last_wichtel_delivery_date', [], $wish_id));
 
         if (!empty($found_wichtel)) {
             $currentLastWichtelDeliveryDate = new \DateTime($found_wichtel);

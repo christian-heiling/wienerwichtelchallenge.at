@@ -293,10 +293,10 @@ class JiraHandler {
     }
 
     public function clearAllWishes() {
-        
+
         wp_suspend_cache_addition();
         wp_cache_flush();
-        
+
         $wish_post_type = App::getInstance()->getWishController()->getPostType();
 
         global $wpdb;
@@ -486,6 +486,32 @@ class JiraHandler {
 
         foreach ($wishes as $wish) {
             update_post_meta($wish->ID, 'priority', ceil(rand(0, 1000)));
+        }
+    }
+
+    public function setLastMinuteWishes() {
+        $options = App::getInstance()->getOptions();
+        $wish_controller = App::getInstance()->getWishController();
+
+        $wishes = get_posts(array(
+            'post_type' => $wish_controller->getPostType(),
+            'limit' => -1,
+            'posts_per_page' => -1
+        ));
+
+        foreach ($wishes as $wish) {
+            $is_open = rwmb_meta('status_id', array(), $wish->ID) == $options->get('jira_state', WishPostType::STATE_OPEN);
+
+            if ($is_open) {
+                $delta_in_days = $wish_controller->getCurrentWichtelLastDeliveryDateDeltaInDays($wish->ID);
+                $last_minute_threshold = $options->get('last_minute_threshold');
+                
+                if ($delta_in_days <= $last_minute_threshold) {
+                    wp_set_object_terms($wish->ID, intval($options->get('last_minute_tag_id')), $wish_controller->getRegionTaxonomyName());
+                } else {
+                    wp_remove_object_terms($wish->ID, intval($options->get('last_minute_tag_id')), $wish_controller->getRegionTaxonomyName());
+                }
+            }
         }
     }
 

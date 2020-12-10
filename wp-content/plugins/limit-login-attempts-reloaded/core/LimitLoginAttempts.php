@@ -30,12 +30,13 @@ class Limit_Login_Attempts {
 		'cookies'            => true,
 
 		/* Notify on lockout. Values: '', 'log', 'email', 'log,email' */
-		'lockout_notify'     => 'log',
+		'lockout_notify'     => 'log,email',
 
 		/* If notify by email, do so after this number of lockouts */
-		'notify_email_after' => 4,
+		'notify_email_after' => 3,
 
 		'review_notice_shown' => false,
+		'enable_notify_notice_shown' => false,
 
 		'whitelist'           => array(),
 		'whitelist_usernames' => array(),
@@ -94,8 +95,11 @@ class Limit_Login_Attempts {
 		add_filter( 'limit_login_blacklist_usernames', array( $this, 'check_blacklist_usernames' ), 10, 2 );
 
 		add_filter( 'illegal_user_logins', array( $this, 'register_user_blacklist' ), 999 );
+		add_action( 'admin_notices', array( $this, 'show_enable_notify_notice' ) );
 		add_action( 'admin_notices', array( $this, 'show_leave_review_notice' ) );
-		add_action( 'wp_ajax_dismiss_review_notice', array( $this, 'dismiss_review_notice_callback' ));
+		add_action( 'wp_ajax_dismiss_review_notice', array( $this, 'dismiss_review_notice_callback' ) );
+		add_action( 'wp_ajax_dismiss_notify_notice', array( $this, 'dismiss_notify_notice_callback' ) );
+		add_action( 'wp_ajax_enable_notify', array( $this, 'enable_notify_callback' ) );
 		add_action( 'wp_ajax_app_config_save', array( $this, 'app_config_save_callback' ));
 		add_action( 'wp_ajax_app_setup', array( $this, 'app_setup_callback' ));
 		add_action( 'wp_ajax_app_log_action', array( $this, 'app_log_action_callback' ));
@@ -112,6 +116,18 @@ class Limit_Login_Attempts {
 	* Hook 'plugins_loaded'
 	*/
 	public function setup() {
+
+		if( ! ( $activation_timestamp = $this->get_option( 'activation_timestamp' ) ) ) {
+
+			// Write time when the plugin is activated
+			$this->update_option( 'activation_timestamp', time() );
+		}
+
+		if( ! ( $activation_timestamp = $this->get_option( 'notice_enable_notify_timestamp' ) ) ) {
+
+			// Write time when the plugin is activated
+			$this->update_option( 'notice_enable_notify_timestamp', strtotime( '-32 day' ) );
+		}
 
 		// Load languages files
 		load_plugin_textdomain( 'limit-login-attempts-reloaded', false, plugin_basename( dirname( __FILE__ ) ) . '/../languages' );
@@ -171,11 +187,19 @@ class Limit_Login_Attempts {
 		 */
 		add_action( 'authenticate', array( $this, 'bp_authenticate_filter' ), 35, 3 );
 
-		if ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST )
-			add_action( 'init', array( $this, 'check_xmlrpc_lock' ) );
-
 		add_action('wp_ajax_limit-login-unlock', array( $this, 'ajax_unlock' ) );
 
+		add_filter( 'plugin_action_links_' . LLA_PLUGIN_BASENAME, array( $this, 'add_action_links' ) );
+	}
+
+	public function add_action_links( $actions ) {
+
+		$actions = array_merge( array(
+			'<a href="' . $this->get_options_page_uri( 'settings' ) . '">' . __( 'Settings', 'limit-login-attempts-reloaded' ) . '</a>',
+			'<a href="https://www.limitloginattempts.com/community/?from=plugin-plugins" target="_blank" style="font-weight: bold;">' . __( 'Premium Support', 'limit-login-attempts-reloaded' ) . '</a>',
+		), $actions );
+
+		return $actions;
 	}
 
 	public function app_init() {
@@ -191,18 +215,6 @@ class Limit_Login_Attempts {
 		wp_enqueue_script('jquery-ui-accordion');
 		wp_enqueue_style('llar-jquery-ui', LLA_PLUGIN_URL.'assets/css/jquery-ui.css');
     }
-
-	public function check_xmlrpc_lock()
-	{
-		if ( is_user_logged_in() || $this->is_ip_whitelisted() )
-			return;
-
-		if ( $this->is_ip_blacklisted() || !$this->is_limit_login_ok() )
-		{
-			header('HTTP/1.0 403 Forbidden');
-			exit;
-		}
-	}
 
 	public function check_whitelist_ips( $allow, $ip ) {
 		return $this->ip_in_range( $ip, (array) $this->get_option( 'whitelist' ) );
@@ -277,39 +289,12 @@ class Limit_Login_Attempts {
 			return $error;
 		}
 
-		if ( ! $this->is_limit_login_ok() ) {
-			return new IXR_Error( 403, $this->error_msg() );
-		}
+		if( $login_error = $this->get_message() ) {
 
-		$ip      = $this->get_address();
-		$retries = $this->get_option( 'retries' );
-		$valid   = $this->get_option( 'retries_valid' );
+			return new IXR_Error( 403, strip_tags( $login_error ) );
+        }
 
-		/* Should we show retries remaining? */
-
-		if ( ! is_array( $retries ) || ! is_array( $valid ) ) {
-			/* no retries at all */
-			return $error;
-		}
-		if (
-                (! isset( $retries[ $ip ] ) && ! isset( $retries[ $this->getHash($ip) ] )) ||
-                (! isset( $valid[ $ip ] ) && ! isset( $valid[ $this->getHash($ip) ] )) ||
-                (time() > $valid[ $ip ] && time() > $valid[ $this->getHash($ip) ])
-
-        ) {
-			/* no: no valid retries */
-			return $error;
-		}
-		if (
-                ( ((isset($retries[ $ip ]) ? $retries[ $ip ] : 0) + (isset($retries[ $this->getHash($ip) ]) ? $retries[ $this->getHash($ip) ] : 0)) % $this->get_option( 'allowed_retries' ) ) == 0
-            ) {
-			//* no: already been locked out for these retries */
-			return $error;
-		}
-
-		$remaining = max( ( $this->get_option( 'allowed_retries' ) - ( ((isset($retries[ $ip ]) ? $retries[ $ip ] : 0) + (isset($retries[ $this->getHash($ip) ]) ? $retries[ $this->getHash($ip) ] : 0)) % $this->get_option( 'allowed_retries' ) ) ), 0 );
-
-		return new IXR_Error( 403, sprintf( _n( "<strong>%d</strong> attempt remaining.", "<strong>%d</strong> attempts remaining.", $remaining, 'limit-login-attempts-reloaded' ), $remaining ) );
+		return $error;
 	}
 
 	/**
@@ -379,6 +364,12 @@ class Limit_Login_Attempts {
 
 					$user = new WP_Error();
 					$user->add( 'username_blacklisted', $err );
+
+					if ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST ) {
+
+						header('HTTP/1.0 403 Forbidden');
+						exit;
+					}
                 }
                 else if( $response['result'] === 'pass' ) {
 
@@ -406,6 +397,12 @@ class Limit_Login_Attempts {
 
 					$user = new WP_Error();
 					$user->add( 'username_blacklisted', "<strong>ERROR:</strong> Too many failed login attempts." );
+
+					if ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST ) {
+
+						header('HTTP/1.0 403 Forbidden');
+						exit;
+                    }
 
 				} elseif ( $this->is_username_whitelisted( $username ) || $this->is_ip_whitelisted( $ip ) ) {
 
@@ -483,8 +480,11 @@ class Limit_Login_Attempts {
 	* Enqueue js and css
 	*/
 	public function enqueue() {
-		wp_enqueue_style( 'lla-main', LLA_PLUGIN_URL . 'assets/css/limit-login-attempts.css' );
-		wp_enqueue_script( 'lla-main', LLA_PLUGIN_URL . 'assets/js/limit-login-attempts.js' );
+
+	    $plugin_data = get_plugin_data( LLA_PLUGIN_DIR . '/limit-login-attempts-reloaded.php' );
+
+		wp_enqueue_style( 'lla-main', LLA_PLUGIN_URL . 'assets/css/limit-login-attempts.css', array(), $plugin_data['Version'] );
+		wp_enqueue_script( 'lla-main', LLA_PLUGIN_URL . 'assets/js/limit-login-attempts.js', array(), $plugin_data['Version'] );
 	}
 
 	/**
@@ -846,32 +846,6 @@ class Limit_Login_Attempts {
 			$when     = sprintf( _n( '%d minute', '%d minutes', $time, 'limit-login-attempts-reloaded' ), $time );
 		}
 
-		$blogname = $this->use_local_options ? get_option( 'blogname' ) : get_site_option( 'site_name' );
-		$blogname = htmlspecialchars_decode( $blogname, ENT_QUOTES );
-
-		if ( $whitelisted ) {
-			$subject = sprintf( __( "[%s] Failed login attempts from whitelisted IP"
-					, 'limit-login-attempts-reloaded' )
-				, $blogname );
-		} else {
-			$subject = sprintf( __( "[%s] Too many failed login attempts"
-					, 'limit-login-attempts-reloaded' )
-				, $blogname );
-		}
-
-		$message = sprintf( __( "%d failed login attempts (%d lockout(s)) from IP: %s"
-				, 'limit-login-attempts-reloaded' ) . "\r\n\r\n"
-			, $count, $lockouts, $ip );
-		if ( $user != '' ) {
-			$message .= sprintf( __( "Last user attempted: %s", 'limit-login-attempts-reloaded' )
-								. "\r\n\r\n", $user );
-		}
-		if ( $whitelisted ) {
-			$message .= __( "IP was NOT blocked because of external whitelist.", 'limit-login-attempts-reloaded' );
-		} else {
-			$message .= sprintf( __( "IP was blocked for %s", 'limit-login-attempts-reloaded' ), $when );
-		}
-
 		if( $custom_admin_email = $this->get_option( 'admin_notify_email' ) ) {
 
 			$admin_email = $custom_admin_email;
@@ -880,7 +854,52 @@ class Limit_Login_Attempts {
 			$admin_email = $this->use_local_options ? get_option( 'admin_email' ) : get_site_option( 'admin_email' );
 		}
 
-		@wp_mail( $admin_email, $subject, $message );
+		$admin_name = '';
+
+		global $wpdb;
+
+		$res = $wpdb->get_col( $wpdb->prepare( "
+                SELECT u.display_name
+                FROM $wpdb->users AS u
+                LEFT JOIN $wpdb->usermeta AS m ON u.ID = m.user_id
+                WHERE u.user_email = %s
+                AND m.meta_key LIKE 'wp_capabilities'
+                AND m.meta_value LIKE '%administrator%'",
+                $admin_email
+            )
+        );
+
+		if( $res ) {
+		    $admin_name = ' ' . $res[0];
+        }
+
+		$blogname = $this->use_local_options ? get_option( 'blogname' ) : get_site_option( 'site_name' );
+		$blogname = htmlspecialchars_decode( $blogname, ENT_QUOTES );
+
+        $subject = sprintf( __( "[%s] Failed login attempts", 'limit-login-attempts-reloaded' ) , $blogname );
+
+        $message = __( '<p>Hello%1$s,</p>' .
+                       '<p>%2$d failed login attempts (%3$d lockout(s)) from IP <b>%4$s</b> and it was blocked for %5$s<br>' .
+                       'Last user attempted: <b>%6$s</b></p>' .
+                       '<p>Under Attack? Learn more about <a href="%7$s">brute force attacks</a>. ' .
+                       'Have Questions? Visit our <a href="%8$s" target="_blank">help section</a>.<br>' .
+                       '<a href="%9$s">Unsubscribe</a> from these notifications.</p>' .
+                       "<hr><p>This notification was sent automatically via <b>Limit Login Attempts Reloaded Plugin</b>.</p>", 'limit-login-attempts-reloaded' );
+
+        $message = sprintf(
+            $message,
+			$admin_name,
+			$count,
+            $lockouts,
+            $ip,
+            $when,
+			$user,
+			'https://www.limitloginattempts.com/am-i-under-attack/?from=plugin-lockout-email',
+			'https://www.limitloginattempts.com/resources/?from=plugin-lockout-email',
+            admin_url( 'options-general.php?page=limit-login-attempts&tab=settings' )
+        );
+
+		@wp_mail( $admin_email, $subject, $message, array( 'content-type: text/html' ) );
 	}
 
 	/**
@@ -1610,36 +1629,6 @@ class Limit_Login_Attempts {
         if ( !current_user_can('manage_options') || $this->get_option('review_notice_shown') || $screen->parent_base === 'edit' ) return;
 
         $activation_timestamp = $this->get_option('activation_timestamp');
-        $file_changed_timestamp = filemtime(LLA_PLUGIN_DIR . 'core/Helpers.php');
-
-        if($file_changed_timestamp < strtotime("-1 week") && !$activation_timestamp) {
-
-			$activation_timestamp = $file_changed_timestamp;
-
-			$this->update_option( 'activation_timestamp', $activation_timestamp );
-
-        } else {
-
-            if(!$activation_timestamp || $activation_timestamp < time()) {
-
-				$logs = $this->get_option('logged');
-
-				preg_match_all('/\"date\";\i\:([0-9]+)\;/', serialize($logs), $matches);
-
-				if(!empty($matches[1]) && $min_time = min($matches[1])) {
-
-					$activation_timestamp = $min_time;
-
-					$this->update_option( 'activation_timestamp', $activation_timestamp );
-				}
-            }
-
-			if(!$activation_timestamp) {
-
-				// Write time when the plugin is activated
-				$this->update_option( 'activation_timestamp', time());
-			}
-        }
 
 		if ( $activation_timestamp && $activation_timestamp < strtotime("-1 month") ) { ?>
 
@@ -1701,6 +1690,110 @@ class Limit_Login_Attempts {
 		}
 	}
 
+	public function show_enable_notify_notice() {
+
+		$screen = get_current_screen();
+
+		if(isset($_COOKIE['llar_enable_notify_notice_shown'])) {
+
+			$this->update_option('enable_notify_notice_shown', true);
+			@setcookie('llar_enable_notify_notice_shown', '', time() - 3600, '/');
+		}
+
+		$active_app = $this->get_option( 'active_app' );
+		$notify_methods = explode( ',', $this->get_option( 'lockout_notify' ) );
+
+        if ( $active_app !== 'local' ||
+             in_array( 'email', $notify_methods ) ||
+             !current_user_can('manage_options') ||
+             $this->get_option('enable_notify_notice_shown') ||
+             $screen->parent_base === 'edit' ) return;
+
+        $activation_timestamp = $this->get_option('notice_enable_notify_timestamp');
+
+		if ( $activation_timestamp && $activation_timestamp < strtotime("-1 month") ) {
+
+			$review_activation_timestamp = $this->get_option('activation_timestamp');
+			if ( $review_activation_timestamp && $review_activation_timestamp < strtotime("-1 month") ) {
+				$this->update_option( 'activation_timestamp', time() );
+            }
+
+		    ?>
+
+			<div id="message" class="updated fade notice is-dismissible llar-notice-notify">
+                <div class="llar-review-image">
+                    <span class="dashicons dashicons-warning"></span>
+                </div>
+				<div class="llar-review-info">
+				    <p><?php _e('You have been upgraded to the latest version of <strong>Limit Login Attempts Reloaded</strong>.<br> ' .
+                            'Due to increased security threats around the holidays, we recommend turning on email ' .
+                            'notifications when you receive a failed login attempt.', 'limit-login-attempts-reloaded'); ?></p>
+
+                    <ul class="llar-buttons">
+                        <li><a class="button button-primary llar-ajax-enable-notify" target="_blank" href="#"><?php _e('Yes, turn on email notifications', 'limit-login-attempts-reloaded'); ?></a></li>
+                        <li><a href="#" class="llar-notify-notice-dismiss button" data-type="later"><?php _e('Remind me a month from now', 'limit-login-attempts-reloaded'); ?></a></li>
+                        <li><a href="#" class="llar-notify-notice-dismiss" data-type="dismiss"><?php _e('Don\'t show this message again', 'limit-login-attempts-reloaded'); ?></a></li>
+                    </ul>
+                </div>
+			</div>
+            <script type="text/javascript">
+                (function($){
+
+                    $(document).ready(function(){
+                        $('.llar-notify-notice-dismiss').on('click', function(e) {
+                            e.preventDefault();
+
+                            var type = $(this).data('type');
+
+                            $.post(ajaxurl, {
+                                action: 'dismiss_notify_notice',
+                                type: type,
+                                sec: '<?php echo wp_create_nonce( "llar-action" ); ?>'
+                            });
+
+                            $(this).closest('.llar-notice-notify').remove();
+                        });
+
+                        $(".llar-notice-notify").on("click", ".notice-dismiss", function (e) {
+                            createCookie('llar_enable_notify_notice_shown', '1', 30);
+                        });
+
+                        $(".llar-ajax-enable-notify").on("click", function (e) {
+							e.preventDefault();
+
+							$.post(ajaxurl, {
+								action: 'enable_notify',
+								sec: '<?php echo wp_create_nonce( "llar-action" ); ?>'
+							}, function(response){
+
+								if(response.success) {
+									$(".llar-notice-notify .llar-review-info p").text('You are all set!');
+									$(".llar-notice-notify .llar-buttons").remove();
+                                }
+
+                            });
+                        });
+
+                        function createCookie(name, value, days) {
+                            var expires;
+
+                            if (days) {
+                                var date = new Date();
+                                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                expires = "; expires=" + date.toGMTString();
+                            } else {
+                                expires = "";
+                            }
+                            document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+                        }
+                    });
+
+                })(jQuery);
+            </script>
+			<?php
+		}
+	}
+
 	public function dismiss_review_notice_callback() {
 
 		if ( !current_user_can('activate_plugins') ) {
@@ -1710,7 +1803,7 @@ class Limit_Login_Attempts {
 
 		check_ajax_referer('llar-action', 'sec');
 
-		$type = isset( $_POST['type'] ) ? $_POST['type'] : false;
+		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
 
 		if ($type === 'dismiss'){
 
@@ -1719,8 +1812,54 @@ class Limit_Login_Attempts {
 
 		if ($type === 'later') {
 
-			$this->update_option( 'activation_timestamp', strtotime("+1 month") );
+			$this->update_option( 'activation_timestamp', time() );
 		}
+
+		wp_send_json_success(array());
+	}
+
+	public function dismiss_notify_notice_callback() {
+
+		if ( !current_user_can('activate_plugins') ) {
+
+		    wp_send_json_error(array());
+        }
+
+		check_ajax_referer('llar-action', 'sec');
+
+		$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : false;
+
+		if ($type === 'dismiss'){
+
+			$this->update_option( 'enable_notify_notice_shown', true );
+		}
+
+		if ($type === 'later') {
+
+			$this->update_option( 'notice_enable_notify_timestamp', time() );
+		}
+
+		wp_send_json_success(array());
+	}
+
+	public function enable_notify_callback() {
+
+		if ( !current_user_can('activate_plugins') ) {
+
+		    wp_send_json_error(array());
+        }
+
+		check_ajax_referer('llar-action', 'sec');
+
+		$notify_methods = explode( ',', $this->get_option( 'lockout_notify' ) );
+
+        if( !in_array( 'email', $notify_methods ) ) {
+
+            $notify_methods[] = 'email';
+		}
+
+		$this->update_option( 'lockout_notify', implode( ',', $notify_methods ) );
+		$this->update_option( 'enable_notify_notice_shown', true );
 
 		wp_send_json_success(array());
 	}

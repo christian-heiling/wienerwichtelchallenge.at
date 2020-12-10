@@ -140,7 +140,7 @@
         cursor: pointer; }
       #smush-image-bar .smush-resize-box .smush-front-icons {
         margin: 0 10px;
-        line-height: 12px; }
+        line-height: 5px; }
         #smush-image-bar .smush-resize-box .smush-front-icons:before {
           font-family: "wpmudev-plugin-icons" !important;
           speak: none;

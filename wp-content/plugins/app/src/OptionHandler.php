@@ -511,6 +511,25 @@ class OptionHandler {
             )
         );
 
+        $meta_boxes[] = array(
+            'title' => __('Last Minute Wishes', 'app'),
+            'post_types' => array($this->getPostType()),
+            'fields' => array(
+                array(
+                    'id' => 'last_minute_threshold',
+                    'name' => __('Last Minute Wish when only X days left', 'app'),
+                    'type' => 'number',
+                    'step' => 1,
+                    'min' => 0
+                ),
+                array(
+                    'id' => 'last_minute_tag_id',
+                    'name' => __('Associate to following tag id when last minute', 'app'),
+                    'type' => 'text'
+                )
+            )
+        );
+
         $optionItem = $this->getOptionItem();
 
         if (is_admin() && array_key_exists('post', $_GET) && $_GET['post'] == $optionItem->ID && $_GET['action'] == 'edit') {
@@ -527,6 +546,15 @@ class OptionHandler {
                     'attributes' => array(
                         'class' => 'ajax',
                         'data-url' => '/?ajax-action=shuffleWishes'
+                    )
+                ),
+                array(
+                    'id' => 'full_import',
+                    'name' => 'Set Last Minute Wishes',
+                    'type' => 'button',
+                    'attributes' => array(
+                        'class' => 'ajax',
+                        'data-url' => '/?ajax-action=setLastMinuteWishes'
                     )
                 ),
                 array(

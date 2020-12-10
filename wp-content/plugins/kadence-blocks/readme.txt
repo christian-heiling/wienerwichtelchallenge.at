@@ -3,8 +3,8 @@ Contributors: britner
 Tags: gutenberg, blocks, page builder, google fonts, dual buttons, svg icons, editor width,
 Donate link: https://www.kadencewp.com/about-us/
 Requires at least: 5.2
-Tested up to: 5.5.3
-Stable tag: 1.9.5
+Tested up to: 5.6.0
+Stable tag: 1.9.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,31 @@ Install the plugin into the `/wp-content/plugins/` folder, and activate it.
 6. Editor Width settings inside Gutenberg
 
 == Changelog ==
+
+= 1.9.9 =
+* Update: Measure Settings Control.
+* Fix: Possible issue with gallery carousel overflow.
+* Fix: Possible issue with defaults.
+* Fix: RTL Collapse grid gutter.
+* Fix: RTL Column select.
+* Fix: Accordion Mobile Font size.
+
+= 1.9.8 =
+* Update: Admin Styling for WP 5.6
+* Fix: Advanced header link option not showing.
+
+= 1.9.7 =
+* Fix: Possible update issue.
+
+= 1.9.6 =
+* Add: MailerLite option to Kadence Blocks.
+* Update: Initial Update to Blocks settings page.
+* Update: Initial Update to use WPScripts.
+* Fix: Issue with dashes in table to contents when building links.
+* Fix: Issue with Column Margin/Padding controls.
+* Fix: Issue with Button Text Size Input.
+* Fix: Issue with accordions pane link with multiple accordions on the page.
+* Fix: Issue with border radius 0 for testimonial block.
 
 = 1.9.5 =
 * Fix: Issue with rendering when previously had selected muli font.

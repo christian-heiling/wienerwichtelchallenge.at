@@ -10,8 +10,8 @@ Contributors: specialk, aldolat, WpBlogHost, jameswilkes, juliobox, lernerconsul
 Donate link: https://monzillamedia.com/donate.html
 Requires at least: 4.1
 Tested up to: 5.6
-Stable tag: 20201123
-Version: 20201123
+Stable tag: 20201209
+Version: 20201209
 Requires PHP: 5.6.20
 Text Domain: block-bad-queries
 Domain Path: /languages
@@ -247,6 +247,16 @@ Links, tweets and likes also appreciated. Thank you! :)
 
 If you like BBQ, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/block-bad-queries/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
+
+**2020/12/09**
+
+* Tweaks query string pattern for optimal matching
+* Further tests on WordPress 5.6
+
+**2020/12/08**
+
+* Removes `order` pattern from Query String rules
+* Removes `ahrefs` pattern from User Agent rules
 
 **2020/11/23**
 
