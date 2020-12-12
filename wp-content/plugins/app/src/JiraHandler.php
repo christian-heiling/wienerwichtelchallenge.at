@@ -507,7 +507,7 @@ class JiraHandler {
                 $last_minute_threshold = $options->get('last_minute_threshold');
                 
                 if ($delta_in_days <= $last_minute_threshold) {
-                    wp_set_object_terms($wish->ID, intval($options->get('last_minute_tag_id')), $wish_controller->getRegionTaxonomyName());
+                    wp_set_object_terms($wish->ID, intval($options->get('last_minute_tag_id')), $wish_controller->getRegionTaxonomyName(), true);
                 } else {
                     wp_remove_object_terms($wish->ID, intval($options->get('last_minute_tag_id')), $wish_controller->getRegionTaxonomyName());
                 }
